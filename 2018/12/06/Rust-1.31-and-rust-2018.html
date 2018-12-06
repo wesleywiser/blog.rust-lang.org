@@ -348,7 +348,7 @@ stabilizing something similar: &quot;tool lints,&quot; like
 more clear which tool they're coming from.</p>
 <p>If you previously used Clippy's lints, you can migrate like this:</p>
 <pre><code class="language-rust">// old
-#![cfg_attr(clippy, bool_comparison)]
+#![cfg_attr(feature = &quot;cargo-clippy&quot;, allow(bool_comparison))]
 
 // new
 #![allow(clippy::bool_comparison)]

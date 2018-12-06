@@ -88,16 +88,16 @@ we do not expect major breaking changes before 1.0.</p>
 </ul>
 <p>The Rust community really rolled up their sleeves to help push this release over the finish line; thanks to everyone who participated, and especially to the <a href="https://github.com/rust-lang/rust/wiki/Doc-friends-of-the-tree">friends of the tree</a>!</p>
 <p>While we've come a long way in <a href="http://blog.rust-lang.org/2014/09/15/Rust-1.0.html">the last four months</a>, there's a lot left to do before Rust hits 1.0 final. Read on for more.</p>
-<h3>What happens during the alpha cycle?</h3>
+<h3><a href="#what-happens-during-the-alpha-cycle" aria-hidden="true" class="anchor" id="what-happens-during-the-alpha-cycle"></a>What happens during the alpha cycle?</h3>
 <p>If you're already a Rust user, the first thing you'll notice during the alpha cycle is a <em>dramatic</em> drop in the pace of breaking changes.</p>
 <p>Most features and modules that will ship with Rust 1.0 are in place and will change in only limited ways during this cycle, as detailed later in this post. Only a few modules -- the key ones being path manipulation and I/O -- are still stabilizing.</p>
 <p>We need your help to iterate on those final libraries before the beta release, and to hammer out any remaining issues on the parts of Rust we have already marked as stable.  <strong>During the alpha cycle, we recommend using the nightly releases, which will continue to evolve as these APIs take their final shape.</strong></p>
 <p>The alpha release is part of our <a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">transition</a> into <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stability guarantees</a>. While we're not ready to make full stability guarantees yet, this release cycle moves
 us much closer to that 1.0 goal. When 1.0-beta1 is released <a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">six weeks from now</a>, these important remaining APIs will be stable. Code that compiles on the beta release should do so with minimal changes on 1.0 final as well.</p>
-<h3>What's shipping in alpha?</h3>
+<h3><a href="#whats-shipping-in-alpha?" aria-hidden="true" class="anchor" id="whats-shipping-in-alpha?"></a>What's shipping in alpha?</h3>
 <p>Since the <a href="https://mail.mozilla.org/pipermail/rust-dev/2014-October/011267.html">previous release</a>, we've made an enormous amount of progress. We'll cover a
 few of the highlights here; the full details are in <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md">the release notes</a>.</p>
-<h4>Language features</h4>
+<h4><a href="#language-features" aria-hidden="true" class="anchor" id="language-features"></a>Language features</h4>
 <ul>
 <li>
 <p><strong>Dynamically-sized types (DSTs):</strong> <a href="http://smallcultfollowing.com/babysteps/blog/2014/01/05/dst-take-5/">Types whose size is only known at runtime</a> (such as array slices and trait objects) are now largely integrated into the language, including basic integration with user-defined smart pointers. <em>Implemented by Nick Cameron; rolled out by Jorge Aparicio</em>.</p>
@@ -125,7 +125,7 @@ few of the highlights here; the full details are in <a href="https://github.com/
 </li>
 </ul>
 <p>All of these language features have been rolled out throughout the standard library.</p>
-<h4>Library features</h4>
+<h4><a href="#library-features" aria-hidden="true" class="anchor" id="library-features"></a>Library features</h4>
 <ul>
 <li>
 <p><strong>Consistent conventions:</strong>
@@ -151,7 +151,7 @@ have been approved, and are largely summarized <a href="http://aturon.github.io/
 <p><strong>Runtime freedom:</strong> Rust's runtime system and green-threading model has been <a href="https://github.com/rust-lang/rfcs/pull/230">entirely removed</a>, which cut the static binary size of &quot;hello world&quot; in half and has <a href="https://github.com/rust-lang/rust/pull/19169">opened the door</a> to lower-level hooks into the standard library. <em>Implemented by Aaron Turon</em>.</p>
 </li>
 </ul>
-<h4>Documentation</h4>
+<h4><a href="#documentation" aria-hidden="true" class="anchor" id="documentation"></a>Documentation</h4>
 <ul>
 <li>
 <p><strong>The Rust Programming Language:</strong> The previous split between &quot;The Guide&quot; and &quot;The guides&quot; has been rectified by combining them into <a href="https://github.com/rust-lang/rust/pull/19897">&quot;The book&quot;</a>. <em>Led by Steve Klabnik</em>.</p>
@@ -163,7 +163,7 @@ have been approved, and are largely summarized <a href="http://aturon.github.io/
 <p><strong>Additional API documentation:</strong> A lot of work has gone into improving API documentation, both by expanding the overview text and adding examples throughout. <em>Credit goes to the the entire community, who worked tirelessly to improve these docs</em>.</p>
 </li>
 </ul>
-<h3>What remains to be done?</h3>
+<h3><a href="#what-remains-to-be-done" aria-hidden="true" class="anchor" id="what-remains-to-be-done"></a>What remains to be done?</h3>
 <p>A detailed list of possible breaking changes to <em>stable</em> features/APIs can be found <a href="https://github.com/rust-lang/rust/wiki/Anticipated-breaking-changes-during-1.0-alpha">here</a>. Below is a list of major areas of improvement for the alpha cycle:</p>
 <ul>
 <li>
@@ -192,7 +192,7 @@ have been approved, and are largely summarized <a href="http://aturon.github.io/
 </li>
 </ul>
 <p>And, of course, we will continue to fix bugs and add polish throughout the alpha cycle.</p>
-<h3>Contributors to Rust 1.0.0-alpha</h3>
+<h3><a href="#contributors-to-rust-10.0-alpha" aria-hidden="true" class="anchor" id="contributors-to-rust-10.0-alpha"></a>Contributors to Rust 1.0.0-alpha</h3>
 <p>This alpha release could not have happened without the help of Rust's enthusiastic community. Thanks go to:</p>
 <ul>
 <li><code>Aaron Friel</code></li>

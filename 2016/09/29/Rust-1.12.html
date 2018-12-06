@@ -76,7 +76,7 @@ pick three.&quot;</p>
 <p>As always, you can <a href="https://www.rust-lang.org/install.html">install Rust 1.12</a> from the appropriate page on our
 website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1120-2016-09-29">detailed release notes for 1.12</a> on GitHub.
 1361 patches were landed in this release.</p>
-<h3>What's in 1.12 stable</h3>
+<h3><a href="#whats-in-1.12-stable" aria-hidden="true" class="anchor" id="whats-in-1.12-stable"></a>What's in 1.12 stable</h3>
 <p>The release of 1.12 might be one of the most significant Rust releases since
 1.0. We have a lot to cover, but if you don't have time for that, here's a
 summary:</p>
@@ -92,7 +92,7 @@ based on the new Rust <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">M
 user-visible today, it paves the way for a number of future compiler
 optimizations, and for some codebases it already results in improvements to
 compile times and reductions in code size.</p>
-<h4>Overhauled error messages</h4>
+<h4><a href="#overhauled-error-messages" aria-hidden="true" class="anchor" id="overhauled-error-messages"></a>Overhauled error messages</h4>
 <p>With 1.12 we're introducing a new error format which helps to surface a lot of
 the internal knowledge about why an error is occurring to you, the developer.
 It does this by putting your code front and center, highlighting the parts
@@ -120,7 +120,7 @@ compile that code while passing the <code>--error-format=json</code> flag:</p>
 This output is primarily for tooling; we are continuing to invest in supporting
 IDEs and other useful development tools. This output is a small part of that
 effort.</p>
-<h4>MIR code generation</h4>
+<h4><a href="#mir-code-generation" aria-hidden="true" class="anchor" id="mir-code-generation"></a>MIR code generation</h4>
 <p>The new Rust &quot;mid-level IR&quot;, usually called &quot;MIR&quot;, gives the compiler a simpler
 way to think about Rust code than its previous way of operating entirely on the
 Rust abstract syntax tree. It makes analysis and optimizations possible that
@@ -137,7 +137,7 @@ optimization passes in LLVM to reason about. The end result is less work for
 the compiler and less bloat at runtime. In addition, because MIR is a simpler
 'language' than the full AST, it's also easier to implement compiler passes on,
 and easier to verify that they are correct.</p>
-<h4>Other improvements</h4>
+<h4><a href="#other-improvements" aria-hidden="true" class="anchor" id="other-improvements"></a>Other improvements</h4>
 <ul>
 <li>Many minor improvements to the documentation.</li>
 <li><a href="https://github.com/rust-lang/rust/pull/35060"><code>rustc</code> supports three new MUSL targets on ARM:
@@ -160,7 +160,7 @@ The resulting source code can be used by tools and IDES, located in the
 sysroot under <code>lib/rustlib/src</code>.</li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1120-2016-09-29">detailed release notes</a> for more.</p>
-<h4>Library stabilizations</h4>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
 <p>This release sees a number of small quality of life improvements for various
 types in the standard library:</p>
 <ul>
@@ -188,7 +188,7 @@ type</a></li>
 9.0</a></li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1120-2016-09-29">detailed release notes</a> for more.</p>
-<h4>Cargo features</h4>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
 <p>The biggest feature added to Cargo this cycle is
 &quot;<a href="https://github.com/rust-lang/cargo/pull/2759">workspaces</a>.&quot; Defined in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1525-cargo-workspace.md">RFC
 1525</a>,
@@ -213,7 +213,7 @@ compiling</a></li>
 <li><a href="https://github.com/rust-lang/cargo/pull/2849">Add <code>--dry-run</code> to <code>cargo publish</code></a></li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1120-2016-09-29">detailed release notes</a> for more.</p>
-<h3>Contributors to 1.12</h3>
+<h3><a href="#contributors-to-112" aria-hidden="true" class="anchor" id="contributors-to-112"></a>Contributors to 1.12</h3>
 <p>We had 176 individuals contribute to 1.12. Thank you so much!</p>
 <ul>
 <li>Aaron Gallagher</li>

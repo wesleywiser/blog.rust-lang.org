@@ -79,9 +79,9 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1240-2018-02-15">detailed release notes for
 1.24.0</a> on GitHub.</p>
-<h2>What's in 1.24.0 stable</h2>
+<h2><a href="#whats-in-1.24.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.24.0-stable"></a>What's in 1.24.0 stable</h2>
 <p>This release contains two very exciting new features: <code>rustfmt</code> and incremental compilation!</p>
-<h4>rustfmt</h4>
+<h4><a href="#rustfmt" aria-hidden="true" class="anchor" id="rustfmt"></a>rustfmt</h4>
 <p>For years now, we've wanted a tool that automatically can reformat your Rust code to some sort
 of &quot;standard style.&quot; With this release, we're happy to announce that a <em>preview</em> of <code>rustfmt</code>
 can be used with 1.24 stable. To give it a try, do this:</p>
@@ -95,7 +95,7 @@ releasing a <code>rustfmt</code> component and deprecating <code>rustfmt-preview
 <p>In the near future, we plan on writing a post about this release strategy, as it's big
 enough for its own post, and is broader than just this release.</p>
 <p>For more, please check out <a href="https://github.com/rust-lang-nursery/rustfmt"><code>rustfmt</code> on GitHub</a>.</p>
-<h4>Incremental compilation</h4>
+<h4><a href="#incremental-compilation" aria-hidden="true" class="anchor" id="incremental-compilation"></a>Incremental compilation</h4>
 <p>Back in September of 2016 (!!!), we blogged about <a href="https://blog.rust-lang.org/2016/09/08/incremental.html">Incremental Compilation</a>.
 While that post goes into the details, the idea is basically this: when you're working on
 a project, you often compile it, then change something small, then compile again. Historically,
@@ -113,7 +113,7 @@ One small note about this change: it makes builds faster, but makes the final bi
 slower. For maximum speed, setting <code>codegen-units</code> to <code>1</code> in your <code>Cargo.toml</code> is needed
 to eke out every last drop of performance.</p>
 <p>More to come!</p>
-<h4>Other good stuff</h4>
+<h4><a href="#other-good-stuff" aria-hidden="true" class="anchor" id="other-good-stuff"></a>Other good stuff</h4>
 <p>There's one other change we'd like to talk about here: undefined behavior. Rust generally
 strives to minimize undefined behavior, having none of it in safe code, and as little as
 possible in unsafe code. One area where you could invoke UB is when a <code>panic!</code> goes
@@ -127,7 +127,7 @@ with how the <code>&quot;C&quot;</code> ABI works, in this example, or any other
 <p>In Rust 1.24, <a href="https://github.com/rust-lang/rust/pull/46833">this code will now abort</a>
 instead of producing undefined behavior.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1240-2018-02-15">detailed release notes</a> for more.</p>
-<h3>Library stabilizations</h3>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>If you're a fan of <code>str::find</code>, which is used to find a given <code>char</code> inside of a <code>&amp;str</code>, you'll be
 happy to see this pull request: <a href="https://github.com/rust-lang/rust/pull/46735">it's now 10x faster</a>!
 This is thanks to <code>memchr</code>. <code>[u8]::contains</code> <a href="https://github.com/rust-lang/rust/pull/46713">uses it too</a>,
@@ -147,10 +147,10 @@ though it doesn't get such an extreme speedup.</p>
 <li><code>ptr::null</code> and <code>null_mut</code></li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1240-2018-02-15">detailed release notes</a> for more.</p>
-<h3>Cargo features</h3>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
 <p>The big feature of this release was turning on incremental compilation by default, as mentioned above.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1240-2018-02-15">detailed release notes</a> for more.</p>
-<h2>Contributors to 1.24.0</h2>
+<h2><a href="#contributors-to-124.0" aria-hidden="true" class="anchor" id="contributors-to-124.0"></a>Contributors to 1.24.0</h2>
 <p>Many people came together to create Rust 1.24. We couldn't have done it
 without all of you. <a href="https://thanks.rust-lang.org/rust/1.24.0">Thanks!</a></p>
 

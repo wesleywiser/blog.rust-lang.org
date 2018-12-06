@@ -88,7 +88,7 @@ since 1.26.0, we decided to stick to our release train model. We expect to put
 out a 1.27.1 with that fix applied soon, and if there's demand, possibly a
 1.26.3 as well. More information about the specifics here will come in that
 release announcement.</p>
-<h2>What's in 1.27.0 stable</h2>
+<h2><a href="#whats-in-1.27.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.27.0-stable"></a>What's in 1.27.0 stable</h2>
 <p>This release has two big language features that people have been waiting for.
 But first, a small comment on documentation: All books in <a href="https://doc.rust-lang.org/">the Rust
 Bookshelf</a> are <a href="https://github.com/rust-lang/rust/pull/49623/">now searchable</a>! For example, here's <a href="https://doc.rust-lang.org/book/second-edition/?search=borrow">a search of &quot;The Rust
@@ -98,7 +98,7 @@ This will hopefully make it much easier to find what you're looking for.
 Additionally, there's one new book: <a href="https://github.com/rust-lang/rust/pull/49707/">the <code>rustc</code> Book</a>. This book explains
 how to use <code>rustc</code> directly, as well as some other useful information, like a
 list of all lints.</p>
-<h3>SIMD</h3>
+<h3><a href="#simd" aria-hidden="true" class="anchor" id="simd"></a>SIMD</h3>
 <p>Okay, now for the big news: the <a href="https://github.com/rust-lang/rust/pull/49664/">basics of SIMD</a> are now available! SIMD
 stands for &quot;single instruction, multiple data.&quot; Consider a function
 like this:</p>
@@ -188,7 +188,7 @@ generated for you.</p>
 libraries you depend on may. For example, the <a href="https://github.com/rust-lang/regex/pull/456">regex crate has already added
 support</a>, and a new release
 will contain these SIMD speedups without you needing to do anything at all!</p>
-<h3><code>dyn Trait</code></h3>
+<h3><a href="#dyn-trait" aria-hidden="true" class="anchor" id="dyn-trait"></a><code>dyn Trait</code></h3>
 <p>Rust's trait object syntax is one that we ultimately regret. If you'll recall,
 given a trait <code>Foo</code>, this is a trait object:</p>
 <pre><code class="language-rust">Box&lt;Foo&gt;
@@ -220,7 +220,7 @@ it would throw far too many warnings to turn on by default at present.</p>
 upgrade your code to newer idioms. It uses these sorts of lints to do so.
 Expect to hear more about <code>rustfix</code> in a future announcement.</p>
 </blockquote>
-<h3><code>#[must_use]</code> on functions</h3>
+<h3><a href="#[must_use]-on-functions" aria-hidden="true" class="anchor" id="[must_use]-on-functions"></a><code>#[must_use]</code> on functions</h3>
 <p>Finally, the <code>#[must_use]</code> attribute is getting an upgrade: <a href="https://github.com/rust-lang/rust/pull/48925/">it can now be
 used on functions</a>.</p>
 <p>Previously, it only applied to types, like <code>Result&lt;T, E&gt;</code>. But now, you can
@@ -242,7 +242,7 @@ library</a> to make use of this;
 warning if you don't use their results, helping you notice expensive operations
 you may be throwing away by accident.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1270-2018-06-21">detailed release notes</a> for more.</p>
-<h3>Library stabilizations</h3>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>Several new APIs were stabilized this release:</p>
 <ul>
 <li><a href="https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html#method.rfind"><code>DoubleEndedIterator::rfind</code></a></li>
@@ -268,7 +268,7 @@ you may be throwing away by accident.</p>
 <li><a href="https://doc.rust-lang.org/std/primitive.slice.html#method.swap_with_slice"><code>slice::swap_with_slice</code></a></li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1270-2018-06-21">detailed release notes</a> for more.</p>
-<h3>Cargo features</h3>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
 <p>Cargo has two small upgrades this release. First, it now <a href="https://github.com/rust-lang/cargo/pull/5393/">takes a
 <code>--target-dir</code> flag</a> if you'd
 like to change the target directory for a given invocation.</p>
@@ -287,7 +287,7 @@ been relying on it, and so, if you'd like to configure some targets, but not
 others, you can set the <code>autoexamples</code> key to <code>true</code> in the <code>[package]</code>
 section.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1270-2018-06-21">detailed release notes</a> for more.</p>
-<h2>Contributors to 1.27.0</h2>
+<h2><a href="#contributors-to-127.0" aria-hidden="true" class="anchor" id="contributors-to-127.0"></a>Contributors to 1.27.0</h2>
 <p>Many people came together to create Rust 1.27. We couldn't have done it
 without all of you. <a href="https://thanks.rust-lang.org/rust/1.27.0">Thanks!</a></p>
 

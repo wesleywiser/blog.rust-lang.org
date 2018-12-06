@@ -79,7 +79,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1250-2018-03-29">detailed release notes for
 1.25.0</a> on GitHub.</p>
-<h2>What's in 1.25.0 stable</h2>
+<h2><a href="#whats-in-1.25.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.25.0-stable"></a>What's in 1.25.0 stable</h2>
 <p>The last few releases have been relatively minor, but Rust 1.25 contains a
 bunch of stuff! The first one is straightforward: we've <a href="https://github.com/rust-lang/rust/pull/47828">upgraded to LLVM 6</a>
 from LLVM 4. This has a number of effects, a major one
@@ -130,7 +130,7 @@ assert_eq!(std::mem::size_of::&lt;Align16&gt;(), 16);
 <p>If you're working with low-level stuff, control of these kinds of things
 can be very important!</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1250-2018-03-29">detailed release notes</a> for more.</p>
-<h3>Library stabilizations</h3>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>The biggest story in libraries this release is <a href="https://doc.rust-lang.org/std/ptr/struct.NonNull.html"><code>std::ptr::NonNull&lt;T&gt;</code></a>. This type
 is similar to <code>*mut T</code>, but is non-null and covariant. This blog post isn't the right
 place to explain variance, but in a nutshell, <code>NonNull&lt;T&gt;</code>, well, guarantees that it
@@ -143,7 +143,7 @@ containing the <code>Duration</code> type previously only available in <code>lib
 <code>Duration</code> were made <code>const fn</code>s, allowing them to be used to create a
 <code>Duration</code> as a constant expression.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1250-2018-03-29">detailed release notes</a> for more.</p>
-<h3>Cargo features</h3>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
 <p>Cargo's CLI has one really important change this release: <code>cargo new</code> will
 <a href="https://github.com/rust-lang/cargo/pull/5029">now default</a> to generating a
 binary, rather than a library. We try to keep Cargo's CLI quite stable, but
@@ -173,7 +173,7 @@ will get faster.</p>
 faster</a>, thanks to the use of
 hard links when possible.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1250-2018-03-29">detailed release notes</a> for more.</p>
-<h2>Contributors to 1.25.0</h2>
+<h2><a href="#contributors-to-125.0" aria-hidden="true" class="anchor" id="contributors-to-125.0"></a>Contributors to 1.25.0</h2>
 <p>Many people came together to create Rust 1.25. We couldn't have done it
 without all of you.</p>
 <p><a href="https://thanks.rust-lang.org/rust/1.25.0">Thanks!</a></p>

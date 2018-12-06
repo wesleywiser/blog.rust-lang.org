@@ -79,7 +79,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1290-2018-09-13">detailed release notes for
 1.29.0</a> on GitHub.</p>
-<h2>What's in 1.29.0 stable</h2>
+<h2><a href="#whats-in-1.29.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.29.0-stable"></a>What's in 1.29.0 stable</h2>
 <p>The 1.29 release is fairly small; Rust 1.30 and 1.31 are going to have a lot
 in them, and so much of the 1.29 cycle was spent preparing for those
 releases. The two most significant things in this release aren't even language
@@ -88,7 +88,7 @@ features: they're new abilities that Cargo has grown, and they're both about lin
 <li><code>cargo fix</code> can automatically fix your code that has warnings</li>
 <li><code>cargo clippy</code> is a bunch of lints to catch common mistakes and improve your Rust code</li>
 </ul>
-<h3><code>cargo fix</code></h3>
+<h3><a href="#cargo-fix" aria-hidden="true" class="anchor" id="cargo-fix"></a><code>cargo fix</code></h3>
 <p>With the release of Rust 1.29, Cargo has a new subcommand: <code>cargo fix</code>. If you've written
 code in Rust before, you've probably seen a compiler warning before. For example, consider
 this code:</p>
@@ -138,7 +138,7 @@ improve, we'll be expanding this to automatically fix more warnings.</p>
 <p>if you find a compiler suggestion and want to help make it fixable, please
 leave a comment on <a href="https://github.com/rust-lang/rust/issues/50723">this
 issue</a>.</p>
-<h3><code>cargo clippy</code></h3>
+<h3><a href="#cargo-clippy" aria-hidden="true" class="anchor" id="cargo-clippy"></a><code>cargo clippy</code></h3>
 <p>Speaking of warnings, you can now check out a preview of <code>cargo clippy</code> through Rustup.
 Clippy is a large number of additional warnings that you can run against your Rust code.</p>
 <p>For example:</p>
@@ -178,7 +178,7 @@ please give the preview a try and let us know how it goes.</p>
 <p>Oh, and one more thing: <a href="https://github.com/rust-lang-nursery/rustfix/issues/130">you can't use clippy with <code>cargo-fix</code> yet,
 really</a>. It's in the works!</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1290-2018-09-13">detailed release notes</a> for more.</p>
-<h3>Library stabilizations</h3>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>Three APIs were stabilized this release:</p>
 <ul>
 <li><a href="https://doc.rust-lang.org/std/sync/struct.Arc.html#method.downcast"><code>Arc&lt;T&gt;::downcast</code></a></li>
@@ -188,7 +188,7 @@ really</a>. It's in the works!</p>
 <p>Additionally, you can <a href="https://github.com/rust-lang/rust/pull/51178/">now compare <code>&amp;str</code> and
 <code>OsString</code></a>.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1290-2018-09-13">detailed release notes</a> for more.</p>
-<h3>Cargo features</h3>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
 <p>We covered the two new subcommands to Cargo above, but additionally, <a href="https://github.com/rust-lang/cargo/pull/5831/">Cargo
 will now try to fix up lockfiles that have been corrupted by a <code>git merge</code></a>. You can pass
 <code>--locked</code> to disable this behavior.</p>
@@ -199,7 +199,7 @@ intended for end-users. But if you're working on your own crate, and you have
 internal documentation for yourself to refer to, <code>--document-private-items</code>
 will generate docs for all items, not just public ones.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1290-2018-09-13">detailed release notes</a> for more.</p>
-<h2>Contributors to 1.29.0</h2>
+<h2><a href="#contributors-to-129.0" aria-hidden="true" class="anchor" id="contributors-to-129.0"></a>Contributors to 1.29.0</h2>
 <p>Many people came together to create Rust 1.29. We couldn't have done it
 without all of you. <a href="https://thanks.rust-lang.org/rust/1.29.0">Thanks!</a></p>
 

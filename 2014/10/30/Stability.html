@@ -79,7 +79,7 @@ a 6-week release cycle and a menu of release &quot;channels&quot;. The stable
 release channel will provide pain-free upgrades, and the nightly
 channel will give early adopters access to unfinished features as we
 work on them.</p>
-<h3>Committing to stability</h3>
+<h3><a href="#committing-to-stability" aria-hidden="true" class="anchor" id="committing-to-stability"></a>Committing to stability</h3>
 <p>Since the early days of Rust, there have only been two things you
 could count on: safety, and change. And sometimes not the first
 one. In the process of developing Rust, we've encountered a lot of
@@ -97,7 +97,7 @@ painless.</p>
 <p>To put it simply, our responsibility is to ensure that you never dread
 upgrading Rust. If your code compiles on Rust stable 1.0, it should
 compile with Rust stable 1.x with a minimum of hassle.</p>
-<h3>The plan</h3>
+<h3><a href="#the-plan" aria-hidden="true" class="anchor" id="the-plan"></a>The plan</h3>
 <p>We will use a variation of the train model, first introduced in web
 browsers and now widely used to provide stability without stagnation:</p>
 <ul>
@@ -123,12 +123,12 @@ explicitly &quot;opt in&quot; to the instability.</p>
 <p>The beta and stable releases, on the other hand, will only include
 features and APIs deemed <em>stable</em>, which represents a commitment to
 avoid breaking code that uses those features or APIs.</p>
-<h3>The FAQ</h3>
+<h3><a href="#the-faq" aria-hidden="true" class="anchor" id="the-faq"></a>The FAQ</h3>
 <p>There are a lot of details involved in the above process, and we plan
 to publish RFCs laying out the fine points. The rest of this post will
 cover some of the most important details and potential worries about
 this plan.</p>
-<h3>What features will be stable for 1.0?</h3>
+<h3><a href="#what-features-will-be-stable-for-10?" aria-hidden="true" class="anchor" id="what-features-will-be-stable-for-10?"></a>What features will be stable for 1.0?</h3>
 <p>We've done an analysis of the current Rust ecosystem to determine the
 most used crates and the feature gates they depend on, and used this
 data to guide our stabilization plan. The good news is that the vast
@@ -169,13 +169,13 @@ authors to help them migrate away from syntax extensions prior to
 1.0. Because many syntax extensions don't fit this model, we also see
 stabilizing syntax extensions as an immediate priority after the 1.0
 release.</p>
-<h3>What parts of the standard library will be stable for 1.0?</h3>
+<h3><a href="#what-parts-of-the-standard-library-will-be-stable-for-10?" aria-hidden="true" class="anchor" id="what-parts-of-the-standard-library-will-be-stable-for-10?"></a>What parts of the standard library will be stable for 1.0?</h3>
 <p>We have been steadily stabilizing the standard library, and have a
 plan for nearly <em>all</em> of the modules it provides. The expectation is
 that the vast majority of functionality in the standard library will
 be stable for 1.0. We have also been migrating more experimental APIs
 out of the standard library and into their own crates.</p>
-<h3>What about stability attributes outside of the standard library?</h3>
+<h3><a href="#what-about-stability-attributes-outside-of-the-standard-library" aria-hidden="true" class="anchor" id="what-about-stability-attributes-outside-of-the-standard-library"></a>What about stability attributes outside of the standard library?</h3>
 <p>Library authors can continue to use stability attributes as they do
 today to mark their own stability promises. These attributes are not
 tied into the Rust release channels by default. That is, when you're
@@ -186,7 +186,7 @@ itself</em> (the compiler and standard library) painless.</p>
 <p>Library authors should follow <a href="http://semver.org/">semver</a>; we will
 soon publish an RFC defining how library stability attributes and
 semver interact.</p>
-<h3>Why not allow opting in to instability in the stable release?</h3>
+<h3><a href="#why-not-allow-opting-in-to-instability-in-the-stable-release" aria-hidden="true" class="anchor" id="why-not-allow-opting-in-to-instability-in-the-stable-release"></a>Why not allow opting in to instability in the stable release?</h3>
 <p>There are three problems with allowing unstable features on the
 stable release.</p>
 <p>First, as the web has shown numerous times, merely <em>advertising</em>
@@ -208,7 +208,7 @@ all three release channels simultaneously.</p>
 <p>It's not realistic or necessary for the entire ecosystem to flawlessly
 deal with these problems. Instead, we will enforce that stable means
 stable: the stable channel provides only stable features.</p>
-<h3>Won't this split the ecosystem? Will everyone use nightly at 1.0?</h3>
+<h3><a href="#wont-this-split-the-ecosystem?-will-everyone-use-nightly-at-1.0?" aria-hidden="true" class="anchor" id="wont-this-split-the-ecosystem?-will-everyone-use-nightly-at-1.0?"></a>Won't this split the ecosystem? Will everyone use nightly at 1.0?</h3>
 <p>It doesn't split the ecosystem: it creates a subset. Programmers
 working with the nightly release channel can freely use libraries that
 are designed for the stable channel. There will be pressure to
@@ -218,14 +218,14 @@ in the unstable world will shrink over time.</p>
 existing ecosystem will fit into the &quot;stable&quot; category, and thus
 newcomers to Rust will immediately be able to use most libraries on
 the stable 1.0 release.</p>
-<h3>What are the stability caveats?</h3>
+<h3><a href="#what-are-the-stability-caveats" aria-hidden="true" class="anchor" id="what-are-the-stability-caveats"></a>What are the stability caveats?</h3>
 <p>We reserve the right to fix compiler bugs, patch safety holes, and
 change type inference in ways that may occasionally require new type
 annotations. We do not expect any of these changes to cause
 headaches when upgrading Rust.</p>
 <p>The library API caveats will be laid out in a forthcoming RFC, but are
 similarly designed to minimize upgrade pain in practice.</p>
-<h3>Will Rust and its ecosystem continue their rapid development?</h3>
+<h3><a href="#will-rust-and-its-ecosystem-continue-their-rapid-development" aria-hidden="true" class="anchor" id="will-rust-and-its-ecosystem-continue-their-rapid-development"></a>Will Rust and its ecosystem continue their rapid development?</h3>
 <p>Yes! Because new work can land on master at any time, the train model
 doesn't slow down the pace of development or introduce artificial
 delays. Rust has always evolved at a rapid pace, with lots of help

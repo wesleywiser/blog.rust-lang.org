@@ -79,7 +79,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1230-2018-01-04">detailed release notes for
 1.23.0</a> on GitHub.</p>
-<h2>What's in 1.23.0 stable</h2>
+<h2><a href="#whats-in-1.23.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.23.0-stable"></a>What's in 1.23.0 stable</h2>
 <p>New year, new Rust! For our first improvement today, we now <a href="https://github.com/rust-lang/rust/pull/45380">avoid some unnecessary
 copies</a> in certain situations.
 We've seen memory usage of using <code>rustc</code> to drop 5-10% with this change; it may
@@ -106,7 +106,7 @@ Additionally, they've been converted to the same format as our other long-form d
 We'll be adding a redirect from <code>doc.crates.io</code> to this page, and you can expect to see more
 improvements and updates to Cargo's docs throughout the year.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1230-2018-01-04">detailed release notes</a> for more.</p>
-<h3>Library stabilizations</h3>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>As of Rust 1.0, a trait named <a href="https://doc.rust-lang.org/std/ascii/trait.AsciiExt.html"><code>AsciiExt</code></a> existed to provide ASCII related functionality
 on <code>u8</code>, <code>char</code>, <code>[u8]</code>, and <code>str</code>. To use it, you'd write code like this:</p>
 <pre><code class="language-rust">use std::ascii::AsciiExt;
@@ -136,11 +136,11 @@ a neat use-case.</li>
 <li><a href="https://github.com/rust-lang/rust/pull/45682"><code>RwLock&lt;T&gt;</code> has had its <code>Send</code> restriction lifted</a></li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1230-2018-01-04">detailed release notes</a> for more.</p>
-<h3>Cargo features</h3>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
 <p><code>cargo check</code> can now <a href="https://github.com/rust-lang/cargo/pull/4592">check your unit tests</a>.</p>
 <p><code>cargo uninstall</code> can now <a href="https://github.com/rust-lang/cargo/pull/4561">uninstall more than one package in one command</a>.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1230-2018-01-04">detailed release notes</a> for more.</p>
-<h2>Contributors to 1.23.0</h2>
+<h2><a href="#contributors-to-123.0" aria-hidden="true" class="anchor" id="contributors-to-123.0"></a>Contributors to 1.23.0</h2>
 <p>Many people came together to create Rust 1.23. We couldn't have done it
 without all of you. <a href="https://thanks.rust-lang.org/rust/1.23.0">Thanks!</a></p>
 

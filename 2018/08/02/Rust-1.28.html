@@ -79,8 +79,8 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02">detailed release notes for
 1.28.0</a> on GitHub.</p>
-<h2>What's in 1.28.0 stable</h2>
-<h3>Global Allocators</h3>
+<h2><a href="#whats-in-1.28.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.28.0-stable"></a>What's in 1.28.0 stable</h2>
+<h3><a href="#global-allocators" aria-hidden="true" class="anchor" id="global-allocators"></a>Global Allocators</h3>
 <p>Allocators are the way that programs in Rust obtain memory from the system at
 runtime. Previously, Rust did not allow changing the way memory is obtained,
 which prevented some use cases. On some platforms, this meant using jemalloc, on
@@ -106,7 +106,7 @@ fn main() {
 <p>However, sometimes you want to define a custom allocator for a given application
 domain. This is also relatively easy to do by implementing the <code>GlobalAlloc</code>
 trait. You can read more about how to do this in the <a href="https://doc.rust-lang.org/stable/std/alloc/trait.GlobalAlloc.html">documentation</a>.</p>
-<h3>Improved error message for formatting</h3>
+<h3><a href="#improved-error-message-for-formatting" aria-hidden="true" class="anchor" id="improved-error-message-for-formatting"></a>Improved error message for formatting</h3>
 <p>Work on diagnostics continues, this time with an emphasis on formatting:</p>
 <pre><code class="language-rust">format!(&quot;{_foo}&quot;, _foo = 6usize);
 </code></pre>
@@ -126,7 +126,7 @@ is invalid:</p>
   = note: argument names cannot start with an underscore
 </code></pre>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02">detailed release notes</a> for more.</p>
-<h3>Library stabilizations</h3>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>We've already mentioned the stabilization of the <code>GlobalAlloc</code> trait, but
 another important stabilization is the <a href="https://doc.rust-lang.org/stable/std/num/index.html"><code>NonZero</code></a> number types. These are wrappers
 around the standard unsigned integer types: <code>NonZeroU8</code>, <code>NonZeroU16</code>,
@@ -153,11 +153,11 @@ fn main() {
 </code></pre>
 <p>A number of other libraries have also been stabilized: you can see the more
 <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02">detailed release notes</a> for full details.</p>
-<h3>Cargo features</h3>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
 <p><a href="https://github.com/rust-lang/cargo/pull/5584/">Cargo will now no longer allow you to publish crates with build scripts that
 modify the <code>src</code> directory.</a> The <code>src</code> directory in a crate should be
 considered to be immutable.</p>
-<h2>Contributors to 1.28.0</h2>
+<h2><a href="#contributors-to-128.0" aria-hidden="true" class="anchor" id="contributors-to-128.0"></a>Contributors to 1.28.0</h2>
 <p>Many people came together to create Rust 1.28. We couldn't have done it
 without all of you. <a href="https://thanks.rust-lang.org/rust/1.28.0">Thanks!</a></p>
 

@@ -73,7 +73,7 @@
       <p>This week marks three months since Rust 1.0 was released. As we're starting to
 hit our post-1.0 stride, we'd like to talk about <strong>what 1.0 meant in hindsight,
 and where we see Rust going in the next year</strong>.</p>
-<h3>What 1.0 was about</h3>
+<h3><a href="#what-10-was-about" aria-hidden="true" class="anchor" id="what-10-was-about"></a>What 1.0 was about</h3>
 <p>Rust 1.0 focused on stability, community, and clarity.</p>
 <ul>
 <li>
@@ -103,7 +103,7 @@ fear</strong>. And you can do so in contexts you might not have before, dropping
 from languages like Ruby or Python, making your first foray into systems
 programming.</p>
 <p>That's Rust 1.0; but what comes next?</p>
-<h3>Where we go from here</h3>
+<h3><a href="#where-we-go-from-here" aria-hidden="true" class="anchor" id="where-we-go-from-here"></a>Where we go from here</h3>
 <p>After much discussion within the core team, early production users, and the
 broader community, we've identified a number of improvements we'd like to make
 over the course of the next year or so, falling into three categories:</p>
@@ -113,8 +113,8 @@ over the course of the next year or so, falling into three categories:</p>
 <li>Branching out into new places to use Rust.</li>
 </ul>
 <p>Let's look at some of the biggest plans in each of these categories.</p>
-<h3>Doubling down: infrastructure investments</h3>
-<h4>Crater</h4>
+<h3><a href="#doubling-down-infrastructure-investments" aria-hidden="true" class="anchor" id="doubling-down-infrastructure-investments"></a>Doubling down: infrastructure investments</h3>
+<h4><a href="#crater" aria-hidden="true" class="anchor" id="crater"></a>Crater</h4>
 <p>Our basic <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">stability promise</a> for Rust is that upgrades
 between versions are &quot;hassle-free&quot;. To deliver on this promise, we need to
 detect compiler bugs that cause code to stop working. Naturally, the compiler
@@ -139,7 +139,7 @@ covered libraries as well.</li>
 their changes on downstream code.</li>
 <li>Include code from other sources beyond <a href="https://crates.io">crates.io</a>.</li>
 </ul>
-<h4>Incremental compilation</h4>
+<h4><a href="#incremental-compilation" aria-hidden="true" class="anchor" id="incremental-compilation"></a>Incremental compilation</h4>
 <p>Rust has always had a &quot;crate-wide&quot; compilation
 model. This means that the Rust compiler reads in all of the source files in
 your crate at once. These are type-checked and then given to LLVM for
@@ -158,15 +158,15 @@ intermediate representation, which we call <a href="https://github.com/rust-lang
 lower-level form of Rust code that boils down the more complex features, making
 the rest of the compiler simpler. This is a crucial enabler for language changes
 like non-lexical lifetimes (discussed in the next section).</p>
-<h4>IDE integration</h4>
+<h4><a href="#ide-integration" aria-hidden="true" class="anchor" id="ide-integration"></a>IDE integration</h4>
 <p>Top-notch IDE support can help to make Rust even more
 productive. Up until now, pioneering projects like <a href="https://github.com/phildawes/racer">Racer</a>,
 <a href="https://github.com/PistonDevelopers/VisualRust">Visual Rust</a>, and <a href="https://github.com/RustDT/RustDT">Rust DT</a> have been working largely
 without compiler support. <strong>We plan to extend the compiler to permit deeper
 integration with IDEs and other tools</strong>; the plan is to focus initially on two
 IDEs, and then grow from there.</p>
-<h3>Zeroing in: closing gaps in our key features</h3>
-<h4>Specialization</h4>
+<h3><a href="#zeroing-in-closing-gaps-in-our-key-features" aria-hidden="true" class="anchor" id="zeroing-in-closing-gaps-in-our-key-features"></a>Zeroing in: closing gaps in our key features</h3>
+<h4><a href="#specialization" aria-hidden="true" class="anchor" id="specialization"></a>Specialization</h4>
 <p>The idea of zero-cost abstractions breaks down into two
 separate goals, as identified by Stroustrup:</p>
 <ul>
@@ -190,7 +190,7 @@ you to provide multiple, overlapping trait implementations as long as one is
 clearly more specific than the other</strong>. Aside from giving Rust a more complete
 toolkit for zero-cost abstraction, specialization also improves its story for
 code reuse. See <a href="https://github.com/rust-lang/rfcs/pull/1210">the RFC</a> for more details.</p>
-<h4>Borrow checker improvements</h4>
+<h4><a href="#borrow-checker-improvements" aria-hidden="true" class="anchor" id="borrow-checker-improvements"></a>Borrow checker improvements</h4>
 <p>The borrow checker is, in a way, the beating heart of Rust; it's the part of the
 compiler that lets us achieve memory safety without garbage collection, by
 catching use-after-free bugs and the like. But occasionally, the borrower
@@ -208,7 +208,7 @@ with it today because the <code>map</code> variable is borrowed for the entire b
 shortcoming soon by refactoring the borrow checker to view code in terms of
 finer-grained (&quot;non-lexical&quot;) regions -- a step made possible by the move to the
 MIR mentioned above.</p>
-<h4>Plugins</h4>
+<h4><a href="#plugins" aria-hidden="true" class="anchor" id="plugins"></a>Plugins</h4>
 <p>There are some really neat things you can do in Rust today -- if you're willing
 to use the Nightly channel. For example, the <a href="https://github.com/rust-lang/regex">regex crate</a> comes with
 macros that, at compile time, turn regular expressions directly into machine
@@ -217,8 +217,8 @@ checks strings for SQL syntax validity at compile time. Crates like these make
 use of a highly-unstable compiler plugin system that currently exposes far too
 many compiler internals. <strong>We plan to propose a new plugin design that is more
 robust and provides built-in support for hygienic macro expansion as well</strong>.</p>
-<h3>Branching out: taking Rust to new places</h3>
-<h4>Cross-compilation</h4>
+<h3><a href="#branching-out-taking-rust-to-new-places" aria-hidden="true" class="anchor" id="branching-out-taking-rust-to-new-places"></a>Branching out: taking Rust to new places</h3>
+<h4><a href="#cross-compilation" aria-hidden="true" class="anchor" id="cross-compilation"></a>Cross-compilation</h4>
 <p>While cross-compiling with Rust is possible today, it involves a lot of manual
 configuration. <strong>We're shooting for push-button cross-compiles</strong>. The idea is
 that compiling Rust code for another target should be easy:</p>
@@ -228,7 +228,7 @@ if you don't already have it.</li>
 <li>Execute <code>cargo build --target=foo</code>.</li>
 <li>There is no step 3.</li>
 </ol>
-<h4>Cargo install</h4>
+<h4><a href="#cargo-install" aria-hidden="true" class="anchor" id="cargo-install"></a>Cargo install</h4>
 <p>Cargo and <a href="https://crates.io">crates.io</a> is a really great tool for distributing
 libraries, but it lacks any means to install executables.  <a href="https://github.com/rust-lang/rfcs/pull/1200">RFC 1200</a> describes a
 simple addition to cargo, the <code>cargo install</code> command.  Much like the
@@ -236,7 +236,7 @@ conventional <code>make install</code>, <strong><code>cargo install</code> will 
 path so that you can run it</strong>. This can serve as a simple distribution channel,
 and is particularly useful for people writing tools that target Rust developers
 (who are likely to be familiar with running cargo).</p>
-<h4>Tracing hooks</h4>
+<h4><a href="#tracing-hooks" aria-hidden="true" class="anchor" id="tracing-hooks"></a>Tracing hooks</h4>
 <p>One of the most promising ways of using Rust is by &quot;embedding&quot; Rust code into
 systems written in higher-level languages like <a href="http://blog.skylight.io/bending-the-curve-writing-safe-fast-native-gems-with-rust/">Ruby</a> or Python. This
 embedding is usually done by giving the Rust code a C API, and works reasonably
@@ -255,7 +255,7 @@ by a GC to sweep the stack and identify roots, making it possible to write code
 that integrates with advanced VMs smoothly and easily. Naturally, the design
 will respect Rust's &quot;pay for what you use&quot; policy, so that code which does not
 integrate with a GC is unaffected.</p>
-<h3>Epilogue: RustCamp 2015, and Rust's community in 2016</h3>
+<h3><a href="#epilogue-rustcamp-2015,-and-rust's-community-in-2016" aria-hidden="true" class="anchor" id="epilogue-rustcamp-2015,-and-rust's-community-in-2016"></a>Epilogue: RustCamp 2015, and Rust's community in 2016</h3>
 <p>We recently held the first-ever Rust conference, <a href="http://rustcamp.com/">RustCamp</a>
 2015, which sold out with 160 attendees. It was amazing to see so much
 of the Rust community in person, and to see the vibe of our online

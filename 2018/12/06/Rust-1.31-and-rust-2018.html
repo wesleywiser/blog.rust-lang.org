@@ -80,7 +80,7 @@ reliable and efficient software.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1310-2018-12-06">detailed release notes for
 1.31.0</a> on GitHub.</p>
-<h2>What's in 1.31.0 stable</h2>
+<h2><a href="#whats-in-1.31.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.31.0-stable"></a>What's in 1.31.0 stable</h2>
 <p>Rust 1.31 may be the most exciting release since Rust 1.0! Included in this release is the
 first iteration of &quot;Rust 2018,&quot; but there's more than just that! This is going to be a long
 post, so here's a table of contents:</p>
@@ -102,7 +102,7 @@ post, so here's a table of contents:</p>
 <li><a href="#cargo-features">Cargo features</a></li>
 <li><a href="#contributors-to-1310">Contributors</a></li>
 </ul>
-<h3>Rust 2018</h3>
+<h3><a href="#rust-2018" aria-hidden="true" class="anchor" id="rust-2018"></a>Rust 2018</h3>
 <p>We wrote about Rust 2018 <a href="https://blog.rust-lang.org/2018/03/12/roadmap.html">first in
 March</a>, <a href="https://blog.rust-lang.org/2018/07/27/what-is-rust-2018.html">and then in
 July</a>.
@@ -153,7 +153,7 @@ guide</a> to check each
 feature's minimum <code>rustc</code> version as well as edition requirements. However,
 there are a few big-ticket features we'd like to mention here: non-lexical
 lifetimes, and some module system improvements.</p>
-<h4>Non-lexical lifetimes</h4>
+<h4><a href="#non-lexical-lifetimes" aria-hidden="true" class="anchor" id="non-lexical-lifetimes"></a>Non-lexical lifetimes</h4>
 <p>If you've been following Rust's development over the past few years, you may
 have heard the term &quot;NLL&quot; or &quot;non-lexical lifetimes&quot; thrown around. This is
 jargon, but it has a straightforward translation into simpler terms: the
@@ -221,7 +221,7 @@ conflicting borrow occurs. This makes these sorts of errors far easier to
 debug.</p>
 <p>In Rust 1.31, this feature is exclusive to Rust 2018. We plan to backport it
 to Rust 2015 at a later date.</p>
-<h4>Module system changes</h4>
+<h4><a href="#module-system-changes" aria-hidden="true" class="anchor" id="module-system-changes"></a>Module system changes</h4>
 <p>The module system can be a struggle for people first learning Rust.
 Everyone has their own things that take time to master, of course, but
 there's a root cause for why it's so confusing to many: while there are
@@ -242,7 +242,7 @@ model is now significantly simplified overall.</p>
 <p>There's a <em>lot</em> of details here, so please read <a href="https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html">the edition
 guide</a>
 for full details.</p>
-<h3>More lifetime elision rules</h3>
+<h3><a href="#more-lifetime-elision-rules" aria-hidden="true" class="anchor" id="more-lifetime-elision-rules"></a>More lifetime elision rules</h3>
 <p>Let's talk about a feature that's available in both editions: we've added
 some additional elision rules for <code>impl</code> blocks and function definitions.
 Code like this:</p>
@@ -272,7 +272,7 @@ struct Ref&lt;'a, T&gt; {
 <p>The <code>: 'a</code> is inferred. You can still be explicit if you prefer. We're
 considering some more options for elision here in the future, but have no
 concrete plans yet.</p>
-<h3><code>const fn</code></h3>
+<h3><a href="#const-fn" aria-hidden="true" class="anchor" id="const-fn"></a><code>const fn</code></h3>
 <p>There's several ways to define a function in Rust: a regular function with
 <code>fn</code>, an unsafe function with <code>unsafe fn</code>, an external function with <code>extern fn</code>.
 This release adds a new way to qualify a function: <code>const fn</code>. It looks like
@@ -306,7 +306,7 @@ some examples of what you can do:</p>
 this is enough useful stuff to start shipping the feature itself.</p>
 <p>For full details, please see <a href="https://doc.rust-lang.org/reference/items/functions.html#const-functions">the
 reference</a>.</p>
-<h3>New tools</h3>
+<h3><a href="#new-tools" aria-hidden="true" class="anchor" id="new-tools"></a>New tools</h3>
 <p>The 2018 edition signals a new level of maturity for Rust's tools ecosystem.
 Cargo, Rustdoc, and Rustup have been crucial tools since 1.0; with the 2018
 edition, there is a new generation of tools ready for all users: Clippy,
@@ -341,7 +341,7 @@ now multiple, high quality options:</p>
 <p>Work on IDE support is not finished, in particular code completion is not up
 to scratch in the RLS-based editors. However, if you mainly want support for
 types, documentation, and 'go to def', etc. then you should be happy.</p>
-<h3>Tool lints</h3>
+<h3><a href="#tool-lints" aria-hidden="true" class="anchor" id="tool-lints"></a>Tool lints</h3>
 <p>In <a href="https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html">Rust 1.30</a>, we
 stabilized &quot;tool attributes&quot;, like <code>#[rustfmt::skip]</code>. In Rust 1.31, we're
 stabilizing something similar: &quot;tool lints,&quot; like
@@ -356,7 +356,7 @@ more clear which tool they're coming from.</p>
 </code></pre>
 <p>You don't need <code>cfg_attr</code> anymore! You'll also get warnings that can help you
 update to the new style.</p>
-<h3>Documentation</h3>
+<h3><a href="#documentation" aria-hidden="true" class="anchor" id="documentation"></a>Documentation</h3>
 <p>Rustdoc has seen a number of improvements this year, and we also shipped a
 complete re-write of the &quot;The Rust Programming Language.&quot; Additionally, you
 can <a href="https://nostarch.com/rust">buy a dead-tree copy from No Starch Press</a>!</p>
@@ -368,7 +368,7 @@ website with each release, and No Starch will periodically pull in our
 changes and print them. The book has been selling quite well so far, raising
 money for <a href="http://www.blackgirlscode.com/">Black Girls Code</a>.</p>
 <p>You can find the new TRPL <a href="https://doc.rust-lang.org/beta/book/">here</a>.</p>
-<h3>Domain working groups</h3>
+<h3><a href="#domain-working-groups" aria-hidden="true" class="anchor" id="domain-working-groups"></a>Domain working groups</h3>
 <p>We announced the formation of four working groups this year:</p>
 <ul>
 <li>Network services</li>
@@ -387,14 +387,14 @@ command-line applications</li>
 <li>Embedded devices has gotten ARM development working on stable Rust!</li>
 </ul>
 <p>You can find out more about this work on the new website!</p>
-<h3>New Website</h3>
+<h3><a href="#new-website" aria-hidden="true" class="anchor" id="new-website"></a>New Website</h3>
 <p><a href="https://blog.rust-lang.org/2018/11/29/a-new-look-for-rust-lang-org.html">Last
 week</a>
 we announced a new iteration of the web site. It's now been promoted to
 rust-lang.org itself!</p>
 <p>There's still a ton of work to do, but we're proud of the year of work that it
 took by many people to get it shipped.</p>
-<h3>Library stabilizations</h3>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>A bunch of <code>From</code> implementations have been added:</p>
 <ul>
 <li><code>u8</code> now implements <code>From&lt;NonZeroU8&gt;</code>, and likewise for the other numeric types and their <code>NonZero</code> equivalents</li>
@@ -408,7 +408,7 @@ as well as its mutable and <code>r</code> counterparts (like
 <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.rchunks_mut"><code>slice::rchunks_exact_mut</code></a>) in all combinations</li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1310-2018-12-06">detailed release notes</a> for more.</p>
-<h3>Cargo features</h3>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
 <p>Cargo will now download packages in parallel using HTTP/2.</p>
 <p>Additionally, now that <code>extern crate</code> is not usually required, it would be
 jarring to do <code>extern crate foo as bar;</code> to rename a crate. As such, you can
@@ -423,7 +423,7 @@ package = &quot;foo&quot;
 </code></pre>
 <p>Now, the <code>foo</code> package will be able to be used via <code>baz</code> in your code.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1310-2018-12-06">detailed release notes</a> for more.</p>
-<h2>Contributors to 1.31.0</h2>
+<h2><a href="#contributors-to-131.0" aria-hidden="true" class="anchor" id="contributors-to-131.0"></a>Contributors to 1.31.0</h2>
 <p>At the end of release posts, we normally thank <a href="https://thanks.rust-lang.org/rust/1.31.0">the people who contributed to
 this release</a>. But for this
 release, more so than others, this list does not truly capture the amount of

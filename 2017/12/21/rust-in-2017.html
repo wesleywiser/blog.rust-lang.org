@@ -73,8 +73,8 @@
       <p>Rust’s development in 2017 fit into a single overarching theme: <strong>increasing productivity, especially for newcomers to Rust</strong>. From tooling to libraries to documentation to the core language, we wanted to make it easier to get things done with Rust. That desire led to <a href="https://blog.rust-lang.org/2017/02/06/roadmap.html">a roadmap</a> for the year, setting out 8 high-level objectives that would guide the work of the team.</p>
 <p>How’d we do? <em><strong>Really, really well</strong></em>.</p>
 <p>There’s not room in a single post to cover everything that happened, but we’ll cover some of the highlights below.</p>
-<h1>The goals for 2017</h1>
-<h2>Rust should have a lower learning curve</h2>
+<h1><a href="#the-goals-for-2017" aria-hidden="true" class="anchor" id="the-goals-for-2017"></a>The goals for 2017</h1>
+<h2><a href="#rust-should-have-a-lower-learning-curve" aria-hidden="true" class="anchor" id="rust-should-have-a-lower-learning-curve"></a>Rust should have a lower learning curve</h2>
 <ul>
 <li><strong>Books</strong>
 <ul>
@@ -94,7 +94,7 @@
 </ul>
 </li>
 </ul>
-<h2>Rust should have a pleasant edit-compile-debug cycle</h2>
+<h2><a href="#rust-should-have-a-pleasant-edit-compile-debug-cycle" aria-hidden="true" class="anchor" id="rust-should-have-a-pleasant-edit-compile-debug-cycle"></a>Rust should have a pleasant edit-compile-debug cycle</h2>
 <ul>
 <li><strong>The <code>cargo check</code> workflow</strong>
 <ul>
@@ -110,7 +110,7 @@
 </li>
 </ul>
 <p><img src="/images/2017-12-Retro/incr-bench.png" alt="Incremental recompilation benchmarks" />{:class=&quot;center&quot;}</p>
-<h2>Rust should provide a solid, but basic IDE experience</h2>
+<h2><a href="#rust-should-provide-a-solid-but-basic-ide-experience" aria-hidden="true" class="anchor" id="rust-should-provide-a-solid-but-basic-ide-experience"></a>Rust should provide a solid, but basic IDE experience</h2>
 <ul>
 <li>Rust now has solid IDE support in IntelliJ and via the Rust Language Server (RLS). Whether you prefer a fully-featured IDE or a more lightweight editor with IDE features, you can boost your productivity by taking advantage of great Rust integration.</li>
 <li><strong>IntelliJ</strong>. Rust has official support in <a href="https://blog.jetbrains.com/blog/2017/08/04/official-support-for-open-source-rust-plugin-for-intellij-idea-clion-and-other-jetbrains-ides/">JetBrains' IDEs</a> (IntelliJ IDEA, CLion, WebStorm, etc.), which includes:
@@ -139,12 +139,12 @@
 </ul>
 </li>
 </ul>
-<h2>Rust should integrate easily into large build systems</h2>
+<h2><a href="#rust-should-integrate-easily-into-large-build-systems" aria-hidden="true" class="anchor" id="rust-should-integrate-easily-into-large-build-systems"></a>Rust should integrate easily into large build systems</h2>
 <ul>
 <li><strong>Alternative registries.</strong> Cargo now has unstable support for <a href="http://rust-lang.github.io/rfcs/2141-alternative-registries.html">installing crates from registries other than crates.io</a>. This will enable companies to manage and use internal crates as easily as open source crates. Work is underway developing crate servers that are more tailored for private use than the crates.io server is.</li>
 <li><strong>Cargo as a component</strong>. A lot of work this year went into gathering constraints from stakeholders who want to integrate Rust crates into a large existing build system (like <a href="https://bazel.build/">Bazel</a>). The Cargo team has <a href="https://github.com/rust-lang/rfcs/pull/2136">formulated a vision</a> of Cargo as a suite of components that can be customized or swapped out, making it easy for an external build system to manage the work it is built to do, while still integrating with crates.io and with Cargo workflows. While we did not get as far as we hoped in terms of implementing this vision, there is ongoing work spiking out “build plan generation” to a sufficient degree that it can support the Firefox build system and <a href="http://gittup.org/tup/">Tup</a>. This initial spike should provide a good strawman for further iteration in early 2018.</li>
 </ul>
-<h2>Rust should provide easy access to high quality crates</h2>
+<h2><a href="#rust-should-provide-easy-access-to-high-quality-crates" aria-hidden="true" class="anchor" id="rust-should-provide-easy-access-to-high-quality-crates"></a>Rust should provide easy access to high quality crates</h2>
 <ul>
 <li>Crates.io added <a href="https://crates.io/categories">categories</a> this year, which aim to provide a crate organization structure targeted towards providing crates that are good for a particular purpose.</li>
 <li>We had a <a href="https://github.com/rust-lang/rfcs/pull/1824">lively RFC discussion</a> about the best way to order crates within categories and keywords, which included <a href="http://rust-lang.github.io/rfcs/1824-crates.io-default-ranking.html#appendix-user-research">a survey of how people evaluate crates</a>.</li>
@@ -152,7 +152,7 @@
 <li>Some of the additional information now available for crate authors to display on crates.io includes badges for CI status, <a href="https://github.com/rust-lang/crates.io/issues/704">maintenance status</a>, <a href="https://github.com/rust-lang/crates.io/issues/706">code coverage</a>, <a href="https://github.com/rust-lang/crates.io/issues/705">GitHub statistics</a>.</li>
 <li>Most importantly, <a href="https://github.com/rust-lang/crates.io/issues/81">crates.io now displays a crate’s README on the crate page</a>! Crate authors are encouraged to use this capability to provide getting started documentation with a small example of what it looks like to use this crate, because good documentation and examples were among the most-mentioned positive signals that people take into account when evaluating crates.</li>
 </ul>
-<h2>Rust should be well-equipped for writing robust servers</h2>
+<h2><a href="#rust-should-be-well-equipped-for-writing-robust-servers" aria-hidden="true" class="anchor" id="rust-should-be-well-equipped-for-writing-robust-servers"></a>Rust should be well-equipped for writing robust servers</h2>
 <ul>
 <li><strong>Futures and Tokio</strong>
 <ul>
@@ -175,12 +175,12 @@
 </ul>
 </li>
 </ul>
-<h2>Rust should have 1.0-level crates for essential tasks</h2>
+<h2><a href="#rust-should-have-10-level-crates-for-essential-tasks" aria-hidden="true" class="anchor" id="rust-should-have-10-level-crates-for-essential-tasks"></a>Rust should have 1.0-level crates for essential tasks</h2>
 <ul>
 <li><strong>Libz Blitz</strong>. The library team launched the <a href="https://blog.rust-lang.org/2017/05/05/libz-blitz.html">Libz Blitz</a> this year, a major effort to vet and improve a large number of foundational crates and push them toward 1.0 releases. It was a massive community effort: we performed a crowd-sourced “crate evaluation” every two weeks, fully vetting a crate against a clear set of guidelines, assessing the issue tracker, and sussing out any remaining design questions. While not all of the assessed crates have published a 1.0 yet, they are all very close to doing so. The full list includes: <a href="https://github.com/rust-lang-nursery/log/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">log</a>, <a href="https://github.com/sebasmagri/env_logger/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">env_logger</a>, <a href="https://github.com/nikomatsakis/rayon/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">rayon</a>, <a href="https://github.com/carllerche/mio/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22%20">mio</a>, <a href="https://github.com/servo/rust-url/issues/319">url</a>, <a href="https://github.com/seanmonstar/num_cpus/issues/55">num_cpus</a>, <a href="https://github.com/steveklabnik/semver/issues/139">semver</a>, <a href="https://github.com/hyperium/mime/labels/help%20wanted">mime</a>, <a href="https://github.com/seanmonstar/reqwest/issues?q=is%3Aissue+is%3Aopen+label%3Aeasy">reqwest</a>, <a href="https://github.com/rust-lang-nursery/tempdir/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">tempdir</a>, <a href="https://github.com/rust-threadpool/rust-threadpool/issues/86">threadpool</a>, <a href="https://github.com/BurntSushi/byteorder/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22%20">byteorder</a>, <a href="https://github.com/rust-lang-nursery/bitflags/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22%20">bitflags</a>, <a href="https://github.com/alexcrichton/cc-rs">cc-rs</a>, <a href="https://github.com/BurntSushi/walkdir/issues/47">walkdir</a>, <a href="https://crates.io/crates/same-file">same-file</a>, <a href="https://crates.io/crates/memmap">memmap</a>, <a href="https://github.com/rust-lang-nursery/lazy-static.rs/issues?utf8=%E2%9C%93&q=is%3Aopen%20is%3Aissue%20label%3A%22help%20wanted%22%20">lazy_static</a>, <a href="https://github.com/alexcrichton/flate2-rs/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">flate2</a>.</li>
 <li><strong>API Guidelines</strong>. A great by-product of the Libz Blitz is the <a href="https://rust-lang-nursery.github.io/api-guidelines/">API Guidelines</a> book, which consolidates the official library team API guidance as informed by the standard library and the Libz Blitz process.</li>
 </ul>
-<h2>Rust’s community should provide mentoring at all levels</h2>
+<h2><a href="#rusts-community-should-provide-mentoring-at-all-levels" aria-hidden="true" class="anchor" id="rusts-community-should-provide-mentoring-at-all-levels"></a>Rust’s community should provide mentoring at all levels</h2>
 <ul>
 <li>We ran 5 <a href="https://rustbridge.github.io/">RustBridge Workshops</a> in 2017, in Kyiv, Ukraine; Mexico City, Mexico; Portland, OR, USA; Zurich, Switzerland; and Columbus, OH, USA! RustBridge workshops aim to get underrepresented folks started in Rust. Attendees get an introduction to syntax and concepts, work on some <a href="http://exercism.io/">exercism</a> exercises, and build a web application that delivers emergency compliments and crab pictures. We hope to scale this program and help more folks run more workshops in 2018!</li>
 <li>The <a href="https://blog.rust-lang.org/2017/06/27/Increasing-Rusts-Reach.html">Increasing Rust’s Reach program</a> brought people with skills from other areas (such as teaching) and with different experiences into Rust so that we can improve in areas where the community is missing these skills and experiences. The participants have helped immensely, and many are planning to continue helping in the Rust community going forward. We’re glad they’re here! Here are some blog posts about the experience:
@@ -192,9 +192,9 @@ We learned a lot in the first incarnation of this program, and we have plans for
 </li>
 <li>Last but not least, we also launched the first Rust <a href="https://blog.rust-lang.org/2017/09/18/impl-future-for-rust.html"><code>impl Period</code></a>. This was an ambitious effort to simultaneously help get a lot of new people contributing to the Rust ecosystem while also getting a lot of things done. To that end, we created 40+ working groups, each with their own focus area, leaders, and chat channel. These groups identified good “entry points” for people who wanted to contribute, and helped mentor them through the changes needed. This event was a wild success and resulted in changes and contributions to all areas of Rust, ranging from the compiler internals to documentation to the ecosystem at large. To those of you who participated, a great big thank you — and please keep contributing! To those of you who didn’t get a chance, don’t worry: we hope to make this a regular tradition.</li>
 </ul>
-<h1>2018</h1>
+<h1><a href="#2018" aria-hidden="true" class="anchor" id="2018"></a>2018</h1>
 <p>We’ll be spinning up the 2018 roadmap process in the very near future; watch this space!</p>
-<h1>Thank you!</h1>
+<h1><a href="#thank-you" aria-hidden="true" class="anchor" id="thank-you"></a>Thank you!</h1>
 <p>We got a staggering amount of work done this year — and the “we” here includes an equally staggering number of people. Because the work has been spread out over so many facets of the project, it’s hard to provide a single list of people who contributed. For the impl period specifically, you can see detailed contribution lists in the newsletters:</p>
 <ul>
 <li><a href="https://internals.rust-lang.org/t/the-impl-period-newsletter-week-1/5971">Newsletter 1</a></li>

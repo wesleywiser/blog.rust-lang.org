@@ -78,7 +78,7 @@ guided in part by what we learned in producing the Rust standard library, and
 will result in a &quot;cookbook&quot; chock full of ready-made examples for common tasks,
 drawing from a careful selection of Rust crates.</p>
 <p>(Also, ICYMI: please participate in the <a href="https://blog.rust-lang.org/2017/05/03/survey.html">State of Rust survey</a>; even if you don't use Rust, we'd love to hear from you!)</p>
-<h2>Batteries included?</h2>
+<h2><a href="#batteries-included" aria-hidden="true" class="anchor" id="batteries-included"></a>Batteries included?</h2>
 <p><strong>You can't be productive in a language without libraries that are easy to find
 and use.</strong> Of course, the easiest library to find is the standard library, and
 many languages have taken a &quot;batteries included&quot; approach that includes APIs for
@@ -110,7 +110,7 @@ on this ability to the fullest, we need to have excellent libraries. <strong>Our
 mission for 2017 is to ensure that crates are available for a wide swath of
 common tasks and that they are <em>discoverable</em>, <em>cohesive</em>, <em>featureful</em>, and
 <em>well-documented</em>.</strong></p>
-<h2>The Rust Libz Blitz</h2>
+<h2><a href="#the-rust-libz-blitz" aria-hidden="true" class="anchor" id="the-rust-libz-blitz"></a>The Rust Libz Blitz</h2>
 <p>Fortunately, while the standard library has stayed small and focused, the
 crates.io ecosystem has been growing at breakneck pace. So the challenge here
 isn't greenfield library work. It's more a question of: <strong>how can the Rust
@@ -131,7 +131,7 @@ easy to discover the crate and jump into using it.</li>
 past couple of months, to sort out the kinks. But now, we want to open it up to
 the whole Rust community. In the rest of the post, we'll dive a bit more deeply
 into the mechanics and goals of this process.</p>
-<h3>Rust standards of quality</h3>
+<h3><a href="#rust-standards-of-quality" aria-hidden="true" class="anchor" id="rust-standards-of-quality"></a>Rust standards of quality</h3>
 <p>In all the work on the standard library, we have gained a sense of what makes
 Rust APIs great: principles like &quot;make performance characteristics clear&quot; and
 &quot;use ownership to encapsulate invariants&quot;; consistent naming conventions like
@@ -147,7 +147,7 @@ set of <a href="https://github.com/brson/rust-api-guidelines">API guidelines</a>
 design of Rust and level up crates of their own interest. Today those guidelines
 are in a very early state, but give you a sense of where we are headed with this
 effort. Take a look and file issues where things are unclear or missing!</p>
-<h3>Rust standards of documentation</h3>
+<h3><a href="#rust-standards-of-documentation" aria-hidden="true" class="anchor" id="rust-standards-of-documentation"></a>Rust standards of documentation</h3>
 <p>We recently ran a small survey to see what Rust programmers care most about when
 evaluating a crate. The <a href="https://github.com/rust-lang/rfcs/blob/master/text/1824-crates.io-default-ranking.md#factors-considered-when-ranking-crates">most common criterion</a>, by far, was documentation.  So
 a big part of the Libz Blitz process will be evaluating and improving the
@@ -167,7 +167,7 @@ experience when working with Rust.</p>
 <p>Part of the work done in the Libz Blitz for each crate will be identifying the
 key problem statements the crate is trying to address, and adding strong
 examples for each to the cookbook.</p>
-<h3>Rust standards of discoverability</h3>
+<h3><a href="#rust-standards-of-discoverability" aria-hidden="true" class="anchor" id="rust-standards-of-discoverability"></a>Rust standards of discoverability</h3>
 <p>Perhaps the biggest downside to having a small standard library is the problem
 of discoverability: when a Rust programmer needs to take on a task not covered
 by the standard library, how do they figure out where to look?</p>
@@ -179,7 +179,7 @@ out badges for various quality indicators on crates.io, and greatly improving
 the default ranking of results (a design debated vigorously through <a href="https://github.com/rust-lang/rfcs/pull/1824">an
 RFC</a>). There's plenty of room for more work here, so if you have ideas about
 further improving discoverability on crates.io, <a href="https://internals.rust-lang.org/">please start a thread</a>!</p>
-<h3>Rust standards of community</h3>
+<h3><a href="#rust-standards-of-community" aria-hidden="true" class="anchor" id="rust-standards-of-community"></a>Rust standards of community</h3>
 <p>We have some idea of what goes into publishing exceptional Rust crates, but the
 Rust library team is not the sole authority of Rust API design—the Rust crate
 ecosystem is created by all of us together and there are many lessons yet to
@@ -224,7 +224,7 @@ crates to get a feel for it: <a href="https://github.com/rust-lang-nursery/bitfl
 <a href="https://github.com/rust-lang-nursery/lazy-static.rs/issues/70"><code>lazy_static</code></a>. Even these, the most basic of crates, have some work left to do
 but you can expect them to have &quot;1.0&quot; releases soon. As the crates under
 evaluation grow in scope, presumably the tasks that arise will grow as well.</p>
-<h3>What crates are we going to focus on?</h3>
+<h3><a href="#what-crates-are-we-going-to-focus-on" aria-hidden="true" class="anchor" id="what-crates-are-we-going-to-focus-on"></a>What crates are we going to focus on?</h3>
 <p>Rust has some amazing libraries in the works: things like <a href="https://tokio.rs/"><code>tokio</code></a>
 which is a really fast asynchronous I/O framework; like <a href="https://diesel.rs/"><code>diesel</code></a>, a
 really fast library for interacting with database tables; and like
@@ -256,7 +256,7 @@ dependency data, various existing curated crate listings, and good old gut
 feeling. The exact list is definitely up for debate, and we hope that the
 broader community will also apply this process completely independently to
 crates the libs team won't have time to discuss.</p>
-<h3>How can I help?</h3>
+<h3><a href="#how-can-i-help" aria-hidden="true" class="anchor" id="how-can-i-help"></a>How can I help?</h3>
 <p>We're glad you asked! Creating a solid core of libraries for a young
 language is not the work of a single person or team—it is the work of
 the entire community. The central point of coordination is a <a href="https://internals.rust-lang.org/t/rust-libs-blitz/5184">thread
@@ -331,7 +331,7 @@ and guidelines we develop will be widely useful and that crate authors will
 independently seek to evaluate and improve their own crates in similar ways.</p>
 </li>
 </ul>
-<h2>The TL;DR</h2>
+<h2><a href="#the-tldr" aria-hidden="true" class="anchor" id="the-tldr"></a>The TL;DR</h2>
 <p>Here's the plan:</p>
 <ul>
 <li>We will directly improve the most important crates you use every

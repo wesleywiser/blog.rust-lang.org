@@ -78,7 +78,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1170-2017-04-27">detailed release notes for
 1.17.0</a> on GitHub.</p>
-<h3>What's in 1.17.0 stable</h3>
+<h3><a href="#whats-in-1.17.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.17.0-stable"></a>What's in 1.17.0 stable</h3>
 <p>The story of Rust 1.17.0 is mostly one of small, quality of life improvements. For example,
 <a href="https://github.com/rust-lang/rust/pull/39265">the <code>'static</code> lifetime is now assumed in statics and consts</a>. When writing a const or static like this:</p>
 <pre><code class="language-rust">const NAME: &amp;'static str = &quot;Ferris&quot;;
@@ -201,7 +201,7 @@ this release. Until then, Visual Studio 2015 still works fine, or you
 can run <code>vcvars.bat</code> on the command line. We hope to make this work
 in a seamless fashion soon.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1170-2017-04-27">detailed release notes</a> for more.</p>
-<h4>Library stabilizations</h4>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
 <p>19 new bits of API were stabilized this release:</p>
 <ul>
 <li><a href="https://doc.rust-lang.org/std/sync/struct.Arc.html#method.into_raw"><code>Arc::into_raw</code></a> and <a href="https://doc.rust-lang.org/std/rc/struct.Rc.html#method.into_raw"><code>Rc::into_raw</code></a> let you consume an <code>Arc</code> or <code>Rc</code> and get a raw pointer.</li>
@@ -286,7 +286,7 @@ stack backtrace:
 <p>By default. You can set the environment variable <code>RUST_BACKTRACE=full</code> to get the full
 backtrace. We may be able to do more cleanup in the future; see <a href="https://github.com/rust-lang/rust/pull/40264">this bug</a> for more.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1170-2017-04-27">detailed release notes</a> for more.</p>
-<h4>Cargo features</h4>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
 <p>Other than the previously mentioned <code>build.rs</code> changes, Cargo has a few new improvements.
 <a href="https://github.com/rust-lang/cargo/pull/3731"><code>cargo check --all</code></a> and
 <a href="https://github.com/rust-lang/cargo/pull/3691"><code>cargo run --package</code></a> are two missing
@@ -331,7 +331,7 @@ required-features = [&quot;postgres&quot;, &quot;tools&quot;]
 set, and so we can write a normal <code>fn main</code> without all the <code>cfg</code> nonsense getting
 in the way.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1170-2017-04-27">detailed release notes</a> for more.</p>
-<h3>Contributors to 1.17.0</h3>
+<h3><a href="#contributors-to-117.0" aria-hidden="true" class="anchor" id="contributors-to-117.0"></a>Contributors to 1.17.0</h3>
 <p>Many people came together to create Rust 1.17. We couldn't have done it without
 all of you. <a href="https://thanks.rust-lang.org/rust/1.17.0">Thanks!</a></p>
 

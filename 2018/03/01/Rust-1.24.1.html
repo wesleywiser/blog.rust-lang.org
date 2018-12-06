@@ -79,7 +79,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1241-2018-03-01">detailed release notes for
 1.24.1</a> on GitHub.</p>
-<h2>What's in 1.24.1 stable</h2>
+<h2><a href="#whats-in-1.24.1-stable" aria-hidden="true" class="anchor" id="whats-in-1.24.1-stable"></a>What's in 1.24.1 stable</h2>
 <p>Several minor regressions were found in 1.24.0 which collectively merited a
 release.</p>
 <p>A quick summary of the changes:</p>
@@ -93,7 +93,7 @@ release.</p>
 the unwinding issue. We plan on bringing this behavior back in 1.25 or 1.26,
 depending on how smoothly the new strategy goes.</p>
 <p>With that, let's dig into the details!</p>
-<h3>Do not abort when unwinding through FFI</h3>
+<h3><a href="#do-not-abort-when-unwinding-through-ffi" aria-hidden="true" class="anchor" id="do-not-abort-when-unwinding-through-ffi"></a>Do not abort when unwinding through FFI</h3>
 <p>TL;DR: the new behavior in 1.24.0 broke the <code>rlua</code> crate, and is being
 reverted. If you have since changed your code to take advantage of the behavior
 in 1.24.0, you'll need to revert it for now.  While we still plan to introduce
@@ -217,7 +217,7 @@ panics use SEH, the <code>longjmp</code> gets &quot;caught&quot;, and runs the n
 generate the abort handler, but in a way that <code>longjmp</code> won't trigger it.  It's
 not 100% clear if this will make it into Rust 1.25; if the landing is smooth,
 we may backport, otherwise, this functionality will be back in 1.26.</p>
-<h3>Emit UTF-16 files for linker arguments on Windows</h3>
+<h3><a href="#emit-utf-16-files-for-linker-arguments-on-windows" aria-hidden="true" class="anchor" id="emit-utf-16-files-for-linker-arguments-on-windows"></a>Emit UTF-16 files for linker arguments on Windows</h3>
 <p>TL;DR: <code>rustc</code> stopped working for some Windows users in edge-case situations.
 If it's been working for you, you were not affected by this bug.</p>
 <p>In constrast with the previous bug, which is very complex and tough to understand,
@@ -244,7 +244,7 @@ docs state</a>:</p>
 <p>We were providing a UTF-8 encoded file, with no
 <a href="https://en.wikipedia.org/wiki/Byte_order_mark">BOM</a>. The fix is therefore
 straightforward: produce a UTF-16 file with a BOM.</p>
-<h3>Make the error index generator work again</h3>
+<h3><a href="#make-the-error-index-generator-work-again" aria-hidden="true" class="anchor" id="make-the-error-index-generator-work-again"></a>Make the error index generator work again</h3>
 <p>TL;DR: building Rust 1.24.0 with Rust 1.24.0 broke in some circumstances.
 If you weren't building Rust yourself, you were not affected by this bug.</p>
 <p>When packaging Rust for various Linux distros, it was found that <a href="https://github.com/rust-lang/rust/issues/48308">building
@@ -255,7 +255,7 @@ be generated properly.</p>
 number of people, all of whom should be aware of it by now, we won't go
 into the details further. To learn more, please check out the issue and
 the resulting discussion.</p>
-<h3>Cargo will warn on Windows 7 if an update is needed.</h3>
+<h3><a href="#cargo-will-warn-on-windows-7-if-an-update-is-needed" aria-hidden="true" class="anchor" id="cargo-will-warn-on-windows-7-if-an-update-is-needed"></a>Cargo will warn on Windows 7 if an update is needed.</h3>
 <p>TL;DR: Cargo couldn't fetch the index from crates.io if you were using an older
 Windows without having applied security fixes. If you are using a newer
 Windows, or a patched Windows, you are not affected by this bug.</p>
@@ -287,7 +287,7 @@ suggesting that they upgrade their Windows version. Although the <code>libgit2</
 could have been backported, we felt that the code change footprint was too
 large for the point release, especially since the issue does not affect patched
 systems.</p>
-<h2>Contributors to 1.24.1</h2>
+<h2><a href="#contributors-to-124.1" aria-hidden="true" class="anchor" id="contributors-to-124.1"></a>Contributors to 1.24.1</h2>
 <p><a href="https://thanks.rust-lang.org/rust/1.24.1">Thanks!</a></p>
 
     </div>

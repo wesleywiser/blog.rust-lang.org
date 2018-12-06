@@ -87,7 +87,7 @@ explicit.</p>
 zero-cost abstractions. Working with C is, however, just an example; we'll also
 see how Rust can easily talk to languages like Python and Ruby just as
 seamlessly as with C.</p>
-<h3>Rust talking to C</h3>
+<h3><a href="#rust-talking-to-c" aria-hidden="true" class="anchor" id="rust-talking-to-c"></a>Rust talking to C</h3>
 <p>Let's start with a simple example of calling C code from Rust and then
 demonstrate that Rust imposes no additional overhead. Here's a C program which
 will simply double all the input it's given:</p>
@@ -152,7 +152,7 @@ callq  3bc30 &lt;double_input&gt;
 <p>And as before, that's it! Here we can see that calling a C function from Rust
 involves precisely one call instruction after moving the arguments into place,
 exactly the same cost as it would be in C.</p>
-<h3>Safe Abstractions</h3>
+<h3><a href="#safe-abstractions" aria-hidden="true" class="anchor" id="safe-abstractions"></a>Safe Abstractions</h3>
 <p>Most features in Rust tie into its core concept of ownership, and the FFI is no
 exception. When binding a C library in Rust you not only have the benefit of zero
 overhead, but you are also able to make it <em>safer</em> than C can! <strong>Bindings can
@@ -209,7 +209,7 @@ existing C libraries, including <a href="https://crates.io/crates/openssl">OpenS
 and <a href="https://crates.io/crates/sodiumoxide">libsodium</a>. This list is also growing quite rapidly on
 <a href="https://crates.io">crates.io</a>, so your favorite C library may already be bound or will
 be bound soon!</p>
-<h3>C talking to Rust</h3>
+<h3><a href="#c-talking-to-rust" aria-hidden="true" class="anchor" id="c-talking-to-rust"></a>C talking to Rust</h3>
 <p><strong>Despite guaranteeing memory safety, Rust does not have a garbage collector or
 runtime, and one of the benefits of this is that Rust code can be called from C
 with no setup at all.</strong> This means that the zero overhead FFI not only applies
@@ -259,7 +259,7 @@ compiled and linked together and the final executable should run and print
 <p>Rust's lack of a garbage collector and runtime enables this seamless transition
 from C to Rust. The external C code does not need to perform any setup on Rust's
 behalf, making the transition that much cheaper.</p>
-<h3>Beyond C</h3>
+<h3><a href="#beyond-c" aria-hidden="true" class="anchor" id="beyond-c"></a>Beyond C</h3>
 <p>Up to now we've seen how FFI in Rust has zero overhead and how we can use Rust's
 concept of ownership to write safe bindings to C libraries. If you're not using
 C, however, you're still in luck! These features of Rust enable it to also be

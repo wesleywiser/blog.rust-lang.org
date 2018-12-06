@@ -122,7 +122,7 @@ concurrency is <em>open ended</em>: new libraries can embrace new paradigms
 and catch new bugs, just by adding APIs that use Rust's ownership
 features.</p>
 <p>The goal of this post is to give you some idea of how that's done.</p>
-<h3>Background: ownership</h3>
+<h3><a href="#background-ownership" aria-hidden="true" class="anchor" id="background-ownership"></a>Background: ownership</h3>
 <blockquote>
 <p>We'll start with an overview of Rust's ownership and borrowing
 systems. If you're already familiar with these, you can skip the two
@@ -202,7 +202,7 @@ for i in vec.iter() {
 been transferred elsewhere. And that's very good, because the vector
 has already been deallocated at this point!</p>
 <p>Disaster averted.</p>
-<h3>Background: borrowing</h3>
+<h3><a href="#background-borrowing" aria-hidden="true" class="anchor" id="background-borrowing"></a>Background: borrowing</h3>
 <p>The story so far isn't totally satisfying, because it's not our intent
 for <code>print_vec</code> to destroy the vector it was given. What we really
 want is to grant <code>print_vec</code> <em>temporary</em> access to the vector, and
@@ -278,7 +278,7 @@ push_all(&amp;vec, &amp;mut vec);
                     ^~~
 </code></pre>
 <p>Disaster averted.</p>
-<h3>Message passing</h3>
+<h3><a href="#message-passing" aria-hidden="true" class="anchor" id="message-passing"></a>Message passing</h3>
 <p>Now that we've covered the basic ownership story in Rust, let's see
 what it means for concurrency.</p>
 <p>Concurrent programming comes in many styles, but a particularly simple
@@ -319,7 +319,7 @@ to <code>print_vec</code>:</p>
 <pre><code>Error: use of moved value `vec`
 </code></pre>
 <p>Disaster averted.</p>
-<h3>Locks</h3>
+<h3><a href="#locks" aria-hidden="true" class="anchor" id="locks"></a>Locks</h3>
 <p>Another way to deal with concurrency is by having threads communicate
 through passive, shared state.</p>
 <p>Shared-state concurrency has a bad rap. It's easy to forget to acquire
@@ -419,7 +419,7 @@ access(&amp;mut guard)
             ^~~~~
 </code></pre>
 <p>Disaster averted.</p>
-<h3>Thread safety and &quot;Send&quot;</h3>
+<h3><a href="#thread-safety-and-send"" aria-hidden="true" class="anchor" id="thread-safety-and-send""></a>Thread safety and &quot;Send&quot;</h3>
 <p>It's typical to distinguish some data types as &quot;thread safe&quot; and
 others not. Thread safe data structures use enough internal
 synchronization to be safely used by multiple threads concurrently.</p>
@@ -462,7 +462,7 @@ compiler will say:</p>
 <pre><code>`Rc&lt;Vec&lt;i32&gt;&gt;` cannot be sent between threads safely
 </code></pre>
 <p>Disaster averted.</p>
-<h3>Sharing the stack: &quot;scoped&quot;</h3>
+<h3><a href="#sharing-the-stack-"scoped"" aria-hidden="true" class="anchor" id="sharing-the-stack-"scoped""></a>Sharing the stack: &quot;scoped&quot;</h3>
 <p><em>Note: The API mentioned here is an old one which has been moved out of
 the standard library. You can find equivalent functionality in
 <a href="https://crates.io/crates/crossbeam"><code>crossbeam</code></a> (<a href="http://aturon.github.io/crossbeam-doc/crossbeam/fn.scope.html">documentation for <code>scope()</code></a>)
@@ -532,7 +532,7 @@ the compiler:</p>
 </code></pre>
 <p>So in Rust, you can freely borrow stack data into child threads,
 confident that the compiler will check for sufficient synchronization.</p>
-<h3>Data races</h3>
+<h3><a href="#data-races" aria-hidden="true" class="anchor" id="data-races"></a>Data races</h3>
 <p>At this point, we've seen enough to venture a strong statement about
 Rust's approach to concurrency: <strong>the compiler prevents all <em>data races</em>.</strong></p>
 <blockquote>
@@ -561,7 +561,7 @@ propositions:</p>
 <li>Memory safety without garbage collection.</li>
 <li>Concurrency without data races.</li>
 </ul>
-<h3>The future</h3>
+<h3><a href="#the-future" aria-hidden="true" class="anchor" id="the-future"></a>The future</h3>
 <p>When Rust first began, it baked channels directly into the language,
 taking a very opinionated stance on concurrency.</p>
 <p>In today's Rust, concurrency is <em>entirely</em> a library affair;

@@ -75,7 +75,7 @@ launching initiatives targeted at specific roadmap goals. <strong>This post cove
 language team's major initiative: improving the ergonomics of the core
 language.</strong> The aim is to improve productivity and bring down the learning curve
 by streamlining features and glossing over irrelevant details.</p>
-<h2>Ergonomics</h2>
+<h2><a href="#ergonomics" aria-hidden="true" class="anchor" id="ergonomics"></a>Ergonomics</h2>
 <p><strong>Ergonomics is a measure of the friction you experience when trying to get
 things done with a tool</strong>. You want to achieve a state of &quot;flow&quot;, in which ideas
 and intuitions are steadily transformed into working code with a minimum of
@@ -97,7 +97,7 @@ as a newbie. Ergonomic improvements make life better for everyone.</p>
 the rest of this post, I'll present a basic framework for thinking about this
 question, and then apply that framework to three areas of Rust, analyzing both
 the current design and some streamlining we may want to consider this year.</p>
-<h3>Implicit vs explicit</h3>
+<h3><a href="#implicit-vs-explicit" aria-hidden="true" class="anchor" id="implicit-vs-explicit"></a>Implicit vs explicit</h3>
 <p><strong>Information is implicit when it is <em>implied</em> but not <em>expressed</em>.</strong> The
 potential ergonomic wins are pretty easy to see: forcing you to write down
 information that's obvious (because it's already implied) is a pain, because it
@@ -122,7 +122,7 @@ think so: make it too small, and code becomes hopelessly verbose, making it
 difficult to read by forcing too much information into view at all times. What
 we want is a sweet spot, where routine or easy to find details can be left out,
 but relevant or surprising information is kept front and center.</p>
-<h3>How to analyze and manage the reasoning footprint</h3>
+<h3><a href="#how-to-analyze-and-manage-the-reasoning-footprint" aria-hidden="true" class="anchor" id="how-to-analyze-and-manage-the-reasoning-footprint"></a>How to analyze and manage the reasoning footprint</h3>
 <p>There are three dimensions of the reasoning footprint for implicitness:</p>
 <ul>
 <li>
@@ -169,7 +169,7 @@ quickly disappears into the background, to the point that it no longer feels
 implicit at all (see <a href="https://thefeedbackloop.xyz/stroustrups-rule-and-layering-over-time/">Stroustrup's rule</a>). But sometimes a bit of implicitness
 really is a bad idea. The key is to carefully consider the impact on the
 reasoning footprint.</p>
-<h2>Example: type annotations</h2>
+<h2><a href="#example-type-annotations" aria-hidden="true" class="anchor" id="example-type-annotations"></a>Example: type annotations</h2>
 <p>One bit of ergonomics that is increasingly taken for granted is <em>type
 inference</em>. In the days of yore, you'd have to annotate every local variable
 with its type, a practice that seems wildly verbose now—but at the time, type
@@ -219,7 +219,7 @@ earlier.</p>
 </ul>
 <p>There's also been some extensions to the original elision proposal, again
 carefully crafted to follow these rules, like the <a href="https://github.com/rust-lang/rfcs/pull/1623">lifetimes in statics</a> RFC.</p>
-<h3>Idea: implied bounds</h3>
+<h3><a href="#idea-implied-bounds" aria-hidden="true" class="anchor" id="idea-implied-bounds"></a>Idea: implied bounds</h3>
 <p>One papercut with Rust today is the fact that, for certain data structures, you
 end up having to repeat the same set of trait bounds over and over. <code>HashMap</code> is
 a good example; it takes a key type which, in practice, must satisfy the <code>Hash</code>
@@ -266,7 +266,7 @@ The compiler can reliably also produce an error pointing directly to the
 type(s) imposing unfulfilled bounds.</p>
 </li>
 </ul>
-<h2>Example: ownership</h2>
+<h2><a href="#example-ownership" aria-hidden="true" class="anchor" id="example-ownership"></a>Example: ownership</h2>
 <p>A lot of work went into making Rust's ownership system ergonomic, and that work
 entailed judicious use of &quot;implicit&quot; features. It's particularly instructive to
 look at the places where borrowing is explicit, and places where it's not:</p>
@@ -297,7 +297,7 @@ point does <em>not</em> apply to function arguments.</p>
 <p><strong>This design also aids learnability, by often just doing &quot;the obvious thing&quot;
 for borrowing, and thereby limiting the situations in which newcomers have to
 grapple with choices about it</strong>.</p>
-<h3>Ideas: implied borrows</h3>
+<h3><a href="#ideas-implied-borrows" aria-hidden="true" class="anchor" id="ideas-implied-borrows"></a>Ideas: implied borrows</h3>
 <p>Nevertheless, there are some pain points around borrowing in Rust today. To wit:</p>
 <p><strong>Discarding ownership</strong>. Sometimes you have ownership of a value, like a
 <code>String</code>, and want to pass it to a function that only needs a borrow (say,
@@ -359,7 +359,7 @@ again, the borrower checker will catch mistakes).</p>
 very controlled way. They remove the need to write down annotations which are
 essentially already forced by nearby code. And that in turn lowers the learning
 curve for <code>match</code>.</p>
-<h2>Example: the module system</h2>
+<h2><a href="#example-the-module-system" aria-hidden="true" class="anchor" id="example-the-module-system"></a>Example: the module system</h2>
 <p>Finally, let's take the module system. In the most common usage, modules are
 defined like so:</p>
 <pre><code class="language-rust">mod some_module;
@@ -369,7 +369,7 @@ can specify an explicit path if you prefer, so this is a case of implicitness
 through convention. But while this bit of implicitness helps, the module system
 still makes a number of fine distinctions that trip up newcomers and require
 redundancy that even old hands can forget.</p>
-<h3>Idea: eliminate the need for <code>extern crate</code>, and maybe <code>mod</code> too</h3>
+<h3><a href="#idea-eliminate-the-need-for-extern-crate,-and-maybe-mod-too" aria-hidden="true" class="anchor" id="idea-eliminate-the-need-for-extern-crate,-and-maybe-mod-too"></a>Idea: eliminate the need for <code>extern crate</code>, and maybe <code>mod</code> too</h3>
 <p>The clearest-cut case is the <code>extern crate</code> declaration, which is used to bring
 an external crate into scope. The vast majority of Rust projects use Cargo for
 dependency management, and already specify the crates they depend on in their
@@ -396,7 +396,7 @@ not making use of extra, non-default flexibility. There are a lot of questions
 about the fine details and expressiveness. But, at least from an <em>implicitness</em>
 perspective, neither of these changes set off any alarm bells for the reasoning
 footprint.</p>
-<h2>The initiative</h2>
+<h2><a href="#the-initiative" aria-hidden="true" class="anchor" id="the-initiative"></a>The initiative</h2>
 <p>With those aims and that design philosophy in mind, how do we plan to proceed?</p>
 <p>First off, we'll be using the <a href="https://github.com/rust-lang/rust-roadmap/issues/17">roadmap tracker</a> to help organize ideas for
 ergonomic improvements. The tracker is already populated with some of the ideas

@@ -78,7 +78,7 @@ today. For the next few months, we are asking that intrepid early adopters
 <p>Until Rust itself is stable early next year, registry dependencies will need to
 be updated often. Production users may want to continue using git dependencies
 until then.</p>
-<h2>What is Cargo?</h2>
+<h2><a href="#what-is-cargo" aria-hidden="true" class="anchor" id="what-is-cargo"></a>What is Cargo?</h2>
 <p>Cargo is a package manager <a href="http://www.rust-lang.org/">for Rust</a>, <a href="https://github.com/rust-lang/cargo">in
 Rust</a>. Managing dependencies is a
 fundamentally difficult problem, but fortunately over the last decade there's
@@ -99,10 +99,10 @@ that all collaborators are building the same code.</p>
 entire build process for you.</p>
 </li>
 </ol>
-<h2>A Community on Cargo</h2>
+<h2><a href="#a-community-on-cargo" aria-hidden="true" class="anchor" id="a-community-on-cargo"></a>A Community on Cargo</h2>
 <p>To get a feel for how Cargo achieves its goals, let's take a look at some of
 its core mechanics.</p>
-<h3>Declaring Dependencies</h3>
+<h3><a href="#declaring-dependencies" aria-hidden="true" class="anchor" id="declaring-dependencies"></a>Declaring Dependencies</h3>
 <p>Cargo makes depending on third-party code as easy as depending on the standard
 library. When using Cargo, each crate will have an associated
 <a href="http://doc.crates.io/manifest.html">manifest</a> to describe itself and its
@@ -113,7 +113,7 @@ infeasible before.</p>
 <p>Cargo alone, however, is not quite the entire solution. Discovering dependencies
 is still difficult, and ensuring that these dependencies are available for years
 to come is also not guaranteed.</p>
-<h3>crates.io</h3>
+<h3><a href="#cratesio" aria-hidden="true" class="anchor" id="cratesio"></a>crates.io</h3>
 <p>To pair with Cargo, the central crates.io site serves as a single location for
 publishing and discovering libraries. This repository serves as permanent
 storage for releases of crates over time to ensure that projects can always
@@ -127,7 +127,7 @@ one-stop-shop for <a href="http://bundler.io/">Bundler</a> dependencies and
 this month alone! We intend for crates.io to serve a similar role for Rust as a
 critical piece of infrastructure for <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">Rust's long-term stability story at
 1.0</a>.</p>
-<h2>Versioning and Reproducible Builds</h2>
+<h2><a href="#versioning-and-reproducible-builds" aria-hidden="true" class="anchor" id="versioning-and-reproducible-builds"></a>Versioning and Reproducible Builds</h2>
 <p>Over the past few years, the concept of <a href="http://semver.org/">Semantic
 Versioning</a> has gained traction as a way for library
 developers to easily and clearly communicate with users when they make breaking
@@ -145,7 +145,7 @@ generates a <a href="http://doc.crates.io/guide.html#cargo.toml-vs-cargo.lock"><
 then distributed to collaborators of applications to ensure that the crates
 being built remain the same from one build to the next, across times, machines,
 and environments.</p>
-<h2>Building Code</h2>
+<h2><a href="#building-code" aria-hidden="true" class="anchor" id="building-code"></a>Building Code</h2>
 <p>Up to this point we've seen how Cargo facilitates discovery and reuse of
 community projects while managing what versions to use. Now Cargo just has to
 deal with the problem of actually compiling all this code!</p>
@@ -179,7 +179,7 @@ simply specifying a <code>--target</code> options and Cargo will manage tasks su
 compiling plugins and other build dependencies for the right platform.</p>
 </li>
 </ul>
-<h2>What else is in store?</h2>
+<h2><a href="#what-else-is-in-store" aria-hidden="true" class="anchor" id="what-else-is-in-store"></a>What else is in store?</h2>
 <p>The launch of crates.io is a key step in moving the Cargo ecosystem forward,
 but the story does not end here. Usage of crates.io is architected assuming a
 stable compiler, which should be <a href="http://blog.rust-lang.org/2014/09/15/Rust-1.0.html">coming soon</a>! There are also a

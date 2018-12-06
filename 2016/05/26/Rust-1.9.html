@@ -75,8 +75,8 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>As always, you can <a href="https://www.rust-lang.org/install.html">install Rust 1.9</a> from the appropriate page on our
 website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-190-2016-05-26">detailed release notes for 1.9</a> on GitHub.
 About 1000 patches were landed in this release.</p>
-<h3>What's in 1.9 stable</h3>
-<h4>Controlled unwinding</h4>
+<h3><a href="#whats-in-1.9-stable" aria-hidden="true" class="anchor" id="whats-in-1.9-stable"></a>What's in 1.9 stable</h3>
+<h4><a href="#controlled-unwinding" aria-hidden="true" class="anchor" id="controlled-unwinding"></a>Controlled unwinding</h4>
 <p>The biggest shift in Rust 1.9 is the stabilization of the <code>std::panic</code> module,
 which includes methods for halting the unwinding process started by a panic:</p>
 <pre><code class="language-rust">use std::panic;
@@ -135,13 +135,13 @@ then translating the panic into some other form of error elsewhere.</p>
 the entire process (possibly after running a general <a href="https://github.com/rust-lang/rfcs/pull/1328">hook</a>). For some
 applications, this is the most reasonable way to deal with a programmer error,
 and avoiding unwinding can have performance and code size wins.</p>
-<h4>Deprecation warnings</h4>
+<h4><a href="#deprecation-warnings" aria-hidden="true" class="anchor" id="deprecation-warnings"></a>Deprecation warnings</h4>
 <p>We introduced a new attribute for library authors: <code>#[deprecated]</code>. This attribute
 allows you to tag an API with a deprecation warning, which users of their crate
 will receive whenever they use the API, directing them to a replacement API.
 Deprecation warnings have long been a part of the standard library, but thanks
 to <a href="https://github.com/rust-lang/rfcs/blob/master/text/1270-deprecation.md">RFC 1270</a> they're now usable ecosystem-wide.</p>
-<h4>New targets</h4>
+<h4><a href="#new-targets" aria-hidden="true" class="anchor" id="new-targets"></a>New targets</h4>
 <p>We now publish standard library binaries for several new targets:</p>
 <ul>
 <li><code>mips-unknown-linux-musl</code>,</li>
@@ -150,11 +150,11 @@ to <a href="https://github.com/rust-lang/rfcs/blob/master/text/1270-deprecation.
 </ul>
 <p>The first two targets are particularly interesting from a cross-compilation
 perspective; see the <a href="http://blog.rust-lang.org/2016/05/13/rustup.html">recent blog post on <code>rustup</code></a> for more details.</p>
-<h4>Compile time improvements</h4>
+<h4><a href="#compile-time-improvements" aria-hidden="true" class="anchor" id="compile-time-improvements"></a>Compile time improvements</h4>
 <p><a href="https://github.com/rust-lang/rust/pull/32062">The time complexity of comparing variables for equivalence</a> during
 type unification is reduced from O(n!) to O(n). As a result, some programming
 patterns compile much, much more quickly.</p>
-<h4>Rolling out use of specialization</h4>
+<h4><a href="#rolling-out-use-of-specialization" aria-hidden="true" class="anchor" id="rolling-out-use-of-specialization"></a>Rolling out use of specialization</h4>
 <p>This release sees some of the first use of <a href="https://github.com/rust-lang/rfcs/pull/1210">specialization</a> within the standard
 library. Specialization, which is currently available only on <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">nightly</a>, allows
 generic code to automatically be specialized based on more specific type
@@ -166,7 +166,7 @@ implementation provided better performance. Using specialization, these two
 functions are <a href="https://github.com/rust-lang/rust/pull/32586">now equivalent</a>.</p>
 <p>With this simple test of specialization under our belt, we have more performance
 improvements on the way in upcoming releases.</p>
-<h4>Library stabilizations</h4>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
 <p>About 80 library functions and methods are now stable in 1.9.  The most major is
 the <code>std::panic</code> module, described earlier, but there's a lot more too:</p>
 <p><strong>Networking</strong></p>
@@ -197,7 +197,7 @@ raw pointer.</li>
 implementation. <a href="https://github.com/rust-lang/rust/pull/32054">This was fixed</a>
 in the 1.9 release.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-190-2016-05-26">detailed release notes</a> for more.</p>
-<h4>Cargo features</h4>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
 <p>There were two major changes to Cargo:</p>
 <p>First, Cargo
 <a href="https://github.com/rust-lang/cargo/pull/2486">can now be run concurrently</a>.</p>
@@ -206,7 +206,7 @@ in the 1.9 release.</p>
 to specify arbitrary flags to be passed to <code>rustc</code> through an environment
 variable, which is useful for packagers, for example.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-190-2016-05-26">detailed release notes</a> for more.</p>
-<h3>Contributors to 1.9</h3>
+<h3><a href="#contributors-to-19" aria-hidden="true" class="anchor" id="contributors-to-19"></a>Contributors to 1.9</h3>
 <p>We had 127 individuals contribute to 1.9. Thank you so much!</p>
 <ul>
 <li>Aaron Turon</li>

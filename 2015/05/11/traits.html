@@ -126,7 +126,7 @@ code execution and data representation.</p>
 <p>This post will walk through each of the above points at a high level, to give
 you a sense for how the design achieves these goals, without getting too bogged
 down in the details.</p>
-<h3>Background: methods in Rust</h3>
+<h3><a href="#background-methods-in-rust" aria-hidden="true" class="anchor" id="background-methods-in-rust"></a>Background: methods in Rust</h3>
 <blockquote>
 <p>Before delving into traits, we need to look at a small but important detail of
 the language: the difference between methods and functions.</p>
@@ -171,7 +171,7 @@ Rust, supporting &quot;fluent&quot; APIs like the one for spawning processes:</p
     .stdout(Stdio::piped())
     .spawn();
 </code></pre>
-<h3>Traits are interfaces</h3>
+<h3><a href="#traits-are-interfaces" aria-hidden="true" class="anchor" id="traits-are-interfaces"></a>Traits are interfaces</h3>
 <p>Interfaces specify the expectations that one piece of code has on another,
 allowing each to be switched out independently. For traits, this specification
 largely revolves around methods.</p>
@@ -202,7 +202,7 @@ is. But assuming <code>Hash</code> is in scope, you can write <code>true.hash()<
 implementing a trait extends the set of methods available on a type.</p>
 <p>And... that's it! Defining and implementing a trait is really nothing more than
 abstracting out a common interface satisfied by more than one type.</p>
-<h3>Static dispatch</h3>
+<h3><a href="#static-dispatch" aria-hidden="true" class="anchor" id="static-dispatch"></a>Static dispatch</h3>
 <p>Things get more interesting on the other side -- consuming a trait. The most
 common way of doing so is through <em>generics</em>:</p>
 <pre><code class="language-rust">fn print_hash&lt;T: Hash&gt;(t: &amp;T) {
@@ -263,7 +263,7 @@ checked <em>once</em> for type correctness against the abstract <code>Hash</code
 rather than being checked repeatedly when applied to concrete types. That means
 earlier, clearer compilation errors for library authors, and less typechecking
 overhead (i.e., faster compilation) for clients.</p>
-<h3>Dynamic dispatch</h3>
+<h3><a href="#dynamic-dispatch" aria-hidden="true" class="anchor" id="dynamic-dispatch"></a>Dynamic dispatch</h3>
 <p>We've seen one compilation model for traits, where all abstraction is compiled
 away statically. But sometimes abstraction isn't just about reuse or modularity
 -- <strong>sometimes abstraction plays an essential role at runtime that can't be
@@ -313,7 +313,7 @@ interface that can be used in both styles, with minimal, predictable
 costs</strong>. Trait objects satisfy Stroustrup's &quot;pay as you go&quot; principle: you have
 vtables when you need them, but the same trait can be compiled away statically
 when you don't.</p>
-<h3>The many uses of traits</h3>
+<h3><a href="#the-many-uses-of-traits" aria-hidden="true" class="anchor" id="the-many-uses-of-traits"></a>The many uses of traits</h3>
 <p>We've seen a lot of the mechanics and basic use of traits above, but they also
 wind up playing a few other important roles in Rust. Here's a taste:</p>
 <ul>
@@ -378,7 +378,7 @@ as well.</p>
 <p>The point: <strong>despite their seeming simplicity, traits are a unifying concept
 that supports a wide range of use cases and patterns, without having to pile on
 additional language features.</strong></p>
-<h3>The future</h3>
+<h3><a href="#the-future" aria-hidden="true" class="anchor" id="the-future"></a>The future</h3>
 <p>One of the primary ways that languages tend to evolve is in their abstraction
 facilities, and Rust is no exception: many of our <a href="http://internals.rust-lang.org/t/priorities-after-1-0/1901">post-1.0 priorities</a>
 are extensions of the trait system in one direction or another. Here are some

@@ -111,7 +111,7 @@ where it will be transformative to your development experience.</p>
 to begin with, how our implementation of it works, what its current development
 status is, and finally what's planned for the future and how you can contribute,
 should you be so inclined.</p>
-<h1>Why Incremental Compilation in the First Place?</h1>
+<h1><a href="#why-incremental-compilation-in-the-first-place" aria-hidden="true" class="anchor" id="why-incremental-compilation-in-the-first-place"></a>Why Incremental Compilation in the First Place?</h1>
 <p>Much of a programmer's time is spent in an <strong>edit-compile-debug</strong> workflow:</p>
 <ul>
 <li>you make a <strong>small change</strong> (often in a single module or even function),</li>
@@ -136,7 +136,7 @@ same as at the source level, will end up exactly the same, bit for bit.
 Incremental compilation aims at retaining as much of those unchanged
 parts as possible while redoing only that amount of work that actually <em>must</em>
 be redone.</p>
-<h1>How Do You Make Something &quot;Incremental&quot;?</h1>
+<h1><a href="#how-do-you-make-something-incremental"?" aria-hidden="true" class="anchor" id="how-do-you-make-something-incremental"?"></a>How Do You Make Something &quot;Incremental&quot;?</h1>
 <p>We have already heard that computing something incrementally means updating
 only those parts of the computation's output that need to be adapted in
 response to a given change in the computation's inputs.
@@ -165,7 +165,7 @@ entire, tedious multiplication.</p>
 <!-- raw HTML omitted -->
 <p><img src="/images/2016-08-Incremental/algebra-update.svg" alt="Updating the Computation" />{:class=&quot;center&quot;}</p>
 <p>Let's see how this scheme translates to the compiler.</p>
-<h1>An Incremental Compiler</h1>
+<h1><a href="#an-incremental-compiler" aria-hidden="true" class="anchor" id="an-incremental-compiler"></a>An Incremental Compiler</h1>
 <p>The way we chose to implement incrementality in the Rust compiler is
 straightforward: An incremental compilation session follows exactly the same
 steps in the same order as a batch compilation session. However, when control
@@ -198,7 +198,7 @@ of the compiler.</p>
 time, just load the value from the cache. Things get tricky though when we need
 to <strong>find out if</strong> it's actually valid to <strong>use a value from the cache</strong> or if we
 have to <strong>re-compute</strong> it because of some changed input.</p>
-<h1>Dependency Graphs</h1>
+<h1><a href="#dependency-graphs" aria-hidden="true" class="anchor" id="dependency-graphs"></a>Dependency Graphs</h1>
 <p>There is a formal method that can be used to model a computation's intermediate
 results and their individual &quot;up-to-dateness&quot; in a straightforward way:
 <strong>dependency graphs</strong>. It looks like this: Each input and each <strong>intermediate
@@ -225,7 +225,7 @@ of the form &quot;if X has changed, is Y still up-to-date?&quot;. We just take t
 representing <code>Y</code> and collect all the inputs <code>Y</code> depends on by transitively
 following all edges originating from <code>Y</code>. If any of those inputs has changed,
 the value we have cached for <code>Y</code> cannot be relied on anymore.</p>
-<h1>Dependency Tracking in the Compiler</h1>
+<h1><a href="#dependency-tracking-in-the-compiler" aria-hidden="true" class="anchor" id="dependency-tracking-in-the-compiler"></a>Dependency Tracking in the Compiler</h1>
 <p>When compiling in incremental mode, we always build the dependency graph of the
 produced data: every time, some piece of data is written (like an object file),
 we record which other pieces of data we are accessing while doing so.</p>
@@ -268,7 +268,7 @@ description of what the dependency graph for a given program ought to look like.
 This makes sure that the actual graph and the reference graph are arrived at
 via <strong>different methods</strong>, reducing the risk that both the compiler and the
 test case agree on the same, yet wrong, value.</p>
-<h1>&quot;Faster! Up to 15% or More.&quot;<a href="https://xkcd.com/870/">*</a></h1>
+<h1><a href="#faster!-up-to-15%-or-more."*" aria-hidden="true" class="anchor" id="faster!-up-to-15%-or-more."*"></a>&quot;Faster! Up to 15% or More.&quot;<a href="https://xkcd.com/870/">*</a></h1>
 <p>Let's take a look at some of the implications of what we've learned so far:</p>
 <ul>
 <li>The dependency graph reflects the actual dependencies between parts of the
@@ -284,7 +284,7 @@ Changing a single character in the source code might very well invalidate the
 whole incremental compilation cache. Usually though, this kind of change is
 a rare case and most of the time only a small portion of the program has to be
 recompiled.</p>
-<h1>The Current Status of the Implementation</h1>
+<h1><a href="#the-current-status-of-the-implementation" aria-hidden="true" class="anchor" id="the-current-status-of-the-implementation"></a>The Current Status of the Implementation</h1>
 <p>For the first spike implementation of incremental compilation, what we call the
 alpha version now, we chose to focus on caching object files. Why did we do
 that? Let's take a look at the compilation phases again and especially at how
@@ -307,7 +307,7 @@ coarse in places. For example, the dependency graph
 As a consequence, the compiler will consider <em>all</em>
 methods of that <code>impl</code> as changed if just one of them is changed. This of course
 will mean that more code will be re-compiled than is strictly necessary.</p>
-<h1>Performance Numbers</h1>
+<h1><a href="#performance-numbers" aria-hidden="true" class="anchor" id="performance-numbers"></a>Performance Numbers</h1>
 <p>Here are some numbers of how the current implementation fares in various
 situations. First let's take a look at the best case scenario where a 100%
 of a crate's object files can be re-used. This might occur when changing one
@@ -342,7 +342,7 @@ places, like <code>Compiler::new()</code>, we might not see a noticeable reducti
 compile times. But again, be aware that these measurements are from the
 current state of the implementation. They do not reflect the
 full potential of the feature.</p>
-<h1>Future Plans</h1>
+<h1><a href="#future-plans" aria-hidden="true" class="anchor" id="future-plans"></a>Future Plans</h1>
 <p>The alpha version represents a minimal end-to-end implementation of incremental
 compilation for the Rust compiler, so there is lots of room for improvement. The
 section on the current status already laid out the two major axes along which

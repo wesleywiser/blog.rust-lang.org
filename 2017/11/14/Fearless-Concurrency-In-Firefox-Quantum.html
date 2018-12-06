@@ -77,7 +77,7 @@
 pilot projects like an MP4 metadata parser to replace some uses of libstagefright. These components
 performed well and caused effectively no crashes, but browser development had yet to see large
 benefits from the full power Rust could offer. This changes today.</p>
-<h1>Stylo: a parallel CSS engine</h1>
+<h1><a href="#stylo-a-parallel-css-engine" aria-hidden="true" class="anchor" id="stylo-a-parallel-css-engine"></a>Stylo: a parallel CSS engine</h1>
 <p>Firefox Quantum includes Stylo, a pure-Rust CSS engine that makes full use of Rust’s
 “<a href="http://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html">Fearless Concurrency</a>” to speed up page styling. It’s the first major component of Servo to be
 integrated with Firefox, and is a major milestone for Servo, Firefox, and Rust. It replaces
@@ -93,7 +93,7 @@ both of them failed. But Rust’s fearless concurrency has made parallelism prac
 —one of the hundreds of <a href="http://crates.io/">crates</a> Servo uses from Rust’s ecosystem — to drive a work-stealing cascade
 algorithm. You can read more about that in <a href="https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/">Lin Clark’s post</a>. Parallelism leads to a lot
 of performance improvements, including a 30% page load speedup for Amazon’s homepage.</p>
-<h1>Fearless concurrency</h1>
+<h1><a href="#fearless-concurrency" aria-hidden="true" class="anchor" id="fearless-concurrency"></a>Fearless concurrency</h1>
 <p>An example of Rust preventing thread safety bugs is how style information is shared in Stylo.
 Computed styles are grouped into “style structs” of related properties, e.g. there’s one for all the
 font properties, one for all the background properties, and so on. Now, most of these are shared;
@@ -131,7 +131,7 @@ involved, things which basically never were a problem on the Rust side.</p>
 pure C++ we’d be dealing with this far too much to be able to get anything useful done. And indeed,
 bugs like these have thwarted multiple attempts to parallelize styling in the past, both in Firefox
 and other browsers.</p>
-<h1>Rust’s productivity</h1>
+<h1><a href="#rusts-productivity" aria-hidden="true" class="anchor" id="rusts-productivity"></a>Rust’s productivity</h1>
 <p>Firefox developers had a great time learning and using Rust. People really enjoyed being able to
 aggressively write code without having to worry about safety, and many mentioned that Rust’s
 ownership model was close to how they implicitly reason about memory within Firefox’s large C++
@@ -150,7 +150,7 @@ Matthews’ <a href="https://www.joshmatthews.net/rbr17">talk</a> at Rust Belt R
 <p>&lt;heycam&gt; heh</p>
 <p>&lt;njn&gt; you guys sound like an ad for Rust</p>
 </blockquote>
-<h1>Wrapping up</h1>
+<h1><a href="#wrapping-up" aria-hidden="true" class="anchor" id="wrapping-up"></a>Wrapping up</h1>
 <p>Overall, Firefox Quantum benefits significantly from Stylo, and thus from Rust. Not only does it
 speed up page load, but it also speeds up interaction times since styling information can be
 recalculated much faster, making the entire experience smoother.</p>

@@ -154,7 +154,7 @@ into <a href="https://github.com/rust-lang/rust/blob/master/src/librustc/mir/rep
 the <a href="https://github.com/rust-lang/rfcs/blob/master/text/1211-mir.md#alternatives">alternatives section</a>, which discusses certain design
 choices in detail, such as why MIR does not currently use SSA.)</p>
 <!-- raw HTML omitted -->
-<h3>Reducing Rust to a simple core</h3>
+<h3><a href="#reducing-rust-to-a-simple-core" aria-hidden="true" class="anchor" id="reducing-rust-to-a-simple-core"></a>Reducing Rust to a simple core</h3>
 <p>MIR reduces Rust down to a simple core, removing almost all of the
 Rust syntax that you use every day, such as <code>for</code> loops, <code>match</code>
 expressions, and even method calls. Instead, those constructs are
@@ -278,7 +278,7 @@ information. This is useful for analyses like the borrow checker,
 which require the types of local variables and so forth to operate,
 but also means we can run the type-checker periodically as a kind of
 sanity check to ensure that the MIR is well-formed.</p>
-<h3>Control-flow graphs</h3>
+<h3><a href="#control-flow-graphs" aria-hidden="true" class="anchor" id="control-flow-graphs"></a>Control-flow graphs</h3>
 <p>In the previous section, I presented a gradual &quot;deconstruction&quot; of a
 Rust program into something resembling MIR, but we stayed in textual
 form. Internally to the compiler, though, we never &quot;parse&quot; MIR or have
@@ -305,7 +305,7 @@ translation quite straight-forward. It also eliminates a vector for
 bugs: in today's compiler, the control-flow graph used for analyses is
 not necessarily the same as the one which results from LLVM
 construction, which can lead to incorrect programs being accepted.</p>
-<h3>Simplifying match expressions</h3>
+<h3><a href="#simplifying-match-expressions" aria-hidden="true" class="anchor" id="simplifying-match-expressions"></a>Simplifying match expressions</h3>
 <p>The example in the previous section showed how we can reduce all of
 Rust's loops into, effectively, gotos in the MIR and how we can remove
 methods calls in favor of calls to explicit calls to trait
@@ -364,7 +364,7 @@ break:
 <p>Of course, the actual MIR is based on a control-flow-graph, so it
 would look something like this:</p>
 <p><img src="/images/2016-04-MIR/loop-break.svg" alt="Loop-break control-flow graph" />{:class=&quot;center&quot;}</p>
-<h3>Explicit drops and panics</h3>
+<h3><a href="#explicit-drops-and-panics" aria-hidden="true" class="anchor" id="explicit-drops-and-panics"></a>Explicit drops and panics</h3>
 <p>So now we've seen how we can remove loops, method calls, and matches
 out of the MIR, and replace them with simpler equivalents. But there
 is still one key area that we can simplify. Interestingly, it's
@@ -418,7 +418,7 @@ as calls to <code>abort</code>, rather than triggering unwinding. If the program
 is being compiled with &quot;panic as abort&quot; semantics, then this too would
 be reflected in the MIR, as the panic edges and handling would simply
 be absent from the graph.</p>
-<h3>Viewing MIR on play</h3>
+<h3><a href="#viewing-mir-on-play" aria-hidden="true" class="anchor" id="viewing-mir-on-play"></a>Viewing MIR on play</h3>
 <p>At this point, we've reduced our example into something fairly close
 to what MIR actually looks like. If you'd like to see for yourself,
 you can <a href="http://is.gd/MOfDfg">view the MIR for our example</a> on
@@ -428,7 +428,7 @@ button along the top. You'll wind up seeing the MIR for several
 functions, so you have to search through to find the start of the
 <code>example</code> fn. (I won't reproduce the output here, as it is fairly
 lengthy.) In the compiler itself, you can also enable graphviz output.</p>
-<h3>Drops and stack flags</h3>
+<h3><a href="#drops-and-stack-flags" aria-hidden="true" class="anchor" id="drops-and-stack-flags"></a>Drops and stack flags</h3>
 <p>By now I think you have a feeling for how MIR represents a simplified
 Rust. Let's look at one example of where MIR will allow us to
 implement a long-awaited improvement to Rust: the shift to non-zeroing
@@ -539,7 +539,7 @@ each point where we test <code>data_is_owned</code>, we know statically whether
 it is true or false, which would allow us to remove the stack flag and
 optimize the graph above, yielding this result:</p>
 <p><img src="/images/2016-04-MIR/send_if2-opt.svg" alt="Optimized send_if2" />{:class=&quot;center&quot;}</p>
-<h3>Conclusion</h3>
+<h3><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h3>
 <p>I expect the use of MIR to be quite transformative in terms of what
 the compiler can accomplish. By reducing the language to a core set of
 primitives, MIR opens the door to a number of language improvements.

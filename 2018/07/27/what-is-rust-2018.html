@@ -82,7 +82,7 @@ tooling, and libraries that tie in to those features.</p>
 </blockquote>
 <p>Now that some time has passed, we wanted to share more about what this actually
 <em>means</em> for Rust and Rust developers.</p>
-<h2>Language change over time</h2>
+<h2><a href="#language-change-over-time" aria-hidden="true" class="anchor" id="language-change-over-time"></a>Language change over time</h2>
 <p>One of the key questions facing language developers is &quot;how do you manage
 change over time&quot;? How does that work for your users?  We believe quite
 strongly that language stability is of utmost importance.  A language is the
@@ -106,7 +106,7 @@ strong culture of testing, and we use tooling to ensure that every single
 pull request is tested on every platform.
 While we still believe that the six-week process is a fantastic <em>engineering</em>
 strategy, it has some flaws.</p>
-<h3>Losing the big picture</h3>
+<h3><a href="#losing-the-big-picture" aria-hidden="true" class="anchor" id="losing-the-big-picture"></a>Losing the big picture</h3>
 <p>Increasing the number of releases means that each release is smaller. That's
 the point! From an engineering perspective, this is great. But from a
 user-facing perspective, it's harder to keep track of what's going on in Rust
@@ -116,7 +116,7 @@ long way in the last three years! Finally, for people who have tried Rust and
 stopped using it for whatever reason, it's hard to know if the concerns have
 been addressed: they'd have to pay attention every six weeks, which is not
 something that is likely to happen.</p>
-<h3>Tiny but necessary changes</h3>
+<h3><a href="#tiny-but-necessary-changes" aria-hidden="true" class="anchor" id="tiny-but-necessary-changes"></a>Tiny but necessary changes</h3>
 <p>Especially in a language with static types, almost any release can contain
 something that breaks someone's code. Rust's
 <a href="https://github.com/rust-lang/rfcs/blob/master/text/1105-api-evolution.md">RFC</a>
@@ -130,7 +130,7 @@ needing to bump to 2.0, however. For example, the addition of a new keyword is
 a breaking change.  But sometimes, new features require a new keyword to work
 properly.  In many ways, Rust is about taking tradeoffs and bending the curve.
 Can we have our cake and eat it too?</p>
-<h2>What is Rust 2018?</h2>
+<h2><a href="#what-is-rust-2018" aria-hidden="true" class="anchor" id="what-is-rust-2018"></a>What is Rust 2018?</h2>
 <p>The release of Rust 1.31.0 on December 6th will be the first release of &quot;Rust
 2018.&quot; This marks a culmination of the last three years of Rust's development,
 and brings it together in one neat package. For example, there will be a 2018
@@ -153,7 +153,7 @@ name. But since you opt-in to Rust 2018, we can. We can also turn some warnings
 into hard errors. But these changes are extremely limited; without getting too
 deep into the technical details, editions can only change surface-level
 features; the core of Rust is still the same.</p>
-<h2>Managing compatibility</h2>
+<h2><a href="#managing-compatibility" aria-hidden="true" class="anchor" id="managing-compatibility"></a>Managing compatibility</h2>
 <p>It goes even further than that: these two universes are compatible with one
 another. We are quite sensitive to the issues in other language ecosystems,
 where new code and old code can't interoperate. Making sure that this worked
@@ -179,12 +179,12 @@ the Rust 1.0 release.</p>
 not <em>require</em> being a part of Rust 2018 will work on Rust 2015 as well. This is
 due to the way editions work; given the small nature of possible changes, the
 compiler uses the same internal representation for all editions.</p>
-<h2>A few words on long-term support</h2>
+<h2><a href="#a-few-words-on-long-term-support" aria-hidden="true" class="anchor" id="a-few-words-on-long-term-support"></a>A few words on long-term support</h2>
 <p>The Rust project currently only supports the most recent version of the stable
 compiler. Some have wondered if the concept of editions ties into some form of
 longer support. It does not, however, we've been talking about introducing some
 sort of LTS policy, and may do so in the future.</p>
-<h2>Giving it a try</h2>
+<h2><a href="#giving-it-a-try" aria-hidden="true" class="anchor" id="giving-it-a-try"></a>Giving it a try</h2>
 <p>We'll be doing several preview releases of Rust 2018. The most adventurous Rust
 users are already giving it a try on nightly; once we get feedback from them
 and do some polishing, we'll announce a beta that’s ready for more wide usage

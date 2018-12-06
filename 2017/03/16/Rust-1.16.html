@@ -78,7 +78,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes for
 1.16.0</a> on GitHub.</p>
-<h3>What's in 1.16.0 stable</h3>
+<h3><a href="#whats-in-1.16.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.16.0-stable"></a>What's in 1.16.0 stable</h3>
 <p>The largest addition to Rust 1.16 is <code>cargo check</code>. This new subcommand should speed up the development
 workflow in many cases.</p>
 <p>What does it do? Let's take a step back and talk about how <code>rustc</code> compiles your code. Compilation has many
@@ -126,7 +126,7 @@ the crate itself. As you can see, larger projects with many dependencies see a b
 smaller ones see much more modest gains.</p>
 <p>We are still working on improving compile-times generally as well, though we don't have anything
 in particular to highlight at this time.</p>
-<h4>Other improvements</h4>
+<h4><a href="#other-improvements" aria-hidden="true" class="anchor" id="other-improvements"></a>Other improvements</h4>
 <p>To support <code>cargo check</code>, <code>rustc</code> has <a href="https://github.com/rust-lang/rust/pull/38571">learned to emit</a> a new kind of file: <code>.rmeta</code>. This file
 will contain only the metadata about a particular crate. <code>cargo check</code> needs this for your
 dependencies, to let the compiler check types and such from them. It's also useful for the
@@ -223,7 +223,7 @@ println!(&quot;{}&quot;, ffo);
 structs. <a href="https://github.com/rust-lang/rust/pull/38927">This now happens nearly everywhere</a>. When combined with <a href="https://github.com/rust-lang/rust/pull/38154">some other related improvements</a>, this
 results in a significant improvement in these sorts of diagnostics.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes</a> for more.</p>
-<h4>Library stabilizations</h4>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
 <p>21 new bits of API were stabilized this release:</p>
 <ul>
 <li><a href="https://doc.rust-lang.org/std/collections/vec_deque/struct.VecDeque.html#method.truncate"><code>VecDeque::truncate</code></a></li>
@@ -261,7 +261,7 @@ a char boundary; it is inside 'α' (bytes 3..5) of `abcαβγ`'
 </code></pre>
 <p>The part after the <code>;</code> is new.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes</a> for more.</p>
-<h4>Cargo features</h4>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
 <p>In addition to <code>cargo check</code>, Cargo and crates.io have some new polish added. For example,
 <a href="https://github.com/rust-lang/cargo/pull/3511"><code>cargo build</code></a> and <a href="https://github.com/rust-lang/cargo/pull/3515"><code>cargo doc</code></a> now take a <code>--all</code> flag for building and documenting every
 crate in your workspace with one command.</p>
@@ -272,7 +272,7 @@ categories are curated. In addition, keywords are used for searching, but catego
 words, categories are intended to assist browsing, and keywords are intended to assist searching.</p>
 <p>You can browse crates by category <a href="https://crates.io/categories">here</a>.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes</a> for more.</p>
-<h3>Contributors to 1.16.0</h3>
+<h3><a href="#contributors-to-116.0" aria-hidden="true" class="anchor" id="contributors-to-116.0"></a>Contributors to 1.16.0</h3>
 <p>Last release, we introduced <a href="https://thanks.rust-lang.org">thanks.rust-lang.org</a>.
 We have been doing some behind-the-scenes refactoring work to allow for more projects
 than only Rust itself; we're hoping to introduce that in the next release.</p>

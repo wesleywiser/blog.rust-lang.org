@@ -108,7 +108,7 @@ host/target pair with the run of a single command. Today we're happy to announce
 that a major portion of this work is reaching beta status: we're building
 binaries of the Rust standard library for a wide range of targets, and shipping
 them to you via a new tool called <strong><a href="https://www.rustup.rs">rustup</a></strong>.</p>
-<h2>Introducing rustup</h2>
+<h2><a href="#introducing-rustup" aria-hidden="true" class="anchor" id="introducing-rustup"></a>Introducing rustup</h2>
 <p>At its heart, <strong>rustup is a <em>toolchain manager</em> for Rust</strong>. It can
 download and switch between copies of the Rust compiler and standard
 library for all supported platforms, and track Rust's nightly, beta,
@@ -125,7 +125,7 @@ eventually be a matter of checking a box in the Rust installer.</p>
 true push-button experience for cross-compilation, it needs to set up
 the C toolchain as well. That functionality is not shipping today, but
 it's something we hope to incorporate over the next few months.</p>
-<h2>Basic toolchain management</h2>
+<h2><a href="#basic-toolchain-management" aria-hidden="true" class="anchor" id="basic-toolchain-management"></a>Basic toolchain management</h2>
 <p>Let's start with something simple: installing multiple Rust toolchains. In this
 example I create a new library, 'hello', then test it using rustc 1.8, then use
 rustup to install and test that same crate on the 1.9 beta.</p>
@@ -170,7 +170,7 @@ historical reasons (in many cases &quot;triples&quot; are actually quads these
 days). Target triples are the basic way we refer to particular common platforms;
 <code>rustc</code> by default knows about 56 of them, and <code>rustup</code> today can obtain
 compilers for 14, and standard libraries for 30.</p>
-<h2>Example: Building static binaries on Linux</h2>
+<h2><a href="#example-building-static-binaries-on-linux" aria-hidden="true" class="anchor" id="example-building-static-binaries-on-linux"></a>Example: Building static binaries on Linux</h2>
 <p>Now that we've got the basic pieces in place, let's apply them to
 a simple cross-compilation task: building an ultraportable static binary
 for Linux.</p>
@@ -266,7 +266,7 @@ it'll run just fine.</p>
 <p>For more advanced use of musl consider <a href="https://github.com/emk/rust-musl-builder">rust-musl-builder</a>, a Docker
 image set up for musl development, which helpfully includes common C
 libraries compiled for musl.</p>
-<h2>Example: Running Rust on Android</h2>
+<h2><a href="#example-running-rust-on-android" aria-hidden="true" class="anchor" id="example-running-rust-on-android"></a>Example: Running Rust on Android</h2>
 <p>One more example. This time building for Android, from Linux, i.e.,
 <code>arm-linux-androideabi</code> from <code>x86_64-unknown-linux-gnu</code>.  This can also be done
 from OS X or Windows, though on Windows the setup is slightly different.</p>
@@ -359,7 +359,7 @@ rust:~/hello$ cargo build
 <p>Success! Of course just getting something to build is not the end of
 the story. You've also got to package your code up as an Android
 APK. For that you can use <a href="https://users.rust-lang.org/t/announcing-cargo-apk/5501">cargo-apk</a>.</p>
-<h2>Rust everywhere else</h2>
+<h2><a href="#rust-everywhere-else" aria-hidden="true" class="anchor" id="rust-everywhere-else"></a>Rust everywhere else</h2>
 <p>Rust is a software platform with the potential to run on anything with
 a CPU. In this post I showed you a little bit of what Rust can already
 do, with the rustup tool. Today Rust runs on most of the platforms you
@@ -394,7 +394,7 @@ collectors.</p>
 <p>Rust has <a href="https://internals.rust-lang.org/t/need-help-with-emscripten-port/3154">already been ported to Emscripten</a> (at least twice), but the code
 has not yet fully landed. This summer it's happening though: Rust +
 Emscripten. Rust on the Web. Rust everywhere.</p>
-<h2>Epilogue</h2>
+<h2><a href="#epilogue" aria-hidden="true" class="anchor" id="epilogue"></a>Epilogue</h2>
 <p>While many people are reporting success with rustup, it remains in beta, with
 some <a href="https://github.com/rust-lang-nursery/rustup.rs/issues?q=is%3Aopen+is%3Aissue+label%3A%22initial+release%22">key outstanding bugs</a>, and is not yet the officially recommended
 installation method for Rust (though you should try it). We're going to keep
@@ -412,7 +412,7 @@ apt.</p>
 instructions. Then leave feedback on the <a href="https://internals.rust-lang.org/t/beta-testing-rustup-rs/3316/112">dedicated forum thread</a>, or
 <a href="https://github.com/rust-lang-nursery/rustup.rs/issues">file bugs</a> on the issue tracker. More information about rustup is available
 in the <a href="https://github.com/rust-lang-nursery/rustup.rs/blob/master/README.md">README</a>.</p>
-<h2>Thanks</h2>
+<h2><a href="#thanks" aria-hidden="true" class="anchor" id="thanks"></a>Thanks</h2>
 <p>Rust would not be the powerful system it is without the help of many
 individuals. Thanks to Diggory Blake for creating rustup, to Jorge
 Aparicio for fixing lots of cross-compilation bugs and documenting the

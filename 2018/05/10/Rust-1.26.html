@@ -79,11 +79,11 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">detailed release notes for
 1.26.0</a> on GitHub.</p>
-<h2>What's in 1.26.0 stable</h2>
+<h2><a href="#whats-in-1.26.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.26.0-stable"></a>What's in 1.26.0 stable</h2>
 <p>The past few releases have had a steady stream of relatively minor additions. We've
 been working on a lot of stuff, however, and it's all starting to land in stable. 1.26 is
 possibly the most feature-packed release since Rust 1.0. Let's dig in!</p>
-<h4>&quot;The Rust Programming Language&quot; Second Edition</h4>
+<h4><a href="#the-rust-programming-language"-second-edition" aria-hidden="true" class="anchor" id="the-rust-programming-language"-second-edition"></a>&quot;The Rust Programming Language&quot; Second Edition</h4>
 <p>For almost 18 months, Carol, Steve, and others have been working on a
 complete re-write of &quot;The Rust Programming Language.&quot; We've learned a lot
 about how people learn Rust since the first book was written, and this
@@ -99,7 +99,7 @@ locally via <code>rustup doc --book</code>.</p>
 NoStarch Press</a>. The contents are identical,
 but you get a nice physical book to put on a shelf, or a beautifully typeset
 PDF. Proceeds are going to charity.</p>
-<h4><code>impl Trait</code></h4>
+<h4><a href="#impl-trait" aria-hidden="true" class="anchor" id="impl-trait"></a><code>impl Trait</code></h4>
 <p>At long last, <code>impl Trait</code> is here! This feature has been highly desired for
 quite a while, and provides a feature known as &quot;existential types.&quot; It's
 simpler than that sounds, however. The core of it is this idea:</p>
@@ -231,7 +231,7 @@ fn foo(x: impl Trait) {
 a universal. In other words, <code>impl Trait</code> is universal in an input position, but
 existential in an output position.</p>
 </blockquote>
-<h4>Nicer <code>match</code> bindings</h4>
+<h4><a href="#nicer-match-bindings" aria-hidden="true" class="anchor" id="nicer-match-bindings"></a>Nicer <code>match</code> bindings</h4>
 <p>Have you ever had a reference to an <code>Option</code>, and tried to use <code>match</code>? For
 example, code like this:</p>
 <pre><code class="language-rust">fn hello(arg: &amp;Option&lt;String&gt;) {
@@ -305,7 +305,7 @@ be bound as <code>ref mut</code> too.</p>
 <p>We think this will remove a significant papercut for new and old Rustaceans
 alike. The compiler will just do the right thing more often without the need
 for boilerplate.</p>
-<h4><code>main</code> can return a <code>Result</code></h4>
+<h4><a href="#main-can-return-a-result" aria-hidden="true" class="anchor" id="main-can-return-a-result"></a><code>main</code> can return a <code>Result</code></h4>
 <p>Speaking of papercuts, since Rust uses the <code>Result</code> type for returning
 errors, and <code>?</code> to make handling them easy, a common pain-point of
 new Rustaceans is to try and use <code>?</code> in <code>main</code>:</p>
@@ -349,7 +349,7 @@ fn main() -&gt; Result&lt;(), std::io::Error&gt; {
 <p>This now works just fine! If <code>main</code> returns an error, this will
 exit with an error code, and print out a debug representation
 of the error.</p>
-<h4>Inclusive ranges with <code>..=</code></h4>
+<h4><a href="#inclusive-ranges-with-.=" aria-hidden="true" class="anchor" id="inclusive-ranges-with-.="></a>Inclusive ranges with <code>..=</code></h4>
 <p>Since well before Rust 1.0, you've been able to create exclusive ranges with <code>..</code>
 like this:</p>
 <pre><code class="language-rust">for i in 1..3 {
@@ -402,7 +402,7 @@ fn main() {
 }
 </code></pre>
 <p>This will produce those 256 lines of output you might have been expecting.</p>
-<h4>Basic slice patterns</h4>
+<h4><a href="#basic-slice-patterns" aria-hidden="true" class="anchor" id="basic-slice-patterns"></a>Basic slice patterns</h4>
 <p>Another long-awaited feature is &quot;slice patterns.&quot; These let you match on
 slices similar to how you match on other data types. For example:</p>
 <pre><code class="language-rust">let arr = [1, 2, 3];
@@ -425,13 +425,13 @@ inside the <code>[]</code>s. We can also match when we don't know the length:</p
 <p>Here, we don't know how long <code>s</code> is, so we can write the first two arms, each with
 different lengths. This also means we need a <code>_</code> term, since we aren't covering
 every possible length, nor could we!</p>
-<h4>Speed improvements</h4>
+<h4><a href="#speed-improvements" aria-hidden="true" class="anchor" id="speed-improvements"></a>Speed improvements</h4>
 <p>We continue to work on the speed of the compiler. We discovered that deeply
 nesting types was non-linear in some cases, and <a href="https://github.com/rust-lang/rust/pull/48296">a fix was
 implemented</a>. We're seeing up
 to a 12% reduction in compile times from this change, but many other smaller
 fixes landed as well. More to come in the future!</p>
-<h4>128 bit integers</h4>
+<h4><a href="#128-bit-integers" aria-hidden="true" class="anchor" id="128-bit-integers"></a>128 bit integers</h4>
 <p>Finally, a very simple feature: Rust now has 128 bit integers!</p>
 <pre><code class="language-rust">let x: i128 = 0;
 let y: u128 = 0;
@@ -443,7 +443,7 @@ let y: u128 = 0;
 </ul>
 <p>Whew!</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">detailed release notes</a> for more.</p>
-<h3>Library stabilizations</h3>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>We stabilized <a href="https://doc.rust-lang.org/std/fs/fn.read_to_string.html"><code>fs::read_to_string</code></a>,
 a convenience over <code>File::open</code> and <code>io::Read::read_to_string</code> for easily reading an entire
 file into memory at once:</p>
@@ -459,13 +459,13 @@ formatting</a>:</p>
 <p>Trailing commas <a href="https://github.com/rust-lang/rust/pull/48056">are now supported by all macros in the standard
 library</a>.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">detailed release notes</a> for more.</p>
-<h3>Cargo features</h3>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
 <p>Cargo didn't receive many big new features this release but rather saw a steady
 stream of stability and performance improvements. Cargo should now resolve lock
 files even faster, backtrack more intelligently, and require manual <code>cargo update</code> invocations less. Cargo's binary <a href="https://github.com/rust-lang/cargo/pull/5083">now also shares the same version as
 <code>rustc</code></a>.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1260-2018-05-10">detailed release notes</a> for more.</p>
-<h2>Contributors to 1.26.0</h2>
+<h2><a href="#contributors-to-126.0" aria-hidden="true" class="anchor" id="contributors-to-126.0"></a>Contributors to 1.26.0</h2>
 <p>Many people came together to create Rust 1.26. We couldn't have done it
 without all of you.</p>
 <p><a href="https://thanks.rust-lang.org/rust/1.26.0">Thanks!</a></p>

@@ -82,7 +82,7 @@ about the future, developing a <a href="https://github.com/rust-lang/rfcs/pull/1
 users <a href="https://internals.rust-lang.org/t/2016-rust-commercial-user-survey-results/4317">tell us</a> they need.</p>
 <p>And even with all that going on, we put together a new release filled with fun
 new toys.</p>
-<h3>What's in 1.13 stable</h3>
+<h3><a href="#whats-in-1.13-stable" aria-hidden="true" class="anchor" id="whats-in-1.13-stable"></a>What's in 1.13 stable</h3>
 <p>The 1.13 release includes several extensions to the language, including the
 long-awaited <code>?</code> operator, improvements to compile times, minor feature
 additions to cargo and the standard library. This release also includes many
@@ -92,7 +92,7 @@ that are not individually mentioned in the release notes.</p>
 and OpenSSL, which both published security updates recently. For more
 information see the respective announcements for <a href="https://curl.haxx.se/changes.html">curl 7.51.0</a> and <a href="https://www.openssl.org/news/secadv/20160922.txt">OpenSSL
 1.0.2j</a>.</p>
-<h4>The <code>?</code> operator</h4>
+<h4><a href="#the--operator" aria-hidden="true" class="anchor" id="the--operator"></a>The <code>?</code> operator</h4>
 <p>Rust has gained a new operator, <code>?</code>, that makes error handling more pleasant by
 reducing the visual noise involved. It does this by solving one simple
 problem. To illustrate, imagine we had some code to read some data from a file:</p>
@@ -178,7 +178,7 @@ ergonomic improvement to the old <code>try!</code> macro. This is a good example
 kinds of incremental, quality-of-life improvements Rust will continue to
 receive, polishing off the rough corners of our already-powerful base language.</p>
 <p>Read more about <code>?</code> in <a href="https://github.com/rust-lang/rfcs/blob/master/text/0243-trait-based-exception-handling.md">RFC 243</a>.</p>
-<h4>Performance improvements</h4>
+<h4><a href="#performance-improvements" aria-hidden="true" class="anchor" id="performance-improvements"></a>Performance improvements</h4>
 <p>There has been a lot of focus on compiler performance lately. There's good news
 in this release, and more to come.</p>
 <p>Mark Simulacrum and Nick Cameron have been refining <a href="http://perf.rust-lang.org">perf.rust-lang.org</a>, our
@@ -223,7 +223,7 @@ now emits no machine code at all.</p>
 performance as well</a>, focusing on profiling and micro-optimizations. This
 release contains <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#compile-time-optimizations">several fruits of his work</a>, and there are more in the
 pipeline for 1.14.</p>
-<h3>Other notable changes</h3>
+<h3><a href="#other-notable-changes" aria-hidden="true" class="anchor" id="other-notable-changes"></a>Other notable changes</h3>
 <p>This release contains important security updates to Cargo, which depends on curl
 and OpenSSL, which both published security updates recently. For more
 information see the respective announcements for <a href="https://curl.haxx.se/changes.html">curl 7.51.0</a> and <a href="https://www.openssl.org/news/secadv/20160922.txt">OpenSSL
@@ -255,14 +255,14 @@ hardware floats (which is most ARM targets). ARM targets in Rust are presently
 in our 2nd support tier, so this bug was not determined to block the
 release. Because 1.13 contains a security update, users that must target ARM are
 encouraged to use the 1.14 betas, which will soon get a fix for ARM.</p>
-<h4>Language stabilizations</h4>
+<h4><a href="#language-stabilizations" aria-hidden="true" class="anchor" id="language-stabilizations"></a>Language stabilizations</h4>
 <ul>
 <li>The <a href="https://doc.rust-lang.org/std/marker/trait.Reflect.html"><code>Reflect</code></a> trait is deprecated. See the <a href="https://github.com/rust-lang/rust/issues/27749#issuecomment-244489589">explanation</a> of what this means
 for parametricity in Rust.</li>
 <li><a href="https://github.com/rust-lang/rust/pull/36014">Stabilize macros in type position</a>. <a href="https://github.com/rust-lang/rfcs/blob/master/text/0873-type-macros.md">RFC 873</a>.</li>
 <li><a href="https://github.com/rust-lang/rust/pull/36995">Stabilize attributes on statements</a>. <a href="https://github.com/rust-lang/rfcs/blob/master/text/0016-more-attributes.md">RFC 16</a>.</li>
 </ul>
-<h4>Library stabilizations</h4>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
 <ul>
 <li><a href="https://doc.rust-lang.org/std/primitive.i32.html#method.checked_abs"><code>checked_abs</code></a>, <a href="https://doc.rust-lang.org/std/primitive.i32.html#method.wrapping_abs"><code>wrapping_abs</code></a>, and <a href="https://doc.rust-lang.org/std/primitive.i32.html#method.overflowing_abs"><code>overflowing_abs</code></a></li>
 <li><a href="https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow"><code>RefCell::try_borrow</code></a>, and <a href="https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.try_borrow_mut"><code>RefCell::try_borrow_mut</code></a></li>
@@ -274,13 +274,13 @@ for parametricity in Rust.</li>
 <li><a href="https://doc.rust-lang.org/std/hash/struct.SipHasher.html"><code>SipHasher</code></a> is deprecated. Use <a href="https://doc.rust-lang.org/std/collections/hash_map/struct.DefaultHasher.html"><code>DefaultHasher</code></a>.</li>
 <li><a href="https://github.com/rust-lang/rust/pull/35911">Implement more traits for <code>std::io::ErrorKind</code></a></li>
 </ul>
-<h4>Cargo features</h4>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
 <ul>
 <li><a href="https://github.com/rust-lang/cargo/pull/3038">cargo: Add --all-features flag to cargo</a></li>
 <li><a href="https://github.com/rust-lang/cargo/pull/3000">cargo: Add --message-format flag</a></li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1130-2016-11-10">detailed release notes</a> for more.</p>
-<h3>Contributors to 1.13.0</h3>
+<h3><a href="#contributors-to-113.0" aria-hidden="true" class="anchor" id="contributors-to-113.0"></a>Contributors to 1.13.0</h3>
 <p>We had 155 individuals contribute to 1.13.0. Thank you so much!</p>
 <ul>
 <li>Aaron Gallagher</li>

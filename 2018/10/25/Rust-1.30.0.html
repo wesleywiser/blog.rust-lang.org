@@ -79,12 +79,12 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25">detailed release notes for
 1.30.0</a> on GitHub.</p>
-<h2>What's in 1.30.0 stable</h2>
+<h2><a href="#whats-in-1.30.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.30.0-stable"></a>What's in 1.30.0 stable</h2>
 <p>Rust 1.30 is an exciting release with a number of features. On Monday, expect another
 blog post asking you to check out Rust 1.31's beta; Rust 1.31 will be the first release
 of &quot;Rust 2018.&quot; For more on that concept, please see our previous post
 <a href="https://blog.rust-lang.org/2018/07/27/what-is-rust-2018.html">&quot;What is Rust 2018&quot;</a>.</p>
-<h2>Procedural Macros</h2>
+<h2><a href="#procedural-macros" aria-hidden="true" class="anchor" id="procedural-macros"></a>Procedural Macros</h2>
 <p>Way back in <a href="https://blog.rust-lang.org/2017/02/02/Rust-1.15.html">Rust 1.15</a>, we announced the ability to define &quot;custom derives.&quot; For example,
 with <code>serde_derive</code>, you could</p>
 <pre><code class="language-rust">#[derive(Serialize, Deserialize, Debug)]
@@ -126,7 +126,7 @@ pub fn sql(input: TokenStream) -&gt; TokenStream {
 </code></pre>
 <p>This is similar to the derive macro's signature: we get the tokens that
 are inside of the parentheses and return the code we want to generate.</p>
-<h3><code>use</code> and macros</h3>
+<h3><a href="#use-and-macros" aria-hidden="true" class="anchor" id="use-and-macros"></a><code>use</code> and macros</h3>
 <p>You can now <a href="https://github.com/rust-lang/rust/pull/50911/">bring macros into scope with the <code>use</code> keyword</a>. For example,
 to use <code>serde-json</code>'s <code>json</code> macro, you used to write:</p>
 <pre><code class="language-rust">#[macro_use]
@@ -181,7 +181,7 @@ struct Demo {
 7 |     bad: std::thread::Thread,
   |     ^^^ the trait `serde::Serialize` is not implemented for `std::thread::Thread`
 </code></pre>
-<h2>Module system improvements</h2>
+<h2><a href="#module-system-improvements" aria-hidden="true" class="anchor" id="module-system-improvements"></a>Module system improvements</h2>
 <p>The module system has long been a pain point of new Rustaceans; several of
 its rules felt awkward in practice. These changes are the first steps we're
 taking to make the module system feel more straightforward.</p>
@@ -275,7 +275,7 @@ you can ask:</p>
 <p>The old behavior of <code>use</code> paths always starting from the crate root still applies. But
 after making a one-time switch to the new style, these rules will apply uniformly to
 paths everywhere, and you'll need to tweak your imports much less when moving code around.</p>
-<h2>Raw Identifiers</h2>
+<h2><a href="#raw-identifiers" aria-hidden="true" class="anchor" id="raw-identifiers"></a>Raw Identifiers</h2>
 <p><a href="https://github.com/rust-lang/rust/pull/53236/">You can now use keywords as identifiers</a> with some new syntax:</p>
 <pre><code class="language-rust">// define a local variable named `for`
 let r#for = true;
@@ -292,7 +292,7 @@ r#for();
 crate with a Rust 2018 project and vice-versa because the set of keywords will be
 different in the two editions; we'll explain more in the upcoming blog post about
 Rust 2018.</p>
-<h2><code>no_std</code> applications</h2>
+<h2><a href="#no_std-applications" aria-hidden="true" class="anchor" id="no_std-applications"></a><code>no_std</code> applications</h2>
 <p>Back in Rust 1.6, we announced the <a href="https://blog.rust-lang.org/2016/01/21/Rust-1.6.html">stabilization of <code>no_std</code> and
 <code>libcore</code></a> for building
 projects without the standard library. There was a twist, though: you could
@@ -300,14 +300,14 @@ only build libraries, but not applications.</p>
 <p>With Rust 1.30, you can <a href="https://github.com/rust-lang/rust/pull/51366/">use the <code>#[panic_handler]</code></a> attribute
 to implement panics yourself. This now means that you can build applications,
 not just libraries, that don't use the standard library.</p>
-<h2>Other things</h2>
+<h2><a href="#other-things" aria-hidden="true" class="anchor" id="other-things"></a>Other things</h2>
 <p>Finally, you can now <a href="https://github.com/rust-lang/rust/pull/53370/">match on visibility keywords, like <code>pub</code>, in
 macros</a> using the <code>vis</code> specifier. Additionally, &quot;tool
 attributes&quot; like <code>#[rustfmt::skip]</code> <a href="https://github.com/rust-lang/rust/pull/53459/">are now
 stable</a>. Tool <em>lints</em>
 like <code>#[allow(clippy::something)]</code> are not yet stable, however.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25">detailed release notes</a> for more.</p>
-<h3>Library stabilizations</h3>
+<h3><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h3>
 <p>A few new APIs were <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#stabilized-apis">stabilized for this
 release</a>:</p>
 <ul>
@@ -327,12 +327,12 @@ new names for these APIs:</p>
 </ul>
 <p>We plan to deprecate (but not remove, of course) the old names in Rust 1.33.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25">detailed release notes</a> for more.</p>
-<h3>Cargo features</h3>
+<h3><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h3>
 <p>The largest feature of Cargo in this release is that we now <a href="https://github.com/rust-lang/cargo/pull/5995/">have a progress
 bar!</a></p>
 <p><img src="/images/2018-10-25-Rust-1.30/demo.gif" alt="demo gif" /></p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25">detailed release notes</a> for more.</p>
-<h2>Contributors to 1.30.0</h2>
+<h2><a href="#contributors-to-130.0" aria-hidden="true" class="anchor" id="contributors-to-130.0"></a>Contributors to 1.30.0</h2>
 <p>Many people came together to create Rust 1.30. We couldn't have done it
 without all of you. <a href="https://thanks.rust-lang.org/rust/1.30.0">Thanks!</a></p>
 

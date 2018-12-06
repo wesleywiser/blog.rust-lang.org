@@ -73,7 +73,7 @@
       <p>On Monday, Oct 15, starting at approximately 20:00 UTC, crates.io sustained
 an operational incident. You can find the status page report <a href="http://status.crates.io/incidents/cymjwvkrtjn3">here</a> and our
 tweets about it <a href="https://twitter.com/cratesiostatus/status/1051953125030940674">here</a>.</p>
-<h2>Root Cause</h2>
+<h2><a href="#root-cause" aria-hidden="true" class="anchor" id="root-cause"></a>Root Cause</h2>
 <p>A user called <code>cratesio</code> was created on crates.io and proceeded to upload
 packages using common, short names. These packages contained nothing beyond a
 <code>Cargo.toml</code> file and a <code>README.md</code> instructing users that if they wanted to use
@@ -88,12 +88,12 @@ the crates.io team (both through the username <code>cratesio</code>, as well as 
 to the crates-io issue tracker in the crates' <code>Readme</code> files)</li>
 <li>the rate of uploading impacted the stability of the service</li>
 </ul>
-<h2>Action Taken</h2>
+<h2><a href="#action-taken" aria-hidden="true" class="anchor" id="action-taken"></a>Action Taken</h2>
 <p>The user's IP address was banned immediately. We then backdated the users' packages to remove
 their packages from the homepage. We also redirected the <code>cratesio</code> user's page to a 404.</p>
 <p>Finally, the <code>cratesio</code> user and all crates they uploaded were deleted.
 The user was reported to GitHub, and has since been banned by them.</p>
-<h2>Timeline of events</h2>
+<h2><a href="#timeline-of-events" aria-hidden="true" class="anchor" id="timeline-of-events"></a>Timeline of events</h2>
 <ul>
 <li>20:09 UTC: The GitHub user <code>cratesio</code> registers an account</li>
 <li>20:13 UTC: This user begins uploading packages at a rate of roughly one package
@@ -110,7 +110,7 @@ every 2 seconds</li>
 from crates.io</li>
 <li>00:40 UTC: The packages are removed from the index.</li>
 </ul>
-<h2>Future measures</h2>
+<h2><a href="#future-measures" aria-hidden="true" class="anchor" id="future-measures"></a>Future measures</h2>
 <p>It should not have been possible for a single user or IP address to upload that
 many packages in a short period of time. We will be introducing rate limiting on
 this endpoint to limit the number of packages a script is able to upload in the
@@ -136,7 +136,7 @@ that are being raised on both official and unofficial Rust forums. We agree that
 improve our communication with the community and intend to develop more processes
 for folks to communicate with us, as well as for the team to communicate to the general
 community.</p>
-<h2>Background</h2>
+<h2><a href="#background" aria-hidden="true" class="anchor" id="background"></a>Background</h2>
 <p>There has been a growing amount of discussion in the community around our
 squatting policy and our decision not to have namespacing.</p>
 <p><a href="https://internals.rust-lang.org/t/crates-io-package-policies/1041">The original squatting policy</a>,
@@ -171,7 +171,7 @@ feature, not a bug, of this system. We talk about this more below.</p>
 published on our website would help more people to understand the rationale
 behind our policy, without requiring members of the team to reply to every forum
 thread wanting to re-litigate what has already been discussed at length.</p>
-<h2>Conclusion</h2>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
 <p>We wanted to share the details of what happened and why the crates.io team chose to take action
 as quickly as possible. The policy changes we've described will be discussed
 during the next several team meetings. Nothing is set in stone until the team

@@ -78,7 +78,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes for
 1.15.0</a> on GitHub. 1443 patches were landed in this release.</p>
-<h3>What's in 1.15.0 stable</h3>
+<h3><a href="#whats-in-1.15.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.15.0-stable"></a>What's in 1.15.0 stable</h3>
 <p>Rust 1.15 sees an <em>extremely</em> eagerly-awaited feature land on stable: custom
 derive! To review, in Rust, you've always been able to automatically implement
 some traits through the <code>derive</code> attribute:</p>
@@ -164,7 +164,7 @@ important for writing custom derives, see the book chapter, linked above, for
 more.) Custom derive was also known as &quot;macros 1.1&quot;, as it includes the
 infrastructure for supporting even more compile-time powers of Rust, nicknamed
 &quot;macros 2.0.&quot; Expect to hear more about this space in future releases.</p>
-<h4>Other improvements</h4>
+<h4><a href="#other-improvements" aria-hidden="true" class="anchor" id="other-improvements"></a>Other improvements</h4>
 <p>The build system for Rust <a href="https://github.com/rust-lang/rust/pull/37817">has been re-written in Rust, using
 Cargo</a>. It is now the default. This process has been long, but has
 finally borne fruit. Given that all Rust development happens on the master
@@ -191,7 +191,7 @@ struct Foo&lt;T&gt; where T: ?Sized {
 </code></pre>
 <p>This second form is now accepted, and is equivalent to the first.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes</a> for more.</p>
-<h4>Library stabilizations</h4>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
 <p>The <code>slice::sort</code> algorithm <a href="https://github.com/rust-lang/rust/pull/38192">has been rewritten</a>, and is much, much,
 much faster. It is a hybrid merge sort, drawing influences from Timsort.
 Previously it was a straightforward merge sort.</p>
@@ -215,7 +215,7 @@ your code will <a href="https://github.com/rust-lang/rust/pull/38182">now be a l
 <li><a href="https://doc.rust-lang.org/std/io/struct.Take.html#method.into_inner"><code>std::io::Take::into_inner</code></a></li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes</a> for more.</p>
-<h4>Cargo features</h4>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
 <p>Cargo will now <a href="https://github.com/rust-lang/cargo/pull/3361">emit a warning</a> if you have a file named <code>build.rs</code>
 at the top level of a package, but don't have a <code>build = &quot;build.rs&quot;</code>
 annotation. This is in anticipation of inferring that <code>build.rs</code> at the top
@@ -233,7 +233,7 @@ which is useful when you have a workspace.</p>
 <p>We now <a href="https://github.com/rust-lang/cargo/pull/3363">Compile statically against the MSVC CRT</a> on Windows, and
 <a href="https://github.com/rust-lang/cargo/pull/3311">Link OpenSSL statically</a> on Mac OS X.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes</a> for more.</p>
-<h3>Contributors to 1.15.0</h3>
+<h3><a href="#contributors-to-115.0" aria-hidden="true" class="anchor" id="contributors-to-115.0"></a>Contributors to 1.15.0</h3>
 <p>In this part of the release announcements, we usually post a list of
 contributors. However, we've recently started a new initiative, &quot;Thanks!&quot;, to
 do this in a more comprehensive way. One issue with this section is that it

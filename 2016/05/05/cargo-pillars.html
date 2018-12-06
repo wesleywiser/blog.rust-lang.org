@@ -100,7 +100,7 @@ and happened to provide a fast line-breaking library. Within days, that library
 <a href="https://twitter.com/mbrubeck/status/726791246014877696">replaced Servo's old custom linebreaker</a>,
 decreasing Servo's maintenance burden and increasing sharing in the Rust
 ecosystem.</p>
-<h2>The core concerns of dependency management</h2>
+<h2><a href="#the-core-concerns-of-dependency-management" aria-hidden="true" class="anchor" id="the-core-concerns-of-dependency-management"></a>The core concerns of dependency management</h2>
 <p>To make this all work at the scale of an app like Servo, you need a dependency
 management approach with good answers to a number of thorny questions:</p>
 <ol>
@@ -141,7 +141,7 @@ workflows that operate over the entire dependency graph, and increased sharing
 and robustness across the ecosystem. When we started planning Rust 1.0, we knew
 we wanted to bring these ideas to a systems setting, and making Cargo a central
 part of the way people use Rust was a big part of that.</p>
-<h2>Pillars of Cargo</h2>
+<h2><a href="#pillars-of-cargo" aria-hidden="true" class="anchor" id="pillars-of-cargo"></a>Pillars of Cargo</h2>
 <p>Cargo is built on three major pillars:</p>
 <ol>
 <li>
@@ -158,7 +158,7 @@ first two goals.</p>
 </li>
 </ol>
 <p>We'll look at each of these pillars in turn.</p>
-<h2>Predictability</h2>
+<h2><a href="#predictability" aria-hidden="true" class="anchor" id="predictability"></a>Predictability</h2>
 <p>Cargo's predictability goals start with a simple guarantee: <strong>once a project
 successfully compiles on one machine, subsequent compiles across machines and
 environments will use exactly the same source code</strong>.</p>
@@ -185,7 +185,7 @@ level, static and dynamic linking, and architecture. Combined with the
 projects highly predictable.</p>
 </li>
 </ol>
-<h3>Predictability By Example</h3>
+<h3><a href="#predictability-by-example" aria-hidden="true" class="anchor" id="predictability-by-example"></a>Predictability By Example</h3>
 <p>To illustrate these strategies, let's build an example crate using Cargo. To
 keep things simple, we'll create a small <code>datetime</code> crate that exposes date and
 time functionality.</p>
@@ -273,7 +273,7 @@ source code from <a href="https://crates.io/">crates.io</a>, because the registr
 <a href="https://github.com/rust-lang/crates.io-index/">separate git repository</a>, and
 includes checksum for the relevant package. Before Cargo ever unpacks a crate it
 downloads, it first validates the checksum.</p>
-<h3>Collaborating</h3>
+<h3><a href="#collaborating" aria-hidden="true" class="anchor" id="collaborating"></a>Collaborating</h3>
 <p>Now for the real test. Let's push our code up to GitHub and develop it on a
 different machine. Ideally, we would like to be able to pick up right where we
 left off, with the exact same source code for all of our dependencies.</p>
@@ -291,7 +291,7 @@ machine. Then, we run <code>cargo build</code> again.</p>
 versions of all dependencies as before</strong>. And if we wanted to start collaborating
 with other developers on GitHub (or with other members of our team at work), we
 would continue to get the same level of predictability.</p>
-<h3>Common conventions: examples, tests, and docs</h3>
+<h3><a href="#common-conventions-examples,-tests,-and-docs" aria-hidden="true" class="anchor" id="common-conventions-examples,-tests,-and-docs"></a>Common conventions: examples, tests, and docs</h3>
 <p>Now that we've written our snazzy new <code>datetime</code> crate, we'd love to write an
 example to show other developers how it should be used. We create a new file
 called <code>examples/date.rs</code> that looks like this:</p>
@@ -320,7 +320,7 @@ types from those crates, your clients can follow those links.</p>
 <p>These are just a few examples of a general point: <strong>Cargo defines a common set of
 conventions and workflows that operate precisely the same way across the entire
 Rust ecosystem</strong>.</p>
-<h3>Updating</h3>
+<h3><a href="#updating" aria-hidden="true" class="anchor" id="updating"></a>Updating</h3>
 <p>All of this means that your application won't change if you don't make any
 changes to your dependencies, but what happens when you need to change them?</p>
 <p>Cargo adds another layer of protection with <em>conservative updates</em>. This means
@@ -359,7 +359,7 @@ small change to dependencies to rebuild the entire graph, wreaking havoc in its
 wake.</p>
 <p><strong>As a rule, Cargo attempts to minimize the effects of intentional changes to
 direct dependencies.</strong></p>
-<h2>Indirect Dependencies &quot;Just Work&quot;</h2>
+<h2><a href="#indirect-dependencies-just-work"" aria-hidden="true" class="anchor" id="indirect-dependencies-just-work""></a>Indirect Dependencies &quot;Just Work&quot;</h2>
 <p>One of the most basic goals of an application package manager is separating
 direct dependencies, which are required by the application, and indirect
 dependencies, which those dependencies need in order to work.</p>
@@ -370,7 +370,7 @@ for future predictability.</p>
 <p>Since Cargo manages your dependencies for you, it can also make sure that it
 compiles all of your dependencies (whether you knew about them directly or not)
 appropriately for the task at hand.</p>
-<h3>Testing, Benchmarking, Releasing, Oh My</h3>
+<h3><a href="#testing-benchmarking,-releasing,-oh-my" aria-hidden="true" class="anchor" id="testing-benchmarking,-releasing,-oh-my"></a>Testing, Benchmarking, Releasing, Oh My</h3>
 <p>Historically, people have shied away from the kinds of granular dependencies
 we've seen here because of the configuration needed for each new dependency.</p>
 <p>For example, when running tests or type-checking your code, you would like to
@@ -412,7 +412,7 @@ custom workflow if something doesn't precisely meet your needs, the profiles
 feature allows you to customize the existing workflows and stay within Cargo's
 flows.</p>
 </blockquote>
-<h3>Platforms and Architectures</h3>
+<h3><a href="#platforms-and-architectures" aria-hidden="true" class="anchor" id="platforms-and-architectures"></a>Platforms and Architectures</h3>
 <p>Similarly, applications are often built for different architectures, operating
 systems, or even operating system version. They can be compiled for maximum
 portability or to make maximum use of available platform features.</p>
@@ -422,7 +422,7 @@ system version of <code>openssl</code>).</p>
 <p><strong>By standardizing what it means to build and configure a package, Cargo can apply
 all of these configuration choices to your direct dependencies <em>and</em> indirect
 dependencies</strong>.</p>
-<h3>Shared Dependencies</h3>
+<h3><a href="#shared-dependencies" aria-hidden="true" class="anchor" id="shared-dependencies"></a>Shared Dependencies</h3>
 <p>So far, we've looked at packages and their dependencies. But what if two
 packages that your application depends on share a third dependency?</p>
 <p>For example, let's say that I decide to add the <code>nix</code> crate to my <code>datetime</code>
@@ -471,7 +471,7 @@ is used purely internally and is not shared through its public interface. Those
 packages could be more readily duplicated if needed, while dependencies that are
 used in a package's public interface must not be.</p>
 <p>You should expect to see more on this topic in the months ahead.</p>
-<h2>Workflow</h2>
+<h2><a href="#workflow" aria-hidden="true" class="anchor" id="workflow"></a>Workflow</h2>
 <p>As we've seen, <strong>Cargo is not just a dependency manager, but Rust's primary
 workflow tool</strong>.</p>
 <p>This allows Rust to have a rich ecosystem of interconnected dependencies,

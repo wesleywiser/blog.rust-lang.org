@@ -75,7 +75,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>As always, you can <a href="https://www.rust-lang.org/install.html">install Rust 1.10</a> from the appropriate page on our
 website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1100-2016-07-07">detailed release notes for 1.10</a> on GitHub.
 1276 patches were landed in this release.</p>
-<h3>What's in 1.10 stable</h3>
+<h3><a href="#whats-in-1.10-stable" aria-hidden="true" class="anchor" id="whats-in-1.10-stable"></a>What's in 1.10 stable</h3>
 <p>Rust 1.10 contains one of the most-requested features in Rust: through the <a href="https://github.com/rust-lang/rust/pull/32900"><code>-C panic=abort</code> flag</a> or a <a href="https://github.com/rust-lang/cargo/pull/2687">setting in your <code>Cargo.toml</code></a>, when a <code>panic!</code>
 happens, it will abort rather than unwind. Why would you want to do this?
 Remember that <a href="http://blog.rust-lang.org/2016/05/26/Rust-1.9.html">panics are for unexpected problems</a>, and for many applications,
@@ -116,7 +116,7 @@ significantly, as they no longer need two packages. You can find more details
 about this change <a href="https://github.com/rust-lang/rust/pull/32942">in its pull
 request</a>.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1100-2016-07-07">detailed release notes</a> for more.</p>
-<h4>Library stabilizations</h4>
+<h4><a href="#library-stabilizations" aria-hidden="true" class="anchor" id="library-stabilizations"></a>Library stabilizations</h4>
 <p>Roughly 70 APIs were made stable in this release. They break down into these rough
 groups:</p>
 <ul>
@@ -133,7 +133,7 @@ groups:</p>
 <p>Finally, on Linux, if HashMaps can't be initialized with <code>getrandom</code> they will
 <a href="https://github.com/rust-lang/rust/pull/33086">fall back to <code>/dev/urandom</code> temporarily</a> to avoid blocking during early boot.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1100-2016-07-07">detailed release notes</a> for more.</p>
-<h4>Cargo features</h4>
+<h4><a href="#cargo-features" aria-hidden="true" class="anchor" id="cargo-features"></a>Cargo features</h4>
 <p>Cargo has received a number of small improvements in this release.</p>
 <ul>
 <li>The aforementioned <a href="https://github.com/rust-lang/cargo/pull/2687"><code>profile.*.panic</code></a> option can control how you'd like
@@ -145,7 +145,7 @@ panics implemented for your project.</li>
 <li><a href="https://github.com/rust-lang/cargo/pull/2551"><code>cargo --explain</code> was added</a>, mirroring <code>rustc --explain</code>.</li>
 </ul>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1100-2016-07-07">detailed release notes</a> for more.</p>
-<h3>Contributors to 1.10</h3>
+<h3><a href="#contributors-to-110" aria-hidden="true" class="anchor" id="contributors-to-110"></a>Contributors to 1.10</h3>
 <p>We had 139 individuals contribute to 1.10. Thank you so much!</p>
 <ul>
 <li>Adolfo Ochagavía</li>

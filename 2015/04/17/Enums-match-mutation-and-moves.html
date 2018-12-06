@@ -113,7 +113,7 @@ substructure (as opposed to always <em>moving</em> such substructure).</p>
 <p>We cover each of the items above in detail below, but first we
 establish a foundation for the discussion: What does <code>match</code> look
 like, and how does it work?</p>
-<h3>The Basics of <code>match</code></h3>
+<h3><a href="#the-basics-of-match" aria-hidden="true" class="anchor" id="the-basics-of-match"></a>The Basics of <code>match</code></h3>
 <p>The <code>match</code> expression in Rust has this form:</p>
 <pre><code class="language-rust">match INPUT_EXPRESSION {
     PATTERNS_1 =&gt; RESULT_EXPRESSION_1,
@@ -238,7 +238,7 @@ reader's attention directly on the data relevant to the case at hand.</p>
 <p>That is <code>match</code> in a nutshell.</p>
 <p>So, what is the interplay between this construct and Rust's approach to
 ownership and safety in general?</p>
-<h3>Exhaustive case analysis</h3>
+<h3><a href="#exhaustive-case-analysis" aria-hidden="true" class="anchor" id="exhaustive-case-analysis"></a>Exhaustive case analysis</h3>
 <blockquote>
 <p>...when you have eliminated all which is impossible,
 then whatever remains, however improbable, must be the truth.</p>
@@ -288,7 +288,7 @@ that such expressions always either evaluate to a value of the correct type,
 <em>or</em> jump elsewhere in the program.</p>
 </li>
 </ul>
-<h4>Jumping out of a match</h4>
+<h4><a href="#jumping-out-of-a-match" aria-hidden="true" class="anchor" id="jumping-out-of-a-match"></a>Jumping out of a match</h4>
 <p>The following code is a fixed version of the <code>suggest_guess_broken</code>
 function we saw above; it directly illustrates &quot;jumping elsewhere&quot;:</p>
 <pre><code class="language-rust">fn suggest_guess_fixed(prior_guess: u32, answer: Answer) {
@@ -318,7 +318,7 @@ body.</p>
 <p>We can add such special case handling via <code>match</code> without fear
 of overlooking a case, because <code>match</code> will force the case
 analysis to be exhaustive.</p>
-<h3>Algebraic Data Types and Structural Invariants</h3>
+<h3><a href="#algebraic-data-types-and-structural-invariants" aria-hidden="true" class="anchor" id="algebraic-data-types-and-structural-invariants"></a>Algebraic Data Types and Structural Invariants</h3>
 <p><a href="http://en.wikipedia.org/wiki/Algebraic_data_type">Algebraic data types</a> succinctly describe classes of data and allow one
 to encode rich structural invariants. Rust uses <code>enum</code> and <code>struct</code>
 definitions for this purpose.</p>
@@ -385,7 +385,7 @@ fn tree_demo_1() {
 enforced by the language. (Even richer representation invariants can
 be maintained via the use of modules and privacy; but let us not
 digress from the topic at hand.)</p>
-<h3>Both expression- and statement-oriented</h3>
+<h3><a href="#both-expression--and-statement-oriented" aria-hidden="true" class="anchor" id="both-expression--and-statement-oriented"></a>Both expression- and statement-oriented</h3>
 <p>Unlike many languages that offer pattern matching, Rust <em>embraces</em>
 both statement- and expression-oriented programming.</p>
 <p>Many functional languages that offer pattern matching encourage one to
@@ -515,7 +515,7 @@ initialized before it is referenced, but the designers have strived to
 avoid requiring artificial coding patterns adopted solely to placate
 Rust's static analyses (such as requiring one to initialize <code>string</code>
 above with some dummy data, or requiring an expression-oriented style).</p>
-<h3>Matching without moving</h3>
+<h3><a href="#matching-without-moving" aria-hidden="true" class="anchor" id="matching-without-moving"></a>Matching without moving</h3>
 <p>Matching an input can <em>borrow</em> input substructure, without taking
 ownership; this is crucial for matching a reference (e.g. a value of
 type <code>&amp;T</code>).</p>
@@ -652,7 +652,7 @@ local copy of the integer, while we want to modify the actual integer
 simultaneously in the <code>Node</code> arm. The compiler knows that the two
 values cannot alias, and thus it allows both <code>&amp;mut</code>-references to live
 simultaneously.</p>
-<h2>Conclusion</h2>
+<h2><a href="#conclusion" aria-hidden="true" class="anchor" id="conclusion"></a>Conclusion</h2>
 <p>Rust takes the ideas of algebraic data types and pattern matching
 pioneered by the functional programming languages, and adapts them to
 imperative programming styles and Rust's own ownership and borrowing

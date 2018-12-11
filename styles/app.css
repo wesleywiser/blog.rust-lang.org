@@ -57,16 +57,19 @@ section {
 section .container {
   padding-top: 20px; }
 
-a.brand {
+div.brand {
   color: black;
   font-family: "Alfa Slab One", serif;
   font-size: 3rem;
   text-decoration: none;
   margin-top: 3px; }
-  a.brand img {
+  div.brand a {
+    color: black;
+    text-decoration: none; }
+  div.brand img {
     width: 80px;
     margin-top: -3px; }
-  a.brand span {
+  div.brand span {
     display: inline-block;
     margin-left: -1rem; }
 

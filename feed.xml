@@ -844,13 +844,25 @@ attribute itself, that is, the &lt;code&gt;GET, &amp;quot;/&amp;quot;&lt;/code&g
 thing the attribute is attached to, in this case, &lt;code&gt;fn index() {}&lt;/code&gt; and the rest
 of the function's body.&lt;/p&gt;
 &lt;p&gt;Function-like macros define macros that look like function calls. For
-example, an &lt;code&gt;sql!&lt;/code&gt; macro:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;let sql = sql!(SELECT * FROM posts WHERE id=1);
+example, the &lt;a href=&quot;https://gitlab.gnome.org/federico/gnome-class&quot;&gt;&lt;code&gt;gnome-class&lt;/code&gt; crate&lt;/a&gt;
+has a procedural macro that defines &lt;code&gt;GObject&lt;/code&gt; classes in Rust:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;gobject_gen!(
+    class MyClass: GObject {
+        foo: Cell&amp;lt;i32&amp;gt;,
+        bar: RefCell&amp;lt;String&amp;gt;,
+    }
+
+    impl MyClass {
+        virtual fn my_virtual_method(&amp;amp;self, x: i32) {
+            // ... do something with x ...
+        }
+    }
+)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This macro would parse the SQL statement inside of it and check that it's
-syntactically correct. This macro would be defined like this:&lt;/p&gt;
+&lt;p&gt;This looks like a function that is taking a bunch of code as an argument.
+This macro would be defined like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;#[proc_macro]
-pub fn sql(input: TokenStream) -&amp;gt; TokenStream {
+pub fn gobject_gen(input: TokenStream) -&amp;gt; TokenStream {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is similar to the derive macro's signature: we get the tokens that
 are inside of the parentheses and return the code we want to generate.&lt;/p&gt;

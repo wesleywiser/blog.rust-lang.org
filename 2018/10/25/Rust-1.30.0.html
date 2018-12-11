@@ -121,13 +121,25 @@ attribute itself, that is, the <code>GET, &quot;/&quot;</code> stuff. The second
 thing the attribute is attached to, in this case, <code>fn index() {}</code> and the rest
 of the function's body.</p>
 <p>Function-like macros define macros that look like function calls. For
-example, an <code>sql!</code> macro:</p>
-<pre><code class="language-rust">let sql = sql!(SELECT * FROM posts WHERE id=1);
+example, the <a href="https://gitlab.gnome.org/federico/gnome-class"><code>gnome-class</code> crate</a>
+has a procedural macro that defines <code>GObject</code> classes in Rust:</p>
+<pre><code class="language-rust">gobject_gen!(
+    class MyClass: GObject {
+        foo: Cell&lt;i32&gt;,
+        bar: RefCell&lt;String&gt;,
+    }
+
+    impl MyClass {
+        virtual fn my_virtual_method(&amp;self, x: i32) {
+            // ... do something with x ...
+        }
+    }
+)
 </code></pre>
-<p>This macro would parse the SQL statement inside of it and check that it's
-syntactically correct. This macro would be defined like this:</p>
+<p>This looks like a function that is taking a bunch of code as an argument.
+This macro would be defined like this:</p>
 <pre><code>#[proc_macro]
-pub fn sql(input: TokenStream) -&gt; TokenStream {
+pub fn gobject_gen(input: TokenStream) -&gt; TokenStream {
 </code></pre>
 <p>This is similar to the derive macro's signature: we get the tokens that
 are inside of the parentheses and return the code we want to generate.</p>

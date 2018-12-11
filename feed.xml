@@ -365,6 +365,8 @@ now multiple, high quality options:&lt;/p&gt;
 &lt;p&gt;Work on IDE support is not finished, in particular code completion is not up
 to scratch in the RLS-based editors. However, if you mainly want support for
 types, documentation, and 'go to def', etc. then you should be happy.&lt;/p&gt;
+&lt;p&gt;If you have problems installing any of the tools with Rustup, try running
+&lt;code&gt;rustup self update&lt;/code&gt;, and then try again.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#tool-lints&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;tool-lints&quot;&gt;&lt;/a&gt;Tool lints&lt;/h3&gt;
 &lt;p&gt;In &lt;a href=&quot;https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html&quot;&gt;Rust 1.30&lt;/a&gt;, we
 stabilized &amp;quot;tool attributes&amp;quot;, like &lt;code&gt;#[rustfmt::skip]&lt;/code&gt;. In Rust 1.31, we're

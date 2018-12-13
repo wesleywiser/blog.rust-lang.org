@@ -95,6 +95,12 @@ div.brand {
     background-color: rgba(69, 76, 82, 0.05);
     border: 1px solid rgba(69, 76, 82, 0.25); }
 
+ol, ul {
+  padding-left: 1.6rem; }
+
+ul {
+  list-style: circle; }
+
 .purple {
   background-color: #403D58;
   color: white; }

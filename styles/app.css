@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @media screen and (max-width: 30em) {
   .flex-20-s {
     flex: 0 0 20%; } }
@@ -15,6 +16,13 @@
     max-width: 33%; }
   .mw-67-l {
     max-width: 67%; } }
+
+html {
+  font-size: 62.5%; }
+
+@media screen and (min-width: 30em) {
+  html {
+    font-size: 75%; } }
 
 body {
   font-family: "Fira Sans", Helvetica, Arial, sans-serif;
@@ -47,7 +55,7 @@ header h1, section h2 {
 
 header h1 {
   font-family: "Alfa Slab One", serif;
-  font-size: 10rem;
+  font-size: 8rem;
   margin-bottom: 0;
   margin-top: 0; }
 
@@ -56,6 +64,12 @@ section {
 
 section .container {
   padding-top: 20px; }
+
+ul.nav, ul.nav li {
+  margin-bottom: 0; }
+
+.nav a {
+  color: #454C52; }
 
 div.brand {
   color: black;
@@ -94,12 +108,24 @@ div.brand {
     color: black;
     background-color: rgba(69, 76, 82, 0.05);
     border: 1px solid rgba(69, 76, 82, 0.25); }
+  .white a.anchor::before {
+    content: "§";
+    display: none;
+    position: absolute;
+    width: 1em;
+    margin-left: -1em;
+    text-decoration: none;
+    opacity: 0.7;
+    color: #454C52;
+    font-weight: normal; }
+  .white :hover > a.anchor::before {
+    display: block; }
+  .white a.anchor:hover::before {
+    opacity: 1; }
 
-ol, ul {
-  padding-left: 1.6rem; }
-
-ul {
-  list-style: circle; }
+ul, ol {
+  list-style-position: outside;
+  padding-left: 1.2em; }
 
 .purple {
   background-color: #403D58;

@@ -43,8 +43,7 @@ made explicit). Rustfix changes the above code to:&lt;/p&gt;
     fn foo(&amp;amp;self, _: i32);
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For detailed information on how to use Rustfix, see [these instructions]
-(https://doc.rust-lang.org/stable/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html).
+&lt;p&gt;For detailed information on how to use Rustfix, see &lt;a href=&quot;https://doc.rust-lang.org/stable/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html&quot;&gt;these instructions&lt;/a&gt;.
 To transition your code from the 2015 to 2018 edition, run &lt;code&gt;cargo fix --edition&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Rustfix can do a lot, but it is not perfect. When it can't fix your code, it
 will emit a warning informing you that you need to fix it manually. We're

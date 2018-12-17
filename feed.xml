@@ -12,6 +12,172 @@
 
     
     <entry>
+        <title>Tools in the 2018 edition</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2018/12/17/Rust-2018-dev-tools.html" type="text/html" title="Tools in the 2018 edition" />
+        <published>2018-12-17</published>
+        <id>https://blog.rust-lang.org/2018/12/17/Rust-2018-dev-tools.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2018/12/17/Rust-2018-dev-tools.html">&lt;p&gt;Tooling is an important part of what makes a programming language practical and
+productive. Rust has always had some great tools (Cargo in particular has a
+well-deserved reputation as a best-in-class package manager and build tool), and
+the 2018 edition includes more tools which we hope further improve Rust users'
+experience.&lt;/p&gt;
+&lt;p&gt;In this blog post I'll cover Clippy and Rustfmt – two tools that have been
+around for a few years and are now stable and ready for general use. I'll also
+cover IDE support – a key workflow for many users which is now much better
+supported. I'll start by talking about Rustfix, a new tool which was central to
+our edition migration plans.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#rustfix&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustfix&quot;&gt;&lt;/a&gt;Rustfix&lt;/h2&gt;
+&lt;p&gt;Rustfix is a tool for automatically making changes to Rust code. It is a key
+part of our migration story for the 2018 edition, making the transition from
+2015 to 2018 editions much easier, and in many cases completely automatic. This
+is essential, since without such a tool we'd be much more limited in the kinds
+of breaking changes users would accept.&lt;/p&gt;
+&lt;p&gt;A simple example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;trait Foo {
+    fn foo(&amp;amp;self, i32);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above is legal in Rust 2015, but not in Rust 2018 (method arguments must be
+made explicit). Rustfix changes the above code to:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;trait Foo {
+    fn foo(&amp;amp;self, _: i32);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For detailed information on how to use Rustfix, see [these instructions]
+(https://doc.rust-lang.org/stable/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html).
+To transition your code from the 2015 to 2018 edition, run &lt;code&gt;cargo fix --edition&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Rustfix can do a lot, but it is not perfect. When it can't fix your code, it
+will emit a warning informing you that you need to fix it manually. We're
+continuing to work to improve things.&lt;/p&gt;
+&lt;p&gt;Rustfix works by automatically applying suggestions from the compiler. When we
+add or improve the compiler's suggestion for fixing an error or warning, then
+that improves Rustfix. We use the same information in an IDE to give quick fixes
+(such as automatically adding imports).&lt;/p&gt;
+&lt;p&gt;Thank you to Pascal Hertief (killercup), Oliver Scherer (oli-obk), Alex
+Crichton, Zack Davis, and Eric Huss for developing Rustfix and the compiler
+lints which it uses.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#clippy&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;clippy&quot;&gt;&lt;/a&gt;Clippy&lt;/h2&gt;
+&lt;p&gt;Clippy is a linter for Rust. It has numerous (currently 290!) lints to help
+improve the correctness, performance and style of your programs. Each lint can
+be turned on or off (&lt;code&gt;allow&lt;/code&gt;), and configured as either an error (&lt;code&gt;deny&lt;/code&gt;) or
+warning (&lt;code&gt;warn&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;An example: the &lt;a href=&quot;https://rust-lang.github.io/rust-clippy/master/index.html#iter_next_loop&quot;&gt;&lt;code&gt;iter_next_loop&lt;/code&gt;&lt;/a&gt;
+lint checks that you haven't made an error by iterating on the result of &lt;code&gt;next&lt;/code&gt;
+rather than the object you're calling &lt;code&gt;next&lt;/code&gt; on (this is an easy mistake to make
+when changing a &lt;code&gt;while let&lt;/code&gt; loop to a &lt;code&gt;for&lt;/code&gt; loop).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;for x in y.next() {
+    // ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;will give the error&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error: you are iterating over `Iterator::next()` which is an Option; this will compile but is probably not what you want
+ --&amp;gt; src/main.rs:4:14
+  |
+4 |     for x in y.next() {
+  |              ^^^^^^^^
+  |
+  = note: #[deny(clippy::iter_next_loop)] on by default
+  = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#iter_next_loop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Clippy works by extending the Rust compiler. The compiler has support for a few
+built-in lints, Clippy uses the same mechanisms but with lots more lints. That
+means Clippy's error/warning format should be familiar, you should be able to
+apply Clippy's suggestions in your IDE (or using Rustfix), and that the lints
+are reliable and accurate.&lt;/p&gt;
+&lt;p&gt;With Rust 1.31 and the 2018 edition, Clippy is available on stable Rust and has
+backwards compatibility guarantees (if it had a version number, it would be
+1.0). Clippy has the same stability guarantees as rustc: new lints may be added,
+and lints may be modified to add more functionality, however lints may never be
+removed (only deprecated). This means that code that compiles with Clippy will
+continue to compile with Clippy (provided there are no lints set to error via
+&lt;code&gt;deny&lt;/code&gt;), but may throw new warnings.&lt;/p&gt;
+&lt;p&gt;Clippy can be installed using &lt;code&gt;rustup component add clippy&lt;/code&gt;, then use it with
+&lt;code&gt;cargo clippy&lt;/code&gt;. For more information, including how to run it in your CI, see
+&lt;a href=&quot;https://github.com/rust-lang/rust-clippy/&quot;&gt;the repo readme&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Thank you Clippy team (Pascal Hertief (killercup), Oliver Scherer (oli-obk),
+Manish Goregaokar (manishearth), and Andre Bogus (llogiq))!&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#rustfmt&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustfmt&quot;&gt;&lt;/a&gt;Rustfmt&lt;/h2&gt;
+&lt;p&gt;Rustfmt is a tool for formatting your source code. It takes arbitrary, messy
+code and turns it into neat, beautifully styled code.&lt;/p&gt;
+&lt;p&gt;Automatically formatting saves you time and mental energy. You don't need to
+worry about style as you code. If you use Rustfmt in your CI (&lt;code&gt;cargo fmt --check&lt;/code&gt;), then you don't need to worry about code style in review. By using a
+standard style you make your project feel more familiar for new contributors and
+spare yourself arguments about code style. Rust's &lt;a href=&quot;https://github.com/rust-lang/rfcs/blob/master/style-guide/README.md&quot;&gt;standard code
+style&lt;/a&gt; is
+the Rustfmt default, but if you must, then you can customize Rustfmt
+extensively.&lt;/p&gt;
+&lt;p&gt;Rustfmt 1.0 is part of the 2018 edition release. It should work on all code and
+will be backwards compatible until the 2.0 release. By backwards compatible we
+mean that if your code is formatted (i.e., excluding bugs which prevent any
+formatting or code which does not compile), it will always be formatted in the
+same way. This guarantee only applies if you use the default formatting options.&lt;/p&gt;
+&lt;p&gt;Rustfmt is not done. Formatting is not perfect, in particular we don't touch
+comments and string literals and we are pretty limited with macro definitions
+and some macro uses. We're likely to improve formatting here, but you will need
+to opt-in to these changes until there is a 2.0 release. We &lt;em&gt;are&lt;/em&gt; planning on
+having a 2.0 release. Unlike Rust itself, we think its a good idea to have a
+breaking release of Rustfmt and expect that to happen some time in late 2019.&lt;/p&gt;
+&lt;p&gt;To install Rustfmt, use &lt;code&gt;rustup component add rustfmt&lt;/code&gt;. To format your project,
+use &lt;code&gt;cargo fmt&lt;/code&gt;. You can also format individual files using &lt;code&gt;rustfmt&lt;/code&gt; (though
+note that by default rustfmt will format nested modules). You can also use
+Rustfmt in your editor or IDE using the RLS (see below; no need to install
+rustfmt for this, it comes as part of the RLS). We recommend configuring your
+editor to run rustfmt on save. Not having to think about formatting at all as
+you type is a pleasant change.&lt;/p&gt;
+&lt;p&gt;Thank you Seiichi Uchida (topecongiro), Marcus Klaas, and all the Rustfmt
+contributors!&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#ide-support&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;ide-support&quot;&gt;&lt;/a&gt;IDE support&lt;/h2&gt;
+&lt;p&gt;For many users, their IDE is the most important tool. Rust IDE support has been
+in the works for a while and is a highly demanded feature. Rust is now supported
+in many IDEs and editors:
+&lt;a href=&quot;https://plugins.jetbrains.com/plugin/8182-rust&quot;&gt;IntelliJ&lt;/a&gt;, &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=rust-lang.rust&quot;&gt;Visual Studio
+Code&lt;/a&gt;,
+&lt;a href=&quot;https://github.com/rust-lang-nursery/atom-ide-rust&quot;&gt;Atom&lt;/a&gt;, &lt;a href=&quot;https://github.com/rust-lang/rust-enhanced&quot;&gt;Sublime
+Text&lt;/a&gt;,
+&lt;a href=&quot;https://www.eclipse.org/downloads/packages/release/photon/r/eclipse-ide-rust-developers-includes-incubating-components&quot;&gt;Eclipse&lt;/a&gt;
+(and more...). Follow each link for installation instructions.&lt;/p&gt;
+&lt;p&gt;Editor support is powered in two different ways: IntelliJ uses its own compiler,
+the other editors use the Rust compiler via the Rust Language Server (RLS). Both
+approaches give a good but imperfect IDE experience. You should probably choose
+based on which editor you prefer (although if your project does not use Cargo,
+then you won't be able to use the RLS).&lt;/p&gt;
+&lt;p&gt;All these editors come with support for standard IDE functions including 'go to
+definition', 'find all references', code completion, renaming, and reformatting.&lt;/p&gt;
+&lt;p&gt;The RLS has been developed by the Rust dev tools team, it is a bid to bring Rust
+support to as many IDEs and editors as possible. It directly uses Cargo and the
+Rust compiler to provide accurate information about a program. Due to
+performance constraints, code completion is not yet powered by the compiler and
+therefore can be a bit more hit and miss than other features.&lt;/p&gt;
+&lt;p&gt;Thanks to the IDEs and editors team for work on the RLS and the various IDEs and
+extensions (alexheretic, autozimu, jasonwilliams, LucasBullen, matklad,
+vlad20012, Xanewok), Jonathan Turner for helping start off the RLS, and
+phildawes, kngwyu, jwilm, and the other Racer contributors for their work on
+Racer (the code completion component of the RLS)!&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#the-future&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-future&quot;&gt;&lt;/a&gt;The future&lt;/h2&gt;
+&lt;p&gt;We're not done yet! There's lots more we think we can do in the tools domain
+over the next year or so.&lt;/p&gt;
+&lt;p&gt;We've been improving rust debugging support in LLDB and GDB and there is more in
+the works. We're experimenting with distributing our own versions with Rustup
+and making debugging from your IDE easier and more powerful.&lt;/p&gt;
+&lt;p&gt;We hope to make the RLS faster, more stable, and more accurate; including using
+the compiler for code completion.&lt;/p&gt;
+&lt;p&gt;We want to make Cargo a lot more powerful: Cargo will handle compiled binaries
+as well as source code, which will make building and installing crates faster.
+We will support better integration with other build systems (which in turn will
+enable using the RLS with more projects). We'll add commands for adding and
+upgrading dependencies, and to help with security audits.&lt;/p&gt;
+&lt;p&gt;Rustdoc will see improvements to its source view (powered by the RLS) and links
+between documentation for different crates.&lt;/p&gt;
+&lt;p&gt;There's always lots of interesting things to work on. If you'd like to help chat
+to us on GitHub or &lt;a href=&quot;https://discordapp.com/invite/rust-lang&quot;&gt;Discord&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Dev-tools team</name>
+        </author>
+    </entry>
+    
+    <entry>
         <title>A call for Rust 2019 Roadmap blog posts</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html" type="text/html" title="A call for Rust 2019 Roadmap blog posts" />
         <published>2018-12-06</published>
@@ -1234,34 +1400,6 @@ releases with missing components for Tier 1 platform in the future.&lt;/p&gt;
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.29.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2018/09/25/Rust-1.29.1.html" type="text/html" title="Announcing Rust 1.29.1" />
-        <published>2018-09-25</published>
-        <id>https://blog.rust-lang.org/2018/09/25/Rust-1.29.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2018/09/25/Rust-1.29.1.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.29.1. Rust is a
-systems programming language focused on safety, speed, and concurrency.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.29.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1291-2018-09-25&quot;&gt;detailed release notes for
-1.29.1&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1.29.1-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.29.1-stable&quot;&gt;&lt;/a&gt;What's in 1.29.1 stable&lt;/h2&gt;
-&lt;p&gt;A &lt;a href=&quot;https://blog.rust-lang.org/2018/09/21/Security-advisory-for-std.html&quot;&gt;security vulnerability&lt;/a&gt; was found in the standard library where if a
-large number was passed to &lt;code&gt;str::repeat&lt;/code&gt; it could cause a buffer overflow
-after an integer overflow. If you do not call the &lt;code&gt;str::repeat&lt;/code&gt; function you
-are not affected. This has been addressed by unconditionally panicking in
-&lt;code&gt;str::repeat&lt;/code&gt; on integer overflow. More details about this can be found in the
-&lt;a href=&quot;https://blog.rust-lang.org/2018/09/21/Security-advisory-for-std.html&quot;&gt;security announcement&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     

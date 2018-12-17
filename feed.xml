@@ -52,7 +52,7 @@ continuing to work to improve things.&lt;/p&gt;
 add or improve the compiler's suggestion for fixing an error or warning, then
 that improves Rustfix. We use the same information in an IDE to give quick fixes
 (such as automatically adding imports).&lt;/p&gt;
-&lt;p&gt;Thank you to Pascal Hertief (killercup), Oliver Scherer (oli-obk), Alex
+&lt;p&gt;Thank you to Pascal Hertleif (killercup), Oliver Scherer (oli-obk), Alex
 Crichton, Zack Davis, and Eric Huss for developing Rustfix and the compiler
 lints which it uses.&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#clippy&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;clippy&quot;&gt;&lt;/a&gt;Clippy&lt;/h2&gt;
@@ -93,7 +93,7 @@ continue to compile with Clippy (provided there are no lints set to error via
 &lt;p&gt;Clippy can be installed using &lt;code&gt;rustup component add clippy&lt;/code&gt;, then use it with
 &lt;code&gt;cargo clippy&lt;/code&gt;. For more information, including how to run it in your CI, see
 &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/&quot;&gt;the repo readme&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Thank you Clippy team (Pascal Hertief (killercup), Oliver Scherer (oli-obk),
+&lt;p&gt;Thank you Clippy team (Pascal Hertleif (killercup), Oliver Scherer (oli-obk),
 Manish Goregaokar (manishearth), and Andre Bogus (llogiq))!&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#rustfmt&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rustfmt&quot;&gt;&lt;/a&gt;Rustfmt&lt;/h2&gt;
 &lt;p&gt;Rustfmt is a tool for formatting your source code. It takes arbitrary, messy

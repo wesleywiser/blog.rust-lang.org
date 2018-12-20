@@ -35,7 +35,7 @@ attributes led to 100% CPU
 usage:&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;/// Some documentation
 #[derive(Debug)] // Multiple, single-line
-#[allow(missing_docs)] // atributes
+#[allow(missing_docs)] // attributes
 pub struct MyStruct { /* ... */ }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rls/pull/1171&quot;&gt;Go to definition was fixed for std types&lt;/a&gt;:

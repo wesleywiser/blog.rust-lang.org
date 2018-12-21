@@ -12,6 +12,316 @@
 
     
     <entry>
+        <title>Procedural Macros in Rust 2018</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html" type="text/html" title="Procedural Macros in Rust 2018" />
+        <published>2018-12-21</published>
+        <id>https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html">&lt;p&gt;Perhaps my favorite feature in the Rust 2018 edition is &lt;a href=&quot;https://doc.rust-lang.org/reference/procedural-macros.html&quot;&gt;procedural macros&lt;/a&gt;.
+Procedural macros have had a long and storied history in Rust (and will continue
+to have a storied future!), and now is perhaps one of the best times to get
+involved with them because the 2018 edition has so dramatically improved the
+experience both defining and using them.&lt;/p&gt;
+&lt;p&gt;Here I'd like to explore what procedural macros are, what they're capable of,
+notable new features, and some fun use cases of procedural macros. I might even
+convince you that this is Rust 2018's best feature as well!&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#what-is-a-procedural-macro&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;what-is-a-procedural-macro&quot;&gt;&lt;/a&gt;What is a procedural macro?&lt;/h3&gt;
+&lt;p&gt;First defined over two years ago in &lt;a href=&quot;https://github.com/rust-lang/rfcs/blob/master/text/1566-proc-macros.md&quot;&gt;RFC 1566&lt;/a&gt;, procedural macros are, in
+layman's terms, a function that takes a piece of syntax at compile time and
+produces a new bit of syntax. Procedural macros in Rust 2018 come in one of
+three flavors:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;#[derive]&lt;/code&gt; mode macros&lt;/strong&gt; have actually been stable since &lt;a href=&quot;https://blog.rust-lang.org/2017/02/02/Rust-1.15.html&quot;&gt;Rust 1.15&lt;/a&gt;
+and bring all the goodness and ease of use of &lt;code&gt;#[derive(Debug)]&lt;/code&gt; to
+user-defined traits as well, such as &lt;a href=&quot;https://serde.rs&quot;&gt;Serde&lt;/a&gt;'s &lt;code&gt;#[derive(Deserialize)]&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Function-like macros&lt;/strong&gt; are newly stable to the 2018 edition and allow
+defining macros like &lt;code&gt;env!(&amp;quot;FOO&amp;quot;)&lt;/code&gt; or &lt;code&gt;format_args!(&amp;quot;...&amp;quot;)&lt;/code&gt; in a
+crate.io-based library. You can think of these as sort of &amp;quot;&lt;code&gt;macro_rules!&lt;/code&gt;
+macros&amp;quot; on steroids.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Attribute macros&lt;/strong&gt;, my favorite, are also new in the 2018 edition
+and allow you to provide lightweight annotations on Rust functions which
+perform syntactical transformations over the code at compile time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each of these flavors of macros can be defined in a crate with &lt;code&gt;proc-macro = true&lt;/code&gt; &lt;a href=&quot;https://doc.rust-lang.org/cargo/reference/manifest.html&quot;&gt;specified in its manifest&lt;/a&gt;. When used, a procedural macro is
+loaded by the Rust compiler and executed as the invocation is expanded. This
+means that Cargo's in control of versioning for procedural macros and you can
+use them with all same ease of use you'd expect from other Cargo dependencies!&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#defining-a-procedural-macro&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;defining-a-procedural-macro&quot;&gt;&lt;/a&gt;Defining a procedural macro&lt;/h3&gt;
+&lt;p&gt;Each of the three types of procedural macros are &lt;a href=&quot;https://doc.rust-lang.org/stable/reference/procedural-macros.html&quot;&gt;defined in a slightly different
+fashion&lt;/a&gt;, and here we'll single out attribute macros. First we'll flag
+&lt;code&gt;Cargo.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[lib]
+proc-macro = true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and then in &lt;code&gt;src/lib.rs&lt;/code&gt; we can write our macro:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;extern crate proc_macro;
+use proc_macro::TokenStream;
+
+#[proc_macro_attribute]
+pub fn hello(attr: TokenStream, item: TokenStream) -&amp;gt; TokenStream {
+    // ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can then write some unit tests in &lt;code&gt;tests/smoke.rs&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[my_crate::hello]
+fn wrapped_function() {}
+
+#[test]
+fn works() {
+    wrapped_function();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;... and that's it! When we execute &lt;code&gt;cargo test&lt;/code&gt; Cargo will compile our
+procedural macro. Afterwards it will compile our unit test which loads the macro
+at compile time, executing the &lt;code&gt;hello&lt;/code&gt; function and compiling the resulting
+syntax.&lt;/p&gt;
+&lt;p&gt;Right off the bat we can see a few important properties of procedural macros:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The input/output is this fancy &lt;code&gt;TokenStream&lt;/code&gt; type we'll talk about more in a
+bit&lt;/li&gt;
+&lt;li&gt;We're &lt;em&gt;executing aribtrary code&lt;/em&gt; at compile time, which means we can do just
+about anything!&lt;/li&gt;
+&lt;li&gt;Procedural macros are incorporated with the module system, meaning no more
+they can be imported just like any other name.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Before we take a look at implementing a procedural macro, let's first dive into
+some of these points.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#macros-and-the-module-system&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;macros-and-the-module-system&quot;&gt;&lt;/a&gt;Macros and the module system&lt;/h3&gt;
+&lt;p&gt;First stabilized in &lt;a href=&quot;https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html&quot;&gt;Rust 1.30&lt;/a&gt; (noticing a trend with 1.15?) macros are now
+integrated with the module system in Rust. This mainly means that you no longer
+need the clunky &lt;code&gt;#[macro_use]&lt;/code&gt; attribute when importing macros! Instead of this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[macro_use]
+extern crate log;
+
+fn main() {
+    debug!(&amp;quot;hello, &amp;quot;);
+    info!(&amp;quot;world!&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;you can do:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;use log::info;
+
+fn main() {
+    log::debug!(&amp;quot;hello, &amp;quot;);
+    info!(&amp;quot;world!&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Integration with the module system solves one of the most confusing parts about
+macros historically. They're now imported and namespaced just as you would any
+other item in Rust!&lt;/p&gt;
+&lt;p&gt;The benefits are not only limited to bang-style &lt;code&gt;macro_rules&lt;/code&gt; macros, as you can
+now transform code that looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[macro_use]
+extern crate serde_derive;
+
+#[derive(Deserialize)]
+struct Foo {
+    // ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;into&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Foo {
+    // ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and you don't even need to explicitly depend on &lt;code&gt;serde_derive&lt;/code&gt; in &lt;code&gt;Cargo.toml&lt;/code&gt;!
+All you need is:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[dependencies]
+serde = { version = '1.0.82', features = ['derive'] }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href=&quot;#whats-inside-a-tokenstream?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-inside-a-tokenstream?&quot;&gt;&lt;/a&gt;What's inside a &lt;code&gt;TokenStream&lt;/code&gt;?&lt;/h3&gt;
+&lt;p&gt;This mysterious &lt;code&gt;TokenStream&lt;/code&gt; type comes from the &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/&quot;&gt;compiler-provided
+&lt;code&gt;proc_macro&lt;/code&gt; crate&lt;/a&gt;. When it was first added all you could do with a
+&lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/struct.TokenStream.html&quot;&gt;&lt;code&gt;TokenStream&lt;/code&gt;&lt;/a&gt; was call convert it to or from a string using &lt;code&gt;to_string()&lt;/code&gt; or &lt;code&gt;parse()&lt;/code&gt;.
+As of Rust 2018, you can act on the tokens in a &lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/struct.TokenStream.html&quot;&gt;&lt;code&gt;TokenStream&lt;/code&gt;&lt;/a&gt; directly.&lt;/p&gt;
+&lt;p&gt;A &lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/struct.TokenStream.html&quot;&gt;&lt;code&gt;TokenStream&lt;/code&gt;&lt;/a&gt; is effectively &amp;quot;just&amp;quot; an iterator over &lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html&quot;&gt;&lt;code&gt;TokenTree&lt;/code&gt;&lt;/a&gt;. All
+syntax in Rust falls into one of these four categories, the four variants of
+&lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html&quot;&gt;&lt;code&gt;TokenTree&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Ident&lt;/code&gt; is any identifier like &lt;code&gt;foo&lt;/code&gt; or &lt;code&gt;bar&lt;/code&gt;. This also contains keywords
+such as &lt;code&gt;self&lt;/code&gt; and &lt;code&gt;super&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Literal&lt;/code&gt; include things like &lt;code&gt;1&lt;/code&gt;, &lt;code&gt;&amp;quot;foo&amp;quot;&lt;/code&gt;, and &lt;code&gt;'b'&lt;/code&gt;. All literals are one
+token and represent constant values in a program.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Punct&lt;/code&gt; represents some form of punctuation that's not a delimiter. For
+example &lt;code&gt;.&lt;/code&gt; is a &lt;code&gt;Punct&lt;/code&gt; token in the field access of &lt;code&gt;foo.bar&lt;/code&gt;.
+Multi-character punctuation like &lt;code&gt;=&amp;gt;&lt;/code&gt; is represented as two &lt;code&gt;Punct&lt;/code&gt; tokens,
+one for &lt;code&gt;=&lt;/code&gt; and one for &lt;code&gt;&amp;gt;&lt;/code&gt;, and the &lt;code&gt;Spacing&lt;/code&gt; enum says that the &lt;code&gt;=&lt;/code&gt; is
+adjacent to the &lt;code&gt;&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Group&lt;/code&gt; is where the term &amp;quot;tree&amp;quot; is most relevant, as &lt;code&gt;Group&lt;/code&gt; represents a
+delimited sub-token-stream. For example &lt;code&gt;(a, b)&lt;/code&gt; is a &lt;code&gt;Group&lt;/code&gt; with parentheses
+as delimiters, and the internal token stream is &lt;code&gt;a, b&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;While this is conceptually simple, this may sound like there's not much we can
+do with this! It's unclear, for example, how we might parse a function from a
+&lt;code&gt;TokenStream&lt;/code&gt;. The minimality of &lt;code&gt;TokenTree&lt;/code&gt; is crucial, however, for
+stabilization. It would be infeasible to stabilize the Rust AST because that
+means we could never change it. (imagine if we couldn't have added the &lt;code&gt;?&lt;/code&gt;
+operator!)&lt;/p&gt;
+&lt;p&gt;By using &lt;code&gt;TokenStream&lt;/code&gt; to communicate with procedural macros, the compiler is
+able to add new language syntax while also being able to compile
+and work with older procedural macros. Let's see now, though, how we can
+actually get useful information out of a &lt;code&gt;TokenStream&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#parsing-a-tokenstream&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;parsing-a-tokenstream&quot;&gt;&lt;/a&gt;Parsing a &lt;code&gt;TokenStream&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;If &lt;code&gt;TokenStream&lt;/code&gt; is just a simple iterator, then we've got a long way to go from
+that to an actual parsed function. Although the code is already lexed for us
+we still need to write a whole Rust parser! Thankfully though the community has
+been hard at work to make sure writing procedural macros in Rust is as smooth as
+can be, so you need look no further than the &lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt; crate&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With the &lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt;&lt;/a&gt; crate we can parse any Rust AST as a one-liner:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[proc_macro_attribute]
+pub fn hello(attr: TokenStream, item: TokenStream) -&amp;gt; TokenStream {
+    let input = syn::parse_macro_input!(item as syn::ItemFn);
+    let name = &amp;amp;input.ident;
+    let abi = &amp;amp;input.abi;
+    // ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt;&lt;/a&gt; crate not only comes with the ability to parse built-in syntax
+but you can also easily write a recursive descent parser for your own syntax.
+The &lt;a href=&quot;https://docs.rs/syn/0.15/syn/parse/index.html&quot;&gt;&lt;code&gt;syn::parse&lt;/code&gt; module&lt;/a&gt; has more information about this capability.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#producing-a-tokenstream&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;producing-a-tokenstream&quot;&gt;&lt;/a&gt;Producing a &lt;code&gt;TokenStream&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Not only do we take a &lt;code&gt;TokenStream&lt;/code&gt; as input with a procedural macro, but we
+also need to produce a &lt;code&gt;TokenStream&lt;/code&gt; as output. This output is typically
+required to be valid Rust syntax, but like the input it's just list of tokens
+that we need to build somehow.&lt;/p&gt;
+&lt;p&gt;Technically the only way to create a &lt;code&gt;TokenStream&lt;/code&gt; is via its &lt;code&gt;FromIterator&lt;/code&gt;
+implementation, which means we'd have to create each token one-by-one and
+collect it into a &lt;code&gt;TokenStream&lt;/code&gt;. This is quite tedious, though, so let's take a
+look at &lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt;&lt;/a&gt;'s sibling crate: &lt;a href=&quot;https://docs.rs/quote/0.6/quote/&quot;&gt;&lt;code&gt;quote&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://docs.rs/quote/0.6/quote/&quot;&gt;&lt;code&gt;quote&lt;/code&gt;&lt;/a&gt; crate is a quasi-quoting implementation for Rust which primarily
+provides a convenient macro for us to use:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;use quote::quote;
+
+#[proc_macro_attribute]
+pub fn hello(attr: TokenStream, item: TokenStream) -&amp;gt; TokenStream {
+    let input = syn::parse_macro_input!(item as syn::ItemFn);
+    let name = &amp;amp;input.ident;
+
+    // Our input function is always equivalent to returning 42, right?
+    let result = quote! {
+        fn #name() -&amp;gt; u32 { 42 }
+    };
+    result.into()
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;a href=&quot;https://docs.rs/quote/0.6/quote/macro.quote.html&quot;&gt;&lt;code&gt;quote!&lt;/code&gt; macro&lt;/a&gt; allows you to write mostly-Rust syntax and interpolate
+variables quickly from the environment with &lt;code&gt;#foo&lt;/code&gt;. This removes much of the
+tedium of creating a &lt;code&gt;TokenStream&lt;/code&gt; token-by-token and allows quickly cobbling
+together various pieces of syntax into one return value.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#tokens-and-span&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;tokens-and-span&quot;&gt;&lt;/a&gt;Tokens and &lt;code&gt;Span&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Perhaps the greatest feature of procedural macros in Rust 2018 is the ability to
+customize and use &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/struct.Span.html&quot;&gt;&lt;code&gt;Span&lt;/code&gt;&lt;/a&gt; information on each token, giving us the ability for
+amazing syntactical error messages from procedural macros:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error: expected `fn`
+ --&amp;gt; src/main.rs:3:14
+  |
+3 | my_annotate!(not_fn foo() {});
+  |              ^^^^^^
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;as well as completely custom error messages:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error: imported methods must have at least one argument
+  --&amp;gt; invalid-imports.rs:12:5
+   |
+12 |     fn f1();
+   |     ^^^^^^^^
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/struct.Span.html&quot;&gt;&lt;code&gt;Span&lt;/code&gt;&lt;/a&gt; can be thought of as a pointer back into an original source file,
+typically saying something like &amp;quot;the &lt;code&gt;Ident&lt;/code&gt; token&lt;code&gt; foo&lt;/code&gt; came from file
+&lt;code&gt;bar.rs&lt;/code&gt;, line 4, column 5, and was 3 bytes long&amp;quot;. This information is
+primarily used by the compiler's diagnostics with warnings and error messages.&lt;/p&gt;
+&lt;p&gt;In Rust 2018 each &lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html&quot;&gt;&lt;code&gt;TokenTree&lt;/code&gt;&lt;/a&gt; has a &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/struct.Span.html&quot;&gt;&lt;code&gt;Span&lt;/code&gt;&lt;/a&gt; associated with it. This means that
+if you preserve the &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/struct.Span.html&quot;&gt;&lt;code&gt;Span&lt;/code&gt;&lt;/a&gt; of all input tokens into the output then even
+though you're producing brand new syntax the compiler's error messages are still
+accurate!&lt;/p&gt;
+&lt;p&gt;For example, a small macro like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[proc_macro]
+pub fn make_pub(item: TokenStream) -&amp;gt; TokenStream {
+    let result = quote! {
+        pub #item
+    };
+    result.into()
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;when invoked as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;my_macro::make_pub! {
+    static X: u32 = &amp;quot;foo&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;is invalid because we're returning a string from a function that should return a
+&lt;code&gt;u32&lt;/code&gt;, and the compiler will helpfully diagnose the problem as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error[E0308]: mismatched types
+ --&amp;gt; src/main.rs:1:37
+  |
+1 | my_macro::make_pub!(static X: u32 = &amp;quot;foo&amp;quot;);
+  |                                     ^^^^^ expected u32, found reference
+  |
+  = note: expected type `u32`
+             found type `&amp;amp;'static str`
+
+error: aborting due to previous error
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And we can see here that although we're generating brand new syntax, the
+compiler can preserve span information to continue to provide targeted
+diagnostics about code that we've written.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#procedural-macros-in-the-wild&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;procedural-macros-in-the-wild&quot;&gt;&lt;/a&gt;Procedural Macros in the Wild&lt;/h3&gt;
+&lt;p&gt;Ok up to this point we've got a pretty good idea about what procedural macros
+can do and the various capabilities they have in the 2018 edition. As such a
+long-awaited feature, the ecosystem is already making use of these new
+capabilities! If you're interested, some projects to keep your eyes on are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://docs.rs/quote/0.6/quote/&quot;&gt;&lt;code&gt;quote&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&quot;https://docs.rs/proc-macro2/0.4/proc_macro2/&quot;&gt;&lt;code&gt;proc-macro2&lt;/code&gt;&lt;/a&gt; are your go-to libraries for
+writing procedural macros. They make it easy to define custom parsers, parse
+existing syntax, create new syntax, work with older versions of Rust, and much
+more!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://serde.rs&quot;&gt;Serde&lt;/a&gt; and its derive macros for &lt;code&gt;Serialize&lt;/code&gt; and &lt;code&gt;Deserialize&lt;/code&gt; are likely the
+most used macros in the ecosystem. They sport an &lt;a href=&quot;https://serde.rs/attributes.html&quot;&gt;impressive amount of
+configuration&lt;/a&gt; and are a great example of how small annotations
+can be so powerful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;a href=&quot;https://github.com/rustwasm/wasm-bindgen&quot;&gt;&lt;code&gt;wasm-bindgen&lt;/code&gt; project&lt;/a&gt; uses attribute macros to easily define
+interfaces in Rust and import interfaces from JS. The &lt;code&gt;#[wasm_bindgen]&lt;/code&gt;
+lightweight annotation makes it easy to understand what's coming in and out,
+as well as removing lots of conversion boilerplate.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;a href=&quot;https://gitlab.gnome.org/federico/gnome-class&quot;&gt;&lt;code&gt;gobject_gen!&lt;/code&gt; macro&lt;/a&gt; is an experimental IDL for the GNOME
+project to define GObject objects safely in Rust, eschewing manually writing
+all the glue necessary to talk to C and interface with other GObject
+instances in Rust.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;a href=&quot;https://rocket.rs/&quot;&gt;Rocket framework&lt;/a&gt; has recently switched over to procedural
+macros, and showcases some of nightly-only features of procedural macros like
+custom diagnostics, custom span creation, and more. Expect to see these
+features stabilize in 2019!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That's just a &lt;em&gt;taste&lt;/em&gt; of the power of procedural macros and some example usage
+throughout the ecosystem today. We're only 6 weeks out from the original release
+of procedural macros on stable, so we've surely only scratched the surface as
+well! I'm really excited to see where we can take Rust with procedural macros by
+empowering all kinds of lightweight additions and extensions to the language!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Alex Crichton</name>
+        </author>
+    </entry>
+    
+    <entry>
         <title>Announcing Rust 1.31.1</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/12/20/Rust-1.31.1.html" type="text/html" title="Announcing Rust 1.31.1" />
         <published>2018-12-20</published>
@@ -1287,129 +1597,6 @@ without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.30.0&qu
 
         <author>
             <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Update on the October 15, 2018 incident on crates.io</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2018/10/19/Update-on-crates.io-incident.html" type="text/html" title="Update on the October 15, 2018 incident on crates.io" />
-        <published>2018-10-19</published>
-        <id>https://blog.rust-lang.org/2018/10/19/Update-on-crates.io-incident.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2018/10/19/Update-on-crates.io-incident.html">&lt;p&gt;On Monday, Oct 15, starting at approximately 20:00 UTC, crates.io sustained
-an operational incident. You can find the status page report &lt;a href=&quot;http://status.crates.io/incidents/cymjwvkrtjn3&quot;&gt;here&lt;/a&gt; and our
-tweets about it &lt;a href=&quot;https://twitter.com/cratesiostatus/status/1051953125030940674&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#root-cause&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;root-cause&quot;&gt;&lt;/a&gt;Root Cause&lt;/h2&gt;
-&lt;p&gt;A user called &lt;code&gt;cratesio&lt;/code&gt; was created on crates.io and proceeded to upload
-packages using common, short names. These packages contained nothing beyond a
-&lt;code&gt;Cargo.toml&lt;/code&gt; file and a &lt;code&gt;README.md&lt;/code&gt; instructing users that if they wanted to use
-the name, they should open an issue on the crates.io issue tracker.&lt;/p&gt;
-&lt;p&gt;The rate at which this user uploaded packages eventually resulted in our servers
-being throttled by GitHub, causing a slowdown in all package uploads or yanks.
-Endpoints which did not involve updating the index were unaffected.&lt;/p&gt;
-&lt;p&gt;We decided to take action on this behavior because:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The contents of the uploaded packages appeared to be an attempt to impersonate
-the crates.io team (both through the username &lt;code&gt;cratesio&lt;/code&gt;, as well as directing people
-to the crates-io issue tracker in the crates' &lt;code&gt;Readme&lt;/code&gt; files)&lt;/li&gt;
-&lt;li&gt;the rate of uploading impacted the stability of the service&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#action-taken&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;action-taken&quot;&gt;&lt;/a&gt;Action Taken&lt;/h2&gt;
-&lt;p&gt;The user's IP address was banned immediately. We then backdated the users' packages to remove
-their packages from the homepage. We also redirected the &lt;code&gt;cratesio&lt;/code&gt; user's page to a 404.&lt;/p&gt;
-&lt;p&gt;Finally, the &lt;code&gt;cratesio&lt;/code&gt; user and all crates they uploaded were deleted.
-The user was reported to GitHub, and has since been banned by them.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#timeline-of-events&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;timeline-of-events&quot;&gt;&lt;/a&gt;Timeline of events&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;20:09 UTC: The GitHub user &lt;code&gt;cratesio&lt;/code&gt; registers an account&lt;/li&gt;
-&lt;li&gt;20:13 UTC: This user begins uploading packages at a rate of roughly one package
-every 2 seconds&lt;/li&gt;
-&lt;li&gt;20:17 UTC: All requests updating the index begin to take 10+ seconds&lt;/li&gt;
-&lt;li&gt;20:41 UTC: An email is sent to the Rust moderation team reporting this user&lt;/li&gt;
-&lt;li&gt;20:46 UTC: The report is forwarded to the crates.io team&lt;/li&gt;
-&lt;li&gt;20:50 UTC: The user is reported in the crates.io team Discord.&lt;/li&gt;
-&lt;li&gt;21:00 UTC: The user's IP address is blocked from accessing the site&lt;/li&gt;
-&lt;li&gt;21:20 UTC: The user's packages were removed from the crates.io homepage&lt;/li&gt;
-&lt;li&gt;21:20 UTC: The incident is announced on status.crates.io&lt;/li&gt;
-&lt;li&gt;22:49 UTC: The user's account page on crates.io is removed.&lt;/li&gt;
-&lt;li&gt;23:58 UTC: The packages, all associated data, and the user's account are deleted
-from crates.io&lt;/li&gt;
-&lt;li&gt;00:40 UTC: The packages are removed from the index.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#future-measures&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;future-measures&quot;&gt;&lt;/a&gt;Future measures&lt;/h2&gt;
-&lt;p&gt;It should not have been possible for a single user or IP address to upload that
-many packages in a short period of time. We will be introducing rate limiting on
-this endpoint to limit the number of packages a script is able to upload in the
-future.&lt;/p&gt;
-&lt;p&gt;We are also looking into disallowing usernames that could be impersonating
-official Rust teams. We will be updating our policies to clearly state that this
-form of impersonation is not allowed. We will be deciding the exact wording of
-this policy in the coming weeks.&lt;/p&gt;
-&lt;p&gt;While it is impossible to tell a user's intent, many, including the team, have
-speculated that this action was either associated with or directly related to the
-recent escalation in community frustration around crates.io policies, in particular,
-the squatting policy.&lt;/p&gt;
-&lt;p&gt;Regardless of whether this incident had this intent, the cratesio team would like
-to reiterate that taking actions such as the one we experienced on Tuesday is not
-an appropriate nor effective way to contribute to dialogue about crates.io policy.
-We will be adding a policy making it clear that attempting to disrupt crates.io in order
-to make or further a point is not appropriate and will be considered a malicious attack.
-We will be deciding on the exact wording of this policy in the coming weeks.&lt;/p&gt;
-&lt;p&gt;If you feel that a policy is problematic, the correct place to propose a change is by
-creating an RFC or messaging the team at help@crates.io.&lt;/p&gt;
-&lt;p&gt;We also have seen a lot of frustration that the crates.io team is not listening to the concerns
-that are being raised on both official and unofficial Rust forums. We agree that we should
-improve our communication with the community and intend to develop more processes
-for folks to communicate with us, as well as for the team to communicate to the general
-community.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#background&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;background&quot;&gt;&lt;/a&gt;Background&lt;/h2&gt;
-&lt;p&gt;There has been a growing amount of discussion in the community around our
-squatting policy and our decision not to have namespacing.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://internals.rust-lang.org/t/crates-io-package-policies/1041&quot;&gt;The original squatting policy&lt;/a&gt;,
-published in 2014, contains a lot more information about the rationale behind
-the policy than what is currently on our website. The full text of the original
-policy is:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Nobody likes a “squatter”, but finding good rules that define squatting that
-can be applied mechanically is notoriously difficult. If we require that the
-package has at least some content in it, squatters will insert random content.
-If we require regular updates, squatters will make sure to update regularly,
-and that rule might apply over-zealously to packages that are relatively
-stable.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;A more case-by-case policy would be very hard to get right, and would almost
-certainly result in bad mistakes and and regular controversies.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Instead, we are going to stick to a first-come, first-served system. If someone
-wants to take over a package, and the previous owner agrees, the existing
-maintainer can add them as an owner, and the new maintainer can remove them. If
-necessary, the team may reach out to inactive maintainers and help mediate the
-process of ownership transfer. We know that this means, in practice, that
-certain desirable names will be taken early on, and that those early users may
-not be using them in the most optimal way (whether they are claimed by squatters
-or just low-quality packages). Other ecosystems have addressed this problem
-through the use of more colorful names, and we think that this is actually a
-feature, not a bug, of this system. We talk about this more below.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;We will be discussing whether including some of this information in the policy
-published on our website would help more people to understand the rationale
-behind our policy, without requiring members of the team to reply to every forum
-thread wanting to re-litigate what has already been discussed at length.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#conclusion&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;We wanted to share the details of what happened and why the crates.io team chose to take action
-as quickly as possible. The policy changes we've described will be discussed
-during the next several team meetings. Nothing is set in stone until the team
-has a chance to discuss them further, but we wanted to share the possible
-changes we're discussing to limit speculation on what future actions we're
-planning on taking.&lt;/p&gt;
-&lt;p&gt;As a reminder, if you would like to report an incident regarding cratesio, you
-can message the team at help@crates.io. You can view the status of the service
-at https://crates-io.statuspage.io/ and/or by following @cratesiostatus on Twitter.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Crates.io Team</name>
         </author>
     </entry>
     

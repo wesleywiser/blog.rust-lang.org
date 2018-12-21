@@ -110,11 +110,11 @@ perform syntactical transformations over the code at compile time.</p>
 </ul>
 <p>Each of these flavors of macros can be defined in a crate with <code>proc-macro = true</code> <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">specified in its manifest</a>. When used, a procedural macro is
 loaded by the Rust compiler and executed as the invocation is expanded. This
-means that Cargo's in control of versioning for procedural macros and you can
+means that Cargo is in control of versioning for procedural macros and you can
 use them with all same ease of use you'd expect from other Cargo dependencies!</p>
 <h3><a href="#defining-a-procedural-macro" aria-hidden="true" class="anchor" id="defining-a-procedural-macro"></a>Defining a procedural macro</h3>
 <p>Each of the three types of procedural macros are <a href="https://doc.rust-lang.org/stable/reference/procedural-macros.html">defined in a slightly different
-fashion</a>, and here we'll single out attribute macros. First we'll flag
+fashion</a>, and here we'll single out attribute macros. First, we'll flag
 <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[lib]
 proc-macro = true

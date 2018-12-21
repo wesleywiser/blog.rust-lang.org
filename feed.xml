@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2018-12-21T19:39:25Z</updated>
+    <updated>2018-12-21T22:18:19Z</updated>
 
     
     <entry>
@@ -52,11 +52,11 @@ perform syntactical transformations over the code at compile time.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Each of these flavors of macros can be defined in a crate with &lt;code&gt;proc-macro = true&lt;/code&gt; &lt;a href=&quot;https://doc.rust-lang.org/cargo/reference/manifest.html&quot;&gt;specified in its manifest&lt;/a&gt;. When used, a procedural macro is
 loaded by the Rust compiler and executed as the invocation is expanded. This
-means that Cargo's in control of versioning for procedural macros and you can
+means that Cargo is in control of versioning for procedural macros and you can
 use them with all same ease of use you'd expect from other Cargo dependencies!&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#defining-a-procedural-macro&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;defining-a-procedural-macro&quot;&gt;&lt;/a&gt;Defining a procedural macro&lt;/h3&gt;
 &lt;p&gt;Each of the three types of procedural macros are &lt;a href=&quot;https://doc.rust-lang.org/stable/reference/procedural-macros.html&quot;&gt;defined in a slightly different
-fashion&lt;/a&gt;, and here we'll single out attribute macros. First we'll flag
+fashion&lt;/a&gt;, and here we'll single out attribute macros. First, we'll flag
 &lt;code&gt;Cargo.toml&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[lib]
 proc-macro = true

@@ -3,19 +3,21 @@
     <generator uri="https://blog.rust-lang.org/" version="0.1.0">Rust Blog</generator>
     <link href="https://blog.rust-lang.org/feed.xml" rel="self" type="application/atom+xml" />
     <link href="https://blog.rust-lang.org/" rel="alternate" type="text/html" />
+    <id>https://blog.rust-lang.org/</id>
     <title>Rust Blog</title>
     <subtitle>Empowering everyone to build reliable and efficient software.</subtitle>
     <author>
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2018-12-21T19:23:31Z</updated>
+    <updated>2018-12-21T19:39:25Z</updated>
 
     
     <entry>
         <title>Procedural Macros in Rust 2018</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html" type="text/html" title="Procedural Macros in Rust 2018" />
-        <published>2018-12-21</published>
+        <published>2018-12-21T00:00:00Z</published>
+        <updated>2018-12-21T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html">&lt;p&gt;Perhaps my favorite feature in the Rust 2018 edition is &lt;a href=&quot;https://doc.rust-lang.org/reference/procedural-macros.html&quot;&gt;procedural macros&lt;/a&gt;.
 Procedural macros have had a long and storied history in Rust (and will continue
@@ -325,7 +327,8 @@ empowering all kinds of lightweight additions and extensions to the language!&lt
     <entry>
         <title>Announcing Rust 1.31.1</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/12/20/Rust-1.31.1.html" type="text/html" title="Announcing Rust 1.31.1" />
-        <published>2018-12-20</published>
+        <published>2018-12-20T00:00:00Z</published>
+        <updated>2018-12-20T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/12/20/Rust-1.31.1.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/12/20/Rust-1.31.1.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.31.1. Rust is a
 systems programming language focused on safety, speed, and concurrency.&lt;/p&gt;
@@ -366,7 +369,8 @@ Before, using the RLS on &lt;code&gt;HashMap&lt;/code&gt;, for example, tried to
     <entry>
         <title>Tools in the 2018 edition</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/12/17/Rust-2018-dev-tools.html" type="text/html" title="Tools in the 2018 edition" />
-        <published>2018-12-17</published>
+        <published>2018-12-17T00:00:00Z</published>
+        <updated>2018-12-17T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/12/17/Rust-2018-dev-tools.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/12/17/Rust-2018-dev-tools.html">&lt;p&gt;Tooling is an important part of what makes a programming language practical and
 productive. Rust has always had some great tools (Cargo in particular has a
@@ -531,7 +535,8 @@ to us on GitHub or &lt;a href=&quot;https://discordapp.com/invite/rust-lang&quot
     <entry>
         <title>A call for Rust 2019 Roadmap blog posts</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html" type="text/html" title="A call for Rust 2019 Roadmap blog posts" />
-        <published>2018-12-06</published>
+        <published>2018-12-06T00:00:00Z</published>
+        <updated>2018-12-06T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html">&lt;p&gt;It's almost 2019! As such, the Rust team needs to create a roadmap for Rust's
 development next year. At the highest level, Rust's development process looks
@@ -610,7 +615,8 @@ wonderful in 2019. Thanks for an awesome 2018!&lt;/p&gt;
     <entry>
         <title>Announcing Rust 1.31 and Rust 2018</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html" type="text/html" title="Announcing Rust 1.31 and Rust 2018" />
-        <published>2018-12-06</published>
+        <published>2018-12-06T00:00:00Z</published>
+        <updated>2018-12-06T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.31.0, and &amp;quot;Rust
 2018&amp;quot; as well. Rust is a programming language that empowers everyone to build
@@ -984,7 +990,8 @@ you all, and we look forward to continuing to grow in the next three years.&lt;/
     <entry>
         <title>A new look for rust-lang.org</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/11/29/a-new-look-for-rust-lang-org.html" type="text/html" title="A new look for rust-lang.org" />
-        <published>2018-11-29</published>
+        <published>2018-11-29T00:00:00Z</published>
+        <updated>2018-11-29T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/11/29/a-new-look-for-rust-lang-org.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/11/29/a-new-look-for-rust-lang-org.html">&lt;p&gt;Before 1.0, Rust had a reputation for changing the language on a near-daily
 basis. By contrast, the website has looked pretty much the same. Here’s the
@@ -1091,7 +1098,8 @@ find!&lt;/p&gt;
     <entry>
         <title>Rust Survey 2018 Results</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/11/27/Rust-survey-2018.html" type="text/html" title="Rust Survey 2018 Results" />
-        <published>2018-11-27</published>
+        <published>2018-11-27T00:00:00Z</published>
+        <updated>2018-11-27T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/11/27/Rust-survey-2018.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/11/27/Rust-survey-2018.html">&lt;p&gt;Another year means another Rust survey, and this year marks Rust's third annual survey. This year, the survey launched for the first time in multiple languages. In total &lt;strong&gt;14&lt;/strong&gt; languages, in addition to English, were covered.  The results from non-English languages totalled &lt;em&gt;25% of all responses&lt;/em&gt; and helped pushed the number of responses to a new record of &lt;strong&gt;5991 responses&lt;/strong&gt;. Before we begin the analysis, we just want to give a big &amp;quot;thank you!&amp;quot; to all the people who took the time to respond and give us your thoughts. It’s because of your help that Rust will continue to improve year after year.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/2018-11-RustSurvey/1-Do_you_use_Rust.png&quot; alt=&quot;Do you use Rust&quot; /&gt;&lt;/p&gt;
@@ -1202,7 +1210,8 @@ find!&lt;/p&gt;
     <entry>
         <title>Announcing Rust 1.30.1</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/11/08/Rust-1.30.1.html" type="text/html" title="Announcing Rust 1.30.1" />
-        <published>2018-11-08</published>
+        <published>2018-11-08T00:00:00Z</published>
+        <updated>2018-11-08T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/11/08/Rust-1.30.1.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/11/08/Rust-1.30.1.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.30.1. Rust is a
 systems programming language focused on safety, speed, and concurrency.&lt;/p&gt;
@@ -1231,7 +1240,8 @@ prominent for us to issue a point release.&lt;/p&gt;
     <entry>
         <title>Help test Rust 2018</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/10/30/help-test-rust-2018.html" type="text/html" title="Help test Rust 2018" />
-        <published>2018-10-30</published>
+        <published>2018-10-30T00:00:00Z</published>
+        <updated>2018-10-30T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/10/30/help-test-rust-2018.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/10/30/help-test-rust-2018.html">&lt;p&gt;Back in July, we talked about &lt;a href=&quot;https://blog.rust-lang.org/2018/07/27/what-is-rust-2018.html&quot;&gt;&amp;quot;Rust 2018&amp;quot;&lt;/a&gt;. In short, we are launching a
 cycle of long-term milestones called &amp;quot;Editions&amp;quot;. Editions are a way to
@@ -1315,7 +1325,8 @@ Set it, &lt;code&gt;cargo +beta build&lt;/code&gt;, and you should be good to go
     <entry>
         <title>Announcing Rust 1.30</title>
         <link rel="alternate" href="https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html" type="text/html" title="Announcing Rust 1.30" />
-        <published>2018-10-25</published>
+        <published>2018-10-25T00:00:00Z</published>
+        <updated>2018-10-25T00:00:00Z</updated>
         <id>https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.30.0. Rust is a
 systems programming language focused on safety, speed, and concurrency.&lt;/p&gt;

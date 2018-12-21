@@ -84,7 +84,7 @@ syntax.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The input/output is this fancy &lt;code&gt;TokenStream&lt;/code&gt; type we'll talk about more in a
 bit&lt;/li&gt;
-&lt;li&gt;We're &lt;em&gt;executing aribtrary code&lt;/em&gt; at compile time, which means we can do just
+&lt;li&gt;We're &lt;em&gt;executing arbitrary code&lt;/em&gt; at compile time, which means we can do just
 about anything!&lt;/li&gt;
 &lt;li&gt;Procedural macros are incorporated with the module system, meaning no more
 they can be imported just like any other name.&lt;/li&gt;

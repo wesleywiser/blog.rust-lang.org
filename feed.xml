@@ -38,7 +38,7 @@ user-defined traits as well, such as &lt;a href=&quot;https://serde.rs&quot;&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Function-like macros&lt;/strong&gt; are newly stable to the 2018 edition and allow
 defining macros like &lt;code&gt;env!(&amp;quot;FOO&amp;quot;)&lt;/code&gt; or &lt;code&gt;format_args!(&amp;quot;...&amp;quot;)&lt;/code&gt; in a
-crate.io-based library. You can think of these as sort of &amp;quot;&lt;code&gt;macro_rules!&lt;/code&gt;
+crates.io-based library. You can think of these as sort of &amp;quot;&lt;code&gt;macro_rules!&lt;/code&gt;
 macros&amp;quot; on steroids.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;

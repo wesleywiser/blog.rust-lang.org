@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2018-12-21T22:18:19Z</updated>
+    <updated>2018-12-27T14:18:12Z</updated>
 
     
     <entry>
@@ -89,8 +89,8 @@ syntax.&lt;/p&gt;
 bit&lt;/li&gt;
 &lt;li&gt;We're &lt;em&gt;executing arbitrary code&lt;/em&gt; at compile time, which means we can do just
 about anything!&lt;/li&gt;
-&lt;li&gt;Procedural macros are incorporated with the module system, meaning no more
-they can be imported just like any other name.&lt;/li&gt;
+&lt;li&gt;Procedural macros are incorporated with the module system, meaning they can
+be imported just like any other name.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Before we take a look at implementing a procedural macro, let's first dive into
 some of these points.&lt;/p&gt;

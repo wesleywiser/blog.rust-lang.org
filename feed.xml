@@ -10,8 +10,223 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2018-12-27T15:33:44Z</updated>
+    <updated>2019-01-17T19:46:20Z</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.32.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/01/17/Rust-1.32.0.html" type="text/html" title="Announcing Rust 1.32.0" />
+        <published>2019-01-17T00:00:00Z</published>
+        <updated>2019-01-17T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/01/17/Rust-1.32.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/01/17/Rust-1.32.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.32.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.32.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1320-2019-01-17&quot;&gt;detailed release notes for
+1.32.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As a small side note, &lt;code&gt;rustup&lt;/code&gt; has seen some new releases lately! To update
+&lt;code&gt;rustup&lt;/code&gt; itself, run &lt;code&gt;rustup self update&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1.32.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.32.0-stable&quot;&gt;&lt;/a&gt;What's in 1.32.0 stable&lt;/h2&gt;
+&lt;p&gt;Rust 1.32.0 has a few quality of life improvements, switches the default
+allocator, and makes additional functions &lt;code&gt;const&lt;/code&gt;. Read on for a few
+highlights, or see the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1320-2019-01-17&quot;&gt;detailed release notes&lt;/a&gt; for additional
+information.&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#the-dbg-macro&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-dbg-macro&quot;&gt;&lt;/a&gt;The &lt;code&gt;dbg&lt;/code&gt; macro&lt;/h4&gt;
+&lt;p&gt;First up, a quality of life improvement. Are you a &amp;quot;print debugger&amp;quot;? If you are, and
+you've wanted to print out some value while working on some code, you have to do this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;let x = 5;
+
+println!(&amp;quot;{:?}&amp;quot;, x);
+
+// or maybe even this
+println!(&amp;quot;{:#?}&amp;quot;, x);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This isn't the &lt;em&gt;largest&lt;/em&gt; speed bump, but it is a lot of stuff to simply show the value of &lt;code&gt;x&lt;/code&gt;.
+Additionally, there's no context here. If you have several of these &lt;code&gt;println!&lt;/code&gt;s, it can be hard
+to tell which is which, unless you add your own context to each invocation, requiring even more work.&lt;/p&gt;
+&lt;p&gt;In Rust 1.32.0, &lt;a href=&quot;https://github.com/rust-lang/rust/pull/56395/&quot;&gt;we've added a new macro,
+&lt;code&gt;dbg!&lt;/code&gt;&lt;/a&gt;, for this purpose:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
+    let x = 5;
+    
+    dbg!(x);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you run this program, you'll see:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;[src/main.rs:4] x = 5
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You get the file and line number of where this was invoked, as well as the
+name and value. Additionally, &lt;code&gt;println!&lt;/code&gt; prints to the standard output, so
+you really should be using &lt;code&gt;eprintln!&lt;/code&gt; to print to standard error. &lt;code&gt;dbg!&lt;/code&gt;
+does the right thing and goes to &lt;code&gt;stderr&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;It even works in more complex circumstances. Consider this factorial example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn factorial(n: u32) -&amp;gt; u32 {
+    if n &amp;lt;= 1 {
+        n
+    } else {
+        n * factorial(n - 1)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we wanted to debug this, we might write it like this with &lt;code&gt;eprintln!&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn factorial(n: u32) -&amp;gt; u32 {
+    eprintln!(&amp;quot;n: {}&amp;quot;, n);
+
+    if n &amp;lt;= 1 {
+        eprintln!(&amp;quot;n &amp;lt;= 1&amp;quot;);
+
+        n
+    } else {
+        let n = n * factorial(n - 1);
+
+        eprintln!(&amp;quot;n: {}&amp;quot;, n);
+
+        n
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We want to log &lt;code&gt;n&lt;/code&gt; on each iteration, as well as have some kind of context
+for each of the branches. We see this output for &lt;code&gt;factorial(4)&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;n: 4
+n: 3
+n: 2
+n: 1
+n &amp;lt;= 1
+n: 2
+n: 6
+n: 24
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is servicable, but not particularly great. Maybe we could work on how we
+print out the context to make it more clear, but now we're not debugging our code,
+we're figuring out how to make our debugging code better.&lt;/p&gt;
+&lt;p&gt;Consider this version using &lt;code&gt;dbg!&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn factorial(n: u32) -&amp;gt; u32 {
+    if dbg!(n &amp;lt;= 1) {
+        dbg!(1)
+    } else {
+        dbg!(n * factorial(n - 1))
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We simply wrap each of the various expressions we want to print with the macro. We
+get this output instead:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;[src/main.rs:3] n &amp;lt;= 1 = false
+[src/main.rs:3] n &amp;lt;= 1 = false
+[src/main.rs:3] n &amp;lt;= 1 = false
+[src/main.rs:3] n &amp;lt;= 1 = true
+[src/main.rs:4] 1 = 1
+[src/main.rs:5] n * factorial(n - 1) = 2
+[src/main.rs:5] n * factorial(n - 1) = 6
+[src/main.rs:5] n * factorial(n - 1) = 24
+[src/main.rs:11] factorial(4) = 24
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Because the &lt;code&gt;dbg!&lt;/code&gt; macro returns the value of what it's debugging, instead of
+&lt;code&gt;eprintln!&lt;/code&gt; which returns &lt;code&gt;()&lt;/code&gt;, we need to make &lt;em&gt;no&lt;/em&gt; changes to the structure
+of our code. Additionally, we have &lt;em&gt;vastly&lt;/em&gt; more useful output.&lt;/p&gt;
+&lt;p&gt;That's a lot to say about a little macro, but we hope it improves your
+debugging experience! We are contining to work on support for &lt;code&gt;gdb&lt;/code&gt; and
+friends as well, of course.&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#jemalloc-is-removed-by-default&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;jemalloc-is-removed-by-default&quot;&gt;&lt;/a&gt;&lt;code&gt;jemalloc&lt;/code&gt; is removed by default&lt;/h4&gt;
+&lt;p&gt;Long, long ago, Rust had a large, Erlang-like runtime. We chose to use
+&lt;a href=&quot;http://jemalloc.net/&quot;&gt;jemalloc&lt;/a&gt; instead of the system allocator, because it often improved
+performance over the default system one. Over time, we shed more and more of
+this runtime, and eventually almost all of it was removed, but jemalloc
+was not. We didn't have a way to choose a custom allocator, and so we
+couldn't really remove it without causing a regression for people who do need
+jemalloc.&lt;/p&gt;
+&lt;p&gt;Also, saying that &lt;code&gt;jemalloc&lt;/code&gt; was always the default is a bit UNIX-centric,
+as it was only the default on &lt;em&gt;some&lt;/em&gt; platforms. Notably, the MSVC target on
+Windows has shipped the system allocator for a long time.&lt;/p&gt;
+&lt;p&gt;Finally, while jemalloc &lt;em&gt;usually&lt;/em&gt; has great performance, that's not always
+the case. Additionally, it adds about 300kb to every Rust binary. We've also
+had a host of &lt;a href=&quot;https://github.com/rust-lang/rust/issues/36963#issuecomment-252029017&quot;&gt;other
+issues&lt;/a&gt;
+with jemalloc in the past. It has also felt a little strange that a systems
+language does not default to the system's allocator.&lt;/p&gt;
+&lt;p&gt;For all of these reasons, once &lt;a href=&quot;https://blog.rust-lang.org/2018/08/02/Rust-1.28.html#whats-in-1.28.0-stable&quot;&gt;Rust 1.28 shipped a way to choose a global
+allocator&lt;/a&gt;,
+we started making plans to switch the default to the system allocator, and
+allow you to use &lt;code&gt;jemalloc&lt;/code&gt; via a crate. In Rust 1.32, we've finally finished
+this work, and by default, you will get the system allocator for your
+programs.&lt;/p&gt;
+&lt;p&gt;If you'd like to continue to use jemalloc, use &lt;a href=&quot;https://crates.io/crates/jemallocator&quot;&gt;the jemallocator crate&lt;/a&gt;. In
+your &lt;code&gt;Cargo.toml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;jemallocator = &amp;quot;0.1.8&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And in your crate root:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[global_allocator]
+static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That's it! If you don't need jemalloc, it's not forced upon you, and if
+you do need it, it's a few lines of code away.&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#final-module-improvements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;final-module-improvements&quot;&gt;&lt;/a&gt;Final module improvements&lt;/h4&gt;
+&lt;p&gt;In the past two releases, we announced several improvements to the module
+system. We have one last tweak landing in 1.32.0 and the 2018 edition.
+Nicknamed &lt;a href=&quot;https://github.com/rust-lang/rust/pull/56759#issuecomment-450051210&quot;&gt;&amp;quot;uniform
+paths&amp;quot;&lt;/a&gt;,
+it permits previously invalid import path statements to be resolved exactly
+the same way as non-import paths. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;enum Color { Red, Green, Blue }
+
+use Color::*;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This code did &lt;em&gt;not&lt;/em&gt; previously compile, as &lt;code&gt;use&lt;/code&gt; statements had to start with
+&lt;code&gt;super&lt;/code&gt;, &lt;code&gt;self&lt;/code&gt;, or &lt;code&gt;crate&lt;/code&gt;. Now that the compiler supports uniform paths,
+this code will work, and do what you probably expect: import the variants of
+the &lt;code&gt;Color&lt;/code&gt; enum defined above the &lt;code&gt;use&lt;/code&gt; statement.&lt;/p&gt;
+&lt;p&gt;With this change in place, we've completed our efforts at revising the module
+system. We hope you've been enjoying the simplified system so far!&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#macro-improvements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;macro-improvements&quot;&gt;&lt;/a&gt;Macro improvements&lt;/h4&gt;
+&lt;p&gt;A few improvements to macros have landed in Rust 1.32.0. First, &lt;a href=&quot;https://github.com/rust-lang/rust/pull/56072/&quot;&gt;a new
+&lt;code&gt;literal&lt;/code&gt; matcher&lt;/a&gt; was added:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;macro_rules! m {
+    ($lt:literal) =&amp;gt; {};
+}
+
+fn main() {
+    m!(&amp;quot;some string literal&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;literal&lt;/code&gt; mactches against literals of any type; string literals, numeric literals, &lt;code&gt;char&lt;/code&gt; literals.&lt;/p&gt;
+&lt;p&gt;In the 2018 edition, &lt;code&gt;macro_rules&lt;/code&gt; macros can also use &lt;code&gt;?&lt;/code&gt;, like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;macro_rules! bar {
+    ($(a)?) =&amp;gt; {}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;?&lt;/code&gt; will match zero or one repetitions of the pattern, similar to the
+already-existing &lt;code&gt;*&lt;/code&gt; for &amp;quot;zero or more&amp;quot; and &lt;code&gt;+&lt;/code&gt; for &amp;quot;one or more.&amp;quot;&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#library-stabilizations&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-stabilizations&quot;&gt;&lt;/a&gt;Library stabilizations&lt;/h3&gt;
+&lt;p&gt;We talked above about the &lt;code&gt;dbg!&lt;/code&gt; macro, which is a big library addition.
+Beyond that, 19 functions were made &lt;code&gt;const fn&lt;/code&gt;s, and all integral numeric
+primitives now provide conversion functions to and from byte-arrays with
+specified edianness. These six functions are named &lt;code&gt;to_&amp;lt;endian&amp;gt;_bytes&lt;/code&gt; and
+&lt;code&gt;from_&amp;lt;endian&amp;gt;_bytes&lt;/code&gt;, where &lt;code&gt;&amp;lt;endian&amp;gt;&lt;/code&gt; is one of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ne&lt;/code&gt; - native endianness&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;le&lt;/code&gt; - little endian&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;be&lt;/code&gt; - big endian&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1320-2019-01-17&quot;&gt;detailed release notes&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#cargo-features&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;cargo-features&quot;&gt;&lt;/a&gt;Cargo features&lt;/h3&gt;
+&lt;p&gt;Cargo gained &lt;a href=&quot;https://github.com/rust-lang/cargo/pull/6218/&quot;&gt;&lt;code&gt;cargo c&lt;/code&gt; as an alias for &lt;code&gt;cargo check&lt;/code&gt;&lt;/a&gt;, and now &lt;a href=&quot;https://github.com/rust-lang/cargo/pull/6242/&quot;&gt;allows
+usernames in registry URLs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1320-2019-01-17&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-132.0&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-132.0&quot;&gt;&lt;/a&gt;Contributors to 1.32.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.32.0. We couldn't have done it
+without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.32.0&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Procedural Macros in Rust 2018</title>
@@ -1315,296 +1530,6 @@ edition = &amp;quot;2018&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;See that &lt;code&gt;edition = &amp;quot;2018&amp;quot;&lt;/code&gt;? That's what opts you in to the new features.
 Set it, &lt;code&gt;cargo +beta build&lt;/code&gt;, and you should be good to go!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.30</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html" type="text/html" title="Announcing Rust 1.30" />
-        <published>2018-10-25T00:00:00Z</published>
-        <updated>2018-10-25T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.30.0. Rust is a
-systems programming language focused on safety, speed, and concurrency.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.30.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25&quot;&gt;detailed release notes for
-1.30.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1.30.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.30.0-stable&quot;&gt;&lt;/a&gt;What's in 1.30.0 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.30 is an exciting release with a number of features. On Monday, expect another
-blog post asking you to check out Rust 1.31's beta; Rust 1.31 will be the first release
-of &amp;quot;Rust 2018.&amp;quot; For more on that concept, please see our previous post
-&lt;a href=&quot;https://blog.rust-lang.org/2018/07/27/what-is-rust-2018.html&quot;&gt;&amp;quot;What is Rust 2018&amp;quot;&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#procedural-macros&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;procedural-macros&quot;&gt;&lt;/a&gt;Procedural Macros&lt;/h2&gt;
-&lt;p&gt;Way back in &lt;a href=&quot;https://blog.rust-lang.org/2017/02/02/Rust-1.15.html&quot;&gt;Rust 1.15&lt;/a&gt;, we announced the ability to define &amp;quot;custom derives.&amp;quot; For example,
-with &lt;code&gt;serde_derive&lt;/code&gt;, you could&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[derive(Serialize, Deserialize, Debug)]
-struct Pet {
-    name: String,
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And convert a &lt;code&gt;Pet&lt;/code&gt; to and from JSON using &lt;code&gt;serde_json&lt;/code&gt; because &lt;code&gt;serde_derive&lt;/code&gt;
-defined &lt;code&gt;Serialize&lt;/code&gt; and &lt;code&gt;Deserialize&lt;/code&gt; in a procedural macro.&lt;/p&gt;
-&lt;p&gt;Rust 1.30 expands on this by adding the ability to define two other kinds of
-advanced macros, &amp;quot;attribute-like procedural macros&amp;quot; and &amp;quot;function-like
-procedural macros.&amp;quot;&lt;/p&gt;
-&lt;p&gt;Attribute-like macros are similar to custom derive macros, but instead of generating code
-for only the &lt;code&gt;#[derive]&lt;/code&gt; attribute, they allow you to create new, custom attributes of
-your own. They're also more flexible: derive only works for structs and enums, but
-attributes can go on other places, like functions. As an example of using an
-attribute-like macro, you might have something like this when using a web application
-framework:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#[route(GET, &amp;quot;/&amp;quot;)]
-fn index() {
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This &lt;code&gt;#[route]&lt;/code&gt; attribute would be defined by the framework itself, as a
-procedural macro. Its signature would look like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#[proc_macro_attribute]
-pub fn route(attr: TokenStream, item: TokenStream) -&amp;gt; TokenStream {
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here, we have two input &lt;code&gt;TokenStreams&lt;/code&gt;: the first is for the contents of the
-attribute itself, that is, the &lt;code&gt;GET, &amp;quot;/&amp;quot;&lt;/code&gt; stuff. The second is the body of the
-thing the attribute is attached to, in this case, &lt;code&gt;fn index() {}&lt;/code&gt; and the rest
-of the function's body.&lt;/p&gt;
-&lt;p&gt;Function-like macros define macros that look like function calls. For
-example, the &lt;a href=&quot;https://gitlab.gnome.org/federico/gnome-class&quot;&gt;&lt;code&gt;gnome-class&lt;/code&gt; crate&lt;/a&gt;
-has a procedural macro that defines &lt;code&gt;GObject&lt;/code&gt; classes in Rust:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;gobject_gen!(
-    class MyClass: GObject {
-        foo: Cell&amp;lt;i32&amp;gt;,
-        bar: RefCell&amp;lt;String&amp;gt;,
-    }
-
-    impl MyClass {
-        virtual fn my_virtual_method(&amp;amp;self, x: i32) {
-            // ... do something with x ...
-        }
-    }
-)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This looks like a function that is taking a bunch of code as an argument.
-This macro would be defined like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#[proc_macro]
-pub fn gobject_gen(input: TokenStream) -&amp;gt; TokenStream {
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is similar to the derive macro's signature: we get the tokens that
-are inside of the parentheses and return the code we want to generate.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#use-and-macros&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;use-and-macros&quot;&gt;&lt;/a&gt;&lt;code&gt;use&lt;/code&gt; and macros&lt;/h3&gt;
-&lt;p&gt;You can now &lt;a href=&quot;https://github.com/rust-lang/rust/pull/50911/&quot;&gt;bring macros into scope with the &lt;code&gt;use&lt;/code&gt; keyword&lt;/a&gt;. For example,
-to use &lt;code&gt;serde-json&lt;/code&gt;'s &lt;code&gt;json&lt;/code&gt; macro, you used to write:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[macro_use]
-extern crate serde_json;
-
-let john = json!({
-    &amp;quot;name&amp;quot;: &amp;quot;John Doe&amp;quot;,
-    &amp;quot;age&amp;quot;: 43,
-    &amp;quot;phones&amp;quot;: [
-        &amp;quot;+44 1234567&amp;quot;,
-        &amp;quot;+44 2345678&amp;quot;
-    ]
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But now, you'd write&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;extern crate serde_json;
-
-use serde_json::json;
-
-let john = json!({
-    &amp;quot;name&amp;quot;: &amp;quot;John Doe&amp;quot;,
-    &amp;quot;age&amp;quot;: 43,
-    &amp;quot;phones&amp;quot;: [
-        &amp;quot;+44 1234567&amp;quot;,
-        &amp;quot;+44 2345678&amp;quot;
-    ]
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This brings macros more in line with other items and removes the need for
-&lt;code&gt;macro_use&lt;/code&gt; annotations.&lt;/p&gt;
-&lt;p&gt;Finally, the &lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/&quot;&gt;&lt;code&gt;proc_macro&lt;/code&gt; crate&lt;/a&gt;
-is made stable, which gives you the needed APIs to write these sorts of macros.
-It also has significantly improved the APIs for errors, and crates like &lt;code&gt;syn&lt;/code&gt; and
-&lt;code&gt;quote&lt;/code&gt; are already using them. For example, before:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust,ignore&quot;&gt;#[derive(Serialize)]
-struct Demo {
-    ok: String,
-    bad: std::thread::Thread,
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;used to give this error:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;error[E0277]: the trait bound `std::thread::Thread: _IMPL_SERIALIZE_FOR_Demo::_serde::Serialize` is not satisfied
- --&amp;gt; src/main.rs:3:10
-  |
-3 | #[derive(Serialize)]
-  |          ^^^^^^^^^ the trait `_IMPL_SERIALIZE_FOR_Demo::_serde::Serialize` is not implemented for `std::thread::Thread`
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now it will give this one:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;error[E0277]: the trait bound `std::thread::Thread: serde::Serialize` is not satisfied
- --&amp;gt; src/main.rs:7:5
-  |
-7 |     bad: std::thread::Thread,
-  |     ^^^ the trait `serde::Serialize` is not implemented for `std::thread::Thread`
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;&lt;a href=&quot;#module-system-improvements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;module-system-improvements&quot;&gt;&lt;/a&gt;Module system improvements&lt;/h2&gt;
-&lt;p&gt;The module system has long been a pain point of new Rustaceans; several of
-its rules felt awkward in practice. These changes are the first steps we're
-taking to make the module system feel more straightforward.&lt;/p&gt;
-&lt;p&gt;There's two changes to &lt;code&gt;use&lt;/code&gt; in addition to the aforementioned change for
-macros. The first is that &lt;a href=&quot;https://github.com/rust-lang/rust/pull/54404/&quot;&gt;external crates are now in the
-prelude&lt;/a&gt;, that is:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;// old
-let json = ::serde_json::from_str(&amp;quot;...&amp;quot;);
-
-// new
-let json = serde_json::from_str(&amp;quot;...&amp;quot;);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The trick here is that the 'old' style wasn't always needed, due to the way Rust's
-module system worked:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust,ignore&quot;&gt;extern crate serde_json;
-
-fn main() {
-    // this works just fine; we're in the crate root, so `serde_json` is in
-    // scope here
-    let json = serde_json::from_str(&amp;quot;...&amp;quot;);
-}
-
-mod foo {
-    fn bar() {
-        // this doesn't work; we're inside the `foo` namespace, and `serde_json`
-        // isn't declared there
-        let json = serde_json::from_str(&amp;quot;...&amp;quot;);
-
-    }
-
-    // one option is to `use` it inside the module
-    use serde_json;
-
-    fn baz() {
-        // the other option is to use `::serde_json`, so we're using an absolute path
-        // rather than a relative one
-        let json = ::serde_json::from_str(&amp;quot;...&amp;quot;);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Moving a function to a submodule and having some of your code break was not a great
-experience. Now, it will check the first part of the path and see if it's an &lt;code&gt;extern crate&lt;/code&gt;, and if it is, use it regardless of where you're at in the module hierarchy.&lt;/p&gt;
-&lt;p&gt;Finally, &lt;a href=&quot;https://github.com/rust-lang/rust/pull/54404/&quot;&gt;&lt;code&gt;use&lt;/code&gt; also supports bringing items into scope with paths starting with
-&lt;code&gt;crate&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;mod foo {
-    pub fn bar() {
-        // ...
-    }
-}
-
-// old
-use ::foo::bar;
-// or
-use foo::bar;
-
-// new
-use crate::foo::bar;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;crate&lt;/code&gt; keyword at the start of the path indicates that you would like the path to
-start at your crate root. Previously, paths specified after &lt;code&gt;use&lt;/code&gt; would always start at
-the crate root, but paths referring to items directly would start at the local path,
-meaning the behavior of paths was inconsistent:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;mod foo {
-    pub fn bar() {
-        // ...
-    }
-}
-
-mod baz {
-    pub fn qux() {
-        // old
-        ::foo::bar();
-        // does not work, which is different than with `use`:
-        // foo::bar();
-
-        // new
-        crate::foo::bar();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once this style becomes widely used, this will hopefully make absolute paths a bit more
-clear and remove some of the ugliness of leading &lt;code&gt;::&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;All of these changes combined lead to a more straightforward understanding of how paths
-resolve. Wherever you see a path like &lt;code&gt;a::b::c&lt;/code&gt; someplace other than a &lt;code&gt;use&lt;/code&gt; statement,
-you can ask:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Is &lt;code&gt;a&lt;/code&gt; the name of a crate? Then we're looking for &lt;code&gt;b::c&lt;/code&gt; inside of it.&lt;/li&gt;
-&lt;li&gt;Is &lt;code&gt;a&lt;/code&gt; the keyword &lt;code&gt;crate&lt;/code&gt;? Then we're looking for &lt;code&gt;b::c&lt;/code&gt; from the root of our crate.&lt;/li&gt;
-&lt;li&gt;Otherwise, we're looking for &lt;code&gt;a::b::c&lt;/code&gt; from the current spot in the module hierarchy.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The old behavior of &lt;code&gt;use&lt;/code&gt; paths always starting from the crate root still applies. But
-after making a one-time switch to the new style, these rules will apply uniformly to
-paths everywhere, and you'll need to tweak your imports much less when moving code around.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#raw-identifiers&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;raw-identifiers&quot;&gt;&lt;/a&gt;Raw Identifiers&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/53236/&quot;&gt;You can now use keywords as identifiers&lt;/a&gt; with some new syntax:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;// define a local variable named `for`
-let r#for = true;
-
-// define a function named `for`
-fn r#for() {
-    // ...
-}
-
-// call that function
-r#for();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This doesn't have many use cases today, but will once you are trying to use a Rust 2015
-crate with a Rust 2018 project and vice-versa because the set of keywords will be
-different in the two editions; we'll explain more in the upcoming blog post about
-Rust 2018.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#no_std-applications&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;no_std-applications&quot;&gt;&lt;/a&gt;&lt;code&gt;no_std&lt;/code&gt; applications&lt;/h2&gt;
-&lt;p&gt;Back in Rust 1.6, we announced the &lt;a href=&quot;https://blog.rust-lang.org/2016/01/21/Rust-1.6.html&quot;&gt;stabilization of &lt;code&gt;no_std&lt;/code&gt; and
-&lt;code&gt;libcore&lt;/code&gt;&lt;/a&gt; for building
-projects without the standard library. There was a twist, though: you could
-only build libraries, but not applications.&lt;/p&gt;
-&lt;p&gt;With Rust 1.30, you can &lt;a href=&quot;https://github.com/rust-lang/rust/pull/51366/&quot;&gt;use the &lt;code&gt;#[panic_handler]&lt;/code&gt;&lt;/a&gt; attribute
-to implement panics yourself. This now means that you can build applications,
-not just libraries, that don't use the standard library.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#other-things&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-things&quot;&gt;&lt;/a&gt;Other things&lt;/h2&gt;
-&lt;p&gt;Finally, you can now &lt;a href=&quot;https://github.com/rust-lang/rust/pull/53370/&quot;&gt;match on visibility keywords, like &lt;code&gt;pub&lt;/code&gt;, in
-macros&lt;/a&gt; using the &lt;code&gt;vis&lt;/code&gt; specifier. Additionally, &amp;quot;tool
-attributes&amp;quot; like &lt;code&gt;#[rustfmt::skip]&lt;/code&gt; &lt;a href=&quot;https://github.com/rust-lang/rust/pull/53459/&quot;&gt;are now
-stable&lt;/a&gt;. Tool &lt;em&gt;lints&lt;/em&gt;
-like &lt;code&gt;#[allow(clippy::something)]&lt;/code&gt; are not yet stable, however.&lt;/p&gt;
-&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#library-stabilizations&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-stabilizations&quot;&gt;&lt;/a&gt;Library stabilizations&lt;/h3&gt;
-&lt;p&gt;A few new APIs were &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#stabilized-apis&quot;&gt;stabilized for this
-release&lt;/a&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Ipv4Addr::{BROADCAST, LOCALHOST, UNSPECIFIED}&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ipv6Addr::{LOCALHOST, UNSPECIFIED}&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Iterator::find_map&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Additionally, the standard library has long had functions like &lt;code&gt;trim_left&lt;/code&gt; to eliminate
-whitespace on one side of some text. However, when considering right-to-left (RTL)
-languages, the meaning of &amp;quot;right&amp;quot; and &amp;quot;left&amp;quot; gets confusing. As such, we're introducing
-new names for these APIs:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;trim_left&lt;/code&gt; -&amp;gt; &lt;code&gt;trim_start&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;trim_right&lt;/code&gt; -&amp;gt; &lt;code&gt;trim_end&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;trim_left_matches&lt;/code&gt; -&amp;gt; &lt;code&gt;trim_start_matches&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;trim_right_matches&lt;/code&gt; -&amp;gt; &lt;code&gt;trim_end_matches&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We plan to deprecate (but not remove, of course) the old names in Rust 1.33.&lt;/p&gt;
-&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#cargo-features&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;cargo-features&quot;&gt;&lt;/a&gt;Cargo features&lt;/h3&gt;
-&lt;p&gt;The largest feature of Cargo in this release is that we now &lt;a href=&quot;https://github.com/rust-lang/cargo/pull/5995/&quot;&gt;have a progress
-bar!&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/2018-10-25-Rust-1.30/demo.gif&quot; alt=&quot;demo gif&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1300-2018-10-25&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#contributors-to-130.0&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-130.0&quot;&gt;&lt;/a&gt;Contributors to 1.30.0&lt;/h2&gt;
-&lt;p&gt;Many people came together to create Rust 1.30. We couldn't have done it
-without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.30.0&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
 </content>
 
         <author>

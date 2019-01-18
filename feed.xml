@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-01-17T21:39:37Z</updated>
+    <updated>2019-01-18T02:26:52Z</updated>
 
     
     <entry>
@@ -206,7 +206,7 @@ already-existing &lt;code&gt;*&lt;/code&gt; for &amp;quot;zero or more&amp;quot;
 &lt;p&gt;We talked above about the &lt;code&gt;dbg!&lt;/code&gt; macro, which is a big library addition.
 Beyond that, 19 functions were made &lt;code&gt;const fn&lt;/code&gt;s, and all integral numeric
 primitives now provide conversion functions to and from byte-arrays with
-specified edianness. These six functions are named &lt;code&gt;to_&amp;lt;endian&amp;gt;_bytes&lt;/code&gt; and
+specified endianness. These six functions are named &lt;code&gt;to_&amp;lt;endian&amp;gt;_bytes&lt;/code&gt; and
 &lt;code&gt;from_&amp;lt;endian&amp;gt;_bytes&lt;/code&gt;, where &lt;code&gt;&amp;lt;endian&amp;gt;&lt;/code&gt; is one of:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;ne&lt;/code&gt; - native endianness&lt;/li&gt;

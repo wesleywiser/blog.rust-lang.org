@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-02-22T19:30:34Z</updated>
+    <updated>2019-02-22T20:59:04Z</updated>
 
     
     <entry>
@@ -1214,7 +1214,7 @@ as well as its mutable and &lt;code&gt;r&lt;/code&gt; counterparts (like
 &lt;h3&gt;&lt;a href=&quot;#cargo-features&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;cargo-features&quot;&gt;&lt;/a&gt;Cargo features&lt;/h3&gt;
 &lt;p&gt;Cargo will now download packages in parallel using HTTP/2.&lt;/p&gt;
 &lt;p&gt;Additionally, now that &lt;code&gt;extern crate&lt;/code&gt; is not usually required, it would be
-jarring to do &lt;code&gt;extern crate foo as bar;&lt;/code&gt; to rename a crate. As such, you can
+jarring to do &lt;code&gt;extern crate foo as baz;&lt;/code&gt; to rename a crate. As such, you can
 do so in your &lt;code&gt;Cargo.toml&lt;/code&gt;, like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[dependencies]
 baz = { version = &amp;quot;0.1&amp;quot;, package = &amp;quot;foo&amp;quot; }

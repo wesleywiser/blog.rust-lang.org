@@ -10,16 +10,16 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-02-22T19:28:26Z</updated>
+    <updated>2019-02-22T19:30:34Z</updated>
 
     
     <entry>
         <title>Changes in the core team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2019/01/21/Core-team-changes.html" type="text/html" title="Changes in the core team" />
-        <published>2019-01-21T00:00:00Z</published>
-        <updated>2019-01-21T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2019/01/21/Core-team-changes.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2019/01/21/Core-team-changes.html">&lt;p&gt;Just a quick update: You may have noticed that, in the last month or
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/02/22/Core-team-changes.html" type="text/html" title="Changes in the core team" />
+        <published>2019-02-22T00:00:00Z</published>
+        <updated>2019-02-22T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/02/22/Core-team-changes.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/02/22/Core-team-changes.html">&lt;p&gt;Just a quick update: You may have noticed that, in the last month or
 so, a number of &lt;a href=&quot;https://www.rust-lang.org/governance/teams/core&quot;&gt;Rust core team&lt;/a&gt; members have changed their jobs
 and/or their roles in the project. Two people have decided to step
 back from the core team:&lt;/p&gt;

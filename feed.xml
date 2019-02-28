@@ -10,8 +10,129 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-02-22T20:59:04Z</updated>
+    <updated>2019-02-28T19:09:57Z</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.33.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/02/28/Rust-1.33.0.html" type="text/html" title="Announcing Rust 1.33.0" />
+        <published>2019-02-28T00:00:00Z</published>
+        <updated>2019-02-28T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/02/28/Rust-1.33.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/02/28/Rust-1.33.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.33.0. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.33.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1330-2019-02-28&quot;&gt;detailed release notes for
+1.33.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1.33.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.33.0-stable&quot;&gt;&lt;/a&gt;What's in 1.33.0 stable&lt;/h2&gt;
+&lt;p&gt;The two largest features in this release are significant improvements to
+&lt;code&gt;const fn&lt;/code&gt;s, and the stabilization of a new concept: &amp;quot;pinning.&amp;quot;&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#const-fn-improvements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;const-fn-improvements&quot;&gt;&lt;/a&gt;&lt;code&gt;const fn&lt;/code&gt; improvements&lt;/h3&gt;
+&lt;p&gt;With &lt;code&gt;const fn&lt;/code&gt;, you can &lt;a href=&quot;https://github.com/rust-lang/rust/pull/57175/&quot;&gt;now do way more
+things!&lt;/a&gt; Specifically:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;irrefutable destructuring patterns (e.g. &lt;code&gt;const fn foo((x, y): (u8, u8)) { ... }&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;let&lt;/code&gt; bindings (e.g. &lt;code&gt;let x = 1;&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;mutable &lt;code&gt;let&lt;/code&gt; bindings (e.g. &lt;code&gt;let mut x = 1;&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;assignment (e.g. &lt;code&gt;x = y&lt;/code&gt;) and assignment operator (e.g. &lt;code&gt;x += y&lt;/code&gt;)
+expressions, even where the assignment target is a projection (e.g. a struct
+field or index operation like &lt;code&gt;x[3] = 42&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;expression statements (e.g. &lt;code&gt;3;&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You're also &lt;a href=&quot;https://github.com/rust-lang/rust/pull/57067/&quot;&gt;able to call &lt;code&gt;const unsafe fn&lt;/code&gt;s inside a &lt;code&gt;const fn&lt;/code&gt;&lt;/a&gt;, like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;const unsafe fn foo() -&amp;gt; i32 { 5 }
+const fn bar() -&amp;gt; i32 {
+    unsafe { foo() }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With these additions, many more functions in the standard library are able to
+be marked as &lt;code&gt;const&lt;/code&gt;. We'll enumerate those in the library section below.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#pinning&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;pinning&quot;&gt;&lt;/a&gt;Pinning&lt;/h3&gt;
+&lt;p&gt;This release introduces a new concept for Rust programs, implemented as two
+types: the &lt;a href=&quot;https://doc.rust-lang.org/std/pin/struct.Pin.html&quot;&gt;&lt;code&gt;std::pin::Pin&amp;lt;P&amp;gt;&lt;/code&gt;
+type&lt;/a&gt;, and the &lt;a href=&quot;https://doc.rust-lang.org/std/marker/trait.Unpin.html&quot;&gt;&lt;code&gt;Unpin&lt;/code&gt;
+marker trait&lt;/a&gt;. The core
+idea is elaborated on in &lt;a href=&quot;https://doc.rust-lang.org/std/pin/index.html&quot;&gt;the docs for
+&lt;code&gt;std::pin&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is sometimes useful to have objects that are guaranteed to not move, in
+the sense that their placement in memory does not change, and can thus be
+relied upon. A prime example of such a scenario would be building
+self-referential structs, since moving an object with pointers to itself will
+invalidate them, which could cause undefined behavior.&lt;/p&gt;
+&lt;p&gt;A &lt;code&gt;Pin&amp;lt;P&amp;gt;&lt;/code&gt; ensures that the pointee of any pointer type &lt;code&gt;P&lt;/code&gt; has a stable location
+in memory, meaning it cannot be moved elsewhere and its memory cannot be
+deallocated until it gets dropped. We say that the pointee is &amp;quot;pinned&amp;quot;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This feature will largely be used by library authors, and so we won't talk a
+lot more about the details here. Consult the docs if you're interested in
+digging into the details. However, the stabilization of this API is important
+to Rust users generally because it is a significant step forward towards a
+highly anticipated Rust feature: &lt;code&gt;async&lt;/code&gt;/&lt;code&gt;await&lt;/code&gt;. We're not quite there yet,
+but this stabilization brings us one step closer. You can track all of the
+necessary features at &lt;a href=&quot;https://areweasyncyet.rs/&quot;&gt;areweasyncyet.rs&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#import-as-_&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;import-as-_&quot;&gt;&lt;/a&gt;Import as &lt;code&gt;_&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/56303/&quot;&gt;You can now import an item as
+&lt;code&gt;_&lt;/code&gt;&lt;/a&gt;. This allows you to
+import a trait's impls, and not have the name in the namespace. e.g.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;use std::io::Read as _;
+
+// Allowed as there is only one `Read` in the module.
+pub trait Read {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1330-2019-02-28&quot;&gt;detailed release notes&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#library-stabilizations&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-stabilizations&quot;&gt;&lt;/a&gt;Library stabilizations&lt;/h3&gt;
+&lt;p&gt;Here's all of the stuff that's been made &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/57566&quot;&gt;The methods &lt;code&gt;overflowing_{add, sub, mul, shl, shr}&lt;/code&gt; are now &lt;code&gt;const&lt;/code&gt;
+functions for all numeric types.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/57105&quot;&gt;The methods &lt;code&gt;rotate_left&lt;/code&gt;, &lt;code&gt;rotate_right&lt;/code&gt;, and &lt;code&gt;wrapping_{add, sub, mul, shl, shr}&lt;/code&gt;
+are now &lt;code&gt;const&lt;/code&gt; functions for all numeric types.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/57105&quot;&gt;The methods &lt;code&gt;is_positive&lt;/code&gt; and &lt;code&gt;is_negative&lt;/code&gt; are now &lt;code&gt;const&lt;/code&gt; functions for
+all signed numeric types.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/57167&quot;&gt;The &lt;code&gt;get&lt;/code&gt; method for all &lt;code&gt;NonZero&lt;/code&gt; types is now &lt;code&gt;const&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/57234&quot;&gt;The methods &lt;code&gt;count_ones&lt;/code&gt;, &lt;code&gt;count_zeros&lt;/code&gt;, &lt;code&gt;leading_zeros&lt;/code&gt;, &lt;code&gt;trailing_zeros&lt;/code&gt;,
+&lt;code&gt;swap_bytes&lt;/code&gt;, &lt;code&gt;from_be&lt;/code&gt;, &lt;code&gt;from_le&lt;/code&gt;, &lt;code&gt;to_be&lt;/code&gt;, &lt;code&gt;to_le&lt;/code&gt; are now &lt;code&gt;const&lt;/code&gt; for all
+numeric types.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/57234&quot;&gt;&lt;code&gt;Ipv4Addr::new&lt;/code&gt; is now a &lt;code&gt;const&lt;/code&gt; function&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally, these APIs have become stable:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/os/unix/fs/trait.FileExt.html#method.read_exact_at&quot;&gt;&lt;code&gt;unix::FileExt::read_exact_at&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/os/unix/fs/trait.FileExt.html#method.write_all_at&quot;&gt;&lt;code&gt;unix::FileExt::write_all_at&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.transpose&quot;&gt;&lt;code&gt;Option::transpose&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/result/enum.Result.html#method.transpose&quot;&gt;&lt;code&gt;Result::transpose&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/convert/fn.identity.html&quot;&gt;&lt;code&gt;convert::identity&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/pin/struct.Pin.html&quot;&gt;&lt;code&gt;pin::Pin&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/stable/std/marker/trait.Unpin.html&quot;&gt;&lt;code&gt;marker::Unpin&lt;/code&gt;&lt;/a&gt; (mentioned above)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/nightly/std/marker/struct.PhantomPinned.html&quot;&gt;&lt;code&gt;marker::PhantomPinned&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/vec/struct.Vec.html#method.resize_with&quot;&gt;&lt;code&gt;Vec::resize_with&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.resize_with&quot;&gt;&lt;code&gt;VecDeque::resize_with&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_millis&quot;&gt;&lt;code&gt;Duration::as_millis&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_micros&quot;&gt;&lt;code&gt;Duration::as_micros&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_nanos&quot;&gt;&lt;code&gt;Duration::as_nanos&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1330-2019-02-28&quot;&gt;detailed release notes&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#cargo-features&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;cargo-features&quot;&gt;&lt;/a&gt;Cargo features&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/cargo/pull/6484/&quot;&gt;Cargo should now rebuild a crate if a file was modified during the initial
+build.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1330-2019-02-28&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#cratesio&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;cratesio&quot;&gt;&lt;/a&gt;Crates.io&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://users.rust-lang.org/t/a-verified-email-address-will-be-required-to-publish-to-crates-io-starting-on-2019-02-28/22425&quot;&gt;As previously announced&lt;/a&gt;, coinciding with this release, crates.io
+will require that you have a verified email address to publish. Starting at
+2019-03-01 00:00 UTC, if you don't have a verified email address and run &lt;code&gt;cargo publish&lt;/code&gt;, you'll get an error.&lt;/p&gt;
+&lt;p&gt;This ensures we can comply with DMCA procedures. If you haven't heeded the
+warnings cargo printed during the last release cycle, head on over to
+&lt;a href=&quot;https://crates.io/me&quot;&gt;crates.io/me&lt;/a&gt; to set and verify your email address. This email address
+will never be displayed publicly and will only be used for crates.io operations.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-133.0&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-133.0&quot;&gt;&lt;/a&gt;Contributors to 1.33.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.33.0. We couldn't have done it
+without all of you.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Changes in the core team</title>
@@ -1458,36 +1579,6 @@ find!&lt;/p&gt;
 
         <author>
             <name>The Rust Survey Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.30.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2018/11/08/Rust-1.30.1.html" type="text/html" title="Announcing Rust 1.30.1" />
-        <published>2018-11-08T00:00:00Z</published>
-        <updated>2018-11-08T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2018/11/08/Rust-1.30.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2018/11/08/Rust-1.30.1.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.30.1. Rust is a
-systems programming language focused on safety, speed, and concurrency.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.30.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1301-2018-11-08&quot;&gt;detailed release notes for
-1.30.1&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1.30.1-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.30.1-stable&quot;&gt;&lt;/a&gt;What's in 1.30.1 stable&lt;/h2&gt;
-&lt;p&gt;This patch release fixes broken Cargo progress bars in MSYS terminals on
-Windows by &lt;a href=&quot;https://github.com/rust-lang/cargo/pull/6122&quot;&gt;capping the progress bar width to 60 columns&lt;/a&gt;. This doesn't affect
-other terminal emulators (like &lt;code&gt;cmd.exe&lt;/code&gt; or PowerShell).&lt;/p&gt;
-&lt;p&gt;This patch release also &lt;a href=&quot;https://github.com/rust-lang/rust/pull/54199&quot;&gt;fixes a compiler panic&lt;/a&gt; that happened while building the
-docs of some crates in Rust 1.30.0. The crates impacted were widely used, so
-this change impacted a considerable amount of users, which made it sufficiently
-prominent for us to issue a point release.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     

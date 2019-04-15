@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-04-12T19:03:17Z</updated>
+    <updated>2019-04-15T14:24:56Z</updated>
 
     
     <entry>
@@ -78,7 +78,7 @@ Now, you can write this in your documentation tests:&lt;/p&gt;
 /// use std::io;
 /// let mut input = String::new();
 /// io::stdin().read_line(&amp;amp;mut input)?;
-/// # Ok::&amp;lt;(), io:Error&amp;gt;(())
+/// # Ok::&amp;lt;(), io::Error&amp;gt;(())
 /// ```
 fn my_func() {}
 &lt;/code&gt;&lt;/pre&gt;

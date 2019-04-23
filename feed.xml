@@ -10,8 +10,70 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-04-15T14:24:56Z</updated>
+    <updated>2019-04-23T16:37:36Z</updated>
 
+    
+    <entry>
+        <title>Rust's 2019 roadmap</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/04/23/roadmap.html" type="text/html" title="Rust's 2019 roadmap" />
+        <published>2019-04-23T00:00:00Z</published>
+        <updated>2019-04-23T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/04/23/roadmap.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/04/23/roadmap.html">&lt;p&gt;Each year the Rust community &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/1728&quot;&gt;comes together&lt;/a&gt; to set out a
+roadmap. This year, in addition to the &lt;a href=&quot;https://blog.rust-lang.org/2018/11/27/Rust-survey-2018.html&quot;&gt;survey&lt;/a&gt;, we put out a &lt;a href=&quot;https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html&quot;&gt;call for blog
+posts&lt;/a&gt; in December, which resulted in &lt;a href=&quot;https://readrust.net/rust-2019/&quot;&gt;73 blog posts&lt;/a&gt;
+written over the span of a few weeks. The end result is the recently-merged
+&lt;a href=&quot;https://github.com/rust-lang/rfcs/blob/master/text/2657-roadmap-2019.md&quot;&gt;2019 roadmap RFC&lt;/a&gt;. To get all of the details, please give it a read,
+but this post lays out some of the highlights.&lt;/p&gt;
+&lt;h1&gt;&lt;a href=&quot;#the-theme-maturity&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-theme-maturity&quot;&gt;&lt;/a&gt;The theme: Maturity&lt;/h1&gt;
+&lt;p&gt;In short, 2019 will be a year of &lt;em&gt;rejuvenation&lt;/em&gt; and &lt;em&gt;maturation&lt;/em&gt; for the Rust
+project. We shipped a lot of stuff last year, and grew a lot. Now it's time to
+take a step back, take stock, and prepare for the future.&lt;/p&gt;
+&lt;p&gt;The work we have planned for this year falls into three major categories:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Governance: improving how the project is run&lt;/li&gt;
+&lt;li&gt;Finish long-standing requests: closing out work we've started but never finished&lt;/li&gt;
+&lt;li&gt;Polish: improving the overall quality of the language and tooling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#governance&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;governance&quot;&gt;&lt;/a&gt;Governance&lt;/h2&gt;
+&lt;p&gt;Over the last three years, the Rust project has grown a lot. Rust used to have a core team of 8 members. When we added sub-teams in 2015, we grew to 23 members. We've now grown to over 100 -- that's bigger than many companies! And of course, looking beyond the teams, the size of the Rust community as a whole has grown tremendously as well. As a result of this growth, we've found that the processes which served us well when we were a smaller project are starting to feel some strain.&lt;/p&gt;
+&lt;p&gt;Many of the teams have announced plans to look over revamp their processes to scale better. Often this can be as simple as taking the time to write down things that previously were understood only informally -- sometimes it means establishing new structures.&lt;/p&gt;
+&lt;p&gt;Because of this widespread interest in governance, we've also created a new &lt;a href=&quot;https://internals.rust-lang.org/t/governance-working-group-announcement/9637&quot;&gt;&lt;strong&gt;Governance Working Group&lt;/strong&gt;&lt;/a&gt;. This group is going to be devoted to working with each team to hone its governance structure and to help pass lessons and strategies between teams.&lt;/p&gt;
+&lt;p&gt;Additionally, the RFC process has been a great boon for Rust, but as we've grown, there have been times where it didn't work so well too.
+We may look at revisions to the process this year.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#long-standing-requests&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;long-standing-requests&quot;&gt;&lt;/a&gt;Long-standing requests&lt;/h2&gt;
+&lt;p&gt;There are a number of exciting initiatives that have been sitting in a limbo
+state -- the majority of the design is done, but there are some lingering
+complications that we haven't had time to work out. This year we hope to take
+a fresh look at some of these problems and try hard to resolve those
+lingering problems.&lt;/p&gt;
+&lt;p&gt;Examples include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Cargo team and custom registries&lt;/li&gt;
+&lt;li&gt;The Language team is taking a look at async/await, specialization, const generics, and generic associated types&lt;/li&gt;
+&lt;li&gt;The Libs team wants to finish custom allocators&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#polish&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;polish&quot;&gt;&lt;/a&gt;Polish&lt;/h2&gt;
+&lt;p&gt;Finally, the last few years have also seen a lot of foundational work. The
+compiler, for example, was massively refactored to support incremental
+compilation and to be better prepared for IDEs. Now that we've got these
+pieces in place, we want to do the &amp;quot;polish&amp;quot; work that really makes for a
+great experience.&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Compile times and IDE support&lt;/li&gt;
+&lt;li&gt;Polishing the specification of the language by improving &lt;a href=&quot;https://doc.rust-lang.org/stable/reference/&quot;&gt;the reference&lt;/a&gt; and laying out &lt;a href=&quot;https://github.com/rust-lang/unsafe-code-guidelines&quot;&gt;the unsafe code guidelines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The WebAssembly WG's work this year includes polishing our wasm support, for example, debugging&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#conclusion&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This post only covered a few examples of the plans we've been making. &lt;a href=&quot;https://github.com/rust-lang/rfcs/blob/master/text/2657-roadmap-2019.md&quot;&gt;If you'd like to see the full details, take a look at the RFC itself.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here's to a great 2019 for Rust!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Core Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.34.0</title>
@@ -1499,114 +1561,6 @@ work and the number of people who have contributed. Each release is only six
 weeks, but this release is the culmination of three years of effort, in
 countless repositories, by numerous people. It's been a pleasure to work with
 you all, and we look forward to continuing to grow in the next three years.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>A new look for rust-lang.org</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2018/11/29/a-new-look-for-rust-lang-org.html" type="text/html" title="A new look for rust-lang.org" />
-        <published>2018-11-29T00:00:00Z</published>
-        <updated>2018-11-29T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2018/11/29/a-new-look-for-rust-lang-org.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2018/11/29/a-new-look-for-rust-lang-org.html">&lt;p&gt;Before 1.0, Rust had a reputation for changing the language on a near-daily
-basis. By contrast, the website has looked pretty much the same. Here’s the
-first version of rust-lang.org, seven years ago (courtesy of &lt;a href=&quot;https://web.archive.org/&quot;&gt;the WayBack
-Machine&lt;/a&gt;):&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/rust-www1.png&quot; alt=&quot;rust website in 2011&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;In 2014, three years later:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/rust-www2.png&quot; alt=&quot;rust website in 2014&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;If you visit &lt;a href=&quot;https://rust-lang.org&quot;&gt;https://rust-lang.org&lt;/a&gt; today, you'll see this:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/rust-www3.png&quot; alt=&quot;rust website in 2018&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Over time, we’ve grown to love it. It’s simple. Minimal. Familiar.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#improving-the-content&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;improving-the-content&quot;&gt;&lt;/a&gt;Improving the content&lt;/h2&gt;
-&lt;p&gt;But we can always do better. For example, the website suffers from what we
-call “the fireflower problem.” First formulated by &lt;a href=&quot;http://seriouspony.com/&quot;&gt;Kathy
-Sierra&lt;/a&gt;, and made into an image by Samuel Hulick:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/fireflower.png&quot; alt=&quot;the fireflower&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;We want Mario to use Rust, the fireflower, and turn into the ever-awesome
-Fire Mario. But there’s a corollary here: it’s better to say “we will make
-you into Fire Mario” than it is “we sell fire flowers.”&lt;/p&gt;
-&lt;p&gt;(As an aside, we had a &lt;a href=&quot;https://brson.github.io/fireflowers/&quot;&gt;community discussion on this
-topic&lt;/a&gt; back in 2016.)&lt;/p&gt;
-&lt;p&gt;In other words, this list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;zero-cost abstractions&lt;/li&gt;
-&lt;li&gt;move semantics&lt;/li&gt;
-&lt;li&gt;guaranteed memory safety&lt;/li&gt;
-&lt;li&gt;threads without data races&lt;/li&gt;
-&lt;li&gt;trait-based generics&lt;/li&gt;
-&lt;li&gt;pattern matching&lt;/li&gt;
-&lt;li&gt;type inference&lt;/li&gt;
-&lt;li&gt;minimal runtime&lt;/li&gt;
-&lt;li&gt;efficient C bindings&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;doesn’t explain what you can &lt;em&gt;do&lt;/em&gt; with Rust, which leads people to say “Rust
-seems neat, but I don’t know what I would actually use it for.”&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#improving-the-style&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;improving-the-style&quot;&gt;&lt;/a&gt;Improving the style&lt;/h2&gt;
-&lt;p&gt;We also like the minimalist style of the current site, but it also may be
-&lt;em&gt;too&lt;/em&gt; minimal. Furthermore, it has no room to grow; we have more than just
-rust-lang.org these days. We wanted a style that we could use to unify all of
-the websites that we maintain in the Rust project; crates.io being a big one.
-Its “pool table” design feels extremely different than rust-lang.org, which
-is confusing.&lt;/p&gt;
-&lt;p&gt;Doing this requires care, as we don’t want to make the website huge and
-complicated, but at the same time, using more than black and blue might be
-nice.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#the-beta&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-beta&quot;&gt;&lt;/a&gt;The beta&lt;/h2&gt;
-&lt;p&gt;Today, we’d like to announce a beta of the new rust-lang.org. If you go to
-&lt;a href=&quot;https://beta.rust-lang.org&quot;&gt;https://beta.rust-lang.org&lt;/a&gt;, you’ll see this:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/rust-www4.png&quot; alt=&quot;beta rust website&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Its fresh visual design gives us a lot more flexibility in how we get
-information across. It retains the minimalist spirit of the old site, while
-adding some bold color and visual variety.&lt;/p&gt;
-&lt;p&gt;We hope you like it as much as we do!&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#some-highlights&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;some-highlights&quot;&gt;&lt;/a&gt;Some highlights&lt;/h3&gt;
-&lt;p&gt;The new site puts the “why Rust?” question front-and-center, and includes
-dedicated pages for the four application domains we targeted in 2018:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Embedded devices&lt;/li&gt;
-&lt;li&gt;WebAssembly&lt;/li&gt;
-&lt;li&gt;CLI apps&lt;/li&gt;
-&lt;li&gt;Network services&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We have also revised the slogan. Historically, it has been:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Rust is a systems programming language that runs blazingly fast, prevents
-segfaults, and guarantees thread safety.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Like the bullet list of features, this doesn't convey what you can &lt;em&gt;do&lt;/em&gt; with
-Rust. So we've updated the slogan:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Rust: The programming language that empowers everyone to become a systems
-programmer.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;We're still not sure we love the term &amp;quot;systems programming,&amp;quot; as it seems like
-it means something different to everyone, but this iteration is significantly
-better than the old one. Even if people have different ideas about what
-&amp;quot;systems programming&amp;quot; means, they at least have some idea. &amp;quot;guarantees thread
-safety,&amp;quot; not so much.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#future-work&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;future-work&quot;&gt;&lt;/a&gt;Future work&lt;/h2&gt;
-&lt;p&gt;There’s still more work to do:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Some information on the old site, has not yet been ported over.&lt;/li&gt;
-&lt;li&gt;Translations have regressed. We’re working on adding the proper
-infrastructure here, and hope to be able to start accepting translations by
-the end of the year.&lt;/li&gt;
-&lt;li&gt;We need more polish and testing in a general sense.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Please &lt;a href=&quot;https://github.com/rust-lang/beta.rust-lang.org/issues/new/choose&quot;&gt;file an
-issue&lt;/a&gt; with any
-feedback you have! We’re also looking for people with abilities of all kinds
-to help maintain the site, and especially people with design, CSS, and
-marketing skills. If you’d like to get involved, please &lt;a href=&quot;mailto:www@rust-lang.org&quot;&gt;email
-us&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;We’d like to ship this new site on December 6, with the release of Rust 2018.
-Thank you for giving it a try before then, so we can work out any bugs we
-find!&lt;/p&gt;
 </content>
 
         <author>

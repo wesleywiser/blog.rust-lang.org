@@ -10,8 +10,58 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-04-23T22:02:45Z</updated>
+    <updated>2019-04-25T16:29:45Z</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.34.1</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/04/25/Rust-1.34.1.html" type="text/html" title="Announcing Rust 1.34.1" />
+        <published>2019-04-25T00:00:00Z</published>
+        <updated>2019-04-25T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/04/25/Rust-1.34.1.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/04/25/Rust-1.34.1.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.34.1, and a new version of rustup, 1.18.1.
+Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup,
+getting Rust 1.34.1 and rustup 1.18.1 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1.34.1-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.34.1-stable&quot;&gt;&lt;/a&gt;What's in 1.34.1 stable&lt;/h2&gt;
+&lt;p&gt;This patch release fixes two false positives and &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/pull/3805&quot;&gt;a panic when checking macros&lt;/a&gt; in &lt;a href=&quot;https://github.com/rust-lang/rust-clippy&quot;&gt;Clippy&lt;/a&gt;.
+Clippy is a tool which provides a collection of lints to catch common mistakes and improve your Rust code.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#false-positive-in-clippy:redundant_closure&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;false-positive-in-clippy:redundant_closure&quot;&gt;&lt;/a&gt;False positive in &lt;code&gt;clippy::redundant_closure&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;A false positive in the &lt;code&gt;redundant_closure&lt;/code&gt; lint was &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/pull/3821&quot;&gt;fixed&lt;/a&gt;.
+The lint did not take into account &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/issues/3802&quot;&gt;differences in the number of borrows&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the following snippet, the method &lt;code&gt;required&lt;/code&gt; expects &lt;code&gt;dep: &amp;amp;D&lt;/code&gt; but the actual type of &lt;code&gt;dep&lt;/code&gt; is &lt;code&gt;&amp;amp;&amp;amp;D&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;dependencies.iter().filter(|dep| dep.required());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Clippy erronously suggested &lt;code&gt;.filter(Dependency::required)&lt;/code&gt;,
+which is rejected by the compiler due to the difference in borrows.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#false-positive-in-clippy:missing_const_for_fn&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;false-positive-in-clippy:missing_const_for_fn&quot;&gt;&lt;/a&gt;False positive in &lt;code&gt;clippy::missing_const_for_fn&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Another false positive in the &lt;code&gt;missing_const_for_fn&lt;/code&gt; lint was &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/pull/3844&quot;&gt;fixed&lt;/a&gt;.
+This lint did not take into account that functions inside &lt;code&gt;trait&lt;/code&gt; implementations cannot be &lt;code&gt;const fn&lt;/code&gt;s.
+For example, when given the following snippet, the lint would trigger:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[derive(PartialEq, Eq)] // warning: this could be a const_fn
+struct Point(isize, isize);
+
+impl std::ops::Add for Point {
+    type Output = Self;
+
+    fn add(self, other: Self) -&amp;gt; Self { // warning: this could be a const_fn
+        Point(self.0 + other.0, self.1 + other.1)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-new-in-rustup-1.18.1&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-new-in-rustup-1.18.1&quot;&gt;&lt;/a&gt;What's new in rustup 1.18.1&lt;/h2&gt;
+&lt;p&gt;A recent rustup release, 1.18.0, introduced &lt;a href=&quot;https://github.com/rust-lang/rustup.rs/issues/1794&quot;&gt;a regression&lt;/a&gt; that prevented installing Rust through the shell script on older platforms.
+A patch was released that fixes the issue, avoiding to force TLS v1.2 on the platforms that don't support it.&lt;/p&gt;
+&lt;p&gt;You can check out other rustup changes in its &lt;a href=&quot;https://github.com/rust-lang/rustup.rs/blob/master/CHANGELOG.md#1181---2019-04-25&quot;&gt;full release notes&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Rust's 2019 roadmap</title>
@@ -1186,381 +1236,6 @@ open up the normal RFC process, though if you want, you are welcome to write
 a post and link to it on the GitHub discussion.&lt;/p&gt;
 &lt;p&gt;We look forward to working with the entire community to make Rust even more
 wonderful in 2019. Thanks for an awesome 2018!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.31 and Rust 2018</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html" type="text/html" title="Announcing Rust 1.31 and Rust 2018" />
-        <published>2018-12-06T00:00:00Z</published>
-        <updated>2018-12-06T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.31.0, and &amp;quot;Rust
-2018&amp;quot; as well. Rust is a programming language that empowers everyone to build
-reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.31.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/tools/install&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1310-2018-12-06&quot;&gt;detailed release notes for
-1.31.0&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1.31.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.31.0-stable&quot;&gt;&lt;/a&gt;What's in 1.31.0 stable&lt;/h2&gt;
-&lt;p&gt;Rust 1.31 may be the most exciting release since Rust 1.0! Included in this release is the
-first iteration of &amp;quot;Rust 2018,&amp;quot; but there's more than just that! This is going to be a long
-post, so here's a table of contents:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#rust-2018&quot;&gt;Rust 2018&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#non-lexical-lifetimes&quot;&gt;Non-lexical lifetimes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#module-system-changes&quot;&gt;Module system changes&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#more-lifetime-elision-rules&quot;&gt;More lifetime elision rules&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#const-fn&quot;&gt;&lt;code&gt;const fn&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#new-tools&quot;&gt;New tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#tool-lints&quot;&gt;Tool Lints&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#documentation&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#domain-working-groups&quot;&gt;Domain working groups&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#new-website&quot;&gt;New website&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#library-stabilizations&quot;&gt;Library stabilizations&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#cargo-features&quot;&gt;Cargo features&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#contributors-to-131.0&quot;&gt;Contributors&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;&lt;a href=&quot;#rust-2018&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;rust-2018&quot;&gt;&lt;/a&gt;Rust 2018&lt;/h3&gt;
-&lt;p&gt;We wrote about Rust 2018 &lt;a href=&quot;https://blog.rust-lang.org/2018/03/12/roadmap.html&quot;&gt;first in
-March&lt;/a&gt;, &lt;a href=&quot;https://blog.rust-lang.org/2018/07/27/what-is-rust-2018.html&quot;&gt;and then in
-July&lt;/a&gt;.
-For some more background about the &lt;em&gt;why&lt;/em&gt; of Rust 2018, please go read those
-posts; there's a lot to cover in the release announcement, and so we're going
-to focus on the &lt;em&gt;what&lt;/em&gt; here. There's also a &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-2018-is-here/&quot;&gt;post on Mozilla Hacks&lt;/a&gt; as
-well!&lt;/p&gt;
-&lt;p&gt;Briefly, Rust 2018 is an opportunity to bring
-all of the work we've been doing over the past three years together, and create
-a cohesive package. This is more than just language features, it also includes&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Tooling (IDE support, &lt;code&gt;rustfmt&lt;/code&gt;, Clippy)&lt;/li&gt;
-&lt;li&gt;Documentation&lt;/li&gt;
-&lt;li&gt;Domain working groups work&lt;/li&gt;
-&lt;li&gt;A new web site&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We'll be covering all of this and more in this post.&lt;/p&gt;
-&lt;p&gt;Let's create a new project with Cargo:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ cargo new foo
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here's the contents of &lt;code&gt;Cargo.toml&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[package]
-name = &amp;quot;foo&amp;quot;
-version = &amp;quot;0.1.0&amp;quot;
-authors = [&amp;quot;Your Name &amp;lt;you@example.com&amp;gt;&amp;quot;]
-edition = &amp;quot;2018&amp;quot;
-
-[dependencies]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A new key has been added under &lt;code&gt;[package]&lt;/code&gt;: &lt;code&gt;edition&lt;/code&gt;. Note that it has been
-set to &lt;code&gt;2018&lt;/code&gt;. You can also set it to &lt;code&gt;2015&lt;/code&gt;, which is the default if the key
-does not exist.&lt;/p&gt;
-&lt;p&gt;By using Rust 2018, some new features are unlocked that are not allowed in
-Rust 2015.&lt;/p&gt;
-&lt;p&gt;It is important to note that each package can be in either 2015 or
-2018 mode, and they work seamlessly together. Your 2018 project can use 2015
-dependencies, and a 2015 project can use 2018 dependencies. This ensures that
-we don't split the ecosystem, and all of these new things are opt-in,
-preserving compatibility for existing code. Furthermore, when you do choose
-to migrate Rust 2015 code to Rust 2018, the changes can be made
-automatically, via &lt;code&gt;cargo fix&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;What kind of new features, you may ask? Well, first, features get added to
-Rust 2015 unless they require some sort of incompatibility with 2015's
-features. As such, most of the language is available everywhere. You can
-check out &lt;a href=&quot;https://doc.rust-lang.org/edition-guide&quot;&gt;the edition
-guide&lt;/a&gt; to check each
-feature's minimum &lt;code&gt;rustc&lt;/code&gt; version as well as edition requirements. However,
-there are a few big-ticket features we'd like to mention here: non-lexical
-lifetimes, and some module system improvements.&lt;/p&gt;
-&lt;h4&gt;&lt;a href=&quot;#non-lexical-lifetimes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;non-lexical-lifetimes&quot;&gt;&lt;/a&gt;Non-lexical lifetimes&lt;/h4&gt;
-&lt;p&gt;If you've been following Rust's development over the past few years, you may
-have heard the term &amp;quot;NLL&amp;quot; or &amp;quot;non-lexical lifetimes&amp;quot; thrown around. This is
-jargon, but it has a straightforward translation into simpler terms: the
-borrow checker has gotten smarter, and now accepts some valid code that it
-previously rejected. Consider this example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
-    let mut x = 5;
-
-    let y = &amp;amp;x;
-
-    let z = &amp;amp;mut x;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In older Rust, this is a compile-time error:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
- --&amp;gt; src/main.rs:5:18
-  |
-4 |     let y = &amp;amp;x;
-  |              - immutable borrow occurs here
-5 |     let z = &amp;amp;mut x;
-  |                  ^ mutable borrow occurs here
-6 | }
-  | - immutable borrow ends here
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is because lifetimes follow &amp;quot;lexical scope&amp;quot;; that is, the borrow from &lt;code&gt;y&lt;/code&gt;
-is considered to be held until &lt;code&gt;y&lt;/code&gt; goes out of scope at the end of main, even
-though we never use &lt;code&gt;y&lt;/code&gt; again. This code is fine, but the borrow checker could
-not handle it.&lt;/p&gt;
-&lt;p&gt;Today, this code will compile just fine.&lt;/p&gt;
-&lt;p&gt;What if we did use &lt;code&gt;y&lt;/code&gt;, like this for example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
-    let mut x = 5;
-    let y = &amp;amp;x;
-    let z = &amp;amp;mut x;
-    
-    println!(&amp;quot;y: {}&amp;quot;, y);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Older Rust will give you this error:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
- --&amp;gt; src/main.rs:5:18
-  |
-4 |     let y = &amp;amp;x;
-  |              - immutable borrow occurs here
-5 |     let z = &amp;amp;mut x;
-  |                  ^ mutable borrow occurs here
-...
-8 | }
-  | - immutable borrow ends here
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With Rust 2018, this error changes for the better:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
- --&amp;gt; src/main.rs:5:13
-  |
-4 |     let y = &amp;amp;x;
-  |             -- immutable borrow occurs here
-5 |     let z = &amp;amp;mut x;
-  |             ^^^^^^ mutable borrow occurs here
-6 |     
-7 |     println!(&amp;quot;y: {}&amp;quot;, y);
-  |                       - borrow later used here
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Instead of pointing to where &lt;code&gt;y&lt;/code&gt; goes out of scope, it shows you where the
-conflicting borrow occurs. This makes these sorts of errors far easier to
-debug.&lt;/p&gt;
-&lt;p&gt;In Rust 1.31, this feature is exclusive to Rust 2018. We plan to backport it
-to Rust 2015 at a later date.&lt;/p&gt;
-&lt;h4&gt;&lt;a href=&quot;#module-system-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;module-system-changes&quot;&gt;&lt;/a&gt;Module system changes&lt;/h4&gt;
-&lt;p&gt;The module system can be a struggle for people first learning Rust.
-Everyone has their own things that take time to master, of course, but
-there's a root cause for why it's so confusing to many: while there are
-simple and consistent rules defining the module system, their consequences
-can feel inconsistent, counterintuitive and mysterious.&lt;/p&gt;
-&lt;p&gt;As such, the 2018 edition of Rust introduces a few changes to how paths work,
-but they end up simplifying the module system, to make it more clear as to
-what is going on.&lt;/p&gt;
-&lt;p&gt;Here's a brief summary:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;extern crate&lt;/code&gt; is no longer needed in almost all circumstances.&lt;/li&gt;
-&lt;li&gt;You can import macros with &lt;code&gt;use&lt;/code&gt;, rather than a &lt;code&gt;#[macro_use]&lt;/code&gt; attribute.&lt;/li&gt;
-&lt;li&gt;Absolute paths begin with a crate name, where the keyword &lt;code&gt;crate&lt;/code&gt; refers to the current crate.&lt;/li&gt;
-&lt;li&gt;A &lt;code&gt;foo.rs&lt;/code&gt; and &lt;code&gt;foo/&lt;/code&gt; subdirectory may coexist; &lt;code&gt;mod.rs&lt;/code&gt; is no longer needed when placing submodules in a subdirectory.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;These may seem like arbitrary new rules when put this way, but the mental
-model is now significantly simplified overall.&lt;/p&gt;
-&lt;p&gt;There's a &lt;em&gt;lot&lt;/em&gt; of details here, so please read &lt;a href=&quot;https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html&quot;&gt;the edition
-guide&lt;/a&gt;
-for full details.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#more-lifetime-elision-rules&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;more-lifetime-elision-rules&quot;&gt;&lt;/a&gt;More lifetime elision rules&lt;/h3&gt;
-&lt;p&gt;Let's talk about a feature that's available in both editions: we've added
-some additional elision rules for &lt;code&gt;impl&lt;/code&gt; blocks and function definitions.
-Code like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;impl&amp;lt;'a&amp;gt; Reader for BufReader&amp;lt;'a&amp;gt; {
-    // methods go here
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;can now be written like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;impl Reader for BufReader&amp;lt;'_&amp;gt; {
-    // methods go here
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;'_&lt;/code&gt; lifetime still shows that &lt;code&gt;BufReader&lt;/code&gt; takes a parameter, but we
-don't need to create a name for it anymore.&lt;/p&gt;
-&lt;p&gt;Lifetimes are still required to be defined in structs. However, we no longer
-require as much boilerplate as before:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;// Rust 2015
-struct Ref&amp;lt;'a, T: 'a&amp;gt; {
-    field: &amp;amp;'a T
-}
-
-// Rust 2018
-struct Ref&amp;lt;'a, T&amp;gt; {
-    field: &amp;amp;'a T
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;: 'a&lt;/code&gt; is inferred. You can still be explicit if you prefer. We're
-considering some more options for elision here in the future, but have no
-concrete plans yet.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#const-fn&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;const-fn&quot;&gt;&lt;/a&gt;&lt;code&gt;const fn&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;There's several ways to define a function in Rust: a regular function with
-&lt;code&gt;fn&lt;/code&gt;, an unsafe function with &lt;code&gt;unsafe fn&lt;/code&gt;, an external function with &lt;code&gt;extern fn&lt;/code&gt;.
-This release adds a new way to qualify a function: &lt;code&gt;const fn&lt;/code&gt;. It looks like
-this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;const fn foo(x: i32) -&amp;gt; i32 {
-    x + 1
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A &lt;code&gt;const fn&lt;/code&gt; can be called like a regular function, but it can also be used
-in any constant context. When it is, it is evaluated at compile time, rather
-than at run time. As an example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;const SIX: i32 = foo(5);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will execute &lt;code&gt;foo&lt;/code&gt; at compile time, and set &lt;code&gt;SIX&lt;/code&gt; to &lt;code&gt;6&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;const fn&lt;/code&gt;s cannot do everything that normal &lt;code&gt;fn&lt;/code&gt;s can do; they must
-have deterministic output. This is important for soundness reasons.
-Currently, &lt;code&gt;const fn&lt;/code&gt;s can do a minimal subset of operations. Here's
-some examples of what you can do:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Arithmetic and comparison operators on integers&lt;/li&gt;
-&lt;li&gt;All boolean operators except for &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; and &lt;code&gt;||&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Constructing arrays, structs, enums, and tuples&lt;/li&gt;
-&lt;li&gt;Calls to other &lt;code&gt;const fn&lt;/code&gt;s&lt;/li&gt;
-&lt;li&gt;Index expressions on arrays and slices&lt;/li&gt;
-&lt;li&gt;Field accesses on structs and tuples&lt;/li&gt;
-&lt;li&gt;Reading from constants (but not statics, not even taking a reference to a static)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;amp;&lt;/code&gt; and &lt;code&gt;*&lt;/code&gt; of references&lt;/li&gt;
-&lt;li&gt;Casts, except for raw pointer to integer casts&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We'll be growing the abilities of &lt;code&gt;const fn&lt;/code&gt;, but we've decided that
-this is enough useful stuff to start shipping the feature itself.&lt;/p&gt;
-&lt;p&gt;For full details, please see &lt;a href=&quot;https://doc.rust-lang.org/reference/items/functions.html#const-functions&quot;&gt;the
-reference&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#new-tools&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;new-tools&quot;&gt;&lt;/a&gt;New tools&lt;/h3&gt;
-&lt;p&gt;The 2018 edition signals a new level of maturity for Rust's tools ecosystem.
-Cargo, Rustdoc, and Rustup have been crucial tools since 1.0; with the 2018
-edition, there is a new generation of tools ready for all users: Clippy,
-Rustfmt, and IDE support.&lt;/p&gt;
-&lt;p&gt;Rust's linter, &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/&quot;&gt;&lt;code&gt;clippy&lt;/code&gt;&lt;/a&gt;, is
-now available on stable Rust. You can install it via &lt;code&gt;rustup component add clippy&lt;/code&gt; and run it with &lt;code&gt;cargo clippy&lt;/code&gt;. Clippy is now considered 1.0, which
-carries the same lint stability guarantees as rustc. New lints may be added,
-and lints may be modified to add more functionality, however lints may never
-be removed (only deprecated). This means that code that compiles under clippy
-will continue to compile under clippy (provided there are no lints set to
-error via &lt;code&gt;deny&lt;/code&gt;), but may throw new warnings.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rustfmt&quot;&gt;Rustfmt&lt;/a&gt; is a tool for formatting Rust
-code. Automatically formatting your code lets you save time and arguments by
-using the &lt;a href=&quot;https://github.com/rust-lang/rfcs/blob/master/style-guide/README.md&quot;&gt;official Rust
-style&lt;/a&gt;.
-You can install with &lt;code&gt;rustup component add rustfmt&lt;/code&gt; and use it with &lt;code&gt;cargo fmt&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;This release includes Rustfmt 1.0. From now on we guarantee backwards
-compatibility for Rustfmt: if you can format your code today, then the
-formatting will not change in the future (only with the default options).
-Backwards compatibility means that running Rustfmt on your CI is practical
-(use &lt;code&gt;cargo fmt -- --check&lt;/code&gt;). Try that and 'format on save' in your editor to
-revolutionize your workflow.&lt;/p&gt;
-&lt;p&gt;IDE support is one of the most requested tooling features for Rust. There are
-now multiple, high quality options:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=rust-lang.rust&quot;&gt;Visual Studio Code&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://plugins.jetbrains.com/plugin/8182-rust&quot;&gt;IntelliJ&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang-nursery/atom-ide-rust&quot;&gt;Atom&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust-enhanced&quot;&gt;Sublime Text 3&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.eclipse.org/downloads/packages/release/photon/r/eclipse-ide-rust-developers-includes-incubating-components&quot;&gt;Eclipse&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Work on IDE support is not finished, in particular code completion is not up
-to scratch in the RLS-based editors. However, if you mainly want support for
-types, documentation, and 'go to def', etc. then you should be happy.&lt;/p&gt;
-&lt;p&gt;If you have problems installing any of the tools with Rustup, try running
-&lt;code&gt;rustup self update&lt;/code&gt;, and then try again.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#tool-lints&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;tool-lints&quot;&gt;&lt;/a&gt;Tool lints&lt;/h3&gt;
-&lt;p&gt;In &lt;a href=&quot;https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html&quot;&gt;Rust 1.30&lt;/a&gt;, we
-stabilized &amp;quot;tool attributes&amp;quot;, like &lt;code&gt;#[rustfmt::skip]&lt;/code&gt;. In Rust 1.31, we're
-stabilizing something similar: &amp;quot;tool lints,&amp;quot; like
-&lt;code&gt;#[allow(clippy::bool_comparison)]&lt;/code&gt; These give a namespace to lints, so that it's
-more clear which tool they're coming from.&lt;/p&gt;
-&lt;p&gt;If you previously used Clippy's lints, you can migrate like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;// old
-#![cfg_attr(feature = &amp;quot;cargo-clippy&amp;quot;, allow(bool_comparison))]
-
-// new
-#![allow(clippy::bool_comparison)]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You don't need &lt;code&gt;cfg_attr&lt;/code&gt; anymore! You'll also get warnings that can help you
-update to the new style.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#documentation&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;documentation&quot;&gt;&lt;/a&gt;Documentation&lt;/h3&gt;
-&lt;p&gt;Rustdoc has seen a number of improvements this year, and we also shipped a
-complete re-write of the &amp;quot;The Rust Programming Language.&amp;quot; Additionally, you
-can &lt;a href=&quot;https://nostarch.com/rust&quot;&gt;buy a dead-tree copy from No Starch Press&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;We had previously called this the &amp;quot;second edition&amp;quot; of the book, but since
-it's the first edition in print, that was confusing. We also want to
-periodically update the print edition as well. In the end, after many
-discussions with No Starch, we're going to be updating the book on the
-website with each release, and No Starch will periodically pull in our
-changes and print them. The book has been selling quite well so far, raising
-money for &lt;a href=&quot;http://www.blackgirlscode.com/&quot;&gt;Black Girls Code&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can find the new TRPL &lt;a href=&quot;https://doc.rust-lang.org/beta/book/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#domain-working-groups&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;domain-working-groups&quot;&gt;&lt;/a&gt;Domain working groups&lt;/h3&gt;
-&lt;p&gt;We announced the formation of four working groups this year:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Network services&lt;/li&gt;
-&lt;li&gt;Command-line applications&lt;/li&gt;
-&lt;li&gt;WebAssembly&lt;/li&gt;
-&lt;li&gt;Embedded devices&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Each of these groups has been working very hard on a number of things to
-make Rust awesome in each of these domains. Some highlights:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Network services has been shaking out the Futures interface, and async/await
-on top of it. This hasn't shipped yet, but we're close!&lt;/li&gt;
-&lt;li&gt;The CLI working group has been working on libraries and documentation for making awesome
-command-line applications&lt;/li&gt;
-&lt;li&gt;The WebAssembly group has been shipping a ton of world-class tooling for using Rust with wasm.&lt;/li&gt;
-&lt;li&gt;Embedded devices has gotten ARM development working on stable Rust!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You can find out more about this work on the new website!&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#new-website&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;new-website&quot;&gt;&lt;/a&gt;New Website&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.rust-lang.org/2018/11/29/a-new-look-for-rust-lang-org.html&quot;&gt;Last
-week&lt;/a&gt;
-we announced a new iteration of the web site. It's now been promoted to
-rust-lang.org itself!&lt;/p&gt;
-&lt;p&gt;There's still a ton of work to do, but we're proud of the year of work that it
-took by many people to get it shipped.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#library-stabilizations&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-stabilizations&quot;&gt;&lt;/a&gt;Library stabilizations&lt;/h3&gt;
-&lt;p&gt;A bunch of &lt;code&gt;From&lt;/code&gt; implementations have been added:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;u8&lt;/code&gt; now implements &lt;code&gt;From&amp;lt;NonZeroU8&amp;gt;&lt;/code&gt;, and likewise for the other numeric types and their &lt;code&gt;NonZero&lt;/code&gt; equivalents&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Option&amp;lt;&amp;amp;T&amp;gt;&lt;/code&gt; implements &lt;code&gt;From&amp;lt;&amp;amp;Option&amp;lt;T&amp;gt;&amp;gt;&lt;/code&gt;, and likewise for &lt;code&gt;&amp;amp;mut&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Additionally, these functions have been stabilized:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.align_to&quot;&gt;&lt;code&gt;slice::align_to&lt;/code&gt;&lt;/a&gt; and its mutable counterpart&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.chunks_exact&quot;&gt;&lt;code&gt;slice::chunks_exact&lt;/code&gt;&lt;/a&gt;,
-as well as its mutable and &lt;code&gt;r&lt;/code&gt; counterparts (like
-&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.rchunks_mut&quot;&gt;&lt;code&gt;slice::rchunks_exact_mut&lt;/code&gt;&lt;/a&gt;) in all combinations&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1310-2018-12-06&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#cargo-features&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;cargo-features&quot;&gt;&lt;/a&gt;Cargo features&lt;/h3&gt;
-&lt;p&gt;Cargo will now download packages in parallel using HTTP/2.&lt;/p&gt;
-&lt;p&gt;Additionally, now that &lt;code&gt;extern crate&lt;/code&gt; is not usually required, it would be
-jarring to do &lt;code&gt;extern crate foo as baz;&lt;/code&gt; to rename a crate. As such, you can
-do so in your &lt;code&gt;Cargo.toml&lt;/code&gt;, like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[dependencies]
-baz = { version = &amp;quot;0.1&amp;quot;, package = &amp;quot;foo&amp;quot; }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;or, the equivalent&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[dependencies.baz]
-version = &amp;quot;0.1&amp;quot;
-package = &amp;quot;foo&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, the &lt;code&gt;foo&lt;/code&gt; package will be able to be used via &lt;code&gt;baz&lt;/code&gt; in your code.&lt;/p&gt;
-&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1310-2018-12-06&quot;&gt;detailed release notes&lt;/a&gt; for more.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#contributors-to-131.0&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-131.0&quot;&gt;&lt;/a&gt;Contributors to 1.31.0&lt;/h2&gt;
-&lt;p&gt;At the end of release posts, we normally thank &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.31.0&quot;&gt;the people who contributed to
-this release&lt;/a&gt;. But for this
-release, more so than others, this list does not truly capture the amount of
-work and the number of people who have contributed. Each release is only six
-weeks, but this release is the culmination of three years of effort, in
-countless repositories, by numerous people. It's been a pleasure to work with
-you all, and we look forward to continuing to grow in the next three years.&lt;/p&gt;
 </content>
 
         <author>

@@ -10,8 +10,27 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-04-25T16:29:45Z</updated>
+    <updated>2019-04-26T21:18:29Z</updated>
 
+    
+    <entry>
+        <title>Mozilla IRC Sunset and the Rust Channel</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/04/26/Mozilla-IRC-Sunset-and-the-Rust-Channel.html" type="text/html" title="Mozilla IRC Sunset and the Rust Channel" />
+        <published>2019-04-26T00:00:00Z</published>
+        <updated>2019-04-26T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/04/26/Mozilla-IRC-Sunset-and-the-Rust-Channel.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/04/26/Mozilla-IRC-Sunset-and-the-Rust-Channel.html">&lt;p&gt;The Rust community has had a presence on Mozilla’s IRC network almost since Rust’s inception. Over time, the single channel grew into a set of pretty active channels where folks would come to ask Rust questions, coordinate work on Rust itself, and just in general chat about Rust.&lt;/p&gt;
+&lt;p&gt;Mozilla &lt;a href=&quot;http://exple.tive.org/blarg/2019/04/26/synchronous-text/&quot;&gt;recently announced&lt;/a&gt; that it would be shutting down its IRC network, citing a growing maintenance and moderation burden. They are looking into new options for the Mozilla community, but this does leave the question open as to what the Rust project will do.&lt;/p&gt;
+&lt;p&gt;Last year a lot of the teams &lt;a href=&quot;https://internals.rust-lang.org/t/exploring-new-communication-channels/7859&quot;&gt;started exploring new communication platforms&lt;/a&gt;. Almost all the Rust teams no longer use IRC as their official discussion platform, instead using Discord or Zulip (as well as a variety of video chat tools for synchronous meetings). The few teams that do use IRC are working with us to find a new home, likely a channel on Discord or Zulip.&lt;/p&gt;
+&lt;p&gt;This leaves the #rust and #rust-beginners channels on Mozilla’s IRC network, which are still quite active, that will need a new home when Mozilla’s network shuts down. Rust’s &lt;a href=&quot;http://discord.gg/rust-lang&quot;&gt;official Discord server&lt;/a&gt; does have the #users, #help, and #beginners channels that fill in this purpose, and we recommend people start using those.&lt;/p&gt;
+&lt;p&gt;We understand that not everyone wishes to switch to Discord for many reasons. For people who wish to continue using IRC, there is &lt;a href=&quot;http://webchat.freenode.net/?channels=##rust&quot;&gt;an unofficial freenode channel&lt;/a&gt; which you can hang out in, though we’d like to emphasize that this is not associated with the Rust teams and is not moderated by our Moderation team. You’re also free to create new channels on freenode &lt;a href=&quot;https://freenode.net/policies#off-topic-use&quot;&gt;in accordance with the freenode rules&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are still a couple months before irc.mozilla.org shuts down — we’ll work at making this transition as smooth as possible in this time. We’d like to thank everyone who made #rust and #rust-beginners on Mozilla IRC a great place to hang out and are sad to see it go.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Core Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.34.1</title>
@@ -1160,86 +1179,6 @@ to us on GitHub or &lt;a href=&quot;https://discordapp.com/invite/rust-lang&quot
 
         <author>
             <name>The Dev-tools team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>A call for Rust 2019 Roadmap blog posts</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html" type="text/html" title="A call for Rust 2019 Roadmap blog posts" />
-        <published>2018-12-06T00:00:00Z</published>
-        <updated>2018-12-06T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html">&lt;p&gt;It's almost 2019! As such, the Rust team needs to create a roadmap for Rust's
-development next year. At the highest level, Rust's development process looks
-like this:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;The Rust community blogs about what they'd like to see.&lt;/li&gt;
-&lt;li&gt;The core team reads these posts, and produces a &amp;quot;roadmap RFC,&amp;quot; a proposal
-for what next year's development looks like.&lt;/li&gt;
-&lt;li&gt;The RFC is widely discussed, and modified in response to feedback, and
-eventually accepted.&lt;/li&gt;
-&lt;li&gt;This RFC becomes a guideline for accepting or postponing RFCs for the next
-year.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;We try to align this with the calendar year, but it doesn't 100% match up,
-currently. Last year, &lt;a href=&quot;https://blog.rust-lang.org/2018/01/03/new-years-rust-a-call-for-community-blogposts.html&quot;&gt;we had a call for posts on January
-3&lt;/a&gt;,
-the roadmap RFC was opened &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2314&quot;&gt;on Jan
-29th&lt;/a&gt;, and was &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/2314#issuecomment-370576889&quot;&gt;accepted on
-March
-5th&lt;/a&gt;.
-This year, we're starting a bit earlier, but it's still not going to be
-accepted before January 1.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#we-need-you&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;we-need-you&quot;&gt;&lt;/a&gt;We need you&lt;/h2&gt;
-&lt;p&gt;Starting today and running until of January 15, we’d like to ask the
-community to write blogposts reflecting on Rust in 2018 and proposing goals
-and directions for Rust in 2019. Like last year, these can take many forms:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A post on your personal or company blog&lt;/li&gt;
-&lt;li&gt;A Medium post&lt;/li&gt;
-&lt;li&gt;A GitHub gist&lt;/li&gt;
-&lt;li&gt;Or any other online writing platform you prefer.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We’re looking for posts on many topics:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Ideas for community programs&lt;/li&gt;
-&lt;li&gt;Language features&lt;/li&gt;
-&lt;li&gt;Documentation improvements&lt;/li&gt;
-&lt;li&gt;Ecosystem needs&lt;/li&gt;
-&lt;li&gt;Tooling enhancements&lt;/li&gt;
-&lt;li&gt;Or anything else Rust related you hope for in 2019&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;There's one additional thing this year, however. With the shipping of Rust
-2018 today, it's time to think about the next edition. In other words:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Rust 2015: Stability&lt;/li&gt;
-&lt;li&gt;Rust 2018: Productivity&lt;/li&gt;
-&lt;li&gt;Rust 2021: ?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We aren't yet &lt;em&gt;committing&lt;/em&gt; to an edition in 2021, but that's the current
-estimate. Each edition has had some sort of theme associated with it. As
-such, we wouldn't just like to know what you're thinking for Rust in 2019,
-but also, what you want the theme of Rust 2021 to be. Ideally, suggestions
-for Rust in 2019 will fit into the overall goal of the next edition, though
-of course, three years is a lot of time, and so not every single thing must.
-As Rust matures, we need to start thinking of ever-longer horizons, and how
-our current plans fit into those eventual plans.&lt;/p&gt;
-&lt;p&gt;If you're not sure what to write, check out all of the blog posts from last
-year &lt;a href=&quot;https://readrust.net/rust-2018/&quot;&gt;over at ReadRust&lt;/a&gt;. They may give you
-some inspiration!&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#please-share-these-posts-with-us&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;please-share-these-posts-with-us&quot;&gt;&lt;/a&gt;Please share these posts with us&lt;/h2&gt;
-&lt;p&gt;You can write up these posts and email them to &lt;code&gt;community@rust-lang.org&lt;/code&gt; or
-tweet them with the hashtag &lt;code&gt;#rust2019&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The Core team will be reading all of the submitted posts and using them to
-inform the initial roadmap RFC for 2019. Once the RFC is submitted, we’ll
-open up the normal RFC process, though if you want, you are welcome to write
-a post and link to it on the GitHub discussion.&lt;/p&gt;
-&lt;p&gt;We look forward to working with the entire community to make Rust even more
-wonderful in 2019. Thanks for an awesome 2018!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     

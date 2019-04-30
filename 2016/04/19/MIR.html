@@ -157,7 +157,7 @@ the Rust language. Next, we look at how MIR will help with
 implementing <a href="https://github.com/rust-lang/rfcs/blob/master/text/0320-nonzeroing-dynamic-drop.md">non-zeroing drops</a>, a long-desired
 optimization. If after this post you find you are hungry for more,
 have a look at the <a href="https://github.com/rust-lang/rfcs/blob/master/text/1211-mir.md">RFC that introduced MIR</a>, or jump right
-into <a href="https://github.com/rust-lang/rust/blob/master/src/librustc/mir/repr.rs">the code</a>. (Compiler buffs may be particularly interested in
+into <a href="https://github.com/rust-lang/rust/blob/f7ec6873ccfbf7dcdbd1908c0857c866b3e7087a/src/librustc/mir/repr.rs">the code</a>. (Compiler buffs may be particularly interested in
 the <a href="https://github.com/rust-lang/rfcs/blob/master/text/1211-mir.md#alternatives">alternatives section</a>, which discusses certain design
 choices in detail, such as why MIR does not currently use SSA.)</p>
 <!-- raw HTML omitted -->
@@ -290,7 +290,7 @@ sanity check to ensure that the MIR is well-formed.</p>
 Rust program into something resembling MIR, but we stayed in textual
 form. Internally to the compiler, though, we never &quot;parse&quot; MIR or have
 it in textual form. Instead, we represent MIR as a
-<a href="https://github.com/rust-lang/rust/blob/master/src/librustc/mir/repr.rs">set of data structures</a> encoding a
+<a href="https://github.com/rust-lang/rust/blob/f7ec6873ccfbf7dcdbd1908c0857c866b3e7087a/src/librustc/mir/repr.rs">set of data structures</a> encoding a
 <a href="https://en.wikipedia.org/wiki/Control_flow_graph">control-flow graph (CFG)</a>. If you've ever used a flow-chart,
 then the concept of a control-flow graph will be pretty familiar to
 you. It's a representation of your program that exposes the underlying

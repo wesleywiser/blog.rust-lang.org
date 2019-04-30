@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-04-30T18:03:01Z</updated>
+    <updated>2019-04-30T20:46:21Z</updated>
 
     
     <entry>
@@ -106,7 +106,7 @@ take a step back, take stock, and prepare for the future.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2&gt;&lt;a href=&quot;#governance&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;governance&quot;&gt;&lt;/a&gt;Governance&lt;/h2&gt;
 &lt;p&gt;Over the last three years, the Rust project has grown a lot. Rust used to have a core team of 8 members. When we added sub-teams in 2015, we grew to 23 members. We've now grown to over 100 — that's bigger than many companies! And of course, looking beyond the teams, the size of the Rust community as a whole has grown tremendously as well. As a result of this growth, we've found that the processes which served us well when we were a smaller project are starting to feel some strain.&lt;/p&gt;
-&lt;p&gt;Many of the teams have announced plans to look over revamp their processes to scale better. Often this can be as simple as taking the time to write down things that previously were understood only informally — sometimes it means establishing new structures.&lt;/p&gt;
+&lt;p&gt;Many of the teams have announced plans to review and revamp their processes so as to scale better. Often this can be as simple as taking the time to write down things that previously were understood only informally — sometimes it means establishing new structures.&lt;/p&gt;
 &lt;p&gt;Because of this widespread interest in governance, we've also created a new &lt;a href=&quot;https://internals.rust-lang.org/t/governance-working-group-announcement/9637&quot;&gt;&lt;strong&gt;Governance Working Group&lt;/strong&gt;&lt;/a&gt;. This group is going to be devoted to working with each team to hone its governance structure and to help pass lessons and strategies between teams.&lt;/p&gt;
 &lt;p&gt;Additionally, the RFC process has been a great boon for Rust, but as we've grown, there have been times where it didn't work so well too.
 We may look at revisions to the process this year.&lt;/p&gt;

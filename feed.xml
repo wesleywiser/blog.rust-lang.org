@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-05-13T15:43:20Z</updated>
+    <updated>2019-05-13T15:49:18Z</updated>
 
     
     <entry>
@@ -86,7 +86,7 @@ resolve this in the standard library soon.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2&gt;&lt;a href=&quot;#acknowledgements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
 &lt;p&gt;Thanks to Sean McArthur, who found this bug and reported it to us in accordance
-with our &lt;a href=&quot;https://www.rust-lang.org/policies/security.&quot;&gt;security policy&lt;/a&gt;.&lt;/p&gt;
+with our &lt;a href=&quot;https://www.rust-lang.org/policies/security&quot;&gt;security policy&lt;/a&gt;.&lt;/p&gt;
 </content>
 
         <author>

@@ -10,8 +10,43 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-05-14T12:16:02Z</updated>
+    <updated>2019-05-14T13:50:28Z</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.34.2</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/05/14/Rust-1.34.2.html" type="text/html" title="Announcing Rust 1.34.2" />
+        <published>2019-05-14T00:00:00Z</published>
+        <updated>2019-05-14T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/05/14/Rust-1.34.2.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/05/14/Rust-1.34.2.html">&lt;p&gt;The Rust team has published a new point release of Rust, 1.34.2. Rust is a
+programming language that is empowering everyone to build reliable and
+efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
+1.34.2 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
+appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1.34.2-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.34.2-stable&quot;&gt;&lt;/a&gt;What's in 1.34.2 stable&lt;/h2&gt;
+&lt;p&gt;Sean McArthur reported a &lt;a href=&quot;https://groups.google.com/d/msg/rustlang-security-announcements/aZabeCMUv70/-2Y6-SL6AQAJ&quot;&gt;security vulnerability&lt;/a&gt; affecting the standard
+library that caused the &lt;a href=&quot;https://doc.rust-lang.org/stable/std/error/trait.Error.html#method.downcast&quot;&gt;&lt;code&gt;Error::downcast&lt;/code&gt;&lt;/a&gt; family of methods
+to perform unsound casts when a manual implementation of the
+&lt;a href=&quot;https://doc.rust-lang.org/stable/std/error/trait.Error.html#method.type_id&quot;&gt;&lt;code&gt;Error::type_id&lt;/code&gt;&lt;/a&gt; method returned the wrong
+&lt;a href=&quot;https://doc.rust-lang.org/stable/std/any/struct.TypeId.html&quot;&gt;&lt;code&gt;TypeId&lt;/code&gt;&lt;/a&gt;, leading to security issues such as out of bounds
+reads/writes/etc.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://doc.rust-lang.org/stable/std/error/trait.Error.html#method.type_id&quot;&gt;&lt;code&gt;Error::type_id&lt;/code&gt;&lt;/a&gt; method was recently stabilized as part
+of Rust 1.34.0. This point release &lt;strong&gt;destabilizes&lt;/strong&gt; it, preventing any code on
+the stable and beta channels to implement or use it, awaiting future plans that
+will be discussed in &lt;a href=&quot;https://github.com/rust-lang/rust/issues/60784&quot;&gt;issue #60784&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;An in-depth explaination of this issue was posted in yesterday's &lt;a href=&quot;https://groups.google.com/d/msg/rustlang-security-announcements/aZabeCMUv70/-2Y6-SL6AQAJ&quot;&gt;security
+advisory&lt;/a&gt;. The assigned CVE for the vulnerability is &lt;a href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12083&quot;&gt;CVE-2019-12083&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Security advisory for the standard library</title>
@@ -1050,48 +1085,6 @@ empowering all kinds of lightweight additions and extensions to the language!&lt
 
         <author>
             <name>Alex Crichton</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.31.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2018/12/20/Rust-1.31.1.html" type="text/html" title="Announcing Rust 1.31.1" />
-        <published>2018-12-20T00:00:00Z</published>
-        <updated>2018-12-20T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2018/12/20/Rust-1.31.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2018/12/20/Rust-1.31.1.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.31.1. Rust is a
-systems programming language focused on safety, speed, and concurrency.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.31.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
-appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1311-2018-12-20&quot;&gt;detailed release notes for
-1.31.1&lt;/a&gt; on GitHub.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1.31.1-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.31.1-stable&quot;&gt;&lt;/a&gt;What's in 1.31.1 stable&lt;/h2&gt;
-&lt;p&gt;This patch release fixes a build failure on &lt;code&gt;powerpc-unknown-netbsd&lt;/code&gt; by
-way of &lt;a href=&quot;https://github.com/rust-lang/rust/pull/56562&quot;&gt;an update to the &lt;code&gt;libc&lt;/code&gt;
-crate&lt;/a&gt; used by the compiler.&lt;/p&gt;
-&lt;p&gt;Additionally, the Rust Language Server was updated to fix two critical bugs.
-First, &lt;a href=&quot;https://github.com/rust-lang/rls/pull/1170&quot;&gt;hovering over the type with documentation above single-line
-attributes led to 100% CPU
-usage:&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;/// Some documentation
-#[derive(Debug)] // Multiple, single-line
-#[allow(missing_docs)] // attributes
-pub struct MyStruct { /* ... */ }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rls/pull/1171&quot;&gt;Go to definition was fixed for std types&lt;/a&gt;:
-Before, using the RLS on &lt;code&gt;HashMap&lt;/code&gt;, for example, tried to open this file&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/libstd/collections/hash/map.rs
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and now RLS goes to the correct location (for Rust 1.31, note the extra &lt;code&gt;src&lt;/code&gt;):&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libstd/collections/hash/map.rs
-&lt;/code&gt;&lt;/pre&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     

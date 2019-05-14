@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-05-14T11:41:31Z</updated>
+    <updated>2019-05-14T12:16:02Z</updated>
 
     
     <entry>
@@ -21,7 +21,7 @@
         <id>https://blog.rust-lang.org/2019/05/13/Security-advisory.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2019/05/13/Security-advisory.html">&lt;p&gt;This is a cross-post of the &lt;a href=&quot;https://groups.google.com/forum/#!topic/rustlang-security-announcements/aZabeCMUv70&quot;&gt;official security advisory&lt;/a&gt;. The
 official post contains a signed version with our PGP key, as well.&lt;/p&gt;
-&lt;p&gt;The CVE for this vulnerability is &lt;a href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-0803&quot;&gt;CVE-2019-12083&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The CVE for this vulnerability is &lt;a href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12083&quot;&gt;CVE-2019-12083&lt;/a&gt;.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;The Rust team was recently notified of a security vulnerability affecting
 manual implementations of &lt;code&gt;Error::type_id&lt;/code&gt; and their interaction with the

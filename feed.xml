@@ -10,8 +10,35 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-05-14T13:50:28Z</updated>
+    <updated>2019-05-15T14:13:22Z</updated>
 
+    
+    <entry>
+        <title>4 years of Rust</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/05/15/4-Years-Of-Rust.html" type="text/html" title="4 years of Rust" />
+        <published>2019-05-15T00:00:00Z</published>
+        <updated>2019-05-15T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/05/15/4-Years-Of-Rust.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/05/15/4-Years-Of-Rust.html">&lt;p&gt;On May 15th, 2015, &lt;a href=&quot;https://blog.rust-lang.org/2015/05/15/Rust-1.0.html&quot;&gt;Rust&lt;/a&gt; was released to the world! After 5 years of open development (and a couple of years of sketching before that), we finally hit the button on making the attempt to create a new systems programming language a serious effort!&lt;/p&gt;
+&lt;p&gt;It’s easy to look back on the pre-1.0 times and cherish them for being the wild times of language development and fun research. Features were added and cut, syntax and keywords were tried, and before 1.0, there was a big clean-up that removed a lot of the standard library. For fun, you can check Niko’s blog post on &lt;a href=&quot;https://smallcultfollowing.com/babysteps/blog/2012/04/09/rusts-object-system/&quot;&gt;how Rust's object system works&lt;/a&gt;, Marijn Haverbeke’s talk on &lt;a href=&quot;https://www.youtube.com/watch?v=olbTX95hdbg&quot;&gt;features that never made it close to 1.0&lt;/a&gt; or even the &lt;a href=&quot;http://venge.net/graydon/talks/intro-talk-2.pdf&quot;&gt;introductory slides about Servo&lt;/a&gt;, which present a language looking very different from today.&lt;/p&gt;
+&lt;p&gt;Releasing Rust with stability guarantees also meant putting a stop to large visible changes. The face of Rust is still very similar to Rust 1.0. Even with the changes from last year’s 2018 Edition, Rust is still very recognizable as what it was in 2015. That steadiness hides that the time of Rust’s fastest development and growth is &lt;em&gt;now&lt;/em&gt;. With the stability of the language and easy upgrades as a base, a ton of new features have been built. We’ve seen a bunch of achievements in the last year:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We have been StackOverflow’s &lt;a href=&quot;https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted&quot;&gt;“Most loved programming language”&lt;/a&gt; 4 consecutive years in a row&lt;/li&gt;
+&lt;li&gt;We opened up a whole new area of development for stable Rust: &lt;a href=&quot;https://www.rust-lang.org/what/embedded&quot;&gt;embedded development&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.rust-lang.org/what/wasm&quot;&gt;Rust+WASM&lt;/a&gt; went from an experiment to a usable product, making rustc the first compiler with focus on supporting WASM&lt;/li&gt;
+&lt;li&gt;We shipped a new language edition: &lt;a href=&quot;https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html&quot;&gt;Rust 2018&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://crates.io&quot;&gt;Crates.io&lt;/a&gt; passed a billion downloads and has over 25,000 crates available&lt;/li&gt;
+&lt;li&gt;There’s now over 100 meetups around the world, in 42 countries&lt;/li&gt;
+&lt;li&gt;6(!) new conferences were spun up (&lt;a href=&quot;https://rustrush.ru/15th&quot;&gt;RustRush&lt;/a&gt;, &lt;a href=&quot;https://rustcon.asia/&quot;&gt;RustCon Asia&lt;/a&gt;, &lt;a href=&quot;https://oxidizeconf.com/&quot;&gt;Oxidize&lt;/a&gt;, &lt;a href=&quot;https://rustlatam.org/&quot;&gt;Rust LATAM&lt;/a&gt;, &lt;a href=&quot;https://cogoldrust.com/&quot;&gt;Colorado Gold Rust&lt;/a&gt;, &lt;a href=&quot;https://www.rustlab.it/&quot;&gt;RustLab Italy&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This list could go on and on. While the time before and after release was a time where language changes had huge impact how Rust is perceived, it's becoming more and more important what people start building in and around it. This includes projects like whole game engines, but also many small, helpful libraries, meetup formats, tutorials other educational material. Birthdays are a great time to take a look back over the last year and see the happy parts!&lt;/p&gt;
+&lt;p&gt;Rust would be nothing, and especially not winning prizes, without its community. Community happens everywhere! We would like to thank everyone for being along on this ride, from team members to small scale contributors to people just checking the language out and finding interest in it. Your interest and curiosity is what makes the Rust community an enjoyable place to be. Some meetups &lt;a href=&quot;https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=AGENDA&amp;height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=apd9vmbc22egenmtu5l6c5jbfc%40group.calendar.google.com&amp;color=%23691426&amp;ctz=Europe%2FMadrid&quot;&gt;are running birthday parties&lt;/a&gt; today to which everyone is invited. If you are not attending one, you can take the chance to celebrate in any other fashion: maybe show us a picture of what you are currently working on or talk about what excites you. If you want to take it to social media, consider tagging our &lt;a href=&quot;https://twitter.com/rustlang&quot;&gt;Twitter account&lt;/a&gt; or using the hashtag #rustbirthday.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Core Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.34.2</title>
@@ -774,317 +801,6 @@ without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.32.0&qu
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Procedural Macros in Rust 2018</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html" type="text/html" title="Procedural Macros in Rust 2018" />
-        <published>2018-12-21T00:00:00Z</published>
-        <updated>2018-12-21T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html">&lt;p&gt;Perhaps my favorite feature in the Rust 2018 edition is &lt;a href=&quot;https://doc.rust-lang.org/reference/procedural-macros.html&quot;&gt;procedural macros&lt;/a&gt;.
-Procedural macros have had a long and storied history in Rust (and will continue
-to have a storied future!), and now is perhaps one of the best times to get
-involved with them because the 2018 edition has so dramatically improved the
-experience both defining and using them.&lt;/p&gt;
-&lt;p&gt;Here I'd like to explore what procedural macros are, what they're capable of,
-notable new features, and some fun use cases of procedural macros. I might even
-convince you that this is Rust 2018's best feature as well!&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#what-is-a-procedural-macro&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;what-is-a-procedural-macro&quot;&gt;&lt;/a&gt;What is a procedural macro?&lt;/h3&gt;
-&lt;p&gt;First defined over two years ago in &lt;a href=&quot;https://github.com/rust-lang/rfcs/blob/master/text/1566-proc-macros.md&quot;&gt;RFC 1566&lt;/a&gt;, procedural macros are, in
-layman's terms, a function that takes a piece of syntax at compile time and
-produces a new bit of syntax. Procedural macros in Rust 2018 come in one of
-three flavors:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;#[derive]&lt;/code&gt; mode macros&lt;/strong&gt; have actually been stable since &lt;a href=&quot;https://blog.rust-lang.org/2017/02/02/Rust-1.15.html&quot;&gt;Rust 1.15&lt;/a&gt;
-and bring all the goodness and ease of use of &lt;code&gt;#[derive(Debug)]&lt;/code&gt; to
-user-defined traits as well, such as &lt;a href=&quot;https://serde.rs&quot;&gt;Serde&lt;/a&gt;'s &lt;code&gt;#[derive(Deserialize)]&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Function-like macros&lt;/strong&gt; are newly stable to the 2018 edition and allow
-defining macros like &lt;code&gt;env!(&amp;quot;FOO&amp;quot;)&lt;/code&gt; or &lt;code&gt;format_args!(&amp;quot;...&amp;quot;)&lt;/code&gt; in a
-crates.io-based library. You can think of these as sort of &amp;quot;&lt;code&gt;macro_rules!&lt;/code&gt;
-macros&amp;quot; on steroids.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Attribute macros&lt;/strong&gt;, my favorite, are also new in the 2018 edition
-and allow you to provide lightweight annotations on Rust functions which
-perform syntactical transformations over the code at compile time.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Each of these flavors of macros can be defined in a crate with &lt;code&gt;proc-macro = true&lt;/code&gt; &lt;a href=&quot;https://doc.rust-lang.org/cargo/reference/manifest.html&quot;&gt;specified in its manifest&lt;/a&gt;. When used, a procedural macro is
-loaded by the Rust compiler and executed as the invocation is expanded. This
-means that Cargo is in control of versioning for procedural macros and you can
-use them with all same ease of use you'd expect from other Cargo dependencies!&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#defining-a-procedural-macro&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;defining-a-procedural-macro&quot;&gt;&lt;/a&gt;Defining a procedural macro&lt;/h3&gt;
-&lt;p&gt;Each of the three types of procedural macros are &lt;a href=&quot;https://doc.rust-lang.org/stable/reference/procedural-macros.html&quot;&gt;defined in a slightly different
-fashion&lt;/a&gt;, and here we'll single out attribute macros. First, we'll flag
-&lt;code&gt;Cargo.toml&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[lib]
-proc-macro = true
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and then in &lt;code&gt;src/lib.rs&lt;/code&gt; we can write our macro:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;extern crate proc_macro;
-use proc_macro::TokenStream;
-
-#[proc_macro_attribute]
-pub fn hello(attr: TokenStream, item: TokenStream) -&amp;gt; TokenStream {
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can then write some unit tests in &lt;code&gt;tests/smoke.rs&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[my_crate::hello]
-fn wrapped_function() {}
-
-#[test]
-fn works() {
-    wrapped_function();
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;... and that's it! When we execute &lt;code&gt;cargo test&lt;/code&gt; Cargo will compile our
-procedural macro. Afterwards it will compile our unit test which loads the macro
-at compile time, executing the &lt;code&gt;hello&lt;/code&gt; function and compiling the resulting
-syntax.&lt;/p&gt;
-&lt;p&gt;Right off the bat we can see a few important properties of procedural macros:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The input/output is this fancy &lt;code&gt;TokenStream&lt;/code&gt; type we'll talk about more in a
-bit&lt;/li&gt;
-&lt;li&gt;We're &lt;em&gt;executing arbitrary code&lt;/em&gt; at compile time, which means we can do just
-about anything!&lt;/li&gt;
-&lt;li&gt;Procedural macros are incorporated with the module system, meaning they can
-be imported just like any other name.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Before we take a look at implementing a procedural macro, let's first dive into
-some of these points.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#macros-and-the-module-system&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;macros-and-the-module-system&quot;&gt;&lt;/a&gt;Macros and the module system&lt;/h3&gt;
-&lt;p&gt;First stabilized in &lt;a href=&quot;https://blog.rust-lang.org/2018/10/25/Rust-1.30.0.html&quot;&gt;Rust 1.30&lt;/a&gt; (noticing a trend with 1.15?) macros are now
-integrated with the module system in Rust. This mainly means that you no longer
-need the clunky &lt;code&gt;#[macro_use]&lt;/code&gt; attribute when importing macros! Instead of this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[macro_use]
-extern crate log;
-
-fn main() {
-    debug!(&amp;quot;hello, &amp;quot;);
-    info!(&amp;quot;world!&amp;quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;you can do:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;use log::info;
-
-fn main() {
-    log::debug!(&amp;quot;hello, &amp;quot;);
-    info!(&amp;quot;world!&amp;quot;);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Integration with the module system solves one of the most confusing parts about
-macros historically. They're now imported and namespaced just as you would any
-other item in Rust!&lt;/p&gt;
-&lt;p&gt;The benefits are not only limited to bang-style &lt;code&gt;macro_rules&lt;/code&gt; macros, as you can
-now transform code that looks like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[macro_use]
-extern crate serde_derive;
-
-#[derive(Deserialize)]
-struct Foo {
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;into&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;use serde::Deserialize;
-
-#[derive(Deserialize)]
-struct Foo {
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and you don't even need to explicitly depend on &lt;code&gt;serde_derive&lt;/code&gt; in &lt;code&gt;Cargo.toml&lt;/code&gt;!
-All you need is:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[dependencies]
-serde = { version = '1.0.82', features = ['derive'] }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;&lt;a href=&quot;#whats-inside-a-tokenstream?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-inside-a-tokenstream?&quot;&gt;&lt;/a&gt;What's inside a &lt;code&gt;TokenStream&lt;/code&gt;?&lt;/h3&gt;
-&lt;p&gt;This mysterious &lt;code&gt;TokenStream&lt;/code&gt; type comes from the &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/&quot;&gt;compiler-provided
-&lt;code&gt;proc_macro&lt;/code&gt; crate&lt;/a&gt;. When it was first added all you could do with a
-&lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/struct.TokenStream.html&quot;&gt;&lt;code&gt;TokenStream&lt;/code&gt;&lt;/a&gt; was call convert it to or from a string using &lt;code&gt;to_string()&lt;/code&gt; or &lt;code&gt;parse()&lt;/code&gt;.
-As of Rust 2018, you can act on the tokens in a &lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/struct.TokenStream.html&quot;&gt;&lt;code&gt;TokenStream&lt;/code&gt;&lt;/a&gt; directly.&lt;/p&gt;
-&lt;p&gt;A &lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/struct.TokenStream.html&quot;&gt;&lt;code&gt;TokenStream&lt;/code&gt;&lt;/a&gt; is effectively &amp;quot;just&amp;quot; an iterator over &lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html&quot;&gt;&lt;code&gt;TokenTree&lt;/code&gt;&lt;/a&gt;. All
-syntax in Rust falls into one of these four categories, the four variants of
-&lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html&quot;&gt;&lt;code&gt;TokenTree&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Ident&lt;/code&gt; is any identifier like &lt;code&gt;foo&lt;/code&gt; or &lt;code&gt;bar&lt;/code&gt;. This also contains keywords
-such as &lt;code&gt;self&lt;/code&gt; and &lt;code&gt;super&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Literal&lt;/code&gt; include things like &lt;code&gt;1&lt;/code&gt;, &lt;code&gt;&amp;quot;foo&amp;quot;&lt;/code&gt;, and &lt;code&gt;'b'&lt;/code&gt;. All literals are one
-token and represent constant values in a program.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Punct&lt;/code&gt; represents some form of punctuation that's not a delimiter. For
-example &lt;code&gt;.&lt;/code&gt; is a &lt;code&gt;Punct&lt;/code&gt; token in the field access of &lt;code&gt;foo.bar&lt;/code&gt;.
-Multi-character punctuation like &lt;code&gt;=&amp;gt;&lt;/code&gt; is represented as two &lt;code&gt;Punct&lt;/code&gt; tokens,
-one for &lt;code&gt;=&lt;/code&gt; and one for &lt;code&gt;&amp;gt;&lt;/code&gt;, and the &lt;code&gt;Spacing&lt;/code&gt; enum says that the &lt;code&gt;=&lt;/code&gt; is
-adjacent to the &lt;code&gt;&amp;gt;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Group&lt;/code&gt; is where the term &amp;quot;tree&amp;quot; is most relevant, as &lt;code&gt;Group&lt;/code&gt; represents a
-delimited sub-token-stream. For example &lt;code&gt;(a, b)&lt;/code&gt; is a &lt;code&gt;Group&lt;/code&gt; with parentheses
-as delimiters, and the internal token stream is &lt;code&gt;a, b&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;While this is conceptually simple, this may sound like there's not much we can
-do with this! It's unclear, for example, how we might parse a function from a
-&lt;code&gt;TokenStream&lt;/code&gt;. The minimality of &lt;code&gt;TokenTree&lt;/code&gt; is crucial, however, for
-stabilization. It would be infeasible to stabilize the Rust AST because that
-means we could never change it. (imagine if we couldn't have added the &lt;code&gt;?&lt;/code&gt;
-operator!)&lt;/p&gt;
-&lt;p&gt;By using &lt;code&gt;TokenStream&lt;/code&gt; to communicate with procedural macros, the compiler is
-able to add new language syntax while also being able to compile
-and work with older procedural macros. Let's see now, though, how we can
-actually get useful information out of a &lt;code&gt;TokenStream&lt;/code&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#parsing-a-tokenstream&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;parsing-a-tokenstream&quot;&gt;&lt;/a&gt;Parsing a &lt;code&gt;TokenStream&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;If &lt;code&gt;TokenStream&lt;/code&gt; is just a simple iterator, then we've got a long way to go from
-that to an actual parsed function. Although the code is already lexed for us
-we still need to write a whole Rust parser! Thankfully though the community has
-been hard at work to make sure writing procedural macros in Rust is as smooth as
-can be, so you need look no further than the &lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt; crate&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;With the &lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt;&lt;/a&gt; crate we can parse any Rust AST as a one-liner:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[proc_macro_attribute]
-pub fn hello(attr: TokenStream, item: TokenStream) -&amp;gt; TokenStream {
-    let input = syn::parse_macro_input!(item as syn::ItemFn);
-    let name = &amp;amp;input.ident;
-    let abi = &amp;amp;input.abi;
-    // ...
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt;&lt;/a&gt; crate not only comes with the ability to parse built-in syntax
-but you can also easily write a recursive descent parser for your own syntax.
-The &lt;a href=&quot;https://docs.rs/syn/0.15/syn/parse/index.html&quot;&gt;&lt;code&gt;syn::parse&lt;/code&gt; module&lt;/a&gt; has more information about this capability.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#producing-a-tokenstream&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;producing-a-tokenstream&quot;&gt;&lt;/a&gt;Producing a &lt;code&gt;TokenStream&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;Not only do we take a &lt;code&gt;TokenStream&lt;/code&gt; as input with a procedural macro, but we
-also need to produce a &lt;code&gt;TokenStream&lt;/code&gt; as output. This output is typically
-required to be valid Rust syntax, but like the input it's just list of tokens
-that we need to build somehow.&lt;/p&gt;
-&lt;p&gt;Technically the only way to create a &lt;code&gt;TokenStream&lt;/code&gt; is via its &lt;code&gt;FromIterator&lt;/code&gt;
-implementation, which means we'd have to create each token one-by-one and
-collect it into a &lt;code&gt;TokenStream&lt;/code&gt;. This is quite tedious, though, so let's take a
-look at &lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt;&lt;/a&gt;'s sibling crate: &lt;a href=&quot;https://docs.rs/quote/0.6/quote/&quot;&gt;&lt;code&gt;quote&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The &lt;a href=&quot;https://docs.rs/quote/0.6/quote/&quot;&gt;&lt;code&gt;quote&lt;/code&gt;&lt;/a&gt; crate is a quasi-quoting implementation for Rust which primarily
-provides a convenient macro for us to use:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;use quote::quote;
-
-#[proc_macro_attribute]
-pub fn hello(attr: TokenStream, item: TokenStream) -&amp;gt; TokenStream {
-    let input = syn::parse_macro_input!(item as syn::ItemFn);
-    let name = &amp;amp;input.ident;
-
-    // Our input function is always equivalent to returning 42, right?
-    let result = quote! {
-        fn #name() -&amp;gt; u32 { 42 }
-    };
-    result.into()
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;a href=&quot;https://docs.rs/quote/0.6/quote/macro.quote.html&quot;&gt;&lt;code&gt;quote!&lt;/code&gt; macro&lt;/a&gt; allows you to write mostly-Rust syntax and interpolate
-variables quickly from the environment with &lt;code&gt;#foo&lt;/code&gt;. This removes much of the
-tedium of creating a &lt;code&gt;TokenStream&lt;/code&gt; token-by-token and allows quickly cobbling
-together various pieces of syntax into one return value.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#tokens-and-span&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;tokens-and-span&quot;&gt;&lt;/a&gt;Tokens and &lt;code&gt;Span&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;Perhaps the greatest feature of procedural macros in Rust 2018 is the ability to
-customize and use &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/struct.Span.html&quot;&gt;&lt;code&gt;Span&lt;/code&gt;&lt;/a&gt; information on each token, giving us the ability for
-amazing syntactical error messages from procedural macros:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;error: expected `fn`
- --&amp;gt; src/main.rs:3:14
-  |
-3 | my_annotate!(not_fn foo() {});
-  |              ^^^^^^
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;as well as completely custom error messages:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;error: imported methods must have at least one argument
-  --&amp;gt; invalid-imports.rs:12:5
-   |
-12 |     fn f1();
-   |     ^^^^^^^^
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/struct.Span.html&quot;&gt;&lt;code&gt;Span&lt;/code&gt;&lt;/a&gt; can be thought of as a pointer back into an original source file,
-typically saying something like &amp;quot;the &lt;code&gt;Ident&lt;/code&gt; token&lt;code&gt; foo&lt;/code&gt; came from file
-&lt;code&gt;bar.rs&lt;/code&gt;, line 4, column 5, and was 3 bytes long&amp;quot;. This information is
-primarily used by the compiler's diagnostics with warnings and error messages.&lt;/p&gt;
-&lt;p&gt;In Rust 2018 each &lt;a href=&quot;https://doc.rust-lang.org/stable/proc_macro/enum.TokenTree.html&quot;&gt;&lt;code&gt;TokenTree&lt;/code&gt;&lt;/a&gt; has a &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/struct.Span.html&quot;&gt;&lt;code&gt;Span&lt;/code&gt;&lt;/a&gt; associated with it. This means that
-if you preserve the &lt;a href=&quot;https://doc.rust-lang.org/proc_macro/struct.Span.html&quot;&gt;&lt;code&gt;Span&lt;/code&gt;&lt;/a&gt; of all input tokens into the output then even
-though you're producing brand new syntax the compiler's error messages are still
-accurate!&lt;/p&gt;
-&lt;p&gt;For example, a small macro like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[proc_macro]
-pub fn make_pub(item: TokenStream) -&amp;gt; TokenStream {
-    let result = quote! {
-        pub #item
-    };
-    result.into()
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;when invoked as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;my_macro::make_pub! {
-    static X: u32 = &amp;quot;foo&amp;quot;;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;is invalid because we're returning a string from a function that should return a
-&lt;code&gt;u32&lt;/code&gt;, and the compiler will helpfully diagnose the problem as:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;error[E0308]: mismatched types
- --&amp;gt; src/main.rs:1:37
-  |
-1 | my_macro::make_pub!(static X: u32 = &amp;quot;foo&amp;quot;);
-  |                                     ^^^^^ expected u32, found reference
-  |
-  = note: expected type `u32`
-             found type `&amp;amp;'static str`
-
-error: aborting due to previous error
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And we can see here that although we're generating brand new syntax, the
-compiler can preserve span information to continue to provide targeted
-diagnostics about code that we've written.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#procedural-macros-in-the-wild&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;procedural-macros-in-the-wild&quot;&gt;&lt;/a&gt;Procedural Macros in the Wild&lt;/h3&gt;
-&lt;p&gt;Ok up to this point we've got a pretty good idea about what procedural macros
-can do and the various capabilities they have in the 2018 edition. As such a
-long-awaited feature, the ecosystem is already making use of these new
-capabilities! If you're interested, some projects to keep your eyes on are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://crates.io/crates/syn&quot;&gt;&lt;code&gt;syn&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://docs.rs/quote/0.6/quote/&quot;&gt;&lt;code&gt;quote&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&quot;https://docs.rs/proc-macro2/0.4/proc_macro2/&quot;&gt;&lt;code&gt;proc-macro2&lt;/code&gt;&lt;/a&gt; are your go-to libraries for
-writing procedural macros. They make it easy to define custom parsers, parse
-existing syntax, create new syntax, work with older versions of Rust, and much
-more!&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://serde.rs&quot;&gt;Serde&lt;/a&gt; and its derive macros for &lt;code&gt;Serialize&lt;/code&gt; and &lt;code&gt;Deserialize&lt;/code&gt; are likely the
-most used macros in the ecosystem. They sport an &lt;a href=&quot;https://serde.rs/attributes.html&quot;&gt;impressive amount of
-configuration&lt;/a&gt; and are a great example of how small annotations
-can be so powerful.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;a href=&quot;https://github.com/rustwasm/wasm-bindgen&quot;&gt;&lt;code&gt;wasm-bindgen&lt;/code&gt; project&lt;/a&gt; uses attribute macros to easily define
-interfaces in Rust and import interfaces from JS. The &lt;code&gt;#[wasm_bindgen]&lt;/code&gt;
-lightweight annotation makes it easy to understand what's coming in and out,
-as well as removing lots of conversion boilerplate.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;a href=&quot;https://gitlab.gnome.org/federico/gnome-class&quot;&gt;&lt;code&gt;gobject_gen!&lt;/code&gt; macro&lt;/a&gt; is an experimental IDL for the GNOME
-project to define GObject objects safely in Rust, eschewing manually writing
-all the glue necessary to talk to C and interface with other GObject
-instances in Rust.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;a href=&quot;https://rocket.rs/&quot;&gt;Rocket framework&lt;/a&gt; has recently switched over to procedural
-macros, and showcases some of nightly-only features of procedural macros like
-custom diagnostics, custom span creation, and more. Expect to see these
-features stabilize in 2019!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;That's just a &lt;em&gt;taste&lt;/em&gt; of the power of procedural macros and some example usage
-throughout the ecosystem today. We're only 6 weeks out from the original release
-of procedural macros on stable, so we've surely only scratched the surface as
-well! I'm really excited to see where we can take Rust with procedural macros by
-empowering all kinds of lightweight additions and extensions to the language!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>Alex Crichton</name>
         </author>
     </entry>
     

@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-05-20T12:44:17Z</updated>
+    <updated>2019-05-20T13:59:13Z</updated>
 
     
     <entry>
@@ -32,7 +32,7 @@ event happened in Montevideo this year, and &lt;a href=&quot;https://www.youtube
 Rust Latam plans to be a yearly event, so &lt;a href=&quot;https://twitter.com/RustLatamConf&quot;&gt;watch Twitter&lt;/a&gt; for information about next
 year's event.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#april-20-23-2019:-rustcon-asia&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;april-20-23-2019:-rustcon-asia&quot;&gt;&lt;/a&gt;April 20-23, 2019: RustCon Asia&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://rustcon.asia/&quot;&gt;RustCon Asia&lt;/a&gt; was the first Rust conference in Asia! The [talk videos][] are already
+&lt;p&gt;&lt;a href=&quot;https://rustcon.asia/&quot;&gt;RustCon Asia&lt;/a&gt; was the first Rust conference in Asia! The &lt;a href=&quot;https://www.youtube.com/playlist?list=PL85XCvVPmGQjPvweRqkBgnh_HKE5MBB8x&quot;&gt;talk videos&lt;/a&gt; are already
 available on YouTube! &lt;a href=&quot;https://twitter.com/RustConAsia&quot;&gt;Follow @RustConAsia&lt;/a&gt; on Twitter for future updates.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#april-26-29-2019:-oxidize&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;april-26-29-2019:-oxidize&quot;&gt;&lt;/a&gt;April 26-29, 2019: Oxidize&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://oxidizeconf.com/&quot;&gt;Oxidize&lt;/a&gt; was a conference specifically about using Rust on embedded devices that took

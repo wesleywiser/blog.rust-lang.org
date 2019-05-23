@@ -10,8 +10,197 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-05-20T13:59:13Z</updated>
+    <updated>2019-05-23T20:28:47Z</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.35.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/05/23/Rust-1.35.0.html" type="text/html" title="Announcing Rust 1.35.0" />
+        <published>2019-05-23T00:00:00Z</published>
+        <updated>2019-05-23T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/05/23/Rust-1.35.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/05/23/Rust-1.35.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.35.0. Rust is a
+programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.35.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website,
+and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23&quot;&gt;detailed release notes for 1.35.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1.35.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.35.0-stable&quot;&gt;&lt;/a&gt;What's in 1.35.0 stable&lt;/h2&gt;
+&lt;p&gt;The highlight of this release is the implementation of the &lt;code&gt;FnOnce&lt;/code&gt;, &lt;code&gt;FnMut&lt;/code&gt;,
+and &lt;code&gt;Fn&lt;/code&gt; closure traits for &lt;code&gt;Box&amp;lt;dyn FnOnce&amp;gt;&lt;/code&gt;, &lt;code&gt;Box&amp;lt;dyn FnMut&amp;gt;&lt;/code&gt;, and &lt;code&gt;Box&amp;lt;dyn Fn&amp;gt;&lt;/code&gt; respectively.
+Additionally, closures may now be coerced to unsafe function pointers.
+The &lt;code&gt;dbg!&lt;/code&gt; macro introduced in &lt;a href=&quot;https://blog.rust-lang.org/2019/01/17/Rust-1.32.0.html#the-dbg-macro&quot;&gt;Rust 1.32.0&lt;/a&gt; can now also be called without arguments.
+Moreover, there were a number of standard library stabilizations.
+Read on for a few highlights, or see the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23&quot;&gt;detailed release notes&lt;/a&gt; for additional information.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#fn-closure-traits-implemented-for-box&lt;dyn-fn*&gt;&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;fn-closure-traits-implemented-for-box&lt;dyn-fn*&gt;&quot;&gt;&lt;/a&gt;&lt;code&gt;Fn*&lt;/code&gt; closure traits implemented for &lt;code&gt;Box&amp;lt;dyn Fn*&amp;gt;&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;In Rust 1.35.0, the &lt;code&gt;FnOnce&lt;/code&gt;, &lt;code&gt;FnMut&lt;/code&gt;, and the &lt;code&gt;Fn&lt;/code&gt; traits &lt;a href=&quot;https://github.com/rust-lang/rust/pull/55431&quot;&gt;are now implemented&lt;/a&gt; for &lt;code&gt;Box&amp;lt;dyn FnOnce&amp;gt;&lt;/code&gt;,
+&lt;code&gt;Box&amp;lt;dyn FnMut&amp;gt;&lt;/code&gt;, and &lt;code&gt;Box&amp;lt;dyn Fn&amp;gt;&lt;/code&gt; respectively.&lt;/p&gt;
+&lt;p&gt;Previously, if you wanted to call the function stored in a boxed closure, you had to use &lt;a href=&quot;https://doc.rust-lang.org/1.34.0/std/boxed/trait.FnBox.html&quot;&gt;&lt;code&gt;FnBox&lt;/code&gt;&lt;/a&gt;.
+This was because instances of &lt;code&gt;Box&amp;lt;dyn FnOnce&amp;gt;&lt;/code&gt; and friends did not implement the respective &lt;code&gt;Fn*&lt;/code&gt; traits.
+This also meant that it was not possible to pass boxed functions to code expecting an implementor of a &lt;code&gt;Fn&lt;/code&gt; trait,
+and you had to create temporary closures to pass them down.&lt;/p&gt;
+&lt;p&gt;This was ultimately due to a limitation in the compiler's ability to reason about such implementations,
+which has since been fixed with the introduction of &lt;a href=&quot;https://doc.rust-lang.org/nightly/unstable-book/language-features/unsized-locals.html&quot;&gt;unsized locals&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With this release, you can now use boxed functions in places that expect items implementing a function trait.&lt;/p&gt;
+&lt;p&gt;The following code now works:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn foo(x: Box&amp;lt;dyn Fn(u8) -&amp;gt; u8&amp;gt;) -&amp;gt; Vec&amp;lt;u8&amp;gt; {
+    vec![1, 2, 3, 4].into_iter().map(x).collect()
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Furthermore, you can now directly call &lt;code&gt;Box&amp;lt;dyn FnOnce&amp;gt;&lt;/code&gt; objects:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn foo(x: Box&amp;lt;dyn FnOnce()&amp;gt;) {
+    x()
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href=&quot;#coercing-closures-to-unsafe-fn-pointers&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;coercing-closures-to-unsafe-fn-pointers&quot;&gt;&lt;/a&gt;Coercing closures to &lt;code&gt;unsafe fn&lt;/code&gt; pointers&lt;/h3&gt;
+&lt;p&gt;Since &lt;a href=&quot;https://blog.rust-lang.org/2017/07/20/Rust-1.19.html&quot;&gt;Rust 1.19.0&lt;/a&gt;, it has been possible to coerce closures that do not capture from their environment into function pointers.
+For example, you may write:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn twice(x: u8, f: fn(u8) -&amp;gt; u8) -&amp;gt; u8 {
+    f(f(x))
+}
+
+fn main() {
+    assert_eq!(42, twice(0, |x| x + 21));
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This has however not extended to &lt;code&gt;unsafe&lt;/code&gt; function pointers.
+With this release of Rust, you may now do so. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;/// The safety invariants are those of the `unsafe fn` pointer passed.
+unsafe fn call_unsafe_fn_ptr(f: unsafe fn()) {
+    f()
+}
+
+fn main() {
+    // SAFETY: There are no invariants.
+    // The closure is statically prevented from doing unsafe things.
+    unsafe {
+        call_unsafe_fn_ptr(|| {
+            dbg!();
+        });
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href=&quot;#calling-dbg()-with-no-argument&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;calling-dbg()-with-no-argument&quot;&gt;&lt;/a&gt;Calling &lt;code&gt;dbg!()&lt;/code&gt; with no argument&lt;/h3&gt;
+&lt;p&gt;For the benefit of all the occasional and frequent &amp;quot;print debuggers&amp;quot; out there,
+&lt;a href=&quot;https://blog.rust-lang.org/2019/01/17/Rust-1.32.0.html#the-dbg-macro&quot;&gt;Rust 1.32.0&lt;/a&gt; saw the release of &lt;a href=&quot;https://doc.rust-lang.org/std/macro.dbg.html&quot;&gt;the &lt;code&gt;dbg!&lt;/code&gt; macro&lt;/a&gt;.
+To recap, the macro allows you to quickly inspect the value of some expression with context.
+For example, when running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
+    let mut x = 0;
+
+    if dbg!(x == 1) {
+        x += 1;
+    }
+
+    dbg!(x);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;...you would see:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[src/main.rs:4] x == 1 = false
+[src/main.rs:8] x = 0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As seen in the previous section, where the higher order function &lt;code&gt;call_unsafe_fn_ptr&lt;/code&gt; is called,
+you may now also call &lt;code&gt;dbg!&lt;/code&gt; without passing any arguments.
+This is useful when tracing what branches your application takes.
+For example, with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
+    let condition = true;
+
+    if condition {
+        dbg!();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;...you would see:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[src/main.rs:5]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href=&quot;#library-stabilizations&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-stabilizations&quot;&gt;&lt;/a&gt;Library stabilizations&lt;/h3&gt;
+&lt;p&gt;In 1.35.0, a number of APIs have become stable.&lt;/p&gt;
+&lt;p&gt;In addition, some implementations were added and other changes occured as well.
+See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23&quot;&gt;detailed release notes&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#copy-the-sign-of-a-floating-point-number-onto-another&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;copy-the-sign-of-a-floating-point-number-onto-another&quot;&gt;&lt;/a&gt;Copy the sign of a floating point number onto another&lt;/h4&gt;
+&lt;p&gt;With this release, new methods &lt;code&gt;copysign&lt;/code&gt; have been added to the floating point primitive types &lt;a href=&quot;https://doc.rust-lang.org/std/primitive.f32.html&quot;&gt;&lt;code&gt;f32&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/primitive.f64.html&quot;&gt;&lt;code&gt;f64&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.f32.html#method.copysign&quot;&gt;&lt;code&gt;f32::copysign&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.f64.html#method.copysign&quot;&gt;&lt;code&gt;f64::copysign&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As the name suggests, you can use these to copy the sign of one number onto another. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
+    assert_eq!(3.5_f32.copysign(-0.42), -3.5);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&lt;a href=&quot;#check-whether-a-range-contains-a-value&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;check-whether-a-range-contains-a-value&quot;&gt;&lt;/a&gt;Check whether a &lt;code&gt;Range&lt;/code&gt; &lt;code&gt;contains&lt;/code&gt; a value&lt;/h4&gt;
+&lt;p&gt;Rust 1.35.0 contains a few freshly minted methods on the &lt;code&gt;Range&lt;/code&gt; types:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/ops/struct.Range.html#method.contains&quot;&gt;&lt;code&gt;Range::contains&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/ops/struct.RangeFrom.html#method.contains&quot;&gt;&lt;code&gt;RangeFrom::contains&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/ops/struct.RangeTo.html#method.contains&quot;&gt;&lt;code&gt;RangeTo::contains&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/ops/struct.RangeInclusive.html#method.contains&quot;&gt;&lt;code&gt;RangeInclusive::contains&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/ops/struct.RangeToInclusive.html#method.contains&quot;&gt;&lt;code&gt;RangeToInclusive::contains&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With these, you can easily check whether a given value exists in a range. For example, you may write:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
+    if (0..=10).contains(&amp;amp;5) {
+        println!(&amp;quot;Five is included in zero to ten.&amp;quot;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&lt;a href=&quot;#map-and-split-a-borrowed-refcell-value-in-two&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;map-and-split-a-borrowed-refcell-value-in-two&quot;&gt;&lt;/a&gt;Map and split a borrowed &lt;code&gt;RefCell&lt;/code&gt; value in two&lt;/h4&gt;
+&lt;p&gt;With Rust 1.35.0, you can now map and split the borrowed value of a &lt;code&gt;RefCell&lt;/code&gt; into multiple borrows for different components of the borrowed data:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/cell/struct.Ref.html#method.map_split&quot;&gt;&lt;code&gt;Ref::map_split&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/cell/struct.RefMut.html#method.map_split&quot;&gt;&lt;code&gt;RefMut::map_split&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;a href=&quot;#replace-the-value-of-a-refcell-through-a-closure&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;replace-the-value-of-a-refcell-through-a-closure&quot;&gt;&lt;/a&gt;Replace the value of a &lt;code&gt;RefCell&lt;/code&gt; through a closure&lt;/h4&gt;
+&lt;p&gt;This release introduces a convenience method &lt;code&gt;replace_with&lt;/code&gt; on &lt;code&gt;RefCell&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.replace_with&quot;&gt;&lt;code&gt;RefCell::replace_with&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With it, you can more ergonomically map and replace the current value of the cell and get back the old value as a result.&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#hash-a-pointer-or-reference-by-address-not-value&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;hash-a-pointer-or-reference-by-address-not-value&quot;&gt;&lt;/a&gt;Hash a pointer or reference by address, not value&lt;/h4&gt;
+&lt;p&gt;In this release, we have introduced:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/ptr/fn.hash.html&quot;&gt;&lt;code&gt;ptr::hash&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This function takes a raw pointer and hashes it. Using &lt;code&gt;ptr::hash&lt;/code&gt;,
+you can avoid hashing the pointed-to value of a reference and instead hash the address.&lt;/p&gt;
+&lt;h4&gt;&lt;a href=&quot;#copy-the-contents-of-an-option&amp;t&gt;&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;copy-the-contents-of-an-option&amp;t&gt;&quot;&gt;&lt;/a&gt;Copy the contents of an &lt;code&gt;Option&amp;lt;&amp;amp;T&amp;gt;&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;From the very beginning with Rust 1.0.0,
+the methods &lt;code&gt;Option::cloned&lt;/code&gt; for &lt;code&gt;Option&amp;lt;&amp;amp;T&amp;gt;&lt;/code&gt; and &lt;code&gt;Option&amp;lt;&amp;amp;mut T&amp;gt;&lt;/code&gt; have allowed you to clone the contents in case of &lt;code&gt;Some(_)&lt;/code&gt;.
+However, cloning can sometimes be an expensive operation and the methods &lt;code&gt;opt.cloned()&lt;/code&gt; provided no hints to that effect.&lt;/p&gt;
+&lt;p&gt;With this release of Rust, we introduced:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.copied&quot;&gt;&lt;code&gt;Option::copied&lt;/code&gt;&lt;/a&gt; for both &lt;code&gt;Option&amp;lt;&amp;amp;T&amp;gt;&lt;/code&gt; and &lt;code&gt;Option&amp;lt;&amp;amp;mut T&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The functionality of &lt;code&gt;opt.copied()&lt;/code&gt; is the same as for &lt;code&gt;opt.cloned()&lt;/code&gt;.
+However, calling the method requires that &lt;code&gt;T: Copy&lt;/code&gt;.
+Using this method, you can make sure that code stops compiling should &lt;code&gt;T&lt;/code&gt; no longer implements &lt;code&gt;Copy&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#changes-in-clippy&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;changes-in-clippy&quot;&gt;&lt;/a&gt;Changes in Clippy&lt;/h3&gt;
+&lt;p&gt;In this release of Rust,
+Clippy (a collection of lints to catch common mistakes and improve your Rust code) added a new lint &lt;a href=&quot;https://rust-lang.github.io/rust-clippy/master/index.html#drop_bounds&quot;&gt;&lt;code&gt;drop_bounds&lt;/code&gt;&lt;/a&gt;.
+This lint triggers when you add a bound &lt;code&gt;T: Drop&lt;/code&gt; to a generic function. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn foo&amp;lt;T: Drop&amp;gt;(x: T) {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Having a bound &lt;code&gt;T: Drop&lt;/code&gt; is almost always a mistake as it excludes types,
+such as &lt;code&gt;u8&lt;/code&gt;, which have trivial drop-glues.
+Moreover, &lt;code&gt;T: Drop&lt;/code&gt; does not account for types like &lt;code&gt;String&lt;/code&gt; not having interesting destructor behavior directly but rather as a result of embedding types,
+such as &lt;code&gt;Vec&amp;lt;u8&amp;gt;&lt;/code&gt;, that do.&lt;/p&gt;
+&lt;p&gt;In addition to &lt;a href=&quot;https://rust-lang.github.io/rust-clippy/master/index.html#drop_bounds&quot;&gt;&lt;code&gt;drop_bounds&lt;/code&gt;&lt;/a&gt;,
+this release of Clippy &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/pull/4101&quot;&gt;split&lt;/a&gt; the lint&lt;code&gt;redundant_closure&lt;/code&gt; into &lt;code&gt;redundant_closure&lt;/code&gt; and &lt;code&gt;redundant_closure_for_method_calls&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-135-beta&quot;&gt;detailed release notes for Clippy&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#changes-in-cargo&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;changes-in-cargo&quot;&gt;&lt;/a&gt;Changes in Cargo&lt;/h3&gt;
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-135-2019-05-23&quot;&gt;detailed release notes for Cargo&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-135.0&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-135.0&quot;&gt;&lt;/a&gt;Contributors to 1.35.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.35.0.
+We couldn't have done it without all of you.
+&lt;a href=&quot;https://thanks.rust-lang.org/rust/1.35.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>The 2019 Rust Event Lineup</title>
@@ -600,45 +789,6 @@ without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.33.0&qu
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Changes in the core team</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2019/02/22/Core-team-changes.html" type="text/html" title="Changes in the core team" />
-        <published>2019-02-22T00:00:00Z</published>
-        <updated>2019-02-22T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2019/02/22/Core-team-changes.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2019/02/22/Core-team-changes.html">&lt;p&gt;Just a quick update: You may have noticed that, in the last month or
-so, a number of &lt;a href=&quot;https://www.rust-lang.org/governance/teams/core&quot;&gt;Rust core team&lt;/a&gt; members have changed their jobs
-and/or their roles in the project. Two people have decided to step
-back from the core team:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Nick Cameron &lt;a href=&quot;https://www.ncameron.org/blog/leaving-mozilla-and-most-of-the-rust-project/&quot;&gt;left Mozilla to work at PingCap&lt;/a&gt;. Although he
-won’t have time to stay active on the core team, he plans to
-continue co-leading the Cargo team in his new position.&lt;/li&gt;
-&lt;li&gt;Aaron Turon &lt;a href=&quot;https://internals.rust-lang.org/t/aturon-retires-from-the-core-team-but-not-from-rust/9392/3&quot;&gt;decided to step back from the core team&lt;/a&gt; so
-that he could focus on engineering work and the language design
-team. (He remains on the Rust team at Mozilla.)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;With Rust 2018 having shipped, this is a natural time of
-transition. While we’ll miss Nick and Aaron’s contributions to the
-core team, we are very excited for them to be focusing on something
-new, and we’re very happy that they are still going to stay involved
-with Rust. We’re also looking into growing the core team to help with
-the work ahead.&lt;/p&gt;
-&lt;p&gt;Finally, two other members have changed their jobs, but plan to stay
-involved in the core team:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Ashley Williams &lt;a href=&quot;https://twitter.com/ag_dubs/status/1088118810157219848&quot;&gt;joined Cloudflare and plans to work on Rust and WASM integration there&lt;/a&gt;.
-She will be remaining on the core team.&lt;/li&gt;
-&lt;li&gt;Steve Klabnik &lt;a href=&quot;https://words.steveklabnik.com/thank-u-next&quot;&gt;left Mozilla, but will remain on the core team.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;That’s it!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     

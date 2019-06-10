@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-06-03T09:30:31Z</updated>
+    <updated>2019-06-10T20:07:39Z</updated>
 
     
     <entry>
@@ -241,7 +241,7 @@ year's event.&lt;/p&gt;
 available on YouTube! &lt;a href=&quot;https://twitter.com/RustConAsia&quot;&gt;Follow @RustConAsia&lt;/a&gt; on Twitter for future updates.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#april-26-29-2019:-oxidize&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;april-26-29-2019:-oxidize&quot;&gt;&lt;/a&gt;April 26-29, 2019: Oxidize&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://oxidizeconf.com/&quot;&gt;Oxidize&lt;/a&gt; was a conference specifically about using Rust on embedded devices that took
-place in Berlin. Videos aren't out yet, but there'll probably be &lt;a href=&quot;https://twitter.com/OxidizeConf&quot;&gt;tweets&lt;/a&gt; when they are!&lt;/p&gt;
+place in Berlin. The videos are now &lt;a href=&quot;https://www.youtube.com/playlist?list=PLXajQV_H-DxJPiJQK8gvou4SUZ8Zfvgm6&quot;&gt;available on YouTube&lt;/a&gt;, and &lt;a href=&quot;https://twitter.com/OxidizeConf&quot;&gt;follow @oxidizeconf&lt;/a&gt; on Twitter for future updates.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#june-28-29-2019:-rustlab&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;june-28-29-2019:-rustlab&quot;&gt;&lt;/a&gt;June 28-29, 2019: RustLab&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.rustlab.it/&quot;&gt;RustLab&lt;/a&gt; is a new conference for this year that will be taking place in Florence, Italy.
 Their session and workshop lineup has been announced, and tickets are now available! &lt;a href=&quot;https://twitter.com/rustlab_conf&quot;&gt;Follow the

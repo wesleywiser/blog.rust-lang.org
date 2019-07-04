@@ -10,8 +10,142 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-06-10T20:07:39Z</updated>
+    <updated>2019-07-04T13:43:21Z</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.36.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/07/04/Rust-1.36.0.html" type="text/html" title="Announcing Rust 1.36.0" />
+        <published>2019-07-04T00:00:00Z</published>
+        <updated>2019-07-04T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/07/04/Rust-1.36.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/07/04/Rust-1.36.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.36.0.
+Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.36.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website,
+and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1360-2019-07-04&quot;&gt;detailed release notes for 1.36.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1.36.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.36.0-stable&quot;&gt;&lt;/a&gt;What's in 1.36.0 stable&lt;/h2&gt;
+&lt;p&gt;This release brings many changes, including the stabilization of the &lt;a href=&quot;https://doc.rust-lang.org/std/future/trait.Future.html&quot;&gt;&lt;code&gt;Future&lt;/code&gt;&lt;/a&gt; trait,
+the &lt;a href=&quot;https://doc.rust-lang.org/alloc/index.html&quot;&gt;&lt;code&gt;alloc&lt;/code&gt;&lt;/a&gt; crate, the &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; type, &lt;a href=&quot;http://blog.pnkfx.org/blog/2019/06/26/breaking-news-non-lexical-lifetimes-arrives-for-everyone/&quot;&gt;NLL for Rust 2015&lt;/a&gt;,
+a new &lt;code&gt;HashMap&amp;lt;K, V&amp;gt;&lt;/code&gt; implementation, and &lt;a href=&quot;https://doc.rust-lang.org/cargo/commands/cargo-build.html#cargo_build_manifest_options&quot;&gt;&lt;code&gt;--offline&lt;/code&gt;&lt;/a&gt; support in Cargo.
+Read on for a few highlights, or see the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1360-2019-07-04&quot;&gt;detailed release notes&lt;/a&gt; for additional information.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#the-future-is-here&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-future-is-here&quot;&gt;&lt;/a&gt;The &lt;a href=&quot;https://doc.rust-lang.org/std/future/trait.Future.html&quot;&gt;&lt;code&gt;Future&lt;/code&gt;&lt;/a&gt; is here!&lt;/h3&gt;
+&lt;p&gt;In Rust 1.36.0 the long awaited &lt;a href=&quot;https://doc.rust-lang.org/std/future/trait.Future.html&quot;&gt;&lt;code&gt;Future&lt;/code&gt;&lt;/a&gt; trait has been &lt;a href=&quot;https://github.com/rust-lang/rust/pull/59739&quot;&gt;stabilized&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;With this stabilization, we hope to give important crates, libraries,
+and the ecosystem time to prepare for &lt;code&gt;async&lt;/code&gt; / &lt;code&gt;.await&lt;/code&gt;,
+which we'll tell you more about in the future.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#the-alloc-crate-is-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-alloc-crate-is-stable&quot;&gt;&lt;/a&gt;The &lt;a href=&quot;https://doc.rust-lang.org/alloc/index.html&quot;&gt;&lt;code&gt;alloc&lt;/code&gt;&lt;/a&gt; crate is stable&lt;/h3&gt;
+&lt;p&gt;Before 1.36.0, the standard library consisted of the crates &lt;code&gt;std&lt;/code&gt;, &lt;code&gt;core&lt;/code&gt;, and &lt;code&gt;proc_macro&lt;/code&gt;.
+The &lt;code&gt;core&lt;/code&gt; crate provided core functionality such as &lt;code&gt;Iterator&lt;/code&gt; and &lt;code&gt;Copy&lt;/code&gt;
+and could be used in &lt;code&gt;#![no_std]&lt;/code&gt; environments since it did not impose any requirements.
+Meanwhile, the &lt;code&gt;std&lt;/code&gt; crate provided types like &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; and OS functionality
+but required a global allocator and other OS capabilities in return.&lt;/p&gt;
+&lt;p&gt;Starting with Rust 1.36.0, the parts of &lt;code&gt;std&lt;/code&gt; that depend on a global allocator, e.g. &lt;code&gt;Vec&amp;lt;T&amp;gt;&lt;/code&gt;,
+are now available in the &lt;code&gt;alloc&lt;/code&gt; crate. The &lt;code&gt;std&lt;/code&gt; crate then re-exports these parts.
+While &lt;code&gt;#![no_std]&lt;/code&gt; binaries using &lt;code&gt;alloc&lt;/code&gt; still require nightly Rust,
+&lt;code&gt;#![no_std]&lt;/code&gt; library crates can use the &lt;code&gt;alloc&lt;/code&gt; crate in stable Rust.
+Meanwhile, normal binaries, without &lt;code&gt;#![no_std]&lt;/code&gt;, can depend on such library crates.
+We hope this will facilitate the development of a &lt;code&gt;#![no_std]&lt;/code&gt; compatible ecosystem of libraries
+prior to stabilizing support for &lt;code&gt;#![no_std]&lt;/code&gt; binaries using &lt;code&gt;alloc&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you are the maintainer of a library that only relies on some allocation primitives to function,
+consider making your library &lt;code&gt;#[no_std]&lt;/code&gt; compatible by using the following at the top of your &lt;code&gt;lib.rs&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#![no_std]
+
+extern crate alloc;
+
+use alloc::vec::Vec;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href=&quot;#maybeuninitt&gt;-instead-of-mem::uninitialized&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;maybeuninitt&gt;-instead-of-mem::uninitialized&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; instead of &lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn.uninitialized.html&quot;&gt;&lt;code&gt;mem::uninitialized&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;In previous releases of Rust, the &lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn.uninitialized.html&quot;&gt;&lt;code&gt;mem::uninitialized&lt;/code&gt;&lt;/a&gt; function has allowed you to bypass Rust's
+initialization checks by pretending that you've initialized a value at type &lt;code&gt;T&lt;/code&gt; without doing anything.
+One of the main uses of this function has been to lazily allocate arrays.&lt;/p&gt;
+&lt;p&gt;However, &lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn.uninitialized.html&quot;&gt;&lt;code&gt;mem::uninitialized&lt;/code&gt;&lt;/a&gt; is an incredibly dangerous operation that essentially
+cannot be used correctly as the Rust compiler assumes that values are properly initialized.
+For example, calling &lt;code&gt;mem::uninitialized::&amp;lt;bool&amp;gt;()&lt;/code&gt; causes &lt;em&gt;instantaneous &lt;strong&gt;undefined behavior&lt;/strong&gt;&lt;/em&gt;
+as, from Rust's point of view, the uninitialized bits are neither &lt;code&gt;0&lt;/code&gt; (for &lt;code&gt;false&lt;/code&gt;)
+nor &lt;code&gt;1&lt;/code&gt; (for &lt;code&gt;true&lt;/code&gt;) -- the only two allowed bit patterns for &lt;code&gt;bool&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To remedy this situation, in Rust 1.36.0, the type &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; has been &lt;a href=&quot;https://github.com/rust-lang/rust/pull/60445&quot;&gt;stabilized&lt;/a&gt;.
+The Rust compiler will understand that it should not assume that a &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; is a properly initialized &lt;code&gt;T&lt;/code&gt;.
+Therefore, you can do gradual initialization more safely and eventually use &lt;code&gt;.assume_init()&lt;/code&gt;
+once you are certain that &lt;code&gt;maybe_t: MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt; contains an initialized &lt;code&gt;T&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;As &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; is the safer alternative, starting with Rust 1.38,
+the function &lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn.uninitialized.html&quot;&gt;&lt;code&gt;mem::uninitialized&lt;/code&gt;&lt;/a&gt; will be deprecated.&lt;/p&gt;
+&lt;p&gt;To find out more about uninitialized memory, &lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn.uninitialized.html&quot;&gt;&lt;code&gt;mem::uninitialized&lt;/code&gt;&lt;/a&gt;,
+and &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;, read &lt;a href=&quot;https://gankro.github.io/blah/initialize-me-maybe/&quot;&gt;Alexis Beingessner's blog post&lt;/a&gt;.
+The standard library also contains extensive documentation about &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#nll-for-rust-2015&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;nll-for-rust-2015&quot;&gt;&lt;/a&gt;NLL for Rust 2015&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html#non-lexical-lifetimes&quot;&gt;In the announcement for Rust 1.31.0&lt;/a&gt;, we told you about NLL (Non-Lexical Lifetimes),
+an improvement to the language that makes the borrow checker smarter and more user friendly.
+For example, you may now write:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
+    let mut x = 5;
+    let y = &amp;amp;x;
+    let z = &amp;amp;mut x; // This was not allowed before 1.31.0.
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In 1.31.0 NLL was stabilized only for Rust 2018,
+with a promise that we would backport it to Rust 2015 as well.
+With Rust 1.36.0, we are happy to announce that we have done so! NLL is now available for Rust 2015.&lt;/p&gt;
+&lt;p&gt;With NLL on both editions, we are closer to removing the old borrow checker.
+However, the old borrow checker unfortunately accepted some &lt;a href=&quot;https://en.wikipedia.org/wiki/Soundness&quot;&gt;unsound&lt;/a&gt; code it should not have.
+As a result, NLL is currently in a &amp;quot;migration mode&amp;quot; wherein we will emit warnings instead
+of errors if the NLL borrow checker rejects code the old AST borrow checker would accept.
+Please see &lt;a href=&quot;https://github.com/rust-lang/rust/issues/60680#issuecomment-495089654&quot;&gt;this list&lt;/a&gt; of public crates that are affected.&lt;/p&gt;
+&lt;p&gt;To find out more about NLL, MIR, the story around fixing soundness holes,
+and what you can do about the warnings if you have them, read &lt;a href=&quot;http://blog.pnkfx.org/blog/2019/06/26/breaking-news-non-lexical-lifetimes-arrives-for-everyone/&quot;&gt;Felix Klock's blog post&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#a-new-hashmapk,-v&gt;-implementation&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;a-new-hashmapk,-v&gt;-implementation&quot;&gt;&lt;/a&gt;A new &lt;a href=&quot;https://doc.rust-lang.org/std/collections/struct.HashMap.html&quot;&gt;&lt;code&gt;HashMap&amp;lt;K, V&amp;gt;&lt;/code&gt;&lt;/a&gt; implementation&lt;/h3&gt;
+&lt;p&gt;In Rust 1.36.0, the &lt;code&gt;HashMap&amp;lt;K, V&amp;gt;&lt;/code&gt; implementation has been &lt;a href=&quot;https://github.com/rust-lang/rust/pull/58623&quot;&gt;replaced&lt;/a&gt;
+with the one in the &lt;a href=&quot;https://crates.io/crates/hashbrown&quot;&gt;&lt;code&gt;hashbrown&lt;/code&gt;&lt;/a&gt; crate which is based on the &lt;a href=&quot;https://abseil.io/blog/20180927-swisstables&quot;&gt;SwissTable&lt;/a&gt; design.
+While the interface is the same, the &lt;code&gt;HashMap&amp;lt;K, V&amp;gt;&lt;/code&gt; implementation is now
+&lt;a href=&quot;https://perf.rust-lang.org/compare.html?start=b57fe74a27590289fd657614b8ad1f3eac8a7ad2&amp;end=abade53a649583e40ed07c26ee10652703f09b58&amp;stat=wall-time&quot;&gt;faster on average&lt;/a&gt; and has lower memory overhead.
+Note that unlike the &lt;code&gt;hashbrown&lt;/code&gt; crate,
+the implementation in &lt;code&gt;std&lt;/code&gt; still defaults to the SipHash 1-3 hashing algorithm.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#--offline-support-in-cargo&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;--offline-support-in-cargo&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://doc.rust-lang.org/cargo/commands/cargo-build.html#cargo_build_manifest_options&quot;&gt;&lt;code&gt;--offline&lt;/code&gt;&lt;/a&gt; support in Cargo&lt;/h3&gt;
+&lt;p&gt;During most builds, Cargo doesn't interact with the network.
+Sometimes, however, Cargo has to.
+Such is the case when a dependency is added and the latest compatible version needs to be downloaded.
+At times, network access is not an option though, for example on an airplane or in isolated build environments.&lt;/p&gt;
+&lt;p&gt;In Rust 1.36, a new Cargo flag has been stabilized: &lt;a href=&quot;https://doc.rust-lang.org/cargo/commands/cargo-build.html#cargo_build_manifest_options&quot;&gt;&lt;code&gt;--offline&lt;/code&gt;&lt;/a&gt;.
+The flag alters Cargo's dependency resolution algorithm to only use locally cached dependencies.
+When the required crates are not available offline, and a network access would be required,
+Cargo will exit with an error.
+To prepopulate the local cache in preparation for going offline,
+use the &lt;a href=&quot;https://doc.rust-lang.org/cargo/commands/cargo-fetch.html&quot;&gt;&lt;code&gt;cargo fetch&lt;/code&gt;&lt;/a&gt; command, which downloads all the required dependencies for a project.&lt;/p&gt;
+&lt;p&gt;To find out more about &lt;a href=&quot;https://doc.rust-lang.org/cargo/commands/cargo-build.html#cargo_build_manifest_options&quot;&gt;&lt;code&gt;--offline&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/cargo/commands/cargo-fetch.html&quot;&gt;&lt;code&gt;cargo fetch&lt;/code&gt;&lt;/a&gt;, read &lt;a href=&quot;https://www.ncameron.org/blog/cargo-offline/&quot;&gt;Nick Cameron's blog post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For information on other changes to Cargo, see the &lt;a href=&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-136-2019-07-04&quot;&gt;detailed release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#library-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&quot;https://doc.rust-lang.org/std/macro.dbg.html&quot;&gt;&lt;code&gt;dbg!&lt;/code&gt;&lt;/a&gt; macro now supports multiple arguments.&lt;/p&gt;
+&lt;p&gt;Additionally, a number of APIs have been made &lt;code&gt;const&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/core/alloc/struct.Layout.html#method.from_size_align_unchecked&quot;&gt;&lt;code&gt;Layout::from_size_align_unchecked&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn.needs_drop.html&quot;&gt;&lt;code&gt;mem::needs_drop&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/ptr/struct.NonNull.html#method.dangling&quot;&gt;&lt;code&gt;NonNull::dangling&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/ptr/struct.NonNull.html#method.cast&quot;&gt;&lt;code&gt;NonNull::cast&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;New APIs have become stable, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/task/struct.Waker.html&quot;&gt;&lt;code&gt;task::Waker&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/task/enum.Poll.html&quot;&gt;&lt;code&gt;task::Poll&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.rotate_left&quot;&gt;&lt;code&gt;VecDeque::rotate_left&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/collections/struct.VecDeque.html#method.rotate_right&quot;&gt;&lt;code&gt;VecDeque::rotate_right&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/io/trait.Read.html#method.read_vectored&quot;&gt;&lt;code&gt;Read::read_vectored&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/io/trait.Write.html#method.write_vectored&quot;&gt;&lt;code&gt;Write::write_vectored&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.copied&quot;&gt;&lt;code&gt;Iterator::copied&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/60404&quot;&gt;&lt;code&gt;BorrowMut&amp;lt;str&amp;gt; for String&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.str.html#method.as_mut_ptr&quot;&gt;&lt;code&gt;str::as_mut_ptr&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Other library changes are available in the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1360-2019-07-04&quot;&gt;detailed release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#other-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;Detailed 1.36.0 release notes are available for &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1360-2019-07-04&quot;&gt;Rust&lt;/a&gt;,
+&lt;a href=&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-136-2019-07-04&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-136&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-136.0&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-136.0&quot;&gt;&lt;/a&gt;Contributors to 1.36.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.36.0. We couldn't have done it
+without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.36.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>The Governance WG is going public</title>
@@ -540,150 +674,6 @@ great experience.&lt;/p&gt;
 
         <author>
             <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.34.0</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2019/04/11/Rust-1.34.0.html" type="text/html" title="Announcing Rust 1.34.0" />
-        <published>2019-04-11T00:00:00Z</published>
-        <updated>2019-04-11T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2019/04/11/Rust-1.34.0.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2019/04/11/Rust-1.34.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.34.0. Rust is a
-programming language that is empowering everyone to build reliable and
-efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
-1.34.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate
-page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1.34.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.34.0-stable&quot;&gt;&lt;/a&gt;What's in 1.34.0 stable&lt;/h2&gt;
-&lt;p&gt;The largest feature in this release is the introduction of &lt;em&gt;alternative&lt;/em&gt; &lt;code&gt;cargo&lt;/code&gt; registries.
-The release also includes support for &lt;code&gt;?&lt;/code&gt; in documentation tests,
-some improvements for &lt;code&gt;#[attribute(..)]&lt;/code&gt;s, as well as the stabilization of &lt;code&gt;TryFrom&lt;/code&gt;.
-Read on for a few highlights, or see the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1340-2019-04-11&quot;&gt;detailed release notes&lt;/a&gt; for additional information.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#alternative-cargo-registries&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;alternative-cargo-registries&quot;&gt;&lt;/a&gt;Alternative &lt;code&gt;cargo&lt;/code&gt; registries&lt;/h3&gt;
-&lt;p&gt;Since before 1.0, Rust has had a public crate registry, &lt;a href=&quot;http://crates.io/&quot;&gt;crates.io&lt;/a&gt;.
-People publish crates with &lt;code&gt;cargo publish&lt;/code&gt; and it's easy to include these crates
-in the &lt;code&gt;[dependencies]&lt;/code&gt; section of your &lt;code&gt;Cargo.toml&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;However, not everyone &lt;em&gt;wants&lt;/em&gt; to publish their crates to crates.io.
-People maintaining proprietary/closed-source code cannot use crates.io,
-and instead are forced to use &lt;code&gt;git&lt;/code&gt; or &lt;code&gt;path&lt;/code&gt; dependencies.
-This is usually fine for small projects, but if you have a lot of closed-source crates
-within a large organization, you lose the benefit of the versioning support that crates.io has.&lt;/p&gt;
-&lt;p&gt;With this release, Cargo gains support for alternate registries.
-These registries coexist with crates.io, so you can write software that depends
-on crates from both crates.io and your custom registry.
-Crates on crates.io cannot however depend on external registries.&lt;/p&gt;
-&lt;p&gt;To use an alternate registry, you must add these lines to your &lt;code&gt;.cargo/config&lt;/code&gt;.
-This file can be in your home directory (&lt;code&gt;~/.cargo/config&lt;/code&gt;) or relative to the package directory.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[registries]
-my-registry = { index = &amp;quot;https://my-intranet:8080/git/index&amp;quot; }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Depending on a crate from an alternate registry is easy.
-When specifying dependencies in your &lt;code&gt;Cargo.toml&lt;/code&gt;, use the &lt;code&gt;registry&lt;/code&gt; key to
-let Cargo know that you wish to fetch the crate from the alternate registry:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-toml&quot;&gt;[dependencies]
-other-crate = { version = &amp;quot;1.0&amp;quot;, registry = &amp;quot;my-registry&amp;quot; }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As a crate author, if you wish to publish your crate to an alternate registry,
-you first need to save the authentication token into &lt;code&gt;~/.cargo/credentials&lt;/code&gt; with the &lt;code&gt;cargo login&lt;/code&gt; command:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;cargo login --registry=my-registry
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can then use the &lt;code&gt;--registry&lt;/code&gt; flag to indicate which registry to use when publishing:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;cargo publish --registry=my-registry
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There is &lt;a href=&quot;https://doc.rust-lang.org/nightly/cargo/reference/registries.html#running-a-registry&quot;&gt;documentation&lt;/a&gt; on how to run your own registry.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#-in-documentation-tests&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;-in-documentation-tests&quot;&gt;&lt;/a&gt;&lt;code&gt;?&lt;/code&gt; in documentation tests&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://rust-lang.github.io/rfcs/1937-ques-in-main.html&quot;&gt;RFC 1937&lt;/a&gt; proposed adding support for using the &lt;code&gt;?&lt;/code&gt; operator in &lt;code&gt;fn main()&lt;/code&gt;,
-&lt;code&gt;#[test]&lt;/code&gt; functions, and doctests, allowing them to return &lt;code&gt;Option&amp;lt;T&amp;gt;&lt;/code&gt; or &lt;code&gt;Result&amp;lt;T, E&amp;gt;&lt;/code&gt;,
-with error values causing a nonzero exit code in the case of &lt;code&gt;fn main()&lt;/code&gt;,
-and a test failure in the case of the tests.&lt;/p&gt;
-&lt;p&gt;Support in &lt;code&gt;fn main()&lt;/code&gt; and &lt;code&gt;#[test]&lt;/code&gt; was implemented &lt;a href=&quot;https://blog.rust-lang.org/2018/05/10/Rust-1.26.html#main-can-return-a-result&quot;&gt;many releases ago&lt;/a&gt;.
-However, the support within documentation tests was limited to doctests that have an explicit &lt;code&gt;fn main()&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;In this release, full support for &lt;code&gt;?&lt;/code&gt; in doctests has been added.
-Now, you can write this in your documentation tests:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;/// ```rust
-/// use std::io;
-/// let mut input = String::new();
-/// io::stdin().read_line(&amp;amp;mut input)?;
-/// # Ok::&amp;lt;(), io::Error&amp;gt;(())
-/// ```
-fn my_func() {}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You still have to specify the error type being used at the bottom of the documentation test.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#custom-attributes-accept-arbitrary-token-streams&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;custom-attributes-accept-arbitrary-token-streams&quot;&gt;&lt;/a&gt;Custom attributes accept arbitrary token streams&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.rust-lang.org/2018/12/21/Procedural-Macros-in-Rust-2018.html&quot;&gt;Procedural macros&lt;/a&gt; in Rust can define custom attributes that they consume.
-Until now, such attributes were restricted to being trees of paths and literals
-according to a specific syntax, like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[foo(bar)]
-#[foo = &amp;quot;bar&amp;quot;]
-#[foo = 0]
-#[foo(bar = true)]
-#[foo(bar, baz(quux, foo = &amp;quot;bar&amp;quot;))]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Unlike procedural macros, these helper attributes could not accept arbitrary token streams in delimiters,
-so you could not write &lt;code&gt;#[range(0..10)]&lt;/code&gt; or &lt;code&gt;#[bound(T: MyTrait)]&lt;/code&gt;.
-Procedural macro crates would instead use strings for specifying syntaxes like this, e.g. &lt;code&gt;#[range(&amp;quot;0..10&amp;quot;)]&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;With this Rust release, custom attributes &lt;code&gt;#[attr($tokens)]&lt;/code&gt; &lt;a href=&quot;https://github.com/rust-lang/rust/pull/57367&quot;&gt;now accept&lt;/a&gt;
-arbitrary token streams in &lt;code&gt;$tokens&lt;/code&gt;, bringing them on par with macros.
-If you're the author of a procedural macro crate, please check if your custom attributes
-have unnecessary strings in their syntax and if they can be better expressed with token streams.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#tryfrom-and-tryinto&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;tryfrom-and-tryinto&quot;&gt;&lt;/a&gt;&lt;code&gt;TryFrom&lt;/code&gt; and &lt;code&gt;TryInto&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;The &lt;a href=&quot;https://doc.rust-lang.org/std/convert/trait.TryFrom.html&quot;&gt;&lt;code&gt;TryFrom&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/convert/trait.TryInto.html&quot;&gt;&lt;code&gt;TryInto&lt;/code&gt;&lt;/a&gt; traits were stabilized to allow fallible type conversions.&lt;/p&gt;
-&lt;p&gt;For example, the &lt;a href=&quot;https://doc.rust-lang.org/std/primitive.u32.html#method.from_be_bytes&quot;&gt;&lt;code&gt;from_be_bytes&lt;/code&gt;&lt;/a&gt; and related methods on integer types take arrays,
-but data is often read in via slices. Converting between slices and arrays is tedious to do manually.
-With the new traits, it can be done inline with &lt;code&gt;.try_into()&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;let num = u32::from_be_bytes(slice.try_into()?);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For conversions that cannot fail, such as &lt;code&gt;u8&lt;/code&gt; to &lt;code&gt;u32&lt;/code&gt;, the &lt;a href=&quot;https://doc.rust-lang.org/std/convert/enum.Infallible.html&quot;&gt;&lt;code&gt;Infallible&lt;/code&gt;&lt;/a&gt; type was added.
-This also permits a blanket implementation of &lt;code&gt;TryFrom&lt;/code&gt; for all existing &lt;code&gt;From&lt;/code&gt; implementations.
-In the future, we hope to turn &lt;code&gt;Infallible&lt;/code&gt; into an alias for &lt;a href=&quot;https://github.com/rust-lang/rust/issues/35121&quot;&gt;the &lt;code&gt;!&lt;/code&gt; (never) type&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#fn-before_exec-deprecated-in-favor-of-unsafe-fn-pre_exec&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;fn-before_exec-deprecated-in-favor-of-unsafe-fn-pre_exec&quot;&gt;&lt;/a&gt;&lt;code&gt;fn before_exec&lt;/code&gt; deprecated in favor of &lt;code&gt;unsafe fn pre_exec&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;On Unix-like systems, the function &lt;a href=&quot;https://doc.rust-lang.org/std/os/unix/process/trait.CommandExt.html#tymethod.before_exec&quot;&gt;&lt;code&gt;CommandExt::before_exec&lt;/code&gt;&lt;/a&gt; allows you to
-schedule a closure to be run before &lt;code&gt;exec&lt;/code&gt; is invoked.&lt;/p&gt;
-&lt;p&gt;The closure provided will be run in the context of the child process after a fork.
-This means that resources, such as file descriptors and memory-mapped regions, may get duplicated.
-In other words, you can now copy a value of a non-&lt;code&gt;Copy&lt;/code&gt; type into a different process
-while retaining the original in the parent. This makes &lt;a href=&quot;https://github.com/rust-lang/rust/issues/39575#issuecomment-437658766&quot;&gt;it possible&lt;/a&gt; to cause
-undefined behavior and break &lt;a href=&quot;https://github.com/rust-lang/rust/issues/39575#issuecomment-439645949&quot;&gt;libraries assuming non-duplication&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The function &lt;code&gt;before_exec&lt;/code&gt; should therefore have been marked as &lt;code&gt;unsafe&lt;/code&gt;.
-In this release of Rust, we have deprecated &lt;code&gt;fn before_exec&lt;/code&gt; in favor of the &lt;code&gt;unsafe fn pre_exec&lt;/code&gt;.
-When calling &lt;a href=&quot;https://doc.rust-lang.org/std/os/unix/process/trait.CommandExt.html#tymethod.pre_exec&quot;&gt;&lt;code&gt;CommandExt::pre_exec&lt;/code&gt;&lt;/a&gt;, it is your responsibility to make sure that the closure
-does not violate library invariants by making invalid use of these duplicates.
-If you provide a library that is in a similar situation as &lt;code&gt;before_exec&lt;/code&gt;,
-consider deprecating and providing an &lt;code&gt;unsafe&lt;/code&gt; alternative as well.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#library-stabilizations&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-stabilizations&quot;&gt;&lt;/a&gt;Library stabilizations&lt;/h3&gt;
-&lt;p&gt;In 1.34.0, the set of stable atomic integer types was expanded,
-with signed and unsigned variants from 8 (&lt;a href=&quot;https://doc.rust-lang.org/std/sync/atomic/struct.AtomicU8.html&quot;&gt;&lt;code&gt;AtomicU8&lt;/code&gt;&lt;/a&gt;) to 64 bits now available.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1280-2018-08-02&quot;&gt;Previously&lt;/a&gt;, non-zero unsigned integer types, e.g. &lt;a href=&quot;https://doc.rust-lang.org/std/num/struct.NonZeroU8.html&quot;&gt;&lt;code&gt;NonZeroU8&lt;/code&gt;&lt;/a&gt;, were stabilized.
-This gave &lt;code&gt;Option&amp;lt;NonZeroU8&amp;gt;&lt;/code&gt; the same size as &lt;code&gt;u8&lt;/code&gt;.
-With this Rust release, signed versions, e.g. &lt;a href=&quot;https://doc.rust-lang.org/std/num/struct.NonZeroI8.html&quot;&gt;&lt;code&gt;NonZeroI8&lt;/code&gt;&lt;/a&gt;, have been stabilized.&lt;/p&gt;
-&lt;p&gt;The functions &lt;a href=&quot;https://doc.rust-lang.org/std/iter/fn.from_fn.html&quot;&gt;&lt;code&gt;iter::from_fn&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/iter/fn.successors.html&quot;&gt;&lt;code&gt;iter::successors&lt;/code&gt;&lt;/a&gt; have been stabilized.
-The former allows you to construct an iterator from &lt;code&gt;FnMut() -&amp;gt; Option&amp;lt;T&amp;gt;&lt;/code&gt;.
-To pop elements from a vector iteratively, you can now write &lt;code&gt;from_fn(|| vec.pop())&lt;/code&gt;.
-Meanwhile, the latter creates a new iterator where each successive item
-is computed based on the preceding one.&lt;/p&gt;
-&lt;p&gt;Additionally, these APIs have become stable:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/any/trait.Any.html#tymethod.type_id&quot;&gt;Any::type_id&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/error/trait.Error.html#method.type_id&quot;&gt;Error::type_id&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by_cached_key&quot;&gt;slice::sort_by_cached_key&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.str.html#method.escape_debug&quot;&gt;str::escape_debug&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.str.html#method.escape_default&quot;&gt;str::escape_default&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.str.html#method.escape_unicode&quot;&gt;str::escape_unicode&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.str.html#method.split_ascii_whitespace&quot;&gt;str::split_ascii_whitespace&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Instant.html#method.checked_add&quot;&gt;Instant::checked_add&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Instant.html#method.checked_sub&quot;&gt;Instant::checked_sub&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.SystemTime.html#method.checked_add&quot;&gt;SystemTime::checked_add&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.SystemTime.html#method.checked_sub&quot;&gt;SystemTime::checked_sub&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1340-2019-04-11&quot;&gt;detailed release notes&lt;/a&gt; for more details.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     

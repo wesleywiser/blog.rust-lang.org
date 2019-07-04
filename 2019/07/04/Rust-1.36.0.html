@@ -102,8 +102,8 @@ Meanwhile, the <code>std</code> crate provided types like <code>Box&lt;T&gt;</co
 but required a global allocator and other OS capabilities in return.</p>
 <p>Starting with Rust 1.36.0, the parts of <code>std</code> that depend on a global allocator, e.g. <code>Vec&lt;T&gt;</code>,
 are now available in the <code>alloc</code> crate. The <code>std</code> crate then re-exports these parts.
-While <code>#![no_std]</code> binaries using <code>alloc</code> still require nightly Rust,
-<code>#![no_std]</code> library crates can use the <code>alloc</code> crate in stable Rust.
+While <code>#![no_std]</code> <em>binaries</em> using <code>alloc</code> still require nightly Rust,
+<code>#![no_std]</code> <em>library</em> crates can use the <code>alloc</code> crate in stable Rust.
 Meanwhile, normal binaries, without <code>#![no_std]</code>, can depend on such library crates.
 We hope this will facilitate the development of a <code>#![no_std]</code> compatible ecosystem of libraries
 prior to stabilizing support for <code>#![no_std]</code> binaries using <code>alloc</code>.</p>
@@ -123,7 +123,7 @@ One of the main uses of this function has been to lazily allocate arrays.</p>
 cannot be used correctly as the Rust compiler assumes that values are properly initialized.
 For example, calling <code>mem::uninitialized::&lt;bool&gt;()</code> causes <em>instantaneous <strong>undefined behavior</strong></em>
 as, from Rust's point of view, the uninitialized bits are neither <code>0</code> (for <code>false</code>)
-nor <code>1</code> (for <code>true</code>) -- the only two allowed bit patterns for <code>bool</code>.</p>
+nor <code>1</code> (for <code>true</code>) - the only two allowed bit patterns for <code>bool</code>.</p>
 <p>To remedy this situation, in Rust 1.36.0, the type <a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a> has been <a href="https://github.com/rust-lang/rust/pull/60445">stabilized</a>.
 The Rust compiler will understand that it should not assume that a <a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a> is a properly initialized <code>T</code>.
 Therefore, you can do gradual initialization more safely and eventually use <code>.assume_init()</code>

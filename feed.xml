@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-07-04T13:43:21Z</updated>
+    <updated>2019-07-04T15:50:43Z</updated>
 
     
     <entry>
@@ -44,8 +44,8 @@ Meanwhile, the &lt;code&gt;std&lt;/code&gt; crate provided types like &lt;code&g
 but required a global allocator and other OS capabilities in return.&lt;/p&gt;
 &lt;p&gt;Starting with Rust 1.36.0, the parts of &lt;code&gt;std&lt;/code&gt; that depend on a global allocator, e.g. &lt;code&gt;Vec&amp;lt;T&amp;gt;&lt;/code&gt;,
 are now available in the &lt;code&gt;alloc&lt;/code&gt; crate. The &lt;code&gt;std&lt;/code&gt; crate then re-exports these parts.
-While &lt;code&gt;#![no_std]&lt;/code&gt; binaries using &lt;code&gt;alloc&lt;/code&gt; still require nightly Rust,
-&lt;code&gt;#![no_std]&lt;/code&gt; library crates can use the &lt;code&gt;alloc&lt;/code&gt; crate in stable Rust.
+While &lt;code&gt;#![no_std]&lt;/code&gt; &lt;em&gt;binaries&lt;/em&gt; using &lt;code&gt;alloc&lt;/code&gt; still require nightly Rust,
+&lt;code&gt;#![no_std]&lt;/code&gt; &lt;em&gt;library&lt;/em&gt; crates can use the &lt;code&gt;alloc&lt;/code&gt; crate in stable Rust.
 Meanwhile, normal binaries, without &lt;code&gt;#![no_std]&lt;/code&gt;, can depend on such library crates.
 We hope this will facilitate the development of a &lt;code&gt;#![no_std]&lt;/code&gt; compatible ecosystem of libraries
 prior to stabilizing support for &lt;code&gt;#![no_std]&lt;/code&gt; binaries using &lt;code&gt;alloc&lt;/code&gt;.&lt;/p&gt;
@@ -65,7 +65,7 @@ One of the main uses of this function has been to lazily allocate arrays.&lt;/p&
 cannot be used correctly as the Rust compiler assumes that values are properly initialized.
 For example, calling &lt;code&gt;mem::uninitialized::&amp;lt;bool&amp;gt;()&lt;/code&gt; causes &lt;em&gt;instantaneous &lt;strong&gt;undefined behavior&lt;/strong&gt;&lt;/em&gt;
 as, from Rust's point of view, the uninitialized bits are neither &lt;code&gt;0&lt;/code&gt; (for &lt;code&gt;false&lt;/code&gt;)
-nor &lt;code&gt;1&lt;/code&gt; (for &lt;code&gt;true&lt;/code&gt;) -- the only two allowed bit patterns for &lt;code&gt;bool&lt;/code&gt;.&lt;/p&gt;
+nor &lt;code&gt;1&lt;/code&gt; (for &lt;code&gt;true&lt;/code&gt;) - the only two allowed bit patterns for &lt;code&gt;bool&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;To remedy this situation, in Rust 1.36.0, the type &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; has been &lt;a href=&quot;https://github.com/rust-lang/rust/pull/60445&quot;&gt;stabilized&lt;/a&gt;.
 The Rust compiler will understand that it should not assume that a &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; is a properly initialized &lt;code&gt;T&lt;/code&gt;.
 Therefore, you can do gradual initialization more safely and eventually use &lt;code&gt;.assume_init()&lt;/code&gt;

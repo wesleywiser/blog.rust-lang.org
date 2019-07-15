@@ -128,7 +128,7 @@ nor <code>1</code> (for <code>true</code>) - the only two allowed bit patterns f
 The Rust compiler will understand that it should not assume that a <a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a> is a properly initialized <code>T</code>.
 Therefore, you can do gradual initialization more safely and eventually use <code>.assume_init()</code>
 once you are certain that <code>maybe_t: MaybeUninit&lt;T&gt;</code> contains an initialized <code>T</code>.</p>
-<p>As <a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a> is the safer alternative, starting with Rust 1.38,
+<p>As <a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a> is the safer alternative, starting with Rust 1.39,
 the function <a href="https://doc.rust-lang.org/std/mem/fn.uninitialized.html"><code>mem::uninitialized</code></a> will be deprecated.</p>
 <p>To find out more about uninitialized memory, <a href="https://doc.rust-lang.org/std/mem/fn.uninitialized.html"><code>mem::uninitialized</code></a>,
 and <a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a>, read <a href="https://gankro.github.io/blah/initialize-me-maybe/">Alexis Beingessner's blog post</a>.

@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-07-04T15:50:43Z</updated>
+    <updated>2019-07-15T14:23:36Z</updated>
 
     
     <entry>
@@ -70,7 +70,7 @@ nor &lt;code&gt;1&lt;/code&gt; (for &lt;code&gt;true&lt;/code&gt;) - the only tw
 The Rust compiler will understand that it should not assume that a &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; is a properly initialized &lt;code&gt;T&lt;/code&gt;.
 Therefore, you can do gradual initialization more safely and eventually use &lt;code&gt;.assume_init()&lt;/code&gt;
 once you are certain that &lt;code&gt;maybe_t: MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt; contains an initialized &lt;code&gt;T&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;As &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; is the safer alternative, starting with Rust 1.38,
+&lt;p&gt;As &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; is the safer alternative, starting with Rust 1.39,
 the function &lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn.uninitialized.html&quot;&gt;&lt;code&gt;mem::uninitialized&lt;/code&gt;&lt;/a&gt; will be deprecated.&lt;/p&gt;
 &lt;p&gt;To find out more about uninitialized memory, &lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn.uninitialized.html&quot;&gt;&lt;code&gt;mem::uninitialized&lt;/code&gt;&lt;/a&gt;,
 and &lt;a href=&quot;https://doc.rust-lang.org/std/mem/union.MaybeUninit.html&quot;&gt;&lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt;, read &lt;a href=&quot;https://gankro.github.io/blah/initialize-me-maybe/&quot;&gt;Alexis Beingessner's blog post&lt;/a&gt;.

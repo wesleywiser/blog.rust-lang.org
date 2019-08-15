@@ -10,8 +10,116 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-07-15T14:23:36Z</updated>
+    <updated>2019-08-15T14:23:26Z</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.37.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/08/15/Rust-1.37.0.html" type="text/html" title="Announcing Rust 1.37.0" />
+        <published>2019-08-15T00:00:00Z</published>
+        <updated>2019-08-15T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/08/15/Rust-1.37.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/08/15/Rust-1.37.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.37.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.37.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1370-2019-08-15&quot;&gt;detailed release notes for 1.37.0&lt;/a&gt; on GitHub.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1.37.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.37.0-stable&quot;&gt;&lt;/a&gt;What's in 1.37.0 stable&lt;/h2&gt;
+&lt;p&gt;The highlights of Rust 1.37.0 include referring to &lt;code&gt;enum&lt;/code&gt; variants through &lt;code&gt;type&lt;/code&gt; aliases, built-in &lt;code&gt;cargo vendor&lt;/code&gt;, unnamed &lt;code&gt;const&lt;/code&gt; items, profile-guided optimization, a &lt;code&gt;default-run&lt;/code&gt; key in Cargo, and &lt;code&gt;#[repr(align(N))]&lt;/code&gt; on &lt;code&gt;enum&lt;/code&gt;s. Read on for a few highlights, or see the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1370-2019-08-15&quot;&gt;detailed release notes&lt;/a&gt; for additional information.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#referring-to-enum-variants-through-type-aliases&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;referring-to-enum-variants-through-type-aliases&quot;&gt;&lt;/a&gt;Referring to &lt;code&gt;enum&lt;/code&gt; variants through &lt;code&gt;type&lt;/code&gt; aliases&lt;/h3&gt;
+&lt;p&gt;With Rust 1.37.0, you can now refer to &lt;code&gt;enum&lt;/code&gt; variants through type aliases. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;type ByteOption = Option&amp;lt;u8&amp;gt;;
+
+fn increment_or_zero(x: ByteOption) -&amp;gt; u8 {
+    match x {
+        ByteOption::Some(y) =&amp;gt; y + 1,
+        ByteOption::None =&amp;gt; 0,
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In implementations, &lt;code&gt;Self&lt;/code&gt; acts like a type alias. So in Rust 1.37.0, you can also refer to &lt;code&gt;enum&lt;/code&gt; variants with &lt;code&gt;Self::Variant&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;impl Coin {
+    fn value_in_cents(&amp;amp;self) -&amp;gt; u8 {
+        match self {
+            Self::Penny =&amp;gt; 1,
+            Self::Nickel =&amp;gt; 5,
+            Self::Dime =&amp;gt; 10,
+            Self::Quarter =&amp;gt; 25,
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To be more exact, Rust now allows you to refer to &lt;code&gt;enum&lt;/code&gt; variants through &lt;em&gt;&amp;quot;type-relative resolution&amp;quot;&lt;/em&gt;, &lt;code&gt;&amp;lt;MyType&amp;lt;..&amp;gt;&amp;gt;::Variant&lt;/code&gt;. More details are available in &lt;a href=&quot;https://github.com/rust-lang/rust/pull/61682/#issuecomment-502472847&quot;&gt;the stabilization report&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#built-in-cargo-support-for-vendored-dependencies&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;built-in-cargo-support-for-vendored-dependencies&quot;&gt;&lt;/a&gt;Built-in Cargo support for vendored dependencies&lt;/h3&gt;
+&lt;p&gt;After being available &lt;a href=&quot;https://crates.io/crates/cargo-vendor&quot;&gt;as a separate crate&lt;/a&gt; for years, the &lt;code&gt;cargo vendor&lt;/code&gt; command is now integrated directly into Cargo. The command fetches all your project's dependencies unpacking them into the &lt;code&gt;vendor/&lt;/code&gt; directory, and shows the configuration snippet required to use the vendored code during builds.&lt;/p&gt;
+&lt;p&gt;There are multiple cases where &lt;code&gt;cargo vendor&lt;/code&gt; is already used in production: the Rust compiler &lt;code&gt;rustc&lt;/code&gt; uses it to ship all its dependencies in release tarballs, and projects with monorepos use it to commit the dependencies' code in source control.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#using-unnamed-const-items-for-macros&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;using-unnamed-const-items-for-macros&quot;&gt;&lt;/a&gt;Using unnamed &lt;code&gt;const&lt;/code&gt; items for macros&lt;/h3&gt;
+&lt;p&gt;You can now create &lt;a href=&quot;https://github.com/rust-lang/rust/pull/61347/&quot;&gt;unnamed &lt;code&gt;const&lt;/code&gt; items&lt;/a&gt;. Instead of giving your constant an explicit name, simply name it &lt;code&gt;_&lt;/code&gt; instead. For example, in the &lt;code&gt;rustc&lt;/code&gt; compiler we find:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;/// Type size assertion where the first parameter
+/// is a type and the second is the expected size.
+#[macro_export]
+macro_rules! static_assert_size {
+    ($ty:ty, $size:expr) =&amp;gt; {
+        const _: [(); $size] = [(); ::std::mem::size_of::&amp;lt;$ty&amp;gt;()];
+        //    ^ Note the underscore here.
+    }
+}
+
+static_assert_size!(Option&amp;lt;Box&amp;lt;String&amp;gt;&amp;gt;, 8); // 1.
+static_assert_size!(usize, 8); // 2.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice the second &lt;code&gt;static_assert_size!(..)&lt;/code&gt;: thanks to the use of unnamed constants, you can define new items without naming conflicts. Previously you would have needed to write &lt;code&gt;static_assert_size!(MY_DUMMY_IDENTIFIER, usize, 8);&lt;/code&gt;. Instead, with Rust 1.37.0, it now becomes easier to create ergonomic and reusable declarative and procedural macros for static analysis purposes.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#profile-guided-optimization&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;profile-guided-optimization&quot;&gt;&lt;/a&gt;Profile-guided optimization&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;rustc&lt;/code&gt; compiler now comes with &lt;a href=&quot;https://github.com/rust-lang/rust/pull/61268/&quot;&gt;support for Profile-Guided Optimization (PGO)&lt;/a&gt; via the &lt;code&gt;-C profile-generate&lt;/code&gt; and &lt;code&gt;-C profile-use&lt;/code&gt; flags.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Profile-guided_optimization&quot;&gt;Profile-Guided Optimization&lt;/a&gt; allows the compiler to optimize code based on feedback from real workloads. It works by compiling the program to optimize in two steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First, the program is built with instrumentation inserted by the compiler. This is done by passing the &lt;code&gt;-C profile-generate&lt;/code&gt; flag to &lt;code&gt;rustc&lt;/code&gt;. The instrumented program then needs to be run on sample data and will write the profiling data to a file.&lt;/li&gt;
+&lt;li&gt;Then, the program is built &lt;em&gt;again&lt;/em&gt;, this time feeding the collected profiling data back into &lt;code&gt;rustc&lt;/code&gt; by using the &lt;code&gt;-C profile-use&lt;/code&gt; flag. This build will make use of the collected data to allow the compiler to make better decisions about code placement, inlining, and other optimizations.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For more in-depth information on Profile-Guided Optimization, please refer to the corresponding &lt;a href=&quot;https://doc.rust-lang.org/rustc/profile-guided-optimization.html&quot;&gt;chapter in the rustc book&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#choosing-a-default-binary-in-cargo-projects&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;choosing-a-default-binary-in-cargo-projects&quot;&gt;&lt;/a&gt;Choosing a default binary in Cargo projects&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://doc.rust-lang.org/cargo/commands/cargo-run.html&quot;&gt;&lt;code&gt;cargo run&lt;/code&gt;&lt;/a&gt; is great for quickly testing CLI applications. When multiple binaries are present in the same package, you have to explicitly declare the name of the binary you want to run with the &lt;code&gt;--bin&lt;/code&gt; flag. This makes &lt;code&gt;cargo run&lt;/code&gt; not as ergonomic as we'd like, especially when a binary is called more often than the others.&lt;/p&gt;
+&lt;p&gt;Rust 1.37.0 addresses the issue by adding &lt;a href=&quot;https://doc.rust-lang.org/cargo/reference/manifest.html#the-default-run-field&quot;&gt;&lt;code&gt;default-run&lt;/code&gt;&lt;/a&gt;, a new key in &lt;code&gt;Cargo.toml&lt;/code&gt;. When the key is declared in the &lt;code&gt;[package]&lt;/code&gt; section, &lt;code&gt;cargo run&lt;/code&gt; will default to the chosen binary if the &lt;code&gt;--bin&lt;/code&gt; flag is not passed.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#[repr(align(n))]-on-enums&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;[repr(align(n))]-on-enums&quot;&gt;&lt;/a&gt;&lt;code&gt;#[repr(align(N))]&lt;/code&gt; on &lt;code&gt;enum&lt;/code&gt;s&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://doc.rust-lang.org/reference/type-layout.html#the-alignment-modifiers&quot;&gt;The &lt;code&gt;#[repr(align(N))]&lt;/code&gt; attribute&lt;/a&gt; can be used to raise the &lt;a href=&quot;https://doc.rust-lang.org/reference/type-layout.html#size-and-alignment&quot;&gt;alignment&lt;/a&gt; of a type definition. Previously, the attribute was only allowed on &lt;code&gt;struct&lt;/code&gt;s and &lt;code&gt;union&lt;/code&gt;s. With Rust 1.37.0, the attribute can now also be used &lt;a href=&quot;https://github.com/rust-lang/rust/pull/61229&quot;&gt;on &lt;code&gt;enum&lt;/code&gt; definitions&lt;/a&gt;. For example, the following type &lt;code&gt;Align16&lt;/code&gt; would, as expected, report &lt;code&gt;16&lt;/code&gt; as the alignment whereas the natural alignment without &lt;code&gt;#[repr(align(16))]&lt;/code&gt; would be &lt;code&gt;4&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[repr(align(16))]
+enum Align16 {
+    Foo { foo: u32 },
+    Bar { bar: u32 },
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The semantics of using &lt;code&gt;#[repr(align(N))&lt;/code&gt; on an &lt;code&gt;enum&lt;/code&gt; is the same as defining a wrapper struct &lt;code&gt;AlignN&amp;lt;T&amp;gt;&lt;/code&gt; with that alignment and then using &lt;code&gt;AlignN&amp;lt;MyEnum&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[repr(align(N))]
+struct AlignN&amp;lt;T&amp;gt;(T);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;&lt;a href=&quot;#library-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
+&lt;p&gt;In Rust 1.37.0 there have been a number of standard library stabilizations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/io/struct.BufReader.html#method.buffer&quot;&gt;&lt;code&gt;BufReader::buffer&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/io/struct.BufWriter.html#method.buffer&quot;&gt;&lt;code&gt;BufWriter::buffer&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/cell/struct.Cell.html#method.from_mut&quot;&gt;&lt;code&gt;Cell::from_mut&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/cell/struct.Cell.html#method.as_slice_of_cells&quot;&gt;&lt;code&gt;Cell::as_slice_of_cells&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html#method.nth_back&quot;&gt;&lt;code&gt;DoubleEndedIterator::nth_back&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.xor&quot;&gt;&lt;code&gt;Option::xor&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.u8.html#method.reverse_bits&quot;&gt;&lt;code&gt;{i,u}{8,16,64,128,size}::reverse_bits&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/num/struct.Wrapping.html#method.reverse_bits&quot;&gt;&lt;code&gt;Wrapping::reverse_bits&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.copy_within&quot;&gt;&lt;code&gt;slice::copy_within&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;#other-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.37 release: check out what changed in &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1370-2019-08-15&quot;&gt;Rust&lt;/a&gt;, &lt;a href=&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-137-2019-08-15&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-137&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-137.0&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-137.0&quot;&gt;&lt;/a&gt;Contributors to 1.37.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.37.0. We couldn't have done it
+without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.37.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#new-sponsors-of-rust-infrastructure&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;new-sponsors-of-rust-infrastructure&quot;&gt;&lt;/a&gt;New sponsors of Rust infrastructure&lt;/h2&gt;
+&lt;p&gt;We'd like to thank two new sponsors of Rust's infrastructure who provided the resources needed to make Rust 1.37.0 happen: Amazon Web Services (AWS) and Microsoft Azure.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AWS has provided hosting for release artifacts (compilers, libraries, tools, and source code), serving those artifacts to users through CloudFront, preventing regressions with Crater on EC2, and managing other Rust-related infrastructure hosted on AWS.&lt;/li&gt;
+&lt;li&gt;Microsoft Azure has sponsored builders for Rust’s CI infrastructure, notably the extremely resource intensive rust-lang/rust repository.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.36.0</title>
@@ -612,68 +720,6 @@ A patch was released that fixes the issue, avoiding to force TLS v1.2 on the pla
 
         <author>
             <name>The Rust Release Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Rust's 2019 roadmap</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2019/04/23/roadmap.html" type="text/html" title="Rust's 2019 roadmap" />
-        <published>2019-04-23T00:00:00Z</published>
-        <updated>2019-04-23T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2019/04/23/roadmap.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2019/04/23/roadmap.html">&lt;p&gt;Each year the Rust community &lt;a href=&quot;https://github.com/rust-lang/rfcs/pull/1728&quot;&gt;comes together&lt;/a&gt; to set out a
-roadmap. This year, in addition to the &lt;a href=&quot;https://blog.rust-lang.org/2018/11/27/Rust-survey-2018.html&quot;&gt;survey&lt;/a&gt;, we put out a &lt;a href=&quot;https://blog.rust-lang.org/2018/12/06/call-for-rust-2019-roadmap-blogposts.html&quot;&gt;call for blog
-posts&lt;/a&gt; in December, which resulted in &lt;a href=&quot;https://readrust.net/rust-2019/&quot;&gt;73 blog posts&lt;/a&gt;
-written over the span of a few weeks. The end result is the recently-merged
-&lt;a href=&quot;https://github.com/rust-lang/rfcs/blob/master/text/2657-roadmap-2019.md&quot;&gt;2019 roadmap RFC&lt;/a&gt;. To get all of the details, please give it a read,
-but this post lays out some of the highlights.&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#the-theme-maturity&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;the-theme-maturity&quot;&gt;&lt;/a&gt;The theme: Maturity&lt;/h1&gt;
-&lt;p&gt;In short, 2019 will be a year of &lt;em&gt;rejuvenation&lt;/em&gt; and &lt;em&gt;maturation&lt;/em&gt; for the Rust
-project. We shipped a lot of stuff last year, and grew a lot. Now it's time to
-take a step back, take stock, and prepare for the future.&lt;/p&gt;
-&lt;p&gt;The work we have planned for this year falls into three major categories:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Governance: improving how the project is run&lt;/li&gt;
-&lt;li&gt;Finish long-standing requests: closing out work we've started but never finished&lt;/li&gt;
-&lt;li&gt;Polish: improving the overall quality of the language and tooling&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#governance&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;governance&quot;&gt;&lt;/a&gt;Governance&lt;/h2&gt;
-&lt;p&gt;Over the last three years, the Rust project has grown a lot. Rust used to have a core team of 8 members. When we added sub-teams in 2015, we grew to 23 members. We've now grown to over 100 — that's bigger than many companies! And of course, looking beyond the teams, the size of the Rust community as a whole has grown tremendously as well. As a result of this growth, we've found that the processes which served us well when we were a smaller project are starting to feel some strain.&lt;/p&gt;
-&lt;p&gt;Many of the teams have announced plans to review and revamp their processes so as to scale better. Often this can be as simple as taking the time to write down things that previously were understood only informally — sometimes it means establishing new structures.&lt;/p&gt;
-&lt;p&gt;Because of this widespread interest in governance, we've also created a new &lt;a href=&quot;https://internals.rust-lang.org/t/governance-working-group-announcement/9637&quot;&gt;&lt;strong&gt;Governance Working Group&lt;/strong&gt;&lt;/a&gt;. This group is going to be devoted to working with each team to hone its governance structure and to help pass lessons and strategies between teams.&lt;/p&gt;
-&lt;p&gt;Additionally, the RFC process has been a great boon for Rust, but as we've grown, there have been times where it didn't work so well too.
-We may look at revisions to the process this year.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#long-standing-requests&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;long-standing-requests&quot;&gt;&lt;/a&gt;Long-standing requests&lt;/h2&gt;
-&lt;p&gt;There are a number of exciting initiatives that have been sitting in a limbo
-state — the majority of the design is done, but there are some lingering
-complications that we haven't had time to work out. This year we hope to take
-a fresh look at some of these problems and try hard to resolve those
-lingering problems.&lt;/p&gt;
-&lt;p&gt;Examples include:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The Cargo team and custom registries&lt;/li&gt;
-&lt;li&gt;The Language team is taking a look at async/await, specialization, const generics, and generic associated types&lt;/li&gt;
-&lt;li&gt;The Libs team wants to finish custom allocators&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#polish&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;polish&quot;&gt;&lt;/a&gt;Polish&lt;/h2&gt;
-&lt;p&gt;Finally, the last few years have also seen a lot of foundational work. The
-compiler, for example, was massively refactored to support incremental
-compilation and to be better prepared for IDEs. Now that we've got these
-pieces in place, we want to do the “polish” work that really makes for a
-great experience.&lt;/p&gt;
-&lt;p&gt;Examples:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Compile times and IDE support&lt;/li&gt;
-&lt;li&gt;Polishing the specification of the language by improving &lt;a href=&quot;https://doc.rust-lang.org/stable/reference/&quot;&gt;the reference&lt;/a&gt; and laying out &lt;a href=&quot;https://github.com/rust-lang/unsafe-code-guidelines&quot;&gt;the unsafe code guidelines&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;The WebAssembly WG's work this year includes polishing our wasm support, for example, debugging&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#conclusion&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;This post only covered a few examples of the plans we've been making. &lt;a href=&quot;https://github.com/rust-lang/rfcs/blob/master/text/2657-roadmap-2019.md&quot;&gt;If you'd like to see the full details, take a look at the RFC itself.&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Here's to a great 2019 for Rust!&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
         </author>
     </entry>
     

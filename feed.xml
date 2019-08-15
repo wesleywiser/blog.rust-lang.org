@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-08-15T14:23:26Z</updated>
+    <updated>2019-08-15T16:50:49Z</updated>
 
     
     <entry>
@@ -100,7 +100,7 @@ struct AlignN&amp;lt;T&amp;gt;(T);
 &lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/cell/struct.Cell.html#method.as_slice_of_cells&quot;&gt;&lt;code&gt;Cell::as_slice_of_cells&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html#method.nth_back&quot;&gt;&lt;code&gt;DoubleEndedIterator::nth_back&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/option/enum.Option.html#method.xor&quot;&gt;&lt;code&gt;Option::xor&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.u8.html#method.reverse_bits&quot;&gt;&lt;code&gt;{i,u}{8,16,64,128,size}::reverse_bits&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/num/struct.Wrapping.html#method.reverse_bits&quot;&gt;&lt;code&gt;Wrapping::reverse_bits&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[&lt;code&gt;{i,u}{8,16,32,64,128,size}::reverse_bits&lt;/code&gt;] and &lt;a href=&quot;https://doc.rust-lang.org/std/num/struct.Wrapping.html#method.reverse_bits&quot;&gt;&lt;code&gt;Wrapping::reverse_bits&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.slice.html#method.copy_within&quot;&gt;&lt;code&gt;slice::copy_within&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;&lt;a href=&quot;#other-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;

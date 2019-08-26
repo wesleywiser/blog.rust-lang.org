@@ -82,7 +82,7 @@
 reliable and efficient software.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.31.0 is as easy as:</p>
-<pre><code class="language-bash">$ rustup update stable
+<pre><code class="language-bash">rustup update stable
 </code></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/tools/install">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1310-2018-12-06">detailed release notes for
@@ -128,7 +128,7 @@ a cohesive package. This is more than just language features, it also includes</
 </ul>
 <p>We'll be covering all of this and more in this post.</p>
 <p>Let's create a new project with Cargo:</p>
-<pre><code class="language-console">$ cargo new foo
+<pre><code class="language-console">cargo new foo
 </code></pre>
 <p>Here's the contents of <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[package]
@@ -194,7 +194,7 @@ not handle it.</p>
     let mut x = 5;
     let y = &amp;x;
     let z = &amp;mut x;
-    
+
     println!(&quot;y: {}&quot;, y);
 }
 </code></pre>
@@ -218,7 +218,7 @@ not handle it.</p>
   |             -- immutable borrow occurs here
 5 |     let z = &amp;mut x;
   |             ^^^^^^ mutable borrow occurs here
-6 |     
+6 |
 7 |     println!(&quot;y: {}&quot;, y);
   |                       - borrow later used here
 </code></pre>

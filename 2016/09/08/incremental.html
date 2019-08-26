@@ -97,7 +97,7 @@ marks an important milestone in the development of the feature: For the first
 time since implementation started towards the end of last year, all of the
 <a href="https://github.com/rust-lang/rfcs/blob/master/text/1298-incremental-compilation.md">basic components</a> are in place, the bulk of the groundwork has
 been done. You can give it a try in the nightly version of the compiler:</p>
-<pre><code>rustc -Zincremental=&lt;path&gt; ./main.rs
+<pre><code class="language-console">rustc -Zincremental=&lt;path&gt; ./main.rs
 </code></pre>
 <p>This will start the compiler in <strong>incremental mode</strong>, using whatever <code>&lt;path&gt;</code>
 you've provided as the incremental compilation cache directory. We are also

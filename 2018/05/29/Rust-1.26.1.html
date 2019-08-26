@@ -81,7 +81,7 @@
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.26.1 is as easy as:</p>
-<pre><code class="language-bash">$ rustup update stable
+<pre><code class="language-bash">rustup update stable
 </code></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1261-2018-05-29">detailed release notes for
@@ -160,7 +160,7 @@ refused to partially install Rust. Some users will need to run <code>rustup inst
 component, but this should be a one-time problem.</p>
 <p>This was unfortunately fixed too late to make it into 1.26 stable, so we added
 the patch for 1.26.1 to permit users to install Rust on these platforms.</p>
-<pre><code>$ rustup update
+<pre><code class="language-console">rustup update
 info: syncing channel updates for 'stable-x86_64-unknown-freebsd'
 info: latest update on 2018-05-10, rust version 1.26.0 (a77568041 2018-05-07)
 error: component 'rust-docs' for 'x86_64-unknown-freebsd' is unavailable for download

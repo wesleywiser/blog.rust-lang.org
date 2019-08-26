@@ -221,7 +221,7 @@ edit the <code>Cargo.toml</code> and add the <code>time</code> crate from <a hre
 </code></pre>
 <p>Now that we've added the <code>time</code> crate, let's see what happens if we ask Cargo to
 build our package:</p>
-<pre><code>$ cargo build
+<pre><code class="language-console">cargo build
    Compiling winapi v0.2.6
    Compiling libc v0.2.10
    Compiling winapi-build v0.1.1
@@ -233,12 +233,11 @@ build our package:</p>
 enough predictability to allow functionality like the <code>time</code> crate to be broken
 up into smaller crates that do one thing and do it well</strong>.</p>
 <p>Now that we successfully built our crate, what happens if we try to build it again?</p>
-<pre><code>$ cargo build
-
+<pre><code class="language-console">cargo build
 </code></pre>
 <p>Nothing happened at all. Why's that? We can always ask Cargo to give us more
 information through the <code>--verbose</code> flag, so let's do that:</p>
-<pre><code>$ cargo build --verbose
+<pre><code class="language-console">cargo build --verbose
        Fresh libc v0.2.10
        Fresh winapi v0.2.6
        Fresh winapi-build v0.1.1
@@ -286,7 +285,7 @@ different machine. Ideally, we would like to be able to pick up right where we
 left off, with the exact same source code for all of our dependencies.</p>
 <p>To do this, we check in our <code>Cargo.lock</code> and clone the repository on our new
 machine. Then, we run <code>cargo build</code> again.</p>
-<pre><code>$ cargo build
+<pre><code class="language-console">cargo build
    Compiling libc v0.2.10
    Compiling winapi v0.2.6
    Compiling winapi-build v0.1.1
@@ -309,7 +308,7 @@ fn main() {
 }
 </code></pre>
 <p>To run the example, we ask Cargo to build and run it:</p>
-<pre><code>$ cargo run --example date
+<pre><code class="language-console">cargo run --example date
    Compiling datetime v0.1.0 (file:///Users/ykatz/Code/datetime)
      Running `target/debug/examples/date`
 26 Apr 2016 :: 05:03:38
@@ -347,7 +346,7 @@ to our package:</p>
 + tz = &quot;0.2.1&quot;
 </code></pre>
 <p>After using the crate in our library, let's run <code>cargo build</code> again:</p>
-<pre><code>$ cargo build
+<pre><code class="language-console">cargo build
     Updating registry `https://github.com/rust-lang/crates.io-index`
  Downloading tz v0.2.1
  Downloading byteorder v0.5.1
@@ -395,7 +394,7 @@ fn bench_date(b: &amp;mut Bencher) {
 }
 </code></pre>
 <p>If we then run <code>cargo bench</code>:</p>
-<pre><code>$ cargo bench
+<pre><code class="language-console">cargo bench
    Compiling winapi v0.2.6
    Compiling libc v0.2.10
    Compiling byteorder v0.5.1
@@ -445,7 +444,7 @@ library for Unix-specific functionality.</p>
 + nix = &quot;0.5.0&quot;
 </code></pre>
 <p>As before, when I run <code>cargo build</code>, Cargo <em>conservatively</em> adds <code>nix</code> and its dependencies:</p>
-<pre><code>$ cargo build
+<pre><code class="language-console">cargo build
     Updating registry `https://github.com/rust-lang/crates.io-index`
  Downloading nix v0.5.0
  Downloading bitflags v0.4.0

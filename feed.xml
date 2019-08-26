@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-08-15T16:50:49Z</updated>
+    <updated>2019-08-26T19:59:22Z</updated>
 
     
     <entry>
@@ -21,7 +21,7 @@
         <id>https://blog.rust-lang.org/2019/08/15/Rust-1.37.0.html</id>
         <content type="html" xml:base="https://blog.rust-lang.org/2019/08/15/Rust-1.37.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.37.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
 &lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.37.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website, and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1370-2019-08-15&quot;&gt;detailed release notes for 1.37.0&lt;/a&gt; on GitHub.&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#whats-in-1.37.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.37.0-stable&quot;&gt;&lt;/a&gt;What's in 1.37.0 stable&lt;/h2&gt;
@@ -130,7 +130,7 @@ without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.37.0/&q
         <content type="html" xml:base="https://blog.rust-lang.org/2019/07/04/Rust-1.36.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.36.0.
 Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
 &lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.36.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website,
 and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1360-2019-07-04&quot;&gt;detailed release notes for 1.36.0&lt;/a&gt; on GitHub.&lt;/p&gt;
@@ -280,7 +280,7 @@ without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.36.0/&q
         <content type="html" xml:base="https://blog.rust-lang.org/2019/05/23/Rust-1.35.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.35.0. Rust is a
 programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
 &lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.35.0 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website,
 and check out the &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1350-2019-05-23&quot;&gt;detailed release notes for 1.35.0&lt;/a&gt; on GitHub.&lt;/p&gt;
@@ -551,7 +551,7 @@ programming language that is empowering everyone to build reliable and
 efficient software.&lt;/p&gt;
 &lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust
 1.34.2 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the
 appropriate page on our website.&lt;/p&gt;
@@ -683,7 +683,7 @@ with our &lt;a href=&quot;https://www.rust-lang.org/policies/security&quot;&gt;s
 Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
 &lt;p&gt;If you have a previous version of Rust installed via rustup,
 getting Rust 1.34.1 and rustup 1.18.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;$ rustup update stable
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#whats-in-1.34.1-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.34.1-stable&quot;&gt;&lt;/a&gt;What's in 1.34.1 stable&lt;/h2&gt;

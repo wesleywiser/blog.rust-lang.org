@@ -96,18 +96,18 @@ helping us make Rust even better. &lt;3</p>
 <h2><a href="#setup-install-rust-beta" aria-hidden="true" class="anchor" id="setup-install-rust-beta"></a>Setup: install Rust beta</h2>
 <p>First things first, you'll need to install the beta release channel of Rust.
 With <a href="https://www.rust-lang.org/en-US/install.html">Rustup</a>, it's as easy as:</p>
-<pre><code class="language-console">$ rustup install beta
+<pre><code class="language-console">rustup install beta
 </code></pre>
 <p>To use this channel of Rust instead of your default, you can append a <code>+beta</code>
 to any <code>rustc</code> or cargo commands:</p>
-<pre><code class="language-console">$ rustc +beta --version
+<pre><code class="language-console">rustc +beta --version
 $ cargo +beta build
 </code></pre>
 <p>This lets you stick to stable as the default, while using beta for your
 experiments.</p>
 <h2><a href="#start-a-new-project" aria-hidden="true" class="anchor" id="start-a-new-project"></a>Start a new project</h2>
 <p>To start a new project with Rust 2018:</p>
-<pre><code class="language-console">$ cargo +beta new my-sample-project
+<pre><code class="language-console">cargo +beta new my-sample-project
 </code></pre>
 <p>Nothing changes! Well, something changed. Check out <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[package]
@@ -126,7 +126,7 @@ existing projects keep working.</p>
 dependencies need to be updated for this to work; Rust 2018 and 2015
 interoperate seamlessly!</p>
 <p>The first step is to run <code>cargo fix</code>:</p>
-<pre><code class="language-console">$ cargo fix --edition
+<pre><code class="language-console">cargo fix --edition
 </code></pre>
 <p>This will check your code, and automatically fix any issues that it can.
 <code>cargo fix</code> is still pretty new, and so it can't always fix your code

@@ -80,7 +80,7 @@
       <p>The Rust team is happy to announce the latest version of Rust, 1.16.0. Rust is a
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed, getting Rust 1.16 is as easy as:</p>
-<pre><code class="language-bash">$ rustup update stable
+<pre><code class="language-bash">rustup update stable
 </code></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1160-2017-03-16">detailed release notes for
@@ -157,7 +157,7 @@ impl&lt;'a&gt; FromStr for Name&lt;'a&gt; {
 <p>Here, Rust isn't sure what to do with the lifetimes; as written, the code doesn't guarantee that <code>s</code>
 will live as long as <code>Name</code>, which is required for <code>Name</code> to be valid. Let's try to compile this
 code with Rust 1.15.1:</p>
-<pre><code class="language-bash">&gt; rustc +1.15.1 foo.rs --crate-type=lib
+<pre><code class="language-bash">rustc +1.15.1 foo.rs --crate-type=lib
 error[E0495]: cannot infer an appropriate lifetime for lifetime parameter in generic type due to conflicting requirements
   --&gt; .\foo.rs:10:5
    |
@@ -178,7 +178,7 @@ help: consider using an explicit lifetime parameter as shown: fn from_str(s: &am
 </code></pre>
 <p>The compiler explains the issue, and gives a helpful suggestion. So let's try it: modify the code to add in
 the <code>'a</code>, and compile again:</p>
-<pre><code class="language-bash">&gt; rustc +1.15.1 .\foo.rs --crate-type=lib
+<pre><code class="language-bash">rustc +1.15.1 .\foo.rs --crate-type=lib
 error[E0308]: method not compatible with trait
   --&gt; .\foo.rs:10:5
    |
@@ -200,7 +200,7 @@ help: consider using an explicit lifetime parameter as shown: fn from_str(s: &am
 </code></pre>
 <p>It still doesn't work. That help message was not actually helpful. It does suggest adding another
 lifetime, this time on <code>Name</code>. If we do that...</p>
-<pre><code class="language-bash">&gt; rustc +1.15.1 .\foo.rs --crate-type=lib
+<pre><code class="language-bash">rustc +1.15.1 .\foo.rs --crate-type=lib
 &lt;snip&gt;
 help: consider using an explicit lifetime parameter as shown: fn from_str(s: &amp;'a str) -&gt; Result&lt;Name&lt;'a&gt;, ()&gt;
   --&gt; .\foo.rs:10:5

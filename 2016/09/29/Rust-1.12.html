@@ -119,7 +119,7 @@ design, check out the <a href="https://blog.rust-lang.org/2016/08/10/Shape-of-er
 <p>Finally, you can also get these errors as JSON with a flag. Remember that error
 we showed above, at the start of the post? Here's an example of attempting to
 compile that code while passing the <code>--error-format=json</code> flag:</p>
-<pre><code class="language-bash">$ rustc borrowck-assign-comp.rs --error-format=json
+<pre><code class="language-bash">rustc borrowck-assign-comp.rs --error-format=json
 {&quot;message&quot;:&quot;cannot assign to `p.x` because it is borrowed&quot;,&quot;level&quot;:&quot;error&quot;,&quot;spans&quot;:[{&quot;file_name&quot;:&quot;borrowck-assign-comp.rs&quot;,&quot;byte_start&quot;:562,&quot;byte_end&quot;:563,&quot;line_start&quot;:15,&quot;line_end&quot;:15,&quot;column_start&quot;:14,&quot;column_end&quot;:15,&quot;is_primary&quot;:false,&quot;text&quot;:[{&quot;text&quot;:&quot;    let q = &amp;p;&quot;,&quot;highlight_start&quot;:14,&quot;highlight_end&quot;:15}],&quot;label&quot;:&quot;borrow of `p.x` occurs here&quot;,&quot;suggested_replacement&quot;:null,&quot;expansion&quot;:null}],&quot;label&quot;:&quot;assignment to borrowed `p.x` occurs here&quot;,&quot;suggested_replacement&quot;:null,&quot;expansion&quot;:null}],&quot;children&quot;:[],&quot;rendered&quot;:null}
 {&quot;message&quot;:&quot;aborting due to previous error&quot;,&quot;code&quot;:null,&quot;level&quot;:&quot;error&quot;,&quot;spans&quot;:[],&quot;children&quot;:[],&quot;rendered&quot;:null}
 </code></pre>

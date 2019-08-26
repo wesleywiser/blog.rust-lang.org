@@ -81,7 +81,7 @@
 systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you have a previous version of Rust installed via rustup, getting Rust
 1.24.0 is as easy as:</p>
-<pre><code class="language-bash">$ rustup update stable
+<pre><code class="language-bash">rustup update stable
 </code></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1240-2018-02-15">detailed release notes for
@@ -92,7 +92,7 @@ appropriate page on our website, and check out the <a href="https://github.com/r
 <p>For years now, we've wanted a tool that automatically can reformat your Rust code to some sort
 of &quot;standard style.&quot; With this release, we're happy to announce that a <em>preview</em> of <code>rustfmt</code>
 can be used with 1.24 stable. To give it a try, do this:</p>
-<pre><code class="language-bash">$ rustup component add rustfmt-preview
+<pre><code class="language-bash">rustup component add rustfmt-preview
 </code></pre>
 <p>There are two important aspects here: first, you're using <code>rustup component add</code> instead of <code>cargo install</code> here. If you've previously used <code>rustfmt</code> via
 <code>cargo install</code>, you should uninstall it first. Second, this is a preview, as

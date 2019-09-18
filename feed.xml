@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-09-18T14:25:35Z</updated>
+    <updated>2019-09-18T15:20:06Z</updated>
 
     
     <entry>
@@ -52,7 +52,8 @@ docker run --rm --memory 3221225472 -it rustops/crates-build-env bash
 &lt;p&gt;Once you're in a shell you can install &lt;a href=&quot;https://rustup.rs&quot;&gt;rustup&lt;/a&gt; (it's not installed by default
 in the image), install Rust nightly, clone your crate's repository and then
 build the documentation:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;time cargo doc --no-deps
+&lt;pre&gt;&lt;code&gt;cargo fetch
+time cargo doc --no-deps
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To aid your testing these commands will limit the available RAM to 3 GB and
 show the total execution time of &lt;code&gt;cargo doc&lt;/code&gt;, but network access will not be

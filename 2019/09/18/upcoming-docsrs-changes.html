@@ -110,7 +110,8 @@ docker run --rm --memory 3221225472 -it rustops/crates-build-env bash
 <p>Once you're in a shell you can install <a href="https://rustup.rs">rustup</a> (it's not installed by default
 in the image), install Rust nightly, clone your crate's repository and then
 build the documentation:</p>
-<pre><code>time cargo doc --no-deps
+<pre><code>cargo fetch
+time cargo doc --no-deps
 </code></pre>
 <p>To aid your testing these commands will limit the available RAM to 3 GB and
 show the total execution time of <code>cargo doc</code>, but network access will not be

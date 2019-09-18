@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-09-18T14:00:07Z</updated>
+    <updated>2019-09-18T14:25:35Z</updated>
 
     
     <entry>
@@ -61,7 +61,7 @@ blocked as you'll need to fetch dependencies.&lt;/p&gt;
 please &lt;a href=&quot;https://github.com/rust-lang/crates-build-env/issues&quot;&gt;open an issue&lt;/a&gt; on the Docker image's
 &lt;a href=&quot;https://hub.docker.com/r/rustops/crates-build-env&quot;&gt;repository&lt;/a&gt; and we'll consider adding it.&lt;/p&gt;
 &lt;p&gt;If your crate fails to build because it took more than 15 minutes to generate
-its docs or it uses more than 3 GB of RAM please &lt;a href=&quot;https://github.com/rust-lang/crates-build-env/issues&quot;&gt;open an issue&lt;/a&gt;
+its docs or it uses more than 3 GB of RAM please &lt;a href=&quot;https://github.com/rust-lang/docs.rs/issues&quot;&gt;open an issue&lt;/a&gt;
 and we will consider reasonable limit increases for your crate. We will &lt;strong&gt;not&lt;/strong&gt;
 enable network access for your crate though: you'll need to change your crate
 not to require any external resource at build time.&lt;/p&gt;

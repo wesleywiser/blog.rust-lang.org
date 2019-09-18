@@ -10,8 +10,76 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-08-30T20:06:06Z</updated>
+    <updated>2019-09-18T14:00:07Z</updated>
 
+    
+    <entry>
+        <title>Upcoming docs.rs changes</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/09/18/upcoming-docsrs-changes.html" type="text/html" title="Upcoming docs.rs changes" />
+        <published>2019-09-18T00:00:00Z</published>
+        <updated>2019-09-18T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/09/18/upcoming-docsrs-changes.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/09/18/upcoming-docsrs-changes.html">&lt;p&gt;On September 30th breaking changes will be deployed to the &lt;a href=&quot;https://docs.rs&quot;&gt;docs.rs&lt;/a&gt; build
+environment. &lt;a href=&quot;https://docs.rs&quot;&gt;docs.rs&lt;/a&gt; is a free service building and hosting documentation for
+all the crates published on &lt;a href=&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt;. It's &lt;a href=&quot;https://github.com/rust-lang/docs.rs&quot;&gt;open source&lt;/a&gt;,
+maintained by the &lt;a href=&quot;https://www.rust-lang.org/governance/teams/dev-tools#rustdoc&quot;&gt;Rustdoc team&lt;/a&gt; and operated by the
+&lt;a href=&quot;https://www.rust-lang.org/governance/teams/operations#infra&quot;&gt;Infrastructure team&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#what-will-change&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;what-will-change&quot;&gt;&lt;/a&gt;What will change&lt;/h2&gt;
+&lt;p&gt;Builds will be executed inside the &lt;a href=&quot;https://hub.docker.com/r/rustops/crates-build-env&quot;&gt;rustops/crates-build-env&lt;/a&gt; Docker image.
+That image contains a lot of system dependencies installed to ensure we can
+build as many crates as possible. It's already used by &lt;a href=&quot;https://github.com/rust-lang/crater&quot;&gt;Crater&lt;/a&gt;, and we added
+all the dependencies previously installed in the legacy build environment.&lt;/p&gt;
+&lt;p&gt;To ensure we can continue operating the service in the future and to increase
+its reliability we also improved the sandbox the builds are executed in, adding
+new limits:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Each platform will now have &lt;strong&gt;15 minutes&lt;/strong&gt; to build its dependencies and
+documentation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;3 GB of RAM&lt;/strong&gt; will be available for the build.&lt;/li&gt;
+&lt;li&gt;Network access will be &lt;strong&gt;disabled&lt;/strong&gt; (crates.io dependencies will still be
+fetched).&lt;/li&gt;
+&lt;li&gt;Only the &lt;code&gt;target/&lt;/code&gt; directory will be writable, and it will be purged after
+each build.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Finally, docs.rs will now use the latest nightly available when building
+crates, instead of using a manually updated pinned version of nightly.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#how-to-prepare-for-the-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-to-prepare-for-the-changes&quot;&gt;&lt;/a&gt;How to prepare for the changes&lt;/h2&gt;
+&lt;p&gt;To test if your crate builds inside the new environment you can download the
+Docker image locally and execute a shell inside it:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docker pull rustops/crates-build-env
+docker run --rm --memory 3221225472 -it rustops/crates-build-env bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once you're in a shell you can install &lt;a href=&quot;https://rustup.rs&quot;&gt;rustup&lt;/a&gt; (it's not installed by default
+in the image), install Rust nightly, clone your crate's repository and then
+build the documentation:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;time cargo doc --no-deps
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To aid your testing these commands will limit the available RAM to 3 GB and
+show the total execution time of &lt;code&gt;cargo doc&lt;/code&gt;, but network access will not be
+blocked as you'll need to fetch dependencies.&lt;/p&gt;
+&lt;p&gt;If your project needs a system dependency missing in the build environment,
+please &lt;a href=&quot;https://github.com/rust-lang/crates-build-env/issues&quot;&gt;open an issue&lt;/a&gt; on the Docker image's
+&lt;a href=&quot;https://hub.docker.com/r/rustops/crates-build-env&quot;&gt;repository&lt;/a&gt; and we'll consider adding it.&lt;/p&gt;
+&lt;p&gt;If your crate fails to build because it took more than 15 minutes to generate
+its docs or it uses more than 3 GB of RAM please &lt;a href=&quot;https://github.com/rust-lang/crates-build-env/issues&quot;&gt;open an issue&lt;/a&gt;
+and we will consider reasonable limit increases for your crate. We will &lt;strong&gt;not&lt;/strong&gt;
+enable network access for your crate though: you'll need to change your crate
+not to require any external resource at build time.&lt;/p&gt;
+&lt;p&gt;We recommend using &lt;a href=&quot;https://doc.rust-lang.org/cargo/reference/manifest.html#the-features-section&quot;&gt;Cargo features&lt;/a&gt; to remove the parts of the code causing
+build failures, enabling those features with &lt;a href=&quot;https://docs.rs/about&quot;&gt;docs.rs metadata&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#acknowledgements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
+&lt;p&gt;The new build environment is based on &lt;a href=&quot;https://github.com/rust-lang/rustwide&quot;&gt;Rustwide&lt;/a&gt;, the library powering
+&lt;a href=&quot;https://github.com/rust-lang/crater&quot;&gt;Crater&lt;/a&gt;. It was extracted from the Crater codebase, and created both by the
+&lt;a href=&quot;https://github.com/rust-lang/crater/graphs/contributors&quot;&gt;Crater contributors&lt;/a&gt; and the &lt;a href=&quot;https://github.com/rust-lang/rustwide/graphs/contributors&quot;&gt;Rustwide contributors&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The implementation work on the docs.rs side was done by &lt;a href=&quot;https://github.com/pietroalbini&quot;&gt;Pietro Albini&lt;/a&gt;
+and &lt;a href=&quot;https://github.com/onur&quot;&gt;Onur Aslan&lt;/a&gt;, with &lt;a href=&quot;https://github.com/QuietMisdreavus&quot;&gt;QuietMisdreavus&lt;/a&gt; and &lt;a href=&quot;https://github.com/Mark-Simulacrum&quot;&gt;Mark
+Rousskov&lt;/a&gt; reviewing the changes.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Infrastructure Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Announcing Rust 1.37.0</title>
@@ -670,56 +738,6 @@ with our &lt;a href=&quot;https://www.rust-lang.org/policies/security&quot;&gt;s
 
         <author>
             <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Announcing Rust 1.34.1</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2019/04/25/Rust-1.34.1.html" type="text/html" title="Announcing Rust 1.34.1" />
-        <published>2019-04-25T00:00:00Z</published>
-        <updated>2019-04-25T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2019/04/25/Rust-1.34.1.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2019/04/25/Rust-1.34.1.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.34.1, and a new version of rustup, 1.18.1.
-Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
-&lt;p&gt;If you have a previous version of Rust installed via rustup,
-getting Rust 1.34.1 and rustup 1.18.1 is as easy as:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-in-1.34.1-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.34.1-stable&quot;&gt;&lt;/a&gt;What's in 1.34.1 stable&lt;/h2&gt;
-&lt;p&gt;This patch release fixes two false positives and &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/pull/3805&quot;&gt;a panic when checking macros&lt;/a&gt; in &lt;a href=&quot;https://github.com/rust-lang/rust-clippy&quot;&gt;Clippy&lt;/a&gt;.
-Clippy is a tool which provides a collection of lints to catch common mistakes and improve your Rust code.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#false-positive-in-clippy:redundant_closure&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;false-positive-in-clippy:redundant_closure&quot;&gt;&lt;/a&gt;False positive in &lt;code&gt;clippy::redundant_closure&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;A false positive in the &lt;code&gt;redundant_closure&lt;/code&gt; lint was &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/pull/3821&quot;&gt;fixed&lt;/a&gt;.
-The lint did not take into account &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/issues/3802&quot;&gt;differences in the number of borrows&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;In the following snippet, the method &lt;code&gt;required&lt;/code&gt; expects &lt;code&gt;dep: &amp;amp;D&lt;/code&gt; but the actual type of &lt;code&gt;dep&lt;/code&gt; is &lt;code&gt;&amp;amp;&amp;amp;D&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;dependencies.iter().filter(|dep| dep.required());
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Clippy erronously suggested &lt;code&gt;.filter(Dependency::required)&lt;/code&gt;,
-which is rejected by the compiler due to the difference in borrows.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#false-positive-in-clippy:missing_const_for_fn&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;false-positive-in-clippy:missing_const_for_fn&quot;&gt;&lt;/a&gt;False positive in &lt;code&gt;clippy::missing_const_for_fn&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;Another false positive in the &lt;code&gt;missing_const_for_fn&lt;/code&gt; lint was &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/pull/3844&quot;&gt;fixed&lt;/a&gt;.
-This lint did not take into account that functions inside &lt;code&gt;trait&lt;/code&gt; implementations cannot be &lt;code&gt;const fn&lt;/code&gt;s.
-For example, when given the following snippet, the lint would trigger:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;#[derive(PartialEq, Eq)] // warning: this could be a const_fn
-struct Point(isize, isize);
-
-impl std::ops::Add for Point {
-    type Output = Self;
-
-    fn add(self, other: Self) -&amp;gt; Self { // warning: this could be a const_fn
-        Point(self.0 + other.0, self.1 + other.1)
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;&lt;a href=&quot;#whats-new-in-rustup-1.18.1&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-new-in-rustup-1.18.1&quot;&gt;&lt;/a&gt;What's new in rustup 1.18.1&lt;/h2&gt;
-&lt;p&gt;A recent rustup release, 1.18.0, introduced &lt;a href=&quot;https://github.com/rust-lang/rustup.rs/issues/1794&quot;&gt;a regression&lt;/a&gt; that prevented installing Rust through the shell script on older platforms.
-A patch was released that fixes the issue, avoiding to force TLS v1.2 on the platforms that don't support it.&lt;/p&gt;
-&lt;p&gt;You can check out other rustup changes in its &lt;a href=&quot;https://github.com/rust-lang/rustup.rs/blob/master/CHANGELOG.md#1181---2019-04-25&quot;&gt;full release notes&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Release Team</name>
         </author>
     </entry>
     

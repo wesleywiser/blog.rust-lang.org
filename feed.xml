@@ -10,8 +10,92 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-09-18T21:11:53Z</updated>
+    <updated>2019-09-26T14:15:45Z</updated>
 
+    
+    <entry>
+        <title>Announcing Rust 1.38.0</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/2019/09/26/Rust-1.38.0.html" type="text/html" title="Announcing Rust 1.38.0" />
+        <published>2019-09-26T00:00:00Z</published>
+        <updated>2019-09-26T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/2019/09/26/Rust-1.38.0.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/2019/09/26/Rust-1.38.0.html">&lt;p&gt;The Rust team is happy to announce a new version of Rust, 1.38.0. Rust is a programming language that is empowering everyone to build reliable and efficient software.&lt;/p&gt;
+&lt;p&gt;If you have a previous version of Rust installed via rustup, getting Rust 1.38.0 is as easy as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-console&quot;&gt;rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don't have it already, you can &lt;a href=&quot;https://www.rust-lang.org/install.html&quot;&gt;get &lt;code&gt;rustup&lt;/code&gt;&lt;/a&gt; from the appropriate page on our website.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#whats-in-1.38.0-stable&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-in-1.38.0-stable&quot;&gt;&lt;/a&gt;What's in 1.38.0 stable&lt;/h2&gt;
+&lt;p&gt;The highlight of this release is pipelined compilation.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#pipelined-compilation&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;pipelined-compilation&quot;&gt;&lt;/a&gt;Pipelined compilation&lt;/h3&gt;
+&lt;p&gt;To compile a crate, the compiler doesn't need the dependencies to be fully built. Instead, it just needs their &amp;quot;metadata&amp;quot; (i.e. the list of types, dependencies, exports...). This metadata is produced early in the compilation process. Starting with Rust 1.38.0, Cargo will take advantage of this by automatically starting to build dependent crates as soon as metadata is ready.&lt;/p&gt;
+&lt;p&gt;While the change doesn't have any effect on builds for a single crate, during testing &lt;a href=&quot;https://internals.rust-lang.org/t/evaluating-pipelined-rustc-compilation/10199&quot;&gt;we got reports&lt;/a&gt; of 10-20% compilation speed increases for optimized, clean builds of some crate graphs. Other ones did not improve much, and the speedup depends on the hardware running the build, so your mileage might vary. No code changes are needed to benefit from this.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#linting-some-incorrect-uses-of-mem:{uninitialized,-zeroed}&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;linting-some-incorrect-uses-of-mem:{uninitialized,-zeroed}&quot;&gt;&lt;/a&gt;Linting some incorrect uses of &lt;code&gt;mem::{uninitialized, zeroed}&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;As &lt;a href=&quot;https://blog.rust-lang.org/2019/07/04/Rust-1.36.0.html#maybeuninitt%3E-instead-of-mem::uninitialized&quot;&gt;previously announced&lt;/a&gt;, &lt;code&gt;std::mem::uninitialized&lt;/code&gt; is essentially impossible to use safely. Instead, &lt;code&gt;MaybeUninit&amp;lt;T&amp;gt;&lt;/code&gt; should be used.&lt;/p&gt;
+&lt;p&gt;We have not yet deprecated &lt;code&gt;mem::uninitialized&lt;/code&gt;; this will be done in a future release. Starting in 1.38.0, however, &lt;code&gt;rustc&lt;/code&gt; will provide a lint for a narrow class of incorrect initializations using &lt;code&gt;mem::uninitialized&lt;/code&gt; or &lt;code&gt;mem::zeroed&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;It is undefined behavior for some types, such as &lt;code&gt;&amp;amp;T&lt;/code&gt; and &lt;code&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt;, to ever contain an all-&lt;code&gt;0&lt;/code&gt; bit pattern, because they represent pointer-like objects that cannot be &lt;code&gt;null&lt;/code&gt;. It is therefore an error to use &lt;code&gt;mem::uninitialized&lt;/code&gt; or &lt;code&gt;mem::zeroed&lt;/code&gt; to initialize one of these types, so the new lint will attempt to warn whenever one of those functions is used to initialize one of them, either directly or as a member of a larger &lt;code&gt;struct&lt;/code&gt;. The check is recursive, so the following code will emit a warning:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;struct Wrap&amp;lt;T&amp;gt;(T);
+struct Outer(Wrap&amp;lt;Wrap&amp;lt;Wrap&amp;lt;Box&amp;lt;i32&amp;gt;&amp;gt;&amp;gt;&amp;gt;);
+struct CannotBeZero {
+    outer: Outer,
+    foo: i32,
+    bar: f32
+}
+
+...
+
+let bad_value: CannotBeZero = unsafe { std::mem::uninitialized() };
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Astute readers may note that Rust has more types that cannot be zero, notably &lt;code&gt;NonNull&amp;lt;T&amp;gt;&lt;/code&gt; and &lt;code&gt;NonZero&amp;lt;T&amp;gt;&lt;/code&gt;. For now, initialization of these structs with &lt;code&gt;mem::uninitialized&lt;/code&gt; or &lt;code&gt;mem::zeroed&lt;/code&gt; is &lt;em&gt;not&lt;/em&gt; linted against.&lt;/p&gt;
+&lt;p&gt;These checks do not cover all cases of unsound use of &lt;code&gt;mem::uninitialized&lt;/code&gt; or &lt;code&gt;mem::zeroed&lt;/code&gt;, they merely help identify code that is definitely wrong. All code should still be moved to use &lt;code&gt;MaybeUninit&lt;/code&gt; instead.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#[deprecated]-macros&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;[deprecated]-macros&quot;&gt;&lt;/a&gt;&lt;code&gt;#[deprecated]&lt;/code&gt; macros&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;#[deprecated]&lt;/code&gt; attribute, first introduced in Rust 1.9.0, allows crate authors to notify their users an item of their crate is deprecated and will be removed in a future release. Rust 1.38.0 extends the attribute, allowing it to be applied to macros as well.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#std:any::type_name&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;std:any::type_name&quot;&gt;&lt;/a&gt;&lt;code&gt;std::any::type_name&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;For debugging, it is sometimes useful to get the name of a type. For instance, in generic code, you may want to see, at run-time, what concrete types a function's type parameters has been instantiated with. This can now be done using &lt;code&gt;std::any::type_name&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn gen_value&amp;lt;T: Default&amp;gt;() -&amp;gt; T {
+    println!(&amp;quot;Initializing an instance of {}&amp;quot;, std::any::type_name::&amp;lt;T&amp;gt;());
+    Default::default()
+}
+
+fn main() {
+    let _: i32 = gen_value();
+    let _: String = gen_value();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This prints:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;Initializing an instance of i32
+Initializing an instance of alloc::string::String
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Like all standard library functions intended only for debugging, the exact contents and format of the string are not guaranteed. The value returned is only a best-effort description of the type; multiple types may share the same &lt;code&gt;type_name&lt;/code&gt; value, and the value may change in future compiler releases.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#library-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;library-changes&quot;&gt;&lt;/a&gt;Library changes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/62528/&quot;&gt;&lt;code&gt;slice::{concat, connect, join}&lt;/code&gt; now accepts &lt;code&gt;&amp;amp;[T]&lt;/code&gt; in addition to &lt;code&gt;&amp;amp;T&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/62583/&quot;&gt;&lt;code&gt;*const T&lt;/code&gt; and &lt;code&gt;*mut T&lt;/code&gt; now implement &lt;code&gt;marker::Unpin&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/61953/&quot;&gt;&lt;code&gt;Arc&amp;lt;[T]&amp;gt;&lt;/code&gt; and &lt;code&gt;Rc&amp;lt;[T]&amp;gt;&lt;/code&gt; now implement &lt;code&gt;FromIterator&amp;lt;T&amp;gt;&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rust-lang/rust/pull/61457/&quot;&gt;&lt;code&gt;iter::{StepBy, Peekable, Take}&lt;/code&gt; now implement &lt;code&gt;DoubleEndedIterator&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally, these functions have been stabilized:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.pointer.html#method.cast&quot;&gt;&lt;code&gt;&amp;lt;*const T&amp;gt;::cast&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/primitive.pointer.html#method.cast-1&quot;&gt;&lt;code&gt;&amp;lt;*mut T&amp;gt;::cast&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_secs_f32&quot;&gt;&lt;code&gt;Duration::as_secs_f32&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_secs_f64&quot;&gt;&lt;code&gt;Duration::as_secs_f64&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_duration_f32&quot;&gt;&lt;code&gt;Duration::div_duration_f32&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_duration_f64&quot;&gt;&lt;code&gt;Duration::div_duration_f64&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_f32&quot;&gt;&lt;code&gt;Duration::div_f32&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_f64&quot;&gt;&lt;code&gt;Duration::div_f64&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.from_secs_f32&quot;&gt;&lt;code&gt;Duration::from_secs_f32&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.from_secs_f64&quot;&gt;&lt;code&gt;Duration::from_secs_f64&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.mul_f32&quot;&gt;&lt;code&gt;Duration::mul_f32&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.rust-lang.org/std/time/struct.Duration.html#method.mul_f64&quot;&gt;&lt;code&gt;Duration::mul_f64&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Euclidean remainder and division operations -- &lt;a href=&quot;https://doc.rust-lang.org/std/primitive.i32.html#method.div_euclid&quot;&gt;&lt;code&gt;div_euclid&lt;/code&gt;&lt;/a&gt;,
+&lt;a href=&quot;https://doc.rust-lang.org/std/primitive.i32.html#method.rem_euclid&quot;&gt;&lt;code&gt;rem_euclid&lt;/code&gt;&lt;/a&gt; -- for all integer primitives. &lt;code&gt;checked&lt;/code&gt;,
+&lt;code&gt;overflowing&lt;/code&gt;, and &lt;code&gt;wrapping&lt;/code&gt; versions are also available.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href=&quot;#other-changes&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-changes&quot;&gt;&lt;/a&gt;Other changes&lt;/h3&gt;
+&lt;p&gt;There are other changes in the Rust 1.38 release: check out what changed in &lt;a href=&quot;https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1380-2019-09-26&quot;&gt;Rust&lt;/a&gt;, &lt;a href=&quot;https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-138-2019-09-26&quot;&gt;Cargo&lt;/a&gt;, and &lt;a href=&quot;https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-138&quot;&gt;Clippy&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#contributors-to-138.0&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;contributors-to-138.0&quot;&gt;&lt;/a&gt;Contributors to 1.38.0&lt;/h2&gt;
+&lt;p&gt;Many people came together to create Rust 1.38.0. We couldn't have done it
+without all of you. &lt;a href=&quot;https://thanks.rust-lang.org/rust/1.38.0/&quot;&gt;Thanks!&lt;/a&gt;&lt;/p&gt;
+</content>
+
+        <author>
+            <name>The Rust Release Team</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Upcoming docs.rs changes</title>
@@ -716,25 +800,6 @@ resolve this in the standard library soon.&lt;/p&gt;
 &lt;h2&gt;&lt;a href=&quot;#acknowledgements&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;acknowledgements&quot;&gt;&lt;/a&gt;Acknowledgements&lt;/h2&gt;
 &lt;p&gt;Thanks to Sean McArthur, who found this bug and reported it to us in accordance
 with our &lt;a href=&quot;https://www.rust-lang.org/policies/security&quot;&gt;security policy&lt;/a&gt;.&lt;/p&gt;
-</content>
-
-        <author>
-            <name>The Rust Core Team</name>
-        </author>
-    </entry>
-    
-    <entry>
-        <title>Mozilla IRC Sunset and the Rust Channel</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/2019/04/26/Mozilla-IRC-Sunset-and-the-Rust-Channel.html" type="text/html" title="Mozilla IRC Sunset and the Rust Channel" />
-        <published>2019-04-26T00:00:00Z</published>
-        <updated>2019-04-26T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/2019/04/26/Mozilla-IRC-Sunset-and-the-Rust-Channel.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/2019/04/26/Mozilla-IRC-Sunset-and-the-Rust-Channel.html">&lt;p&gt;The Rust community has had a presence on Mozilla’s IRC network almost since Rust’s inception. Over time, the single channel grew into a set of pretty active channels where folks would come to ask Rust questions, coordinate work on Rust itself, and just in general chat about Rust.&lt;/p&gt;
-&lt;p&gt;Mozilla &lt;a href=&quot;http://exple.tive.org/blarg/2019/04/26/synchronous-text/&quot;&gt;recently announced&lt;/a&gt; that it would be shutting down its IRC network, citing a growing maintenance and moderation burden. They are looking into new options for the Mozilla community, but this does leave the question open as to what the Rust project will do.&lt;/p&gt;
-&lt;p&gt;Last year a lot of the teams &lt;a href=&quot;https://internals.rust-lang.org/t/exploring-new-communication-channels/7859&quot;&gt;started exploring new communication platforms&lt;/a&gt;. Almost all the Rust teams no longer use IRC as their official discussion platform, instead using Discord or Zulip (as well as a variety of video chat tools for synchronous meetings). The few teams that do use IRC are working with us to find a new home, likely a channel on Discord or Zulip.&lt;/p&gt;
-&lt;p&gt;This leaves the #rust and #rust-beginners channels on Mozilla’s IRC network, which are still quite active, that will need a new home when Mozilla’s network shuts down. Rust’s &lt;a href=&quot;http://discord.gg/rust-lang&quot;&gt;official Discord server&lt;/a&gt; does have the #users, #help, and #beginners channels that fill in this purpose, and we recommend people start using those.&lt;/p&gt;
-&lt;p&gt;We understand that not everyone wishes to switch to Discord for many reasons. For people who wish to continue using IRC, there is &lt;a href=&quot;http://webchat.freenode.net/?channels=##rust&quot;&gt;an unofficial freenode channel&lt;/a&gt; which you can hang out in, though we’d like to emphasize that this is not associated with the Rust teams and is not moderated by our Moderation team. You’re also free to create new channels on freenode &lt;a href=&quot;https://freenode.net/policies#off-topic-use&quot;&gt;in accordance with the freenode rules&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;There are still a couple months before irc.mozilla.org shuts down — we’ll work at making this transition as smooth as possible in this time. Thanks to everyone who made #rust and #rust-beginners on Mozilla IRC a great place to hang out! We are sad to see it go. 😢&lt;/p&gt;
 </content>
 
         <author>

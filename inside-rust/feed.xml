@@ -10,8 +10,62 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-10-03T15:17:35Z</updated>
+    <updated>2019-10-03T16:35:50Z</updated>
 
+    
+    <entry>
+        <title>Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9.html" type="text/html" title="Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates" />
+        <published>2019-10-03T00:00:00Z</published>
+        <updated>2019-10-03T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9.html">&lt;p&gt;&lt;a href=&quot;https://github.com/rustsec/cargo-audit&quot;&gt;cargo-audit&lt;/a&gt; is a command-line utility which inspects &lt;code&gt;Cargo.lock&lt;/code&gt; files and compares them against the &lt;a href=&quot;https://rustsec.org&quot;&gt;RustSec Advisory Database&lt;/a&gt;, a community database of security vulnerabilities maintained by the &lt;a href=&quot;https://github.com/rust-secure-code/wg&quot;&gt;Rust Secure Code Working Group&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can install &lt;code&gt;cargo-audit&lt;/code&gt; and run it against your project with the following commands:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cargo install cargo-audit
+$ cargo audit
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The 0.9 release of &lt;code&gt;cargo-audit&lt;/code&gt; includes a number of new features we hope make it more useful, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;UI improvements for understanding how vulnerabilities apply to your project&lt;/li&gt;
+&lt;li&gt;Warnings for unmaintained crate dependencies (with an option to hard fail)&lt;/li&gt;
+&lt;li&gt;Tracking of vulnerabilities in the Rust language itself&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href=&quot;#ui-improvements-dependency-trees&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;ui-improvements-dependency-trees&quot;&gt;&lt;/a&gt;UI improvements: dependency trees&lt;/h2&gt;
+&lt;p&gt;Previously, when &lt;code&gt;cargo-audit&lt;/code&gt; found a vulnerability in a project, it would display advisory information without any context as to how a particular vulnerable dependency is included in your project, making it difficult to determine what action needs to be taken to resolve the vulnerability.&lt;/p&gt;
+&lt;p&gt;The latest release prints an inverse dependency tree (ala the excellent &lt;a href=&quot;https://github.com/sfackler/cargo-tree&quot;&gt;cargo-tree&lt;/a&gt; crate) for each advisory showing how a vulnerable dependency is included in your project:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/RustSec/cargo-audit/a840f7b/screenshot.png&quot; alt=&quot;cargo audit with dependency tree&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;In future versions of &lt;code&gt;cargo-audit&lt;/code&gt; we &lt;a href=&quot;https://github.com/RustSec/cargo-audit/issues/23&quot;&gt;hope to add a &lt;code&gt;cargo audit fix&lt;/code&gt; command&lt;/a&gt; ala &lt;code&gt;npm audit fix&lt;/code&gt; which can either automatically update the necessary dependencies or provide instructions on how to do so. If that feature interests you and you'd like to contribute, &lt;a href=&quot;https://github.com/RustSec/cargo-audit/issues/23&quot;&gt;we're looking for help&lt;/a&gt;!&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#new-feature-unmaintained-crate-warnings&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;new-feature-unmaintained-crate-warnings&quot;&gt;&lt;/a&gt;New feature: unmaintained crate warnings&lt;/h2&gt;
+&lt;p&gt;This release added the notion of &lt;a href=&quot;https://github.com/RustSec/rustsec-crate/pull/75&quot;&gt;informational advisories&lt;/a&gt; - advisories which don't directly represent a security vulnerability, but may contain potentially security-relevant information. The primary intended use for this feature is &lt;a href=&quot;https://github.com/RustSec/advisory-db/issues/173&quot;&gt;providing warnings for unmaintained crates&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A recent study, &lt;a href=&quot;https://www.usenix.org/system/files/sec19-zimmermann.pdf&quot;&gt;Small World with High Risks: A Study of Security Threats in the npm Ecosystem&lt;/a&gt;, showed that unmaintained npm packages pose a high risk to that ecosystem:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our results provide evidence that npm suffers from single points of failure and that unmaintained packages threaten large code bases&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Rust is in a similar boat with some high profile crates, &lt;a href=&quot;https://github.com/Stebalien/term/issues/93&quot;&gt;such as the &lt;code&gt;term&lt;/code&gt; crate&lt;/a&gt; (downloaded 8,000 times a day), are unmaintained. By &lt;a href=&quot;https://github.com/RustSec/advisory-db/issues/173&quot;&gt;tracking information about unmaintained crates in the RustSec Advisory Database&lt;/a&gt;, we hope to improve visibility on these crates, either by helping people discover &amp;quot;successor&amp;quot; crates they should switch to, or putting potential volunteer maintainers in touch with authors interested in handing crates off. When those handoffs happen, we can mark unmaintained crate advisories as obsolete (while still giving interested security researchers a list of crates to keep an eye on for potential &lt;a href=&quot;https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident&quot;&gt;software supply chain attacks&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;If you have an unmaintained crate you'd like us to create an advisory for, or know of a third party unmaintained crate and would like to provide information about potential alternatives, please &lt;a href=&quot;https://github.com/RustSec/advisory-db/issues/173&quot;&gt;leave a comment in the RustSec/advisory-db#173 GitHub issue&lt;/a&gt; and we can file an advisory for it.&lt;/p&gt;
+&lt;p&gt;For now, unmaintained crates are surfaced as warnings, with some brief information available about each one and a link to click to read more. If you'd like for unmaintained crate advisories to be considered errors (so &lt;code&gt;cargo-audit&lt;/code&gt; exits with a non-zero status for e.g. CI purposes), run:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cargo audit -D
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or if you prefer to be more explicit:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cargo audit --deny-warnings
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;a href=&quot;#tracking-rust-language-vulnerabilities&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;tracking-rust-language-vulnerabilities&quot;&gt;&lt;/a&gt;Tracking Rust language vulnerabilities&lt;/h2&gt;
+&lt;p&gt;Previously the &lt;a href=&quot;https://rustsec.org&quot;&gt;RustSec Advisory Database&lt;/a&gt; only tracked information about vulnerable crates published through &lt;a href=&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt;. Starting with this release, however, we are also indexing advisories for vulnerabilities in the Rust language's core ecosystem components, including &lt;code&gt;std&lt;/code&gt;, &lt;code&gt;cargo&lt;/code&gt;, and &lt;code&gt;rustdoc&lt;/code&gt;. We've now indexed the following vulnerabilities:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2018-1000622.html&quot;&gt;CVE-2018-1000622: rustdoc: Uncontrolled search path element vulnerability in rustdoc plugins&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2018-1000657.html&quot;&gt;CVE-2018-1000657: std: Buffer overflow vulnenrability in &lt;code&gt;VecDeque::reserve()&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2018-1000810.html&quot;&gt;CVE-2018-1000810: std: Buffer overflow vulnerability in &lt;code&gt;str::repeat()&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2019-12083.html&quot;&gt;CVE-2019-12083: std: Memory safety vulnerabilities arising from &lt;code&gt;Error::type_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2019-16760.html&quot;&gt;CVE-2019-16760: cargo: Cargo prior to Rust 1.26.0 may download the wrong dependency&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We are &lt;a href=&quot;https://github.com/RustSec/cargo-audit/issues/140&quot;&gt;interested in potentially surfacing information about these advisories via cargo-audit&lt;/a&gt;, e.g. optionally detecting if the currently active Rust toolchain is vulnerable. If that interests you, we're also looking for help on this issue!&lt;/p&gt;
+&lt;p&gt;Thanks for reading, and we hope you enjoy &lt;code&gt;cargo-audit&lt;/code&gt; 0.9!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Tony Arcieri</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Welcome to the Inside Rust blog!</title>

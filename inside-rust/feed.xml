@@ -10,8 +10,62 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-10-03T16:35:50Z</updated>
+    <updated>2019-10-07T12:54:14Z</updated>
 
+    
+    <entry>
+        <title>Async Foundations Update: Time for polish!</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html" type="text/html" title="Async Foundations Update: Time for polish!" />
+        <published>2019-10-07T00:00:00Z</published>
+        <updated>2019-10-07T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html">&lt;p&gt;As you've perhaps heard, recently the async-await feature &lt;a href=&quot;/2019/09/30/Async-await-hits-beta.html&quot;&gt;landed on
+the Rust beta branch&lt;/a&gt;. This marks a big turning point in the
+usability story for Async Rust. But there's still a lot of work to do.
+As we mentioned in the main post, the focus for the &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/&quot;&gt;Async Foundations
+WG&lt;/a&gt; in the immediate term is going to be &lt;strong&gt;polish&lt;/strong&gt;, &lt;strong&gt;polish&lt;/strong&gt;
+and (ahem) &lt;strong&gt;more polish&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In particular, we want to take aim at a backlog of strange
+diagnostics, suboptimal performance, and the occasional inexplicable
+type-check failure. This is a shift: whereas before, we could have
+laser focus on things that truly blocked stabilization, we've now got
+a large set of bugs, often without a clear prioritization between
+them. This requires us to mix up how the &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/&quot;&gt;Async Foundations WG&lt;/a&gt; is
+operating.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#announcing-focus-issues&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;announcing-focus-issues&quot;&gt;&lt;/a&gt;Announcing: focus issues&lt;/h3&gt;
+&lt;p&gt;So how do you deal with a large pile of issues, all of which are
+important but none of which are vital? One at a time, of course.&lt;/p&gt;
+&lt;p&gt;The way we've chosen to organize this is something we call &lt;strong&gt;&lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/#how-to-get-involved&quot;&gt;focus
+issues&lt;/a&gt;&lt;/strong&gt;. We're trying to keep a small number of issues tagged as
+focus issues at any given time. As we close them, we'll pick new ones
+to replace them. The number of these issues depends on mentoring
+bandwidth and on how many people are hacking -- as a rule of thumb,
+they should mostly all be assigned and actively progressing at any
+given time.&lt;/p&gt;
+&lt;p&gt;We also have a secondary set of issues called &lt;strong&gt;on deck issues&lt;/strong&gt;.
+These are the candidates to become focus issues as focus issues are
+completed. If you'd like us to consider fixing something sooner rather
+than later, you can &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/#nominating-issues&quot;&gt;add the &amp;quot;on deck&amp;quot; label yourself&lt;/a&gt;, along
+with a bit of context explaining why you think this issue is more
+important than the rest.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#how-you-can-help&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-you-can-help&quot;&gt;&lt;/a&gt;How you can help&lt;/h3&gt;
+&lt;p&gt;You can help in two ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fix bugs!&lt;/strong&gt; If you'd like to take a shot at fixing a bug, try to
+come to the &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/#triage-meeting&quot;&gt;triage meeting&lt;/a&gt; or just show up in
+&lt;a href=&quot;https://rust-lang.zulipchat.com/#narrow/stream/187312-wg-async-foundations&quot;&gt;&lt;code&gt;#wg-async-foundations&lt;/code&gt; on Zulip&lt;/a&gt;. Maybe we can find something
+for you.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Nominate bugs!&lt;/strong&gt; If you've got a bug that is really
+annoying you, feel free to &amp;quot;nominate it&amp;quot; by &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/#nominating-issues&quot;&gt;following the
+instructions here&lt;/a&gt;. This will help us to fix the things that
+are bothering people the most.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates</title>

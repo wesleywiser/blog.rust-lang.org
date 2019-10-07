@@ -2,19 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>The &quot;Inside Rust&quot; Blog</title>
+    <title>Async Foundations Update: Time for polish! | Inside Rust Blog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Empowering everyone to build reliable and efficient software.">
      <!-- Twitter card -->
  <meta name="twitter:card" content="summary">
  <meta name="twitter:site" content="@rustlang">
  <meta name="twitter:creator" content="@rustlang">
- <meta name="twitter:title" content="The &quot;Inside Rust&quot; Blog">
+ <meta name="twitter:title" content="Async Foundations Update: Time for polish! | Inside Rust Blog">
  <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
 <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
 
 <!-- Facebook OpenGraph -->
-<meta property="og:title" content="The &quot;Inside Rust&quot; Blog" />
+<meta property="og:title" content="Async Foundations Update: Time for polish! | Inside Rust Blog" />
 <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
 <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
 <meta property="og:type" content="website" />
@@ -68,52 +68,61 @@
   </ul>
 </nav>
 
-<header class="mt3 mt0-ns mb4-ns">
-  <div class="container flex flex-column flex-row-l justify-between-l">
-    <div class="mw6-l">
-      <p>This is the <b>"Inside Rust"</b> blog. This blog is aimed at those who wish to follow along with Rust development. The various <a href="https://www.rust-lang.org/governance">Rust teams and working groups</a> use this blog to post status updates, calls for help, and other similar announcements.</p>
+<section id="Async Foundations Update: Time for polish!" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>Async Foundations Update: Time for polish!</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 07, 2019 &middot; Niko Matsakis
+     on behalf of <a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/">the Async Foundations WG</a> 
     </div>
-  </div>    
-  <div class="container flex flex-column flex-row-l justify-between-l">
-    <div class="mw8-l">
-      <p>
-      <b>See also:</b>
-      
-              <a href="/index.html">the main Rust blog</a>
-      
-      </p>
+
+    <div class="post">
+      <p>As you've perhaps heard, recently the async-await feature <a href="/2019/09/30/Async-await-hits-beta.html">landed on
+the Rust beta branch</a>. This marks a big turning point in the
+usability story for Async Rust. But there's still a lot of work to do.
+As we mentioned in the main post, the focus for the <a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/">Async Foundations
+WG</a> in the immediate term is going to be <strong>polish</strong>, <strong>polish</strong>
+and (ahem) <strong>more polish</strong>.</p>
+<p>In particular, we want to take aim at a backlog of strange
+diagnostics, suboptimal performance, and the occasional inexplicable
+type-check failure. This is a shift: whereas before, we could have
+laser focus on things that truly blocked stabilization, we've now got
+a large set of bugs, often without a clear prioritization between
+them. This requires us to mix up how the <a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/">Async Foundations WG</a> is
+operating.</p>
+<h3><a href="#announcing-focus-issues" aria-hidden="true" class="anchor" id="announcing-focus-issues"></a>Announcing: focus issues</h3>
+<p>So how do you deal with a large pile of issues, all of which are
+important but none of which are vital? One at a time, of course.</p>
+<p>The way we've chosen to organize this is something we call <strong><a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/#how-to-get-involved">focus
+issues</a></strong>. We're trying to keep a small number of issues tagged as
+focus issues at any given time. As we close them, we'll pick new ones
+to replace them. The number of these issues depends on mentoring
+bandwidth and on how many people are hacking -- as a rule of thumb,
+they should mostly all be assigned and actively progressing at any
+given time.</p>
+<p>We also have a secondary set of issues called <strong>on deck issues</strong>.
+These are the candidates to become focus issues as focus issues are
+completed. If you'd like us to consider fixing something sooner rather
+than later, you can <a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/#nominating-issues">add the &quot;on deck&quot; label yourself</a>, along
+with a bit of context explaining why you think this issue is more
+important than the rest.</p>
+<h3><a href="#how-you-can-help" aria-hidden="true" class="anchor" id="how-you-can-help"></a>How you can help</h3>
+<p>You can help in two ways:</p>
+<ul>
+<li><strong>Fix bugs!</strong> If you'd like to take a shot at fixing a bug, try to
+come to the <a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/#triage-meeting">triage meeting</a> or just show up in
+<a href="https://rust-lang.zulipchat.com/#narrow/stream/187312-wg-async-foundations"><code>#wg-async-foundations</code> on Zulip</a>. Maybe we can find something
+for you.</li>
+<li><strong>Nominate bugs!</strong> If you've got a bug that is really
+annoying you, feel free to &quot;nominate it&quot; by <a href="https://rust-lang.github.io/compiler-team/working-groups/async-await/#nominating-issues">following the
+instructions here</a>. This will help us to fix the things that
+are bothering people the most.</li>
+</ul>
+
     </div>
-  </div>
-</header>
-
-<section id="posts" class="purple">
-   <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
-
-    <table class="post-list collapse w-100 f2-l f2-m f3-s">
-    
-      <tr>
-        <td class="bn"></td>
-        <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in 2019</h3></td>
-      </tr>
-      <tr>
-        <td class="tr o-60 pr4 pr5-l bn">Oct.&nbsp;07</td>
-        <td class="bn"><a href="/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html">Async Foundations Update: Time for polish!</a></td>
-      </tr>
-    
-      
-      <tr>
-        <td class="tr o-60 pr4 pr5-l bn">Oct.&nbsp;03</td>
-        <td class="bn"><a href="/inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9.html">Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates</a></td>
-      </tr>
-    
-      
-      <tr>
-        <td class="tr o-60 pr4 pr5-l bn">Sept.&nbsp;25</td>
-        <td class="bn"><a href="/inside-rust/2019/09/25/Welcome.html">Welcome to the Inside Rust blog!</a></td>
-      </tr>
-    
-    </table>
-
   </div>
 </section>
 

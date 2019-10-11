@@ -10,7 +10,7 @@
         <name>Maintained by the Rust Team.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-10-09T18:23:47Z</updated>
+    <updated>2019-10-11T13:03:31Z</updated>
 
     
     <entry>
@@ -839,7 +839,7 @@ conference on Twitter&lt;/a&gt; for the most up-to-date information.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#august-22-23-rustconf&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;august-22-23-rustconf&quot;&gt;&lt;/a&gt;August 22-23: RustConf&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://rustconf.com/&quot;&gt;The official RustConf&lt;/a&gt; will again be taking place in Portland, OR, USA. Thursday is a
 day of trainings and Friday is the main day of talks. See &lt;a href=&quot;https://twitter.com/rustconf&quot;&gt;Twitter&lt;/a&gt; for the latest
-announcements!&lt;/p&gt;
+announcements! The videos are now &lt;a href=&quot;https://www.youtube.com/playlist?list=PL85XCvVPmGQhDOUIZBe6u388GydeACbTt&quot;&gt;available on YouTube&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#september-20-21-colorado-gold-rust&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;september-20-21-colorado-gold-rust&quot;&gt;&lt;/a&gt;September 20-21: Colorado Gold Rust&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://cogoldrust.com/&quot;&gt;Colorado Gold Rust&lt;/a&gt; is a new conference for this year, and is taking place in
 Denver, CO, USA. Their CFP and ticket sales are open now, and you can also &lt;a href=&quot;https://twitter.com/COGoldRust&quot;&gt;follow them on
@@ -847,6 +847,9 @@ twitter&lt;/a&gt;!&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#october-18-19-rust-belt-rust&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;october-18-19-rust-belt-rust&quot;&gt;&lt;/a&gt;October 18-19: Rust Belt Rust&lt;/h3&gt;
 &lt;p&gt;This year's &lt;a href=&quot;https://www.rust-belt-rust.com/&quot;&gt;Rust Belt Rust&lt;/a&gt; will be taking place in Dayton, OH, USA, the birthplace of
 flight! The CFP and ticket sales will open soon. Check &lt;a href=&quot;https://twitter.com/rustbeltrust&quot;&gt;Twitter&lt;/a&gt; for announcements.&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;#october-26th-2019:-rust.tokyo&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;october-26th-2019:-rust.tokyo&quot;&gt;&lt;/a&gt;October 26th, 2019: Rust.Tokyo&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://rust.tokyo/&quot;&gt;Rust.Tokyo&lt;/a&gt; is a one-day conference for Rustaceans with 200+ attendees in Tokyo, Japan.
+The &lt;a href=&quot;https://ti.to/rust-tokyo/2019/en&quot;&gt;ticket&lt;/a&gt; sales are open now, and you can also &lt;a href=&quot;https://twitter.com/rustlang_tokyo&quot;&gt;follow them on twitter&lt;/a&gt;!&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;#november-rustfest-barcelona&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;november-rustfest-barcelona&quot;&gt;&lt;/a&gt;November: RustFest Barcelona&lt;/h3&gt;
 &lt;p&gt;The exact dates for &lt;a href=&quot;https://barcelona.rustfest.eu/&quot;&gt;RustFest Barcelona&lt;/a&gt; haven't been announced yet, but it's
 slated to happen sometime in November. Keep an eye on the &lt;a href=&quot;https://twitter.com/rustfest&quot;&gt;RustFest Twitter&lt;/a&gt; for

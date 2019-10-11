@@ -10,8 +10,64 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-10-11T16:30:30Z</updated>
+    <updated>2019-10-11T20:57:19Z</updated>
 
+    
+    <entry>
+        <title>2019-10-10 Lang Team Triage Meeting</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2019/10/11/Lang-Team-Meeting.html" type="text/html" title="2019-10-10 Lang Team Triage Meeting" />
+        <published>2019-10-11T00:00:00Z</published>
+        <updated>2019-10-11T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2019/10/11/Lang-Team-Meeting.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2019/10/11/Lang-Team-Meeting.html">&lt;p&gt;We had our &lt;a href=&quot;https://github.com/rust-lang/lang-team/#meeting-calendara&quot;&gt;weekly triage meeting&lt;/a&gt; on 2019-10-10. You can find the
+&lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/minutes/2019-10-10.md&quot;&gt;minutes&lt;/a&gt; on the &lt;a href=&quot;https://github.com/rust-lang/lang-team/&quot;&gt;lang-team&lt;/a&gt; repository; there is also a &lt;a href=&quot;https://youtu.be/QvE9-zce5_4&quot;&gt;video
+recording&lt;/a&gt; on YouTube. This week we had a number of folks who have
+been working on const evaluation in attendance, which gave us an
+opportunity to dive into some of the complexities involved there. We
+also discussed how to make the const evaluation effort into a
+&amp;quot;shepherded project&amp;quot;, a concept that we are still actively developing
+(see my blog post on &lt;a href=&quot;http://smallcultfollowing.com/babysteps/blog/2019/09/11/aic-shepherds-3-0/&quot;&gt;Shepherding 3.0&lt;/a&gt; for the general idea).&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#other-updates-on-shepherded-items&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-updates-on-shepherded-items&quot;&gt;&lt;/a&gt;Other updates on shepherded items&lt;/h2&gt;
+&lt;p&gt;This is our current list of &amp;quot;shepherded items&amp;quot;, which are things we
+are tracking week to week. We're still evolving the shepherding
+system. Hopefully we'll soon have links for all of these to a good,
+representative place that explains the overall status and roadmap. All
+in good time.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/nikomatsakis/project-ffi-unwind&quot;&gt;unwind-ffi&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;created a &lt;a href=&quot;http://smallcultfollowing.com/babysteps/blog/2019/09/11/aic-shepherds-3-0/&quot;&gt;zulip&lt;/a&gt; stream (&lt;code&gt;#wg-ffi-unwind&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;preparing an RFC that creates the group official and lays out the roadmap&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&amp;quot;object safety&amp;quot; group (e.g., &lt;a href=&quot;http://smallcultfollowing.com/babysteps/blog/2019/09/11/aic-shepherds-3-0/&quot;&gt;#57893&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;no major updates, still iterating on the &amp;quot;in progress&amp;quot; branch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;re-rebalance coherence
+&lt;ul&gt;
+&lt;li&gt;we have a spreadsheet mapping out all the possible tests&lt;/li&gt;
+&lt;li&gt;we'll fill out the matrix, but probably ready to stabilize 🎉&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;stabilize proc-macros generating macro-rules items
+&lt;ul&gt;
+&lt;li&gt;waiting on a report from pnkfelix&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;grammar working group
+&lt;ul&gt;
+&lt;li&gt;no updates&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+
+        <author>
+            <name>Niko Matsakis</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Improving async-await's &quot;Future is not Send&quot; diagnostic</title>

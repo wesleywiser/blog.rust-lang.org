@@ -2,19 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>The &quot;Inside Rust&quot; Blog</title>
+    <title>2019-10-10 Lang Team Triage Meeting | Inside Rust Blog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Empowering everyone to build reliable and efficient software.">
      <!-- Twitter card -->
  <meta name="twitter:card" content="summary">
  <meta name="twitter:site" content="@rustlang">
  <meta name="twitter:creator" content="@rustlang">
- <meta name="twitter:title" content="The &quot;Inside Rust&quot; Blog">
+ <meta name="twitter:title" content="2019-10-10 Lang Team Triage Meeting | Inside Rust Blog">
  <meta name="twitter:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
 <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
 
 <!-- Facebook OpenGraph -->
-<meta property="og:title" content="The &quot;Inside Rust&quot; Blog" />
+<meta property="og:title" content="2019-10-10 Lang Team Triage Meeting | Inside Rust Blog" />
 <meta property="og:description" content="Want to follow along with Rust development? Curious how you might get involved? Take a look!">
 <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
 <meta property="og:type" content="website" />
@@ -68,64 +68,63 @@
   </ul>
 </nav>
 
-<header class="mt3 mt0-ns mb4-ns">
-  <div class="container flex flex-column flex-row-l justify-between-l">
-    <div class="mw6-l">
-      <p>This is the <b>"Inside Rust"</b> blog. This blog is aimed at those who wish to follow along with Rust development. The various <a href="https://www.rust-lang.org/governance">Rust teams and working groups</a> use this blog to post status updates, calls for help, and other similar announcements.</p>
+<section id="2019-10-10 Lang Team Triage Meeting" class="white">
+  <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
+    <header>
+      <h2>2019-10-10 Lang Team Triage Meeting</h2>
+      <div class="highlight"></div>
+    </header>
+
+    <div class="publish-date-author">Oct. 11, 2019 &middot; Niko Matsakis
+     on behalf of <a href="https://www.rust-lang.org/governance/teams/lang">the lang team</a> 
     </div>
-  </div>    
-  <div class="container flex flex-column flex-row-l justify-between-l">
-    <div class="mw8-l">
-      <p>
-      <b>See also:</b>
-      
-              <a href="/index.html">the main Rust blog</a>
-      
-      </p>
+
+    <div class="post">
+      <p>We had our <a href="https://github.com/rust-lang/lang-team/#meeting-calendara">weekly triage meeting</a> on 2019-10-10. You can find the
+<a href="https://github.com/rust-lang/lang-team/blob/master/minutes/2019-10-10.md">minutes</a> on the <a href="https://github.com/rust-lang/lang-team/">lang-team</a> repository; there is also a <a href="https://youtu.be/QvE9-zce5_4">video
+recording</a> on YouTube. This week we had a number of folks who have
+been working on const evaluation in attendance, which gave us an
+opportunity to dive into some of the complexities involved there. We
+also discussed how to make the const evaluation effort into a
+&quot;shepherded project&quot;, a concept that we are still actively developing
+(see my blog post on <a href="http://smallcultfollowing.com/babysteps/blog/2019/09/11/aic-shepherds-3-0/">Shepherding 3.0</a> for the general idea).</p>
+<h2><a href="#other-updates-on-shepherded-items" aria-hidden="true" class="anchor" id="other-updates-on-shepherded-items"></a>Other updates on shepherded items</h2>
+<p>This is our current list of &quot;shepherded items&quot;, which are things we
+are tracking week to week. We're still evolving the shepherding
+system. Hopefully we'll soon have links for all of these to a good,
+representative place that explains the overall status and roadmap. All
+in good time.</p>
+<ul>
+<li><a href="https://github.com/nikomatsakis/project-ffi-unwind">unwind-ffi</a>
+<ul>
+<li>created a <a href="http://smallcultfollowing.com/babysteps/blog/2019/09/11/aic-shepherds-3-0/">zulip</a> stream (<code>#wg-ffi-unwind</code>)</li>
+<li>preparing an RFC that creates the group official and lays out the roadmap</li>
+</ul>
+</li>
+<li>&quot;object safety&quot; group (e.g., <a href="http://smallcultfollowing.com/babysteps/blog/2019/09/11/aic-shepherds-3-0/">#57893</a>)
+<ul>
+<li>no major updates, still iterating on the &quot;in progress&quot; branch</li>
+</ul>
+</li>
+<li>re-rebalance coherence
+<ul>
+<li>we have a spreadsheet mapping out all the possible tests</li>
+<li>we'll fill out the matrix, but probably ready to stabilize 🎉</li>
+</ul>
+</li>
+<li>stabilize proc-macros generating macro-rules items
+<ul>
+<li>waiting on a report from pnkfelix</li>
+</ul>
+</li>
+<li>grammar working group
+<ul>
+<li>no updates</li>
+</ul>
+</li>
+</ul>
+
     </div>
-  </div>
-</header>
-
-<section id="posts" class="purple">
-   <div class="w-100 mw-none ph3 mw8-m mw9-l center f3">
-
-    <table class="post-list collapse w-100 f2-l f2-m f3-s">
-    
-      <tr>
-        <td class="bn"></td>
-        <td class="bn"><h3 class="f0-l f1-m f2-s mt4 mb0">Posts in 2019</h3></td>
-      </tr>
-      <tr>
-        <td class="tr o-60 pr4 pr5-l bn">Oct.&nbsp;11</td>
-        <td class="bn"><a href="/inside-rust/2019/10/11/Lang-Team-Meeting.html">2019-10-10 Lang Team Triage Meeting</a></td>
-      </tr>
-    
-      
-      <tr>
-        <td class="tr o-60 pr4 pr5-l bn">Oct.&nbsp;11</td>
-        <td class="bn"><a href="/inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements.html">Improving async-await's &quot;Future is not Send&quot; diagnostic</a></td>
-      </tr>
-    
-      
-      <tr>
-        <td class="tr o-60 pr4 pr5-l bn">Oct.&nbsp;07</td>
-        <td class="bn"><a href="/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html">Async Foundations Update: Time for polish!</a></td>
-      </tr>
-    
-      
-      <tr>
-        <td class="tr o-60 pr4 pr5-l bn">Oct.&nbsp;03</td>
-        <td class="bn"><a href="/inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9.html">Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates</a></td>
-      </tr>
-    
-      
-      <tr>
-        <td class="tr o-60 pr4 pr5-l bn">Sept.&nbsp;25</td>
-        <td class="bn"><a href="/inside-rust/2019/09/25/Welcome.html">Welcome to the Inside Rust blog!</a></td>
-      </tr>
-    
-    </table>
-
   </div>
 </section>
 

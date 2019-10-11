@@ -10,8 +10,226 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-10-11T13:03:31Z</updated>
+    <updated>2019-10-11T16:30:30Z</updated>
 
+    
+    <entry>
+        <title>Improving async-await's &quot;Future is not Send&quot; diagnostic</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements.html" type="text/html" title="Improving async-await's &quot;Future is not Send&quot; diagnostic" />
+        <published>2019-10-11T00:00:00Z</published>
+        <updated>2019-10-11T00:00:00Z</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements.html">&lt;p&gt;Async-await is due to hit stable in the 1.39 release (only a month away!), and as announced in the
+&lt;a href=&quot;https://blog.rust-lang.org/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html&quot;&gt;&amp;quot;Async Foundations Update: Time for polish!&amp;quot;&lt;/a&gt; post last month, the Async
+Foundations WG has shifted its focus to polish. This post will highlight one aspect of that
+focus, diagnostic improvements, and in particular, the improvements that the working group has
+been making to the once-unhelpful &amp;quot;future is not send&amp;quot; diagnostic.&lt;/p&gt;
+&lt;h1&gt;&lt;a href=&quot;#why-doesnt-my-future-implement-send?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;why-doesnt-my-future-implement-send?&quot;&gt;&lt;/a&gt;Why doesn't my future implement &lt;code&gt;Send&lt;/code&gt;?&lt;/h1&gt;
+&lt;p&gt;One of the major places where async-await should be a pleasure to use is in multithreaded contexts,
+where having a future that can be sent to other threads is desirable. This might look something
+like the following (for brevity, there aren't any threads here, just a requirement that the
+future implement &lt;code&gt;std::marker::Send&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;use std::sync::{Mutex, MutexGuard};
+
+fn is_send&amp;lt;T: Send&amp;gt;(t: T) { }
+
+async fn foo() {
+    bar(&amp;amp;Mutex::new(22)).await
+}
+
+async fn bar(x: &amp;amp;Mutex&amp;lt;u32&amp;gt;) {
+    let g = x.lock().unwrap();
+    baz().await
+}
+
+async fn baz() { }
+
+fn main() {
+    is_send(foo());
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When we try to compile this, we'll get an unwieldly and hard-to-follow diagnostic:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error[E0277]: `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;` cannot be sent between threads safely
+  --&amp;gt; src/main.rs:23:5
+   |
+23 |     is_send(foo());
+   |     ^^^^^^^ `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;` cannot be sent between threads safely
+   |
+   = help: within `impl std::future::Future`, the trait `std::marker::Send` is not implemented for `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;`
+   = note: required because it appears within the type `for&amp;lt;'r, 's&amp;gt; {&amp;amp;'r std::sync::Mutex&amp;lt;u32&amp;gt;, std::sync::MutexGuard&amp;lt;'s, u32&amp;gt;, impl std::future::Future, ()}`
+   = note: required because it appears within the type `[static generator@src/main.rs:13:30: 16:2 x:&amp;amp;std::sync::Mutex&amp;lt;u32&amp;gt; for&amp;lt;'r, 's&amp;gt; {&amp;amp;'r std::sync::Mutex&amp;lt;u32&amp;gt;, std::sync::MutexGuard&amp;lt;'s, u32&amp;gt;, impl std::future::Future, ()}]`
+   = note: required because it appears within the type `std::future::GenFuture&amp;lt;[static generator@src/main.rs:13:30: 16:2 x:&amp;amp;std::sync::Mutex&amp;lt;u32&amp;gt; for&amp;lt;'r, 's&amp;gt; {&amp;amp;'r std::sync::Mutex&amp;lt;u32&amp;gt;, std::sync::MutexGuard&amp;lt;'s, u32&amp;gt;, impl std::future::Future, ()}]&amp;gt;`
+   = note: required because it appears within the type `impl std::future::Future`
+   = note: required because it appears within the type `impl std::future::Future`
+   = note: required because it appears within the type `for&amp;lt;'r&amp;gt; {impl std::future::Future, ()}`
+   = note: required because it appears within the type `[static generator@src/main.rs:9:16: 11:2 for&amp;lt;'r&amp;gt; {impl std::future::Future, ()}]`
+   = note: required because it appears within the type `std::future::GenFuture&amp;lt;[static generator@src/main.rs:9:16: 11:2 for&amp;lt;'r&amp;gt; {impl std::future::Future, ()}]&amp;gt;`
+   = note: required because it appears within the type `impl std::future::Future`
+   = note: required because it appears within the type `impl std::future::Future`
+note: required by `is_send`
+  --&amp;gt; src/main.rs:5:1
+   |
+5  | fn is_send&amp;lt;T: Send&amp;gt;(t: T) {
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That's.. not great. Let's break down what's happening and understand what this error is trying to
+tell us.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
+    is_send(foo());
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In &lt;code&gt;main&lt;/code&gt;, we are calling &lt;code&gt;foo&lt;/code&gt; and passing the return value to &lt;code&gt;is_send&lt;/code&gt;. &lt;code&gt;foo&lt;/code&gt; is an &lt;code&gt;async fn&lt;/code&gt;,
+so it doesn't return &lt;code&gt;()&lt;/code&gt; (what you might expect for a function with no return type specified).
+Instead, it returns &lt;code&gt;impl std::future::Future&amp;lt;Output = ()&amp;gt;&lt;/code&gt;, some unnamed type that implements
+&lt;code&gt;std::future::Future&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;async fn foo() {
+    bar(&amp;amp;Mutex::new(22)).await
+}
+
+// becomes...
+
+fn foo() -&amp;gt; impl std::future::Future&amp;lt;Output = ()&amp;gt; {
+    async move {
+        bar(&amp;amp;Mutex::new(22)).await
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to learn more about the transformations that happen with async-await, consider
+reading the &lt;a href=&quot;https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html&quot;&gt;&lt;code&gt;async&lt;/code&gt;/&lt;code&gt;.await&lt;/code&gt; primer chapter of the async book&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn is_send&amp;lt;T: Send&amp;gt;(t: T) { }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It looks like the error we're getting is because the future returned by &lt;code&gt;foo&lt;/code&gt; doesn't satisfy
+the &lt;code&gt;T: Send&lt;/code&gt; bound of &lt;code&gt;is_send&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#how-are-async-functions-implemented&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-are-async-functions-implemented&quot;&gt;&lt;/a&gt;How are async functions implemented?&lt;/h2&gt;
+&lt;p&gt;To explain why our future doesn't implement &lt;code&gt;Send&lt;/code&gt;, we first need to understand a little bit more
+about what async-await is doing under the hood. rustc implements &lt;code&gt;async fn&lt;/code&gt;s using generators,
+an unstable language feature for resumable functions like the co-routines you might be familiar
+with from other languages. Generators are laid out like enums with variants containing all of the
+variables that are used across await points (which desugar to generator yields):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;async fn bar(x: &amp;amp;Mutex&amp;lt;u32&amp;gt;) {
+    let g = x.lock().unwrap();
+    baz().await // &amp;lt;- await point (suspend #0), `g` and `x` are in use before await point
+} // &amp;lt;- `g` and `x` dropped here, after await point
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;enum BarGenerator {
+    Unresumed { x: &amp;amp;Mutex&amp;lt;u32&amp;gt;, g: MutexGuard&amp;lt;'_, u32&amp;gt;, },
+    Suspend0 { x: &amp;amp;Mutex&amp;lt;u32&amp;gt;, g: MutexGuard&amp;lt;'_, u32&amp;gt;, }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to learn more about the &lt;code&gt;async fn&lt;/code&gt; implementation details, then Tyler Mandry has
+written &lt;a href=&quot;https://tmandry.gitlab.io/blog/posts/optimizing-await-1/&quot;&gt;an excellent blog post&lt;/a&gt; diving into their work here in more depth which is
+definitely worth a read.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#so-why-doesn't-my-future-implement-send?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;so-why-doesn't-my-future-implement-send?&quot;&gt;&lt;/a&gt;So, why doesn't my future implement &lt;code&gt;Send&lt;/code&gt;?&lt;/h2&gt;
+&lt;p&gt;We now know that an &lt;code&gt;async fn&lt;/code&gt; is represented like an enum behind-the-scenes. In synchronous Rust,
+you'll be used to your types automatically implementing &lt;code&gt;Send&lt;/code&gt; when the
+&lt;a href=&quot;https://doc.rust-lang.org/std/marker/trait.Send.html&quot;&gt;compiler determines it's appropriate&lt;/a&gt; - typically when all of the fields of your type
+also implement &lt;code&gt;Send&lt;/code&gt;. It follows that the enum-like that represents our &lt;code&gt;async fn&lt;/code&gt; would
+implement &lt;code&gt;Send&lt;/code&gt; if all of the types in it do.&lt;/p&gt;
+&lt;p&gt;In other words, a future is safe to send across threads if all of the types that are held across
+&lt;code&gt;.await&lt;/code&gt; points implement &lt;code&gt;Send&lt;/code&gt;. This behaviour is useful because it lets us write generic code
+that interoperates smoothly with async-await, but without diagnostic support we get confusing error
+messages.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;#well-which-type-is-the-problem-in-the-example?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;well-which-type-is-the-problem-in-the-example?&quot;&gt;&lt;/a&gt;Well, which type is the problem in the example?&lt;/h2&gt;
+&lt;p&gt;Returning to our example, the future must be holding a type across an &lt;code&gt;.await&lt;/code&gt; point that doesn't
+implement &lt;code&gt;Send&lt;/code&gt;, but where? This is the primary question that the diagnostic improvement aims to
+help answer. Let's start by looking at &lt;code&gt;foo&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;async fn foo() {
+    bar(&amp;amp;Mutex::new(22)).await
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;foo&lt;/code&gt; invokes &lt;code&gt;bar&lt;/code&gt;, passing a reference to a &lt;code&gt;std::sync::Mutex&lt;/code&gt; and getting a future back, before
+&lt;code&gt;await&lt;/code&gt;ing it.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;async fn bar(x: &amp;amp;Mutex&amp;lt;u32&amp;gt;) {
+    let g: MutexGuard&amp;lt;u32&amp;gt; = x.lock().unwrap();
+    baz().await
+} // &amp;lt;- `g` is dropped here
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;bar&lt;/code&gt; unlocks the mutex before &lt;code&gt;await&lt;/code&gt;ing &lt;code&gt;baz&lt;/code&gt;. &lt;code&gt;std::sync::MutexGuard&amp;lt;u32&amp;gt;&lt;/code&gt; does not implement
+&lt;code&gt;Send&lt;/code&gt; and lives across the &lt;code&gt;baz().await&lt;/code&gt; point (because &lt;code&gt;g&lt;/code&gt; is dropped at the end of the scope)
+which causes the entire future not to implement &lt;code&gt;Send&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;That wasn't obvious from the error: we had to know that futures might implement &lt;code&gt;Send&lt;/code&gt; depending
+on the types they capture &lt;em&gt;and&lt;/em&gt; find the type which lives across an await point ourselves.&lt;/p&gt;
+&lt;p&gt;Fortunately, the Async Foundations WG has been working to improve this error, and
+&lt;a href=&quot;https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2018&amp;gist=7e80a8bc151df8817e0983e55bf2667a&quot;&gt;in nightly&lt;/a&gt;, we see the following diagnostic instead:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error[E0277]: `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;` cannot be sent between threads safely
+  --&amp;gt; src/main.rs:23:5
+   |
+5  | fn is_send&amp;lt;T: Send&amp;gt;(t: T) {
+   |    -------    ---- required by this bound in `is_send`
+...
+23 |     is_send(foo());
+   |     ^^^^^^^ `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;` cannot be sent between threads safely
+   |
+   = help: within `impl std::future::Future`, the trait `std::marker::Send` is not implemented for `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;`
+note: future does not implement `std::marker::Send` as this value is used across an await
+  --&amp;gt; src/main.rs:15:3
+   |
+14 |   let g = x.lock().unwrap();
+   |       - has type `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;`
+15 |   baz().await;
+   |   ^^^^^^^^^^^ await occurs here, with `g` maybe used later
+16 | }
+   | - `g` is later dropped here
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Much better!&lt;/p&gt;
+&lt;h1&gt;&lt;a href=&quot;#how-does-it-work&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-does-it-work&quot;&gt;&lt;/a&gt;How does it work?&lt;/h1&gt;
+&lt;p&gt;When rustc's trait system determines that a trait wasn't implemented, in this case
+&lt;code&gt;std::marker::Send&lt;/code&gt;, it emits this error. The trait system produces a chain of &amp;quot;obligations&amp;quot;.
+Obligations are types which denote where a bound (e.g &lt;code&gt;T: Send&lt;/code&gt; in &lt;code&gt;is_send&lt;/code&gt;) originated,
+or where a bound was propagated.&lt;/p&gt;
+&lt;p&gt;To improve this diagnostic, the chain of obligations is now treated like a stack frame, where
+each &amp;quot;frame&amp;quot; of obligations represents each function's contribution to the error. Let's make
+that more concrete with a very rough approximation:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;Obligation {
+    kind: DerivedObligation(/* generator that captured `g` */),
+    source: /* `Span` type pointing at `bar`'s location in user code */,
+    parent: Some(Obligation {
+        kind: DerivedObligation(/* generator calling `bar` */),
+        source: /* `Span` type pointing at `foo`'s location in user code */,
+        parent: Some(Obligation {
+            kind: ItemObligation(/* type representing `std::marker::Send` */),
+            source: /* `Span` type pointing at `is_send`'s location in user code */,
+            cause: None,
+        }),
+    }),
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The compiler matches against the chain expecting an &lt;code&gt;ItemObligation&lt;/code&gt; and some &lt;code&gt;DerivedObligation&lt;/code&gt;s
+containing generators, which identifies the error we want to improve. Using information from these
+obligations, rustc can construct the specialized error shown above - if you'd like to see what the
+actual implementation looks like, check out PR &lt;a href=&quot;https://github.com/rust-lang/rust/pulls/64895&quot;&gt;#64895&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you're interested in improving diagnostics like this, or even just fixing bugs, consider
+contributing to the compiler! There are many working groups to join and resources to help you get
+started (like the &lt;a href=&quot;https://rust-lang.github.io/rustc-guide&quot;&gt;rustc guide&lt;/a&gt; or the &lt;a href=&quot;https://rust-lang.github.io/compiler-team&quot;&gt;compiler team documentation&lt;/a&gt;).&lt;/p&gt;
+&lt;h1&gt;&lt;a href=&quot;#whats-next?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-next?&quot;&gt;&lt;/a&gt;What's next?&lt;/h1&gt;
+&lt;p&gt;More improvements to this diagnostic are planned and being worked on, so that it is applicable in
+more cases, and has specialized messages for &lt;code&gt;Send&lt;/code&gt; and &lt;code&gt;Sync&lt;/code&gt;, like below:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;error[E0277]: future cannot be sent between threads safely
+  --&amp;gt; src/main.rs:23:5
+   |
+5  | fn is_send&amp;lt;T: Send&amp;gt;(t: T) {
+   |    -------    ---- required by this bound in `is_send`
+...
+23 |     is_send(foo());
+   |     ^^^^^^^ future returned by `foo` is not `Send`
+   |
+   = help:  future is not `Send` as this value is used across an await
+note: future does not implement `std::marker::Send` as this value is used across an await
+  --&amp;gt; src/main.rs:15:3
+   |
+14 |   let g = x.lock().unwrap();
+   |       - has type `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;`
+15 |   baz().await;
+   |   ^^^^^^^^^^^ await occurs here, with `g` maybe used later
+16 | }
+   | - `g` is later dropped here
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+
+        <author>
+            <name>David Wood</name>
+        </author>
+    </entry>
     
     <entry>
         <title>Async Foundations Update: Time for polish!</title>

@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,10 +63,10 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Announcing Rust 1.15</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
-    <div class="publish-date-author">Feb. 02, 2017 &middot; The Rust Core Team
+    <div class="publish-date-author">Feb. 2, 2017 &middot; The Rust Core Team
     
     </div>
 
@@ -88,7 +79,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the
 appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes for
 1.15.0</a> on GitHub. 1443 patches were landed in this release.</p>
-<h3><a href="#whats-in-1.15.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.15.0-stable"></a>What's in 1.15.0 stable</h3>
+<h3><a href="#whats-in-1150-stable" aria-hidden="true" class="anchor" id="whats-in-1150-stable"></a>What's in 1.15.0 stable</h3>
 <p>Rust 1.15 sees an <em>extremely</em> eagerly-awaited feature land on stable: custom
 derive! To review, in Rust, you've always been able to automatically implement
 some traits through the <code>derive</code> attribute:</p>
@@ -132,7 +123,7 @@ fn main() {
 <pre><code class="language-text">serialized = {&quot;name&quot;:&quot;Ferris&quot;}
 deserialized = Pet { name: &quot;Ferris&quot; }
 </code></pre>
-<p>Another common use-case is <a href="http://diesel.rs">Diesel</a>. Say we had a database of <code>Pet</code>s.
+<p>Another common use-case is <a href="https://diesel.rs">Diesel</a>. Say we had a database of <code>Pet</code>s.
 We could fetch them like this:</p>
 <pre><code class="language-rust">// some extern crate and use lines elided here
 
@@ -156,7 +147,7 @@ fn main() {
     }
 }
 </code></pre>
-<p>For full instructions, see <a href="http://diesel.rs">the website</a>.</p>
+<p>For full instructions, see <a href="https://diesel.rs">the website</a>.</p>
 <p>These kinds of libraries are extremely powerful, but rely on custom derive for
 ergonomics. While these libraries <em>worked</em> on Rust stable previously, they were
 not as nice to use, so much so that we often heard from users &quot;I only use
@@ -243,7 +234,7 @@ which is useful when you have a workspace.</p>
 <p>We now <a href="https://github.com/rust-lang/cargo/pull/3363">Compile statically against the MSVC CRT</a> on Windows, and
 <a href="https://github.com/rust-lang/cargo/pull/3311">Link OpenSSL statically</a> on Mac OS X.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1150-2017-02-02">detailed release notes</a> for more.</p>
-<h3><a href="#contributors-to-115.0" aria-hidden="true" class="anchor" id="contributors-to-115.0"></a>Contributors to 1.15.0</h3>
+<h3><a href="#contributors-to-1150" aria-hidden="true" class="anchor" id="contributors-to-1150"></a>Contributors to 1.15.0</h3>
 <p>In this part of the release announcements, we usually post a list of
 contributors. However, we've recently started a new initiative, &quot;Thanks!&quot;, to
 do this in a more comprehensive way. One issue with this section is that it
@@ -278,7 +269,6 @@ GitHub</a>!</p>
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -293,10 +283,17 @@ GitHub</a>!</p>
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -307,6 +304,8 @@ GitHub</a>!</p>
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

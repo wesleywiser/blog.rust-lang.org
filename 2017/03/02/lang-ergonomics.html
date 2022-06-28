@@ -2,46 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Rust's language ergonomics initiative | Rust Blog</title>
+    <title>Rust&#x27;s language ergonomics initiative | Rust Blog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Empowering everyone to build reliable and efficient software.">
      <!-- Twitter card -->
  <meta name="twitter:card" content="summary">
  <meta name="twitter:site" content="@rustlang">
  <meta name="twitter:creator" content="@rustlang">
- <meta name="twitter:title" content="Rust's language ergonomics initiative | Rust Blog">
+ <meta name="twitter:title" content="Rust&#x27;s language ergonomics initiative | Rust Blog">
  <meta name="twitter:description" content="Empowering everyone to build reliable and efficient software.">
 <meta name="twitter:image" content="https://www.rust-lang.org/static/images/rust-social.jpg">
 
 <!-- Facebook OpenGraph -->
-<meta property="og:title" content="Rust's language ergonomics initiative | Rust Blog" />
+<meta property="og:title" content="Rust&#x27;s language ergonomics initiative | Rust Blog" />
 <meta property="og:description" content="Empowering everyone to build reliable and efficient software.">
 <meta property="og:image" content="https://www.rust-lang.org/static/images/rust-social-wide.jpg" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -68,14 +59,14 @@
   </ul>
 </nav>
 
-<section id="Rust's language ergonomics initiative" class="white">
+<section id="Rust&#x27;s language ergonomics initiative" class="white">
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
-      <h2>Rust's language ergonomics initiative</h2>
-      <div class="highlight"></div>
+      <h2>Rust&#x27;s language ergonomics initiative</h2>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
-    <div class="publish-date-author">Mar. 02, 2017 &middot; Aaron Turon
+    <div class="publish-date-author">Mar. 2, 2017 &middot; Aaron Turon
     
     </div>
 
@@ -171,7 +162,7 @@ which can do very little).</p>
 in which the compiler is simply assuming a default unless told otherwise. Often
 such conventions are universal and well-known, meaning that you don't need to
 know anything about the rest of the code to know what they are. A good example
-of this technique in Rust is the the fact that <code>mod foo;</code> looks for <code>foo.rs</code> (or
+of this technique in Rust is the fact that <code>mod foo;</code> looks for <code>foo.rs</code> (or
 <code>foo/mod.rs</code>) by default.</p>
 <p>One final point. &quot;Implicitness&quot; is often relative to where the language is
 today, something that seems radical at first—like type inference!—but then
@@ -246,7 +237,7 @@ additional assumptions about the type. But the compiler is making us spell out
 those assumptions explicitly in the signature. This situation seems ripe for an
 ergonomic improvement.</p>
 <p>It's
-<a href="http://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/">straightforward</a>
+<a href="https://smallcultfollowing.com/babysteps/blog/2014/07/06/implied-bounds/">straightforward</a>
 to assume bounds that are &quot;implied&quot; by the type, like assuming that <code>K</code> must be
 <code>Hash</code> and <code>Eq</code> above, by tying it to the type definition:</p>
 <pre><code class="language-rust">struct HashMap&lt;K: Hash + Eq, V&gt; { ... }
@@ -379,7 +370,7 @@ can specify an explicit path if you prefer, so this is a case of implicitness
 through convention. But while this bit of implicitness helps, the module system
 still makes a number of fine distinctions that trip up newcomers and require
 redundancy that even old hands can forget.</p>
-<h3><a href="#idea-eliminate-the-need-for-extern-crate,-and-maybe-mod-too" aria-hidden="true" class="anchor" id="idea-eliminate-the-need-for-extern-crate,-and-maybe-mod-too"></a>Idea: eliminate the need for <code>extern crate</code>, and maybe <code>mod</code> too</h3>
+<h3><a href="#idea-eliminate-the-need-for-extern-crate-and-maybe-mod-too" aria-hidden="true" class="anchor" id="idea-eliminate-the-need-for-extern-crate-and-maybe-mod-too"></a>Idea: eliminate the need for <code>extern crate</code>, and maybe <code>mod</code> too</h3>
 <p>The clearest-cut case is the <code>extern crate</code> declaration, which is used to bring
 an external crate into scope. The vast majority of Rust projects use Cargo for
 dependency management, and already specify the crates they depend on in their
@@ -442,7 +433,6 @@ better, and that good faith deliberation is the way to
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -457,10 +447,17 @@ better, and that good faith deliberation is the way to
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -471,6 +468,8 @@ better, and that good faith deliberation is the way to
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

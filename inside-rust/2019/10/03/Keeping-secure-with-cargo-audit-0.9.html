@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../../images/favicon.svg">
+<link rel="manifest" href="../../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/inside-rust/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../../inside-rust/">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Inside Rust Blog</span>
     </a>
   </div>
@@ -72,10 +63,10 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
-    <div class="publish-date-author">Oct. 03, 2019 &middot; Tony Arcieri
+    <div class="publish-date-author">Oct. 3, 2019 &middot; Tony Arcieri
      on behalf of <a href="https://www.rust-lang.org/governance/wgs/wg-secure-code">the Secure Code WG</a> 
     </div>
 
@@ -94,7 +85,7 @@ $ cargo audit
 <h2><a href="#ui-improvements-dependency-trees" aria-hidden="true" class="anchor" id="ui-improvements-dependency-trees"></a>UI improvements: dependency trees</h2>
 <p>Previously, when <code>cargo-audit</code> found a vulnerability in a project, it would display advisory information without any context as to how a particular vulnerable dependency is included in your project, making it difficult to determine what action needs to be taken to resolve the vulnerability.</p>
 <p>The latest release prints an inverse dependency tree (ala the excellent <a href="https://github.com/sfackler/cargo-tree">cargo-tree</a> crate) for each advisory showing how a vulnerable dependency is included in your project:</p>
-<p><img src="https://raw.githubusercontent.com/RustSec/cargo-audit/a840f7b/screenshot.png" alt="cargo audit with dependency tree" /></p>
+<p><img src="../../../../images/inside-rust/2019-10-03-Keeping-secure-with-cargo-audio-0.9/cargo-audit-dependency-tree.png" alt="cargo audit with dependency tree" /></p>
 <p>In future versions of <code>cargo-audit</code> we <a href="https://github.com/RustSec/cargo-audit/issues/23">hope to add a <code>cargo audit fix</code> command</a> ala <code>npm audit fix</code> which can either automatically update the necessary dependencies or provide instructions on how to do so. If that feature interests you and you'd like to contribute, <a href="https://github.com/RustSec/cargo-audit/issues/23">we're looking for help</a>!</p>
 <h2><a href="#new-feature-unmaintained-crate-warnings" aria-hidden="true" class="anchor" id="new-feature-unmaintained-crate-warnings"></a>New feature: unmaintained crate warnings</h2>
 <p>This release added the notion of <a href="https://github.com/RustSec/rustsec-crate/pull/75">informational advisories</a> - advisories which don't directly represent a security vulnerability, but may contain potentially security-relevant information. The primary intended use for this feature is <a href="https://github.com/RustSec/advisory-db/issues/173">providing warnings for unmaintained crates</a>.</p>
@@ -134,7 +125,6 @@ $ cargo audit
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -149,10 +139,17 @@ $ cargo audit
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -163,6 +160,8 @@ $ cargo audit
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../../scripts/highlight.js"></script>
 
   </body>
 </html>

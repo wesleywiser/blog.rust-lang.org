@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,7 +63,7 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Announcing Rust 1.34.1</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
     <div class="publish-date-author">Apr. 25, 2019 &middot; The Rust Release Team
@@ -87,10 +78,10 @@ getting Rust 1.34.1 and rustup 1.18.1 is as easy as:</p>
 <pre><code class="language-console">rustup update stable
 </code></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website.</p>
-<h2><a href="#whats-in-1.34.1-stable" aria-hidden="true" class="anchor" id="whats-in-1.34.1-stable"></a>What's in 1.34.1 stable</h2>
+<h2><a href="#whats-in-1341-stable" aria-hidden="true" class="anchor" id="whats-in-1341-stable"></a>What's in 1.34.1 stable</h2>
 <p>This patch release fixes two false positives and <a href="https://github.com/rust-lang/rust-clippy/pull/3805">a panic when checking macros</a> in <a href="https://github.com/rust-lang/rust-clippy">Clippy</a>.
 Clippy is a tool which provides a collection of lints to catch common mistakes and improve your Rust code.</p>
-<h3><a href="#false-positive-in-clippy:redundant_closure" aria-hidden="true" class="anchor" id="false-positive-in-clippy:redundant_closure"></a>False positive in <code>clippy::redundant_closure</code></h3>
+<h3><a href="#false-positive-in-clippyredundant_closure" aria-hidden="true" class="anchor" id="false-positive-in-clippyredundant_closure"></a>False positive in <code>clippy::redundant_closure</code></h3>
 <p>A false positive in the <code>redundant_closure</code> lint was <a href="https://github.com/rust-lang/rust-clippy/pull/3821">fixed</a>.
 The lint did not take into account <a href="https://github.com/rust-lang/rust-clippy/issues/3802">differences in the number of borrows</a>.</p>
 <p>In the following snippet, the method <code>required</code> expects <code>dep: &amp;D</code> but the actual type of <code>dep</code> is <code>&amp;&amp;D</code>:</p>
@@ -98,7 +89,7 @@ The lint did not take into account <a href="https://github.com/rust-lang/rust-cl
 </code></pre>
 <p>Clippy erronously suggested <code>.filter(Dependency::required)</code>,
 which is rejected by the compiler due to the difference in borrows.</p>
-<h3><a href="#false-positive-in-clippy:missing_const_for_fn" aria-hidden="true" class="anchor" id="false-positive-in-clippy:missing_const_for_fn"></a>False positive in <code>clippy::missing_const_for_fn</code></h3>
+<h3><a href="#false-positive-in-clippymissing_const_for_fn" aria-hidden="true" class="anchor" id="false-positive-in-clippymissing_const_for_fn"></a>False positive in <code>clippy::missing_const_for_fn</code></h3>
 <p>Another false positive in the <code>missing_const_for_fn</code> lint was <a href="https://github.com/rust-lang/rust-clippy/pull/3844">fixed</a>.
 This lint did not take into account that functions inside <code>trait</code> implementations cannot be <code>const fn</code>s.
 For example, when given the following snippet, the lint would trigger:</p>
@@ -113,7 +104,7 @@ impl std::ops::Add for Point {
     }
 }
 </code></pre>
-<h2><a href="#whats-new-in-rustup-1.18.1" aria-hidden="true" class="anchor" id="whats-new-in-rustup-1.18.1"></a>What's new in rustup 1.18.1</h2>
+<h2><a href="#whats-new-in-rustup-1181" aria-hidden="true" class="anchor" id="whats-new-in-rustup-1181"></a>What's new in rustup 1.18.1</h2>
 <p>A recent rustup release, 1.18.0, introduced <a href="https://github.com/rust-lang/rustup.rs/issues/1794">a regression</a> that prevented installing Rust through the shell script on older platforms.
 A patch was released that fixes the issue, avoiding to force TLS v1.2 on the platforms that don't support it.</p>
 <p>You can check out other rustup changes in its <a href="https://github.com/rust-lang/rustup.rs/blob/master/CHANGELOG.md#1181---2019-04-25">full release notes</a>.</p>
@@ -130,7 +121,6 @@ A patch was released that fixes the issue, avoiding to force TLS v1.2 on the pla
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -145,10 +135,17 @@ A patch was released that fixes the issue, avoiding to force TLS v1.2 on the pla
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -159,6 +156,8 @@ A patch was released that fixes the issue, avoiding to force TLS v1.2 on the pla
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

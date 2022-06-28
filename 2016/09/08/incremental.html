@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,10 +63,10 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Incremental Compilation</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
-    <div class="publish-date-author">Sept. 08, 2016 &middot; Michael Woerister
+    <div class="publish-date-author">Sept. 8, 2016 &middot; Michael Woerister
     
     </div>
 
@@ -146,7 +137,7 @@ same as at the source level, will end up exactly the same, bit for bit.
 Incremental compilation aims at retaining as much of those unchanged
 parts as possible while redoing only that amount of work that actually <em>must</em>
 be redone.</p>
-<h1><a href="#how-do-you-make-something-incremental"?" aria-hidden="true" class="anchor" id="how-do-you-make-something-incremental"?"></a>How Do You Make Something &quot;Incremental&quot;?</h1>
+<h1><a href="#how-do-you-make-something-incremental" aria-hidden="true" class="anchor" id="how-do-you-make-something-incremental"></a>How Do You Make Something &quot;Incremental&quot;?</h1>
 <p>We have already heard that computing something incrementally means updating
 only those parts of the computation's output that need to be adapted in
 response to a given change in the computation's inputs.
@@ -162,8 +153,14 @@ concrete. Let's see what it means to evaluate an expression of the form
 with one set of values for <code>a</code>, <code>b</code>, and <code>c</code>, and then evaluating it a second
 time with a different value for <code>a</code>. For the first time around, <code>a</code> will be
 <code>1</code>, <code>b</code> will be <code>2</code>, and <code>c</code> will be <code>3</code>:</p>
-<!-- raw HTML omitted -->
-<p><img src="/images/2016-08-Incremental/algebra-initial.svg" alt="Initial Computation of a+b×c" /></p>
+<!--
+       a+b×c=7
+       /    \
+      /     b×c=6
+     /     /   \
+    a=1   b=2  c=3
+-->
+<p><img src="../../../images/2016-08-Incremental/algebra-initial.svg" alt="Initial Computation of a+b×c" /></p>
 <p>Assume that we &quot;saved&quot; the intermediate results at each step, that is, we
 remember somewhere that <code>b×c</code> is <code>6</code> and <code>a+b×c</code> is <code>7</code>. Now, in the second
 round, we want to know what <code>a+b×c</code> is if we change the value of <code>a</code> to
@@ -172,8 +169,14 @@ already know that <code>b×c = 6</code>, so we don't have to perform that comput
 again, and can rather skip directly to <code>(a = 4) + (b×c = 6)</code>. We thus have computed
 the value of our expression in just one step instead of two, sparing us an
 entire, tedious multiplication.</p>
-<!-- raw HTML omitted -->
-<p><img src="/images/2016-08-Incremental/algebra-update.svg" alt="Updating the Computation" /></p>
+<!--
+       a+b×c=10
+       /    \
+      /     b×c=6
+     /     /   \
+    a=4   b=2  c=3
+-->
+<p><img src="../../../images/2016-08-Incremental/algebra-update.svg" alt="Updating the Computation" /></p>
 <p>Let's see how this scheme translates to the compiler.</p>
 <h1><a href="#an-incremental-compiler" aria-hidden="true" class="anchor" id="an-incremental-compiler"></a>An Incremental Compiler</h1>
 <p>The way we chose to implement incrementality in the Rust compiler is
@@ -185,8 +188,19 @@ on disk instead. If there is a valid entry in the cache, the compiler can just
 skip computing that particular piece of data. Let's take a look at a (simplified)
 overview of the different compilation phases and the intermediate results they
 produce:</p>
-<!-- raw HTML omitted -->
-<p><img src="/images/2016-08-Incremental/compiler-phases.svg" alt="Compiler Phases and their By-Products" /></p>
+<!--
+* Diagram: compilation phases and their intermediate results
+
+         AST        type info      object
+                       MIR          code        binary
+
+       A A A A     T T T M M M     O O O O
+       A A A A     T T T M M M     O O O O        B
+       A A A A     T T T M M M     O O O O
+    >===========>===============>===========>===========>
+        parse       analysis       codegen     linking
+-->
+<p><img src="../../../images/2016-08-Incremental/compiler-phases.svg" alt="Compiler Phases and their By-Products" /></p>
 <p>First the compiler will parse the source code into an abstract syntax tree
 (AST). The AST then goes through the analysis phase which produces type
 information and the <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">MIR</a> for each function. After that, if analysis
@@ -215,11 +229,25 @@ results and their individual &quot;up-to-dateness&quot; in a straightforward way
 result</strong> is represented as a <strong>node</strong> in a directed graph. The <strong>edges</strong> in the
 graph, on the other hand, represent which intermediate result or input can have
 an <strong>influence</strong> on some other intermediate result.</p>
-<!-- raw HTML omitted -->
+<!-- edited out
+More formally, let `v` be
+some intermediate result and `N(v)` be the dependency graph node representing
+`v` in the graph. Further, let `xᵢ` be the intermediate results and inputs
+that have to be **read** when computing `v` and let `N(xᵢ)`
+be their representing nodes. Then the dependency graph will contain the edges
+`N(v) → N(xᵢ)` for all `i`. In other words, each edge records a dependency
+of one intermediate result on another.
+ -->
 <p>Let's go back to our algebra example to see what this looks like in
 practice:</p>
-<!-- raw HTML omitted -->
-<p><img src="/images/2016-08-Incremental/algebra-dep-graph.svg" alt="Dependency Graph of a+b×c" /></p>
+<!--
+       a+b×c
+       /   \
+      /    b×c
+     /    /   \
+    a    b     c
+-->
+<p><img src="../../../images/2016-08-Incremental/algebra-dep-graph.svg" alt="Dependency Graph of a+b×c" /></p>
 <p>As you can see, we have nodes for the inputs <code>a</code>, <code>b</code>, and <code>c</code>, and nodes for
 the intermediate results <code>b×c</code> and <code>a+b×c</code>. The edges should come as no
 surprise: There is one edge from <code>b×c</code> to <code>b</code> and one to <code>c</code> because those are
@@ -228,8 +256,14 @@ exactly the same. Note, by the way, that the above graph is a tree just because
 the computation it models has the form of a tree. In general, dependency graphs
 are <strong>directed acyclic graphs</strong>, as would be the case if we would
 add another intermediate result <code>b×c+c</code> to our computation:</p>
-<!-- raw HTML omitted -->
-<p><img src="/images/2016-08-Incremental/algebra-dep-graph-dag.svg" alt="Example of a non-tree Dependency Graph" /></p>
+<!--
+       a+b×c   b×c+c
+       /   \  /  |
+      /    b×c   |
+     /    /   \ /
+    a    b     c
+-->
+<p><img src="../../../images/2016-08-Incremental/algebra-dep-graph-dag.svg" alt="Example of a non-tree Dependency Graph" /></p>
 <p>What makes this data structure really useful is that we can ask it questions
 of the form &quot;if X has changed, is Y still up-to-date?&quot;. We just take the node
 representing <code>Y</code> and collect all the inputs <code>Y</code> depends on by transitively
@@ -251,16 +285,34 @@ is accessed, we know that it is being read and we know what it is being read
 <em>for</em> (the currently active node). This gives us both ends of the dependency edge
 and we can simply add it to the graph. At the end of the compilation sessions we
 have all our data nicely linked up, mostly automatically:</p>
-<!-- raw HTML omitted -->
-<p><img src="/images/2016-08-Incremental/compiler-dep-graph.svg" alt="Dependency Graph of Compilation Data" /></p>
+<!--
+         AST        type info      object
+                       MIR          code        binary
+
+       A A A A     T T T M M M     O O O O
+       A A A A     T T T M M M     O O O O        B
+       A A A A     T T T M M M     O O O O
+    >===========>===============>===========>===========>
+        parse       analysis       codegen     linking
+-->
+<p><img src="../../../images/2016-08-Incremental/compiler-dep-graph.svg" alt="Dependency Graph of Compilation Data" /></p>
 <p>This dependency graph is then stored in the incremental compilation cache
 directory along with the cache entries it describes.</p>
 <p>At the beginning of a subsequent compilation session, we detect which inputs
 (=AST nodes) have changed by comparing them to the previous version. Given the
 graph and the set of changed inputs, we can easily find all cache entries that
 are not up-to-date anymore and just remove them from the cache:</p>
-<!-- raw HTML omitted -->
-<p><img src="/images/2016-08-Incremental/compiler-cache-purge.svg" alt="Using the Dependency Graph to Validate the Incremental Compilation Cache" /></p>
+<!--
+         AST        type info      object
+                       MIR          code        binary
+
+       A _ A _     _ _ T M _ _     O _ O _
+       _ A A A     T _ T _ _ M     O _ _ _        _
+       A A _ A     T _ _ M _ M     O O _ _
+    >===========>===============>===========>===========>
+        parse       analysis       codegen     linking
+-->
+<p><img src="../../../images/2016-08-Incremental/compiler-cache-purge.svg" alt="Using the Dependency Graph to Validate the Incremental Compilation Cache" /></p>
 <p>Anything that has survived this cache validation phase can safely be re-used
 during the current compilation session.</p>
 <p>There are a few benefits to the <strong>automated dependency tracking</strong> approach we
@@ -278,7 +330,7 @@ description of what the dependency graph for a given program ought to look like.
 This makes sure that the actual graph and the reference graph are arrived at
 via <strong>different methods</strong>, reducing the risk that both the compiler and the
 test case agree on the same, yet wrong, value.</p>
-<h1><a href="#faster!-up-to-15%-or-more."*" aria-hidden="true" class="anchor" id="faster!-up-to-15%-or-more."*"></a>&quot;Faster! Up to 15% or More.&quot;<a href="https://xkcd.com/870/">*</a></h1>
+<h1><a href="#faster-up-to-15-or-more" aria-hidden="true" class="anchor" id="faster-up-to-15-or-more"></a>&quot;Faster! Up to 15% or More.&quot;<a href="https://xkcd.com/870/">*</a></h1>
 <p>Let's take a look at some of the implications of what we've learned so far:</p>
 <ul>
 <li>The dependency graph reflects the actual dependencies between parts of the
@@ -299,8 +351,20 @@ recompiled.</p>
 alpha version now, we chose to focus on caching object files. Why did we do
 that? Let's take a look at the compilation phases again and especially at how
 much time is spent in each one on average:</p>
-<!-- raw HTML omitted -->
-<p><img src="/images/2016-08-Incremental/compiler-phases-cost.svg" alt="Relative Cost of Compilation Phases" /></p>
+<!--
+         AST        type info      object
+                       MIR          code        binary
+
+       A A A A     T T T M M M     O O O O
+       A A A A     T T T M M M     O O O O        B
+       A A A A     T T T M M M     O O O O
+    >===========>===============>===========>===========>
+        parse       analysis       codegen     linking
+                                   optimize
+
+TIME:    5%            20%         **65%**       10%
+-->
+<p><img src="../../../images/2016-08-Incremental/compiler-phases-cost.svg" alt="Relative Cost of Compilation Phases" /></p>
 <p>As you can see, the Rust compiler spends most of its time in the optimization
 and codegen passes. Consequently, if this phase can be skipped at least for
 part of a code base, this is where the biggest impact on compile times can be
@@ -323,7 +387,7 @@ situations. First let's take a look at the best case scenario where a 100%
 of a crate's object files can be re-used. This might occur when changing one
 crate in a multi-crate project and downstream crates need to be rebuilt but
 are not really affected.</p>
-<p><img src="/images/2016-08-Incremental/perf-full-re-use.svg" alt="Normalized Incremental Compilation Build Times" /></p>
+<p><img src="../../../images/2016-08-Incremental/perf-full-re-use.svg" alt="Normalized Incremental Compilation Build Times" /></p>
 <p>As you can see, compiling a crate for the first time in incremental mode can be
 slower than compiling it in non-incremental mode. This is because the dependency
 tracking incurs some additional cost when activated. Note that compiling
@@ -343,7 +407,7 @@ compilation makes little difference: It's only 3% faster than compiling from
 scratch.</p>
 <p>The next graph shows which impact various changes made to the <code>regex</code> crate
 have on incremental rebuild times:</p>
-<p><img src="/images/2016-08-Incremental/perf-changes.svg" alt="Build Times After Specific Changes" /></p>
+<p><img src="../../../images/2016-08-Incremental/perf-changes.svg" alt="Build Times After Specific Changes" /></p>
 <p>The numbers show that the effectiveness of incremental compilation indeed depends a
 lot on the type of change applied to the code. For changes with very local
 effect we can get close to optimal re-use (as in the case of <code>Error::cause()</code>,
@@ -384,7 +448,7 @@ over to the <a href="https://github.com/rust-lang/rust/issues/36350">tracking is
 comment!</p>
 </li>
 <li>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --> We are working on the
+<p><a name="tool"></a> We are working on the
 <a href="https://github.com/nikomatsakis/cargo-incremental"><em>cargo incremental</em></a> tool (implemented as a Cargo
 subcommand for hassle-free installation and usage) that will walk a projects
 git history, compiling successive versions of the source code and
@@ -412,7 +476,6 @@ or ask around in the <a href="https://www.rust-lang.org/community.html">#rustc c
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -427,10 +490,17 @@ or ask around in the <a href="https://www.rust-lang.org/community.html">#rustc c
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -441,6 +511,8 @@ or ask around in the <a href="https://www.rust-lang.org/community.html">#rustc c
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

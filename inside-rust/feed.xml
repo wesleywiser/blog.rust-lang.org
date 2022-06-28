@@ -10,408 +10,678 @@
         <name>Maintained by the Rust Teams.</name>
         <uri>https://github.com/rust-lang/blog.rust-lang.org/</uri>
     </author>
-    <updated>2019-10-11T20:57:19Z</updated>
+    <updated>2022-06-28T20:46:29+00:00</updated>
 
     
     <entry>
-        <title>2019-10-10 Lang Team Triage Meeting</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2019/10/11/Lang-Team-Meeting.html" type="text/html" title="2019-10-10 Lang Team Triage Meeting" />
-        <published>2019-10-11T00:00:00Z</published>
-        <updated>2019-10-11T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2019/10/11/Lang-Team-Meeting.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2019/10/11/Lang-Team-Meeting.html">&lt;p&gt;We had our &lt;a href=&quot;https://github.com/rust-lang/lang-team/#meeting-calendara&quot;&gt;weekly triage meeting&lt;/a&gt; on 2019-10-10. You can find the
-&lt;a href=&quot;https://github.com/rust-lang/lang-team/blob/master/minutes/2019-10-10.md&quot;&gt;minutes&lt;/a&gt; on the &lt;a href=&quot;https://github.com/rust-lang/lang-team/&quot;&gt;lang-team&lt;/a&gt; repository; there is also a &lt;a href=&quot;https://youtu.be/QvE9-zce5_4&quot;&gt;video
-recording&lt;/a&gt; on YouTube. This week we had a number of folks who have
-been working on const evaluation in attendance, which gave us an
-opportunity to dive into some of the complexities involved there. We
-also discussed how to make the const evaluation effort into a
-&amp;quot;shepherded project&amp;quot;, a concept that we are still actively developing
-(see my blog post on &lt;a href=&quot;http://smallcultfollowing.com/babysteps/blog/2019/09/11/aic-shepherds-3-0/&quot;&gt;Shepherding 3.0&lt;/a&gt; for the general idea).&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#other-updates-on-shepherded-items&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;other-updates-on-shepherded-items&quot;&gt;&lt;/a&gt;Other updates on shepherded items&lt;/h2&gt;
-&lt;p&gt;This is our current list of &amp;quot;shepherded items&amp;quot;, which are things we
-are tracking week to week. We're still evolving the shepherding
-system. Hopefully we'll soon have links for all of these to a good,
-representative place that explains the overall status and roadmap. All
-in good time.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/nikomatsakis/project-ffi-unwind&quot;&gt;unwind-ffi&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;created a &lt;a href=&quot;http://smallcultfollowing.com/babysteps/blog/2019/09/11/aic-shepherds-3-0/&quot;&gt;zulip&lt;/a&gt; stream (&lt;code&gt;#wg-ffi-unwind&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;preparing an RFC that creates the group official and lays out the roadmap&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&amp;quot;object safety&amp;quot; group (e.g., &lt;a href=&quot;http://smallcultfollowing.com/babysteps/blog/2019/09/11/aic-shepherds-3-0/&quot;&gt;#57893&lt;/a&gt;)
-&lt;ul&gt;
-&lt;li&gt;no major updates, still iterating on the &amp;quot;in progress&amp;quot; branch&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;re-rebalance coherence
-&lt;ul&gt;
-&lt;li&gt;we have a spreadsheet mapping out all the possible tests&lt;/li&gt;
-&lt;li&gt;we'll fill out the matrix, but probably ready to stabilize 🎉&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;stabilize proc-macros generating macro-rules items
-&lt;ul&gt;
-&lt;li&gt;waiting on a report from pnkfelix&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;grammar working group
-&lt;ul&gt;
-&lt;li&gt;no updates&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+        <title>1.62.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/06/28/1.62.0-prerelease.html" type="text/html" title="1.62.0 pre-release testing" />
+        <published>2022-06-28T00:00:00+00:00</published>
+        <updated>2022-06-28T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/06/28/1.62.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/06/28/1.62.0-prerelease.html">&lt;p&gt;The 1.62.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, June 30th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1620-2022-06-30&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-06-27/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-06-27/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-62-0-prerelease-testing/16913&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
 </content>
 
         <author>
-            <name>Niko Matsakis</name>
+            <name>Pietro Albini</name>
         </author>
     </entry>
     
     <entry>
-        <title>Improving async-await's &quot;Future is not Send&quot; diagnostic</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements.html" type="text/html" title="Improving async-await's &quot;Future is not Send&quot; diagnostic" />
-        <published>2019-10-11T00:00:00Z</published>
-        <updated>2019-10-11T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2019/10/11/AsyncAwait-Not-Send-Error-Improvements.html">&lt;p&gt;Async-await is due to hit stable in the 1.39 release (only a month away!), and as announced in the
-&lt;a href=&quot;https://blog.rust-lang.org/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html&quot;&gt;&amp;quot;Async Foundations Update: Time for polish!&amp;quot;&lt;/a&gt; post last month, the Async
-Foundations WG has shifted its focus to polish. This post will highlight one aspect of that
-focus, diagnostic improvements, and in particular, the improvements that the working group has
-been making to the once-unhelpful &amp;quot;future is not send&amp;quot; diagnostic.&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#why-doesnt-my-future-implement-send?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;why-doesnt-my-future-implement-send?&quot;&gt;&lt;/a&gt;Why doesn't my future implement &lt;code&gt;Send&lt;/code&gt;?&lt;/h1&gt;
-&lt;p&gt;One of the major places where async-await should be a pleasure to use is in multithreaded contexts,
-where having a future that can be sent to other threads is desirable. This might look something
-like the following (for brevity, there aren't any threads here, just a requirement that the
-future implement &lt;code&gt;std::marker::Send&lt;/code&gt;):&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;use std::sync::{Mutex, MutexGuard};
-
-fn is_send&amp;lt;T: Send&amp;gt;(t: T) { }
-
-async fn foo() {
-    bar(&amp;amp;Mutex::new(22)).await
-}
-
-async fn bar(x: &amp;amp;Mutex&amp;lt;u32&amp;gt;) {
-    let g = x.lock().unwrap();
-    baz().await
-}
-
-async fn baz() { }
-
-fn main() {
-    is_send(foo());
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When we try to compile this, we'll get an unwieldly and hard-to-follow diagnostic:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;error[E0277]: `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;` cannot be sent between threads safely
-  --&amp;gt; src/main.rs:23:5
-   |
-23 |     is_send(foo());
-   |     ^^^^^^^ `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;` cannot be sent between threads safely
-   |
-   = help: within `impl std::future::Future`, the trait `std::marker::Send` is not implemented for `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;`
-   = note: required because it appears within the type `for&amp;lt;'r, 's&amp;gt; {&amp;amp;'r std::sync::Mutex&amp;lt;u32&amp;gt;, std::sync::MutexGuard&amp;lt;'s, u32&amp;gt;, impl std::future::Future, ()}`
-   = note: required because it appears within the type `[static generator@src/main.rs:13:30: 16:2 x:&amp;amp;std::sync::Mutex&amp;lt;u32&amp;gt; for&amp;lt;'r, 's&amp;gt; {&amp;amp;'r std::sync::Mutex&amp;lt;u32&amp;gt;, std::sync::MutexGuard&amp;lt;'s, u32&amp;gt;, impl std::future::Future, ()}]`
-   = note: required because it appears within the type `std::future::GenFuture&amp;lt;[static generator@src/main.rs:13:30: 16:2 x:&amp;amp;std::sync::Mutex&amp;lt;u32&amp;gt; for&amp;lt;'r, 's&amp;gt; {&amp;amp;'r std::sync::Mutex&amp;lt;u32&amp;gt;, std::sync::MutexGuard&amp;lt;'s, u32&amp;gt;, impl std::future::Future, ()}]&amp;gt;`
-   = note: required because it appears within the type `impl std::future::Future`
-   = note: required because it appears within the type `impl std::future::Future`
-   = note: required because it appears within the type `for&amp;lt;'r&amp;gt; {impl std::future::Future, ()}`
-   = note: required because it appears within the type `[static generator@src/main.rs:9:16: 11:2 for&amp;lt;'r&amp;gt; {impl std::future::Future, ()}]`
-   = note: required because it appears within the type `std::future::GenFuture&amp;lt;[static generator@src/main.rs:9:16: 11:2 for&amp;lt;'r&amp;gt; {impl std::future::Future, ()}]&amp;gt;`
-   = note: required because it appears within the type `impl std::future::Future`
-   = note: required because it appears within the type `impl std::future::Future`
-note: required by `is_send`
-  --&amp;gt; src/main.rs:5:1
-   |
-5  | fn is_send&amp;lt;T: Send&amp;gt;(t: T) {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That's.. not great. Let's break down what's happening and understand what this error is trying to
-tell us.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn main() {
-    is_send(foo());
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In &lt;code&gt;main&lt;/code&gt;, we are calling &lt;code&gt;foo&lt;/code&gt; and passing the return value to &lt;code&gt;is_send&lt;/code&gt;. &lt;code&gt;foo&lt;/code&gt; is an &lt;code&gt;async fn&lt;/code&gt;,
-so it doesn't return &lt;code&gt;()&lt;/code&gt; (what you might expect for a function with no return type specified).
-Instead, it returns &lt;code&gt;impl std::future::Future&amp;lt;Output = ()&amp;gt;&lt;/code&gt;, some unnamed type that implements
-&lt;code&gt;std::future::Future&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;async fn foo() {
-    bar(&amp;amp;Mutex::new(22)).await
-}
-
-// becomes...
-
-fn foo() -&amp;gt; impl std::future::Future&amp;lt;Output = ()&amp;gt; {
-    async move {
-        bar(&amp;amp;Mutex::new(22)).await
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you want to learn more about the transformations that happen with async-await, consider
-reading the &lt;a href=&quot;https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html&quot;&gt;&lt;code&gt;async&lt;/code&gt;/&lt;code&gt;.await&lt;/code&gt; primer chapter of the async book&lt;/a&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;fn is_send&amp;lt;T: Send&amp;gt;(t: T) { }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It looks like the error we're getting is because the future returned by &lt;code&gt;foo&lt;/code&gt; doesn't satisfy
-the &lt;code&gt;T: Send&lt;/code&gt; bound of &lt;code&gt;is_send&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#how-are-async-functions-implemented&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-are-async-functions-implemented&quot;&gt;&lt;/a&gt;How are async functions implemented?&lt;/h2&gt;
-&lt;p&gt;To explain why our future doesn't implement &lt;code&gt;Send&lt;/code&gt;, we first need to understand a little bit more
-about what async-await is doing under the hood. rustc implements &lt;code&gt;async fn&lt;/code&gt;s using generators,
-an unstable language feature for resumable functions like the co-routines you might be familiar
-with from other languages. Generators are laid out like enums with variants containing all of the
-variables that are used across await points (which desugar to generator yields):&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;async fn bar(x: &amp;amp;Mutex&amp;lt;u32&amp;gt;) {
-    let g = x.lock().unwrap();
-    baz().await // &amp;lt;- await point (suspend #0), `g` and `x` are in use before await point
-} // &amp;lt;- `g` and `x` dropped here, after await point
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;enum BarGenerator {
-    Unresumed { x: &amp;amp;Mutex&amp;lt;u32&amp;gt;, g: MutexGuard&amp;lt;'_, u32&amp;gt;, },
-    Suspend0 { x: &amp;amp;Mutex&amp;lt;u32&amp;gt;, g: MutexGuard&amp;lt;'_, u32&amp;gt;, }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you want to learn more about the &lt;code&gt;async fn&lt;/code&gt; implementation details, then Tyler Mandry has
-written &lt;a href=&quot;https://tmandry.gitlab.io/blog/posts/optimizing-await-1/&quot;&gt;an excellent blog post&lt;/a&gt; diving into their work here in more depth which is
-definitely worth a read.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#so-why-doesn't-my-future-implement-send?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;so-why-doesn't-my-future-implement-send?&quot;&gt;&lt;/a&gt;So, why doesn't my future implement &lt;code&gt;Send&lt;/code&gt;?&lt;/h2&gt;
-&lt;p&gt;We now know that an &lt;code&gt;async fn&lt;/code&gt; is represented like an enum behind-the-scenes. In synchronous Rust,
-you'll be used to your types automatically implementing &lt;code&gt;Send&lt;/code&gt; when the
-&lt;a href=&quot;https://doc.rust-lang.org/std/marker/trait.Send.html&quot;&gt;compiler determines it's appropriate&lt;/a&gt; - typically when all of the fields of your type
-also implement &lt;code&gt;Send&lt;/code&gt;. It follows that the enum-like that represents our &lt;code&gt;async fn&lt;/code&gt; would
-implement &lt;code&gt;Send&lt;/code&gt; if all of the types in it do.&lt;/p&gt;
-&lt;p&gt;In other words, a future is safe to send across threads if all of the types that are held across
-&lt;code&gt;.await&lt;/code&gt; points implement &lt;code&gt;Send&lt;/code&gt;. This behaviour is useful because it lets us write generic code
-that interoperates smoothly with async-await, but without diagnostic support we get confusing error
-messages.&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#well-which-type-is-the-problem-in-the-example?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;well-which-type-is-the-problem-in-the-example?&quot;&gt;&lt;/a&gt;Well, which type is the problem in the example?&lt;/h2&gt;
-&lt;p&gt;Returning to our example, the future must be holding a type across an &lt;code&gt;.await&lt;/code&gt; point that doesn't
-implement &lt;code&gt;Send&lt;/code&gt;, but where? This is the primary question that the diagnostic improvement aims to
-help answer. Let's start by looking at &lt;code&gt;foo&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;async fn foo() {
-    bar(&amp;amp;Mutex::new(22)).await
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;foo&lt;/code&gt; invokes &lt;code&gt;bar&lt;/code&gt;, passing a reference to a &lt;code&gt;std::sync::Mutex&lt;/code&gt; and getting a future back, before
-&lt;code&gt;await&lt;/code&gt;ing it.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;async fn bar(x: &amp;amp;Mutex&amp;lt;u32&amp;gt;) {
-    let g: MutexGuard&amp;lt;u32&amp;gt; = x.lock().unwrap();
-    baz().await
-} // &amp;lt;- `g` is dropped here
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;bar&lt;/code&gt; unlocks the mutex before &lt;code&gt;await&lt;/code&gt;ing &lt;code&gt;baz&lt;/code&gt;. &lt;code&gt;std::sync::MutexGuard&amp;lt;u32&amp;gt;&lt;/code&gt; does not implement
-&lt;code&gt;Send&lt;/code&gt; and lives across the &lt;code&gt;baz().await&lt;/code&gt; point (because &lt;code&gt;g&lt;/code&gt; is dropped at the end of the scope)
-which causes the entire future not to implement &lt;code&gt;Send&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;That wasn't obvious from the error: we had to know that futures might implement &lt;code&gt;Send&lt;/code&gt; depending
-on the types they capture &lt;em&gt;and&lt;/em&gt; find the type which lives across an await point ourselves.&lt;/p&gt;
-&lt;p&gt;Fortunately, the Async Foundations WG has been working to improve this error, and
-&lt;a href=&quot;https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2018&amp;gist=7e80a8bc151df8817e0983e55bf2667a&quot;&gt;in nightly&lt;/a&gt;, we see the following diagnostic instead:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;error[E0277]: `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;` cannot be sent between threads safely
-  --&amp;gt; src/main.rs:23:5
-   |
-5  | fn is_send&amp;lt;T: Send&amp;gt;(t: T) {
-   |    -------    ---- required by this bound in `is_send`
-...
-23 |     is_send(foo());
-   |     ^^^^^^^ `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;` cannot be sent between threads safely
-   |
-   = help: within `impl std::future::Future`, the trait `std::marker::Send` is not implemented for `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;`
-note: future does not implement `std::marker::Send` as this value is used across an await
-  --&amp;gt; src/main.rs:15:3
-   |
-14 |   let g = x.lock().unwrap();
-   |       - has type `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;`
-15 |   baz().await;
-   |   ^^^^^^^^^^^ await occurs here, with `g` maybe used later
-16 | }
-   | - `g` is later dropped here
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Much better!&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#how-does-it-work&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-does-it-work&quot;&gt;&lt;/a&gt;How does it work?&lt;/h1&gt;
-&lt;p&gt;When rustc's trait system determines that a trait wasn't implemented, in this case
-&lt;code&gt;std::marker::Send&lt;/code&gt;, it emits this error. The trait system produces a chain of &amp;quot;obligations&amp;quot;.
-Obligations are types which denote where a bound (e.g &lt;code&gt;T: Send&lt;/code&gt; in &lt;code&gt;is_send&lt;/code&gt;) originated,
-or where a bound was propagated.&lt;/p&gt;
-&lt;p&gt;To improve this diagnostic, the chain of obligations is now treated like a stack frame, where
-each &amp;quot;frame&amp;quot; of obligations represents each function's contribution to the error. Let's make
-that more concrete with a very rough approximation:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-rust&quot;&gt;Obligation {
-    kind: DerivedObligation(/* generator that captured `g` */),
-    source: /* `Span` type pointing at `bar`'s location in user code */,
-    parent: Some(Obligation {
-        kind: DerivedObligation(/* generator calling `bar` */),
-        source: /* `Span` type pointing at `foo`'s location in user code */,
-        parent: Some(Obligation {
-            kind: ItemObligation(/* type representing `std::marker::Send` */),
-            source: /* `Span` type pointing at `is_send`'s location in user code */,
-            cause: None,
-        }),
-    }),
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The compiler matches against the chain expecting an &lt;code&gt;ItemObligation&lt;/code&gt; and some &lt;code&gt;DerivedObligation&lt;/code&gt;s
-containing generators, which identifies the error we want to improve. Using information from these
-obligations, rustc can construct the specialized error shown above - if you'd like to see what the
-actual implementation looks like, check out PR &lt;a href=&quot;https://github.com/rust-lang/rust/pulls/64895&quot;&gt;#64895&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;If you're interested in improving diagnostics like this, or even just fixing bugs, consider
-contributing to the compiler! There are many working groups to join and resources to help you get
-started (like the &lt;a href=&quot;https://rust-lang.github.io/rustc-guide&quot;&gt;rustc guide&lt;/a&gt; or the &lt;a href=&quot;https://rust-lang.github.io/compiler-team&quot;&gt;compiler team documentation&lt;/a&gt;).&lt;/p&gt;
-&lt;h1&gt;&lt;a href=&quot;#whats-next?&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;whats-next?&quot;&gt;&lt;/a&gt;What's next?&lt;/h1&gt;
-&lt;p&gt;More improvements to this diagnostic are planned and being worked on, so that it is applicable in
-more cases, and has specialized messages for &lt;code&gt;Send&lt;/code&gt; and &lt;code&gt;Sync&lt;/code&gt;, like below:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;error[E0277]: future cannot be sent between threads safely
-  --&amp;gt; src/main.rs:23:5
-   |
-5  | fn is_send&amp;lt;T: Send&amp;gt;(t: T) {
-   |    -------    ---- required by this bound in `is_send`
-...
-23 |     is_send(foo());
-   |     ^^^^^^^ future returned by `foo` is not `Send`
-   |
-   = help:  future is not `Send` as this value is used across an await
-note: future does not implement `std::marker::Send` as this value is used across an await
-  --&amp;gt; src/main.rs:15:3
-   |
-14 |   let g = x.lock().unwrap();
-   |       - has type `std::sync::MutexGuard&amp;lt;'_, u32&amp;gt;`
-15 |   baz().await;
-   |   ^^^^^^^^^^^ await occurs here, with `g` maybe used later
-16 | }
-   | - `g` is later dropped here
-&lt;/code&gt;&lt;/pre&gt;
+        <title>2021 Annual Survey Report</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/06/21/survey-2021-report.html" type="text/html" title="2021 Annual Survey Report" />
+        <published>2022-06-21T00:00:00+00:00</published>
+        <updated>2022-06-21T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/06/21/survey-2021-report.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/06/21/survey-2021-report.html">&lt;p&gt;As usual, we conducted an annual community survey in 2021. We previously shared some some highlights and charts
+in a &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/02/15/Rust-Survey-2021.html&quot;&gt;blog post&lt;/a&gt;. This year we would also like to
+make the complete (-ish) dataset available. We have compiled a report which contains data and charts for nearly
+all questions with minimal analysis. We have elided a few sensitive questions and have combined some answers
+or elided some answers where there is any chance of respondents being identified or of sensitive data being released.&lt;/p&gt;
+&lt;p&gt;We intend to produce further small reports with more analysis targetted at specific teams or groups within the
+project. If there is any analysis or processed data you&#x27;d like to see, please get in touch with the survey working group via
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/294169-t-community.2Frust-survey-2021&quot;&gt;Zulip&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once again, we&#x27;d like to thank all the respondents, our translators, and everyone else who helped to make the survey a success!&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/surveys/raw/main/surveys/2021-annual-survey/2021-annual-survey-summary.pdf&quot;&gt;Download the report&lt;/a&gt;.&lt;/p&gt;
 </content>
 
         <author>
-            <name>David Wood</name>
+            <name>Nick Cameron</name>
         </author>
     </entry>
     
     <entry>
-        <title>Async Foundations Update: Time for polish!</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html" type="text/html" title="Async Foundations Update: Time for polish!" />
-        <published>2019-10-07T00:00:00Z</published>
-        <updated>2019-10-07T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2019/10/07/AsyncAwait-WG-Focus-Issues.html">&lt;p&gt;As you've perhaps heard, recently the async-await feature &lt;a href=&quot;/2019/09/30/Async-await-hits-beta.html&quot;&gt;landed on
-the Rust beta branch&lt;/a&gt;. This marks a big turning point in the
-usability story for Async Rust. But there's still a lot of work to do.
-As we mentioned in the main post, the focus for the &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/&quot;&gt;Async Foundations
-WG&lt;/a&gt; in the immediate term is going to be &lt;strong&gt;polish&lt;/strong&gt;, &lt;strong&gt;polish&lt;/strong&gt;
-and (ahem) &lt;strong&gt;more polish&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;In particular, we want to take aim at a backlog of strange
-diagnostics, suboptimal performance, and the occasional inexplicable
-type-check failure. This is a shift: whereas before, we could have
-laser focus on things that truly blocked stabilization, we've now got
-a large set of bugs, often without a clear prioritization between
-them. This requires us to mix up how the &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/&quot;&gt;Async Foundations WG&lt;/a&gt; is
-operating.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#announcing-focus-issues&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;announcing-focus-issues&quot;&gt;&lt;/a&gt;Announcing: focus issues&lt;/h3&gt;
-&lt;p&gt;So how do you deal with a large pile of issues, all of which are
-important but none of which are vital? One at a time, of course.&lt;/p&gt;
-&lt;p&gt;The way we've chosen to organize this is something we call &lt;strong&gt;&lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/#how-to-get-involved&quot;&gt;focus
-issues&lt;/a&gt;&lt;/strong&gt;. We're trying to keep a small number of issues tagged as
-focus issues at any given time. As we close them, we'll pick new ones
-to replace them. The number of these issues depends on mentoring
-bandwidth and on how many people are hacking -- as a rule of thumb,
-they should mostly all be assigned and actively progressing at any
-given time.&lt;/p&gt;
-&lt;p&gt;We also have a secondary set of issues called &lt;strong&gt;on deck issues&lt;/strong&gt;.
-These are the candidates to become focus issues as focus issues are
-completed. If you'd like us to consider fixing something sooner rather
-than later, you can &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/#nominating-issues&quot;&gt;add the &amp;quot;on deck&amp;quot; label yourself&lt;/a&gt;, along
-with a bit of context explaining why you think this issue is more
-important than the rest.&lt;/p&gt;
-&lt;h3&gt;&lt;a href=&quot;#how-you-can-help&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;how-you-can-help&quot;&gt;&lt;/a&gt;How you can help&lt;/h3&gt;
-&lt;p&gt;You can help in two ways:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Fix bugs!&lt;/strong&gt; If you'd like to take a shot at fixing a bug, try to
-come to the &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/#triage-meeting&quot;&gt;triage meeting&lt;/a&gt; or just show up in
-&lt;a href=&quot;https://rust-lang.zulipchat.com/#narrow/stream/187312-wg-async-foundations&quot;&gt;&lt;code&gt;#wg-async-foundations&lt;/code&gt; on Zulip&lt;/a&gt;. Maybe we can find something
-for you.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Nominate bugs!&lt;/strong&gt; If you've got a bug that is really
-annoying you, feel free to &amp;quot;nominate it&amp;quot; by &lt;a href=&quot;https://rust-lang.github.io/compiler-team/working-groups/async-await/#nominating-issues&quot;&gt;following the
-instructions here&lt;/a&gt;. This will help us to fix the things that
-are bothering people the most.&lt;/li&gt;
-&lt;/ul&gt;
+        <title>Rust Compiler June 2022 Steering Cycle</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/06/03/jun-steering-cycle.html" type="text/html" title="Rust Compiler June 2022 Steering Cycle" />
+        <published>2022-06-03T00:00:00+00:00</published>
+        <updated>2022-06-03T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/06/03/jun-steering-cycle.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/06/03/jun-steering-cycle.html">&lt;p&gt;On &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings/topic/.5Bplanning.20meeting.5D.202022-06-03/near/284883023&quot;&gt;Friday, June 3rd&lt;/a&gt;, the Rust Compiler team had a planning meeting for the June 2022 steering cycle.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This schedule has changed since this post was first published: the dates of the first two meetings were revised.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#t-compiler-june-steering-schedule&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;t-compiler-june-steering-schedule&quot;&gt;&lt;/a&gt;T-compiler June Steering Schedule&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;Meeting Id&lt;/th&gt;
+&lt;th&gt;Meeting Topic&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;tmeid&#x3D;NHY4Y3VmdXZqcWJxOWgzOXVyZWM5a3JjaWUgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;2022-06-10&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/517&quot;&gt;compiler-team#517&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;2022 Q2 P-high review&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/event?action&#x3D;TEMPLATE&amp;tmeid&#x3D;Nm8xbGtqbHBzMjdpcTRjcHAybmw4a3Y0ZjEgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;tmsrc&#x3D;6u5rrtce6lrtv07pfi3damgjus%40group.calendar.google.com&quot;&gt;2022-06-17&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/516&quot;&gt;compiler-team#516&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;path sanitisation changes &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/issues/3127&quot;&gt;rfc#3127&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/calendar/event?eid&#x3D;MmE2azQyb2ViODQ4NWwxMWViMzJka2g0cjIgNnU1cnJ0Y2U2bHJ0djA3cGZpM2RhbWdqdXNAZw&amp;ctz&#x3D;GMT-04:00&quot;&gt;2022-06-24&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/484&quot;&gt;compiler-team#484&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Compiler Feature Backlog Bonanza&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href&#x3D;&quot;https://calendar.google.com/calendar/event?eid&#x3D;MDJyYnJ1cGFtdWR1c2lnNjFmcHJ2b3JlODFfMjAyMjA3MDFUMTQwMDAwWiA2dTVycnRjZTZscnR2MDdwZmkzZGFtZ2p1c0Bn&amp;ctz&#x3D;GMT-04:00&quot;&gt;2022-07-01&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;none&lt;/td&gt;
+&lt;td&gt;(planning for July cycle)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#details&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;details&quot;&gt;&lt;/a&gt;Details&lt;/h3&gt;
+&lt;p&gt;Every fourth Friday, the Rust compiler team decides how
+it is going to use its scheduled steering and design meeting time over the next
+three Fridays.&lt;/p&gt;
+&lt;p&gt;On Friday, 10 June, we will be doing a quarterly &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/517&quot;&gt;review of the open P-high issues&lt;/a&gt;.
+pnkfelix will do some ahead of time work triaging
+some of the issues, and potentially prepare a meeting document summarizing the
+remainder, to maximize the quality of our synchronous in-meeting time.&lt;/p&gt;
+&lt;p&gt;On Friday, 17 June, we will review &lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/issues/3127&quot;&gt;RFC PR #3127&lt;/a&gt;, which proposes
+new rustc and Cargo options to allow path sanitisation by default.&lt;/p&gt;
+&lt;p&gt;On Friday, 24 June, we will be having a &lt;a href&#x3D;&quot;https://github.com/rust-lang/compiler-team/issues/484&quot;&gt;&amp;quot;backlog bonanza&amp;quot;&lt;/a&gt;, in a
+similar vein to that done by T-lang, to review the list of unimplemented or
+partially-implemented features. pnkfelix and Jack Huey will prepare a document
+to drive the meeting.&lt;/p&gt;
+&lt;p&gt;On Friday, 1 July, we will hold our planning meeting for the next steering cycle in July.&lt;/p&gt;
+&lt;p&gt;Each meeting will run from 2pm to 3pm GMT, and will take place on the
+&lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/238009-t-compiler.2Fmeetings&quot;&gt;T-compiler/meetings zulip stream&lt;/a&gt;.&lt;/p&gt;
 </content>
 
         <author>
-            <name>Niko Matsakis</name>
+            <name>Felix Klock</name>
         </author>
     </entry>
     
     <entry>
-        <title>Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9.html" type="text/html" title="Keeping Rust projects secure with cargo-audit 0.9: dependency trees, core advisories, unmaintained crates" />
-        <published>2019-10-03T00:00:00Z</published>
-        <updated>2019-10-03T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2019/10/03/Keeping-secure-with-cargo-audit-0.9.html">&lt;p&gt;&lt;a href=&quot;https://github.com/rustsec/cargo-audit&quot;&gt;cargo-audit&lt;/a&gt; is a command-line utility which inspects &lt;code&gt;Cargo.lock&lt;/code&gt; files and compares them against the &lt;a href=&quot;https://rustsec.org&quot;&gt;RustSec Advisory Database&lt;/a&gt;, a community database of security vulnerabilities maintained by the &lt;a href=&quot;https://github.com/rust-secure-code/wg&quot;&gt;Rust Secure Code Working Group&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can install &lt;code&gt;cargo-audit&lt;/code&gt; and run it against your project with the following commands:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ cargo install cargo-audit
-$ cargo audit
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The 0.9 release of &lt;code&gt;cargo-audit&lt;/code&gt; includes a number of new features we hope make it more useful, including:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;UI improvements for understanding how vulnerabilities apply to your project&lt;/li&gt;
-&lt;li&gt;Warnings for unmaintained crate dependencies (with an option to hard fail)&lt;/li&gt;
-&lt;li&gt;Tracking of vulnerabilities in the Rust language itself&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;a href=&quot;#ui-improvements-dependency-trees&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;ui-improvements-dependency-trees&quot;&gt;&lt;/a&gt;UI improvements: dependency trees&lt;/h2&gt;
-&lt;p&gt;Previously, when &lt;code&gt;cargo-audit&lt;/code&gt; found a vulnerability in a project, it would display advisory information without any context as to how a particular vulnerable dependency is included in your project, making it difficult to determine what action needs to be taken to resolve the vulnerability.&lt;/p&gt;
-&lt;p&gt;The latest release prints an inverse dependency tree (ala the excellent &lt;a href=&quot;https://github.com/sfackler/cargo-tree&quot;&gt;cargo-tree&lt;/a&gt; crate) for each advisory showing how a vulnerable dependency is included in your project:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/RustSec/cargo-audit/a840f7b/screenshot.png&quot; alt=&quot;cargo audit with dependency tree&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;In future versions of &lt;code&gt;cargo-audit&lt;/code&gt; we &lt;a href=&quot;https://github.com/RustSec/cargo-audit/issues/23&quot;&gt;hope to add a &lt;code&gt;cargo audit fix&lt;/code&gt; command&lt;/a&gt; ala &lt;code&gt;npm audit fix&lt;/code&gt; which can either automatically update the necessary dependencies or provide instructions on how to do so. If that feature interests you and you'd like to contribute, &lt;a href=&quot;https://github.com/RustSec/cargo-audit/issues/23&quot;&gt;we're looking for help&lt;/a&gt;!&lt;/p&gt;
-&lt;h2&gt;&lt;a href=&quot;#new-feature-unmaintained-crate-warnings&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;new-feature-unmaintained-crate-warnings&quot;&gt;&lt;/a&gt;New feature: unmaintained crate warnings&lt;/h2&gt;
-&lt;p&gt;This release added the notion of &lt;a href=&quot;https://github.com/RustSec/rustsec-crate/pull/75&quot;&gt;informational advisories&lt;/a&gt; - advisories which don't directly represent a security vulnerability, but may contain potentially security-relevant information. The primary intended use for this feature is &lt;a href=&quot;https://github.com/RustSec/advisory-db/issues/173&quot;&gt;providing warnings for unmaintained crates&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;A recent study, &lt;a href=&quot;https://www.usenix.org/system/files/sec19-zimmermann.pdf&quot;&gt;Small World with High Risks: A Study of Security Threats in the npm Ecosystem&lt;/a&gt;, showed that unmaintained npm packages pose a high risk to that ecosystem:&lt;/p&gt;
+        <title>Concluding the events of last November</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/05/26/Concluding-events-mods.html" type="text/html" title="Concluding the events of last November" />
+        <published>2022-05-26T00:00:00+00:00</published>
+        <updated>2022-05-26T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/05/26/Concluding-events-mods.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/05/26/Concluding-events-mods.html">&lt;p&gt;&lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2021/11/25/in-response-to-the-moderation-team-resignation.html&quot;&gt;With the moderators&#x27; resignation in November&lt;/a&gt;, we (Josh Gould and Khionu Sybiern) had the mantle of the Moderation Team offered to us, and we caught up to speed on what led up to this conflict. Their resignation became a catalyst, and we commited with the rest of the project leadership to do our best to solve the issues present and going forward.&lt;/p&gt;
+&lt;p&gt;After these months, the following update was shared with core and team leaders:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Our results provide evidence that npm suffers from single points of failure and that unmaintained packages threaten large code bases&lt;/p&gt;
+&lt;p&gt;The moderation issue has been brought to a resolution. This case was open for an unsually long time, which made this process a considerably worse experience than necessary for all involved. This was caused in part due to the lack of well defined procedures and the underspecified governance structure of the project. Another major factor was the complexity of the situation: it was not a simple case of a CoC violation, but rather a long-standing collaboration and communication issue involving interpersonal conflict and burnout. While we consider this case resolved, we very much recognize the harm that has been done by how the situation was handled, and will continue to work on improving the way we avoid and handle these kind of issues in the future.&lt;/p&gt;
+&lt;p&gt;It should be noted that all involved parties are considered in good standing with the project.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Rust is in a similar boat with some high profile crates, &lt;a href=&quot;https://github.com/Stebalien/term/issues/93&quot;&gt;such as the &lt;code&gt;term&lt;/code&gt; crate&lt;/a&gt; (downloaded 8,000 times a day), are unmaintained. By &lt;a href=&quot;https://github.com/RustSec/advisory-db/issues/173&quot;&gt;tracking information about unmaintained crates in the RustSec Advisory Database&lt;/a&gt;, we hope to improve visibility on these crates, either by helping people discover &amp;quot;successor&amp;quot; crates they should switch to, or putting potential volunteer maintainers in touch with authors interested in handing crates off. When those handoffs happen, we can mark unmaintained crate advisories as obsolete (while still giving interested security researchers a list of crates to keep an eye on for potential &lt;a href=&quot;https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident&quot;&gt;software supply chain attacks&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;If you have an unmaintained crate you'd like us to create an advisory for, or know of a third party unmaintained crate and would like to provide information about potential alternatives, please &lt;a href=&quot;https://github.com/RustSec/advisory-db/issues/173&quot;&gt;leave a comment in the RustSec/advisory-db#173 GitHub issue&lt;/a&gt; and we can file an advisory for it.&lt;/p&gt;
-&lt;p&gt;For now, unmaintained crates are surfaced as warnings, with some brief information available about each one and a link to click to read more. If you'd like for unmaintained crate advisories to be considered errors (so &lt;code&gt;cargo-audit&lt;/code&gt; exits with a non-zero status for e.g. CI purposes), run:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ cargo audit -D
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;or if you prefer to be more explicit:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ cargo audit --deny-warnings
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;&lt;a href=&quot;#tracking-rust-language-vulnerabilities&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot; id=&quot;tracking-rust-language-vulnerabilities&quot;&gt;&lt;/a&gt;Tracking Rust language vulnerabilities&lt;/h2&gt;
-&lt;p&gt;Previously the &lt;a href=&quot;https://rustsec.org&quot;&gt;RustSec Advisory Database&lt;/a&gt; only tracked information about vulnerable crates published through &lt;a href=&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt;. Starting with this release, however, we are also indexing advisories for vulnerabilities in the Rust language's core ecosystem components, including &lt;code&gt;std&lt;/code&gt;, &lt;code&gt;cargo&lt;/code&gt;, and &lt;code&gt;rustdoc&lt;/code&gt;. We've now indexed the following vulnerabilities:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2018-1000622.html&quot;&gt;CVE-2018-1000622: rustdoc: Uncontrolled search path element vulnerability in rustdoc plugins&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2018-1000657.html&quot;&gt;CVE-2018-1000657: std: Buffer overflow vulnenrability in &lt;code&gt;VecDeque::reserve()&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2018-1000810.html&quot;&gt;CVE-2018-1000810: std: Buffer overflow vulnerability in &lt;code&gt;str::repeat()&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2019-12083.html&quot;&gt;CVE-2019-12083: std: Memory safety vulnerabilities arising from &lt;code&gt;Error::type_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://rustsec.org/advisories/CVE-2019-16760.html&quot;&gt;CVE-2019-16760: cargo: Cargo prior to Rust 1.26.0 may download the wrong dependency&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We are &lt;a href=&quot;https://github.com/RustSec/cargo-audit/issues/140&quot;&gt;interested in potentially surfacing information about these advisories via cargo-audit&lt;/a&gt;, e.g. optionally detecting if the currently active Rust toolchain is vulnerable. If that interests you, we're also looking for help on this issue!&lt;/p&gt;
-&lt;p&gt;Thanks for reading, and we hope you enjoy &lt;code&gt;cargo-audit&lt;/code&gt; 0.9!&lt;/p&gt;
+&lt;p&gt;Bringing a close to this situation is a huge relief, but it is also far from the last step on the journey to recovering as a community. While project leadership &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html&quot;&gt;continues to work on these issues&lt;/a&gt;, the Moderation Team is working on an RFC to create supporting mechanisms to cover a wider range of issues. We&#x27;re working with professionals in mediation and other relevant fields to make sure we are prepared. The RFC additionally will better define areas of moderation that were overlooked and improve collaboration and safety.&lt;/p&gt;
+&lt;p&gt;The number one thing we would like going forward is a stronger two-way relationship between our team and the community. Going forward, we will be asking for your help to make contributing to and using Rust as healthy of an experience as possible.&lt;/p&gt;
 </content>
 
         <author>
-            <name>Tony Arcieri</name>
+            <name>Khionu Sybiern</name>
         </author>
     </entry>
     
     <entry>
-        <title>Welcome to the Inside Rust blog!</title>
-        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2019/09/25/Welcome.html" type="text/html" title="Welcome to the Inside Rust blog!" />
-        <published>2019-09-25T00:00:00Z</published>
-        <updated>2019-09-25T00:00:00Z</updated>
-        <id>https://blog.rust-lang.org/inside-rust/2019/09/25/Welcome.html</id>
-        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2019/09/25/Welcome.html">&lt;p&gt;Welcome to the inaugural post of the &lt;strong&gt;Inside Rust&lt;/strong&gt; blog! This is a
-new blog where the various Rust teams and working groups can post
-updates about new developments. It's a great place to watch if you're
-interested in following along with Rust development -- and a
-particularly great place to watch if you're interested in contributing
-to Rust. Expect to see updates on new projects, calls for help, design
-notes, and other similar items. Thanks for reading!&lt;/p&gt;
+        <title>Governance Update</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html" type="text/html" title="Governance Update" />
+        <published>2022-05-19T00:00:00+00:00</published>
+        <updated>2022-05-19T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/05/19/governance-update.html">&lt;p&gt;Last month, the core team, all the leads of top-level teams, the moderators, and the project representatives on the Rust Foundation board jointly sent out an update to all Rust project members on investigations happening into improvements to the governance of the Rust project.&lt;/p&gt;
+&lt;p&gt;As is detailed in the update, this report follows extensive conversations with many inside of the project and will continue as we encourage others in the project to reach out should they have feedback or want to get involved.&lt;/p&gt;
+&lt;p&gt;Since proper governance of the Rust project impacts all users of Rust, we thought it appropriate to also make this summary public. While typos and grammatical fixes have been made since the original post, the text is otherwise unaltered. &lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;As is noted in the summary, the next steps are to take the findings we have so far and begin crafting proposals for how the Rust project will be governed in the future. This will eventually lead to RFCs or similar documents with concrete proposals.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;From: Ryan Levick&lt;br /&gt;
+To: All members of the Rust project&lt;br /&gt;
+Date: Mon, 11 Apr 2022 18:27:00 UTC&lt;br /&gt;
+Subject: Rust Governance Update&lt;/p&gt;
+&lt;p&gt;Hey @all,&lt;/p&gt;
+&lt;p&gt;We’d like to provide you with an update to our email from December about the issue that led to the resignation of the moderation team in November. In that email, we indicated that we had three high-level goals:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve how we handle complex moderation issues.&lt;/li&gt;
+&lt;li&gt;Bring the specific moderation issue at the center of the disagreement to an adequate resolution.&lt;/li&gt;
+&lt;li&gt;Adapt the governance structure of Rust to better handle the needs of our ever growing project.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In order to accomplish these goals the following actions were taken place:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We have established better communication channels between the core team, the moderation team, project representatives on the Rust Foundation, and all top-level team leads. Concretely, we’ve established a Zulip chat with everyone for those groups so that we can quickly and confidently reach consensus on how to approach sensitive items related to project management and governance. This has led to better communication around project management issues and allowed for healthy, productive, and good faith collaboration among all project leads. While there are many different ways we can and will improve how project management is done in the Rust project, it was important that we reach a healthy and productive steady state, and we believe we have been able to do so.&lt;/li&gt;
+&lt;li&gt;We have begun exploring possible avenues forward for improving how we handle complex moderation cases including the specific moderation issue in question. While we won’t be diving into detail about this topic in this email, there has been some early progress on better understanding the complexity of this issue. We expect the moderation team in conjunction with project leads to bring forward concrete proposals in the future though this work is somewhat blocked on the next point.&lt;/li&gt;
+&lt;li&gt;In pursuit of the ultimate goal of designing and implementing a revised governance structure for Rust, we have been talking with project members to try to deeply understand the requirements of any such governance structure. This process has started with many different conversations with folks from across the project including over 20 formal interviews of project leaders on the needs of Rust project governance. The remainder of this email will be an attempt to outline our initial findings as well as next steps and opportunities for those who are interested to get more involved.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#your-opportunity-to-participate&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;your-opportunity-to-participate&quot;&gt;&lt;/a&gt;Your opportunity to participate&lt;/h3&gt;
+&lt;p&gt;First, while we believe we are honing in on a clear understanding of the needs for Rust governance, the conversation is not (and likely will never be) over. If you’d like to participate yourself, you can find the interview questions we have used &lt;a href&#x3D;&quot;https://hackmd.io/@ryanlevick/By2RKtMec&quot;&gt;here&lt;/a&gt;. Write your answers in whatever form you wish, and send them back to Mara or me so they can be incorporated into our notes. Please note that your answers will not be shared with anyone and will only be reflected in documents that attempt to summarize overall feedback from project members.&lt;/p&gt;
+&lt;p&gt;We encourage anyone interested in participating to complete the interview before reading the following summary of our findings so far. While every interview brings us closer to a complete understanding of the project management needs of the Rust project, nothing is final yet, and all project members will have the opportunity to provide feedback on any concrete proposals brought forth (most likely in the form of RFCs).&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#requirements&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;requirements&quot;&gt;&lt;/a&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;The following is a list of requirements for Rust governance. Some of these requirements are already met by the current governance structure.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Independent and autonomous teams&lt;/strong&gt;: Almost all decision making should be made at the team level. Teams should have the ability to decide their own directions and have the ultimate authority over their respective piece of the project.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cross team collaboration&lt;/strong&gt;: Collaboration between teams should be very high. This ensures teams can make decisions in the context of the larger project and not just within their own silo.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Accountable teams&lt;/strong&gt;: Teams should be held accountable to each other for their work. There should be mechanisms for ensuring teams are meeting other team’s expectations and fulfilling their obligations to other teams.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Centralized leadership&lt;/strong&gt;: While the majority of decisions are owned by and made by independent teams, some decisions affect the entire project. Any such decisions that are not in the purview of one or more specific teams are made by a centralized, accountable leadership body.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Accountable leadership&lt;/strong&gt;: The leadership body should be a structure that has representation and buy-in from all project teams. Additionally, the membership of this group should be chosen transparently, should have large buy-in from other project members, and should be at least reaffirmed relatively often. Lastly, membership in the leadership group requires participation in the wider project and therefore membership in leadership cannot be the exclusive way for someone to participate in the project.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Explicit and well-defined structure&lt;/strong&gt;: How the project is structured, who the decision makers are, and how decisions are made should be relatively transparent to both project participants and outsiders. While informal relationships and other soft power mechanisms exist, most collaboration happens transparently and openly.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Structures for project management and administration&lt;/strong&gt;: There should be mechanisms independent from decision making that perform functions of project management and administration.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Project leaders are not always technical leaders&lt;/strong&gt;: While it may be preferable for some of those who lead technical matters to hold project management leadership positions, being in a leadership position in the project should not require also being in a technical leadership role. In other words, the best language designers don’t necessarily make the best open source project leaders.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Flexibility&lt;/strong&gt;: Project structure should be fluid enough to account for the fact that project members always contribute on a volunteer basis (even if they are paid by others for their volunteering), and this means that they are free to leave the project and change what they dedicate their time to whenever they want.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Relatively little bureaucracy&lt;/strong&gt;: It’s important that the amount of project governance overhead and bureaucracy be as little as possible.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Approachable by outsiders&lt;/strong&gt;: Many outside of the Rust project (e.g., users, potential users, other projects, press, partners, etc.) may wish to engage with the Rust project for a variety of reasons. This process should be clear and straightforward.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#under-resourced-work&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;under-resourced-work&quot;&gt;&lt;/a&gt;Under resourced work&lt;/h2&gt;
+&lt;p&gt;The following is a list of work that is not receiving the amount of investment that it should be receiving. Our governance structure should ensure that this work receives the proper attention.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Policy development&lt;/strong&gt;: Individual teams do a decent job of ensuring they have proper policies, but there are a few problems with this:
+&lt;ul&gt;
+&lt;li&gt;Lack of accountability for when a lack of policy might be causing issues&lt;/li&gt;
+&lt;li&gt;Lack of support in writing policies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Project structure documentation&lt;/strong&gt;: the structure of the project has practical implications. For example, representation in leadership, permissions, inclusion in project communications, etc. No team is in charge of ensuring this structure is properly documented&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diversity efforts&lt;/strong&gt;: while some teams may take it on themselves to do diversity work, there is no one responsible for this at the project level&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Identifying gaps&lt;/strong&gt;: Teams do a good job of servicing their own existing needs but sometimes lack the context to know if other needs outside of their purview are being taken care of.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Contributor pipeline improvements&lt;/strong&gt;: Teams often do great work to improve their own workflow, but this assumes contributors are able to find the team they want to contribute on.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Conflict resolution&lt;/strong&gt;: Project members don’t always agree and in certain situations a positive outcome cannot be reached without the involvement of those outside that conflict.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Supporting team leads&lt;/strong&gt;: Some leads might be new to leadership and leadership in a vacuum without the support of others is hard. Team leads should not need to rely on personal, private relationships to get the support they need.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Project self-reflection&lt;/strong&gt;: instead of waiting for a crisis to occur before addressing issues, the governance structures should have mechanisms for automatically self correcting (i.e., doing the work that Mara and Ryan are doing now on a more regular basis)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reporting progress&lt;/strong&gt;: there is a &lt;em&gt;lot&lt;/em&gt; that happens in the Rust project much of which is not reported on. Having some mechanism for better ensuring that everyone has a good overview of what is happening in the project.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Active community management&lt;/strong&gt;: actively fostering the culture of the Rust project&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Marketing&lt;/strong&gt;: the project had previously done more marketing around Rust usage - this work has largely moved to being performed exclusively by individuals&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Public relations&lt;/strong&gt;: The Rust project has obligations to speak to the outside world (i.e., press, companies, educational institutions, other OSS projects, etc.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User outreach&lt;/strong&gt;: while PR is a push mechanism, the project also needs some sort of pull mechanism for engaging with users and understanding their needs rather than solely relying on the individual insights that contributors bring.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Vision work&lt;/strong&gt;: establishing high level project wide goals that cross between team boundaries.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#failure-modes&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;failure-modes&quot;&gt;&lt;/a&gt;Failure modes&lt;/h2&gt;
+&lt;p&gt;The following are a list of identified failure modes that we want to ensure we avoid when discussing a new governance structure:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Lack of resources for admin/project management work&lt;/strong&gt;: Administrative and project management work is typically less resourced than technical work. Volunteers are typically more drawn towards technical work, and companies tend to fund technical work since they will more easily see a return on that investment. A properly running project is viewed as “table stakes” and thus less likely to see investment without purposeful resource allocation. A failure mode would be not having admin/project management functions be funded and eventually withering away leaving that work not done or done by those who are already busy with other concerns.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Project leadership not held accountable&lt;/strong&gt;: Many teams depend on the work of other teams for their own success. When a team feels another team is not delivering on what they need to succeed, this can lead to cascading failures or even outright conflict. Holding others accountable can be difficult because it requires clear expectations, channels for delivering clear and actionable feedback, consequences for consistently not living up to expectations, and mechanisms for handling conflict should it arise.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Project leadership detached from project&lt;/strong&gt;: As the project grows in complexity so does that admin/project management overhead. It is possible for a project wide decision making body to lose touch with goings-on in the project as they become busy due to this overhead. There are two ways this can manifest itself: the leadership body fails to keep up with what’s happening in the project and/or the project members lose sight of the leadership body leading to degraded authority. A failure mode would be that the project leadership body becomes detached from the project and the two effectively start acting independently.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;An overworked leadership body&lt;/strong&gt;: Many of the requirements described above assume a leadership body with the authority to make decisions. Additionally, the leadership body needs to derive its authority from its members involvement in the rest of the project. A possible failure mode is that the leadership body is tasked with more and more responsibility making it harder for its members to keep up with their responsibilities both inside and outside of that leadership body. The more members begin to focus on their work inside the leadership body, the less they can derive their authority from their work outside that body. Additionally, authority should be largely distributed and so an overworked leadership team is a sign of a failure to properly delegate authority.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lack of delegated authority&lt;/strong&gt;: Some administration and project management tasks require a combination of both authority and large amounts of time to be completed. If authority can only be derived through involvement in technical matters in the project, there is a risk that those charged with that work will not be able to do the work. For example, in the list of under resourced work items above both “identifying gaps” and “project self reflection” require a certain level of authority to have the findings make an impact. It would be necessary for the groups doing that work to somehow gain the level of authority needed to get that work done.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lack of transparency&lt;/strong&gt;: Project governance is composed of activities that live on a spectrum of how sensitive in nature they are. Some activities must be kept private as they directly involve the personal matters of individuals. On the other hand, some activities clearly need the involvement of the entire Rust project from the get-go. Many activities live somewhere in between. A potential failure mode is not consistently ensuring that information that can be made public is regularly made so. Even though this can in practice be very difficult and can make it difficult for some to participate in leadership positions, not doing so can lead to diminishing trust in leadership and a growing lack of accountability.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Leadership not consistently held to same standards&lt;/strong&gt;: Those in leadership positions should be held at least to the same standards as those in the rest of the project. What’s more, it can be tempting to revise policies and procedures or interpret underspecified ones while they’re being exercised. A failure mode is that it becomes common practice for leadership to hold themselves to different standards leading to an erosion of trust.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Underspecified processes/policies&lt;/strong&gt;: It can be tempting to write policy assuming participants have the same assumptions, understandings, etc. This is more flexible, requires less bureaucracy, and is easier to change on the fly. However, such processes/policies are easier to abuse (even without intentional malice). Important processes should be applicable even if the entire project membership is switched out.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Changing of delegated decisions&lt;/strong&gt;: A distributed governance structure relies on delegation. However, true delegation means respecting the authority of the party that decision making power has been delegated to. A possible failure mode is constantly second guessing the decisions of teams that have received delegated power. Accountability and oversight are important, but it’s also important that a delegating power not only respect decisions that it would have made itself.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Leadership as popularity contest&lt;/strong&gt;: Some systems of governance favor those who are willing to campaign and/or make themselves most visible. However, those most suitable to lead may not necessarily be those who participate in such activities. A possible failure mode is making project leadership a direct function of how popular/well-known someone is within the community or project.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diffusion of responsibility&lt;/strong&gt;: If no one is explicitly responsible for a thing then it won’t necessarily get done, even if the thing not getting done is obviously and clearly causing harm. Without an explicit mechanism for understanding the needs of the project and ensuring that those needs are filled, the project is liable to continue to see important work not getting done.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&#x27;d like to take this opportunity to thank you for reading this very long email. Once again, if you&#x27;d like to participate or give feedback in any form, please do not hesitate to reach out.&lt;/p&gt;
+&lt;p&gt;Cheers,&lt;br /&gt;
+Ryan&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;See &lt;a href&#x3D;&quot;https://github.com/rust-lang/blog.rust-lang.org/pull/974&quot;&gt;rust-lang/blog.rust-lang.org#974&lt;/a&gt; for the full history of changes to the original email. &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
 </content>
 
         <author>
-            <name>Niko Matsakis</name>
+            <name>Ryan Levick and Mara Bos</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>1.61.0 pre-release testing</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/05/16/1.61.0-prerelease.html" type="text/html" title="1.61.0 pre-release testing" />
+        <published>2022-05-16T00:00:00+00:00</published>
+        <updated>2022-05-16T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/05/16/1.61.0-prerelease.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/05/16/1.61.0-prerelease.html">&lt;p&gt;The 1.61.0 pre-release is ready for testing. The release is scheduled for this
+Thursday, May 19th. &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/blob/stable/RELEASES.md#version-1610-2022-05-19&quot;&gt;Release notes can be found here.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it out locally by running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class&#x3D;&quot;language-plain&quot;&gt;RUSTUP_DIST_SERVER&#x3D;https://dev-static.rust-lang.org rustup update stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The index is &lt;a href&#x3D;&quot;https://dev-static.rust-lang.org/dist/2022-05-16/index.html&quot;&gt;https://dev-static.rust-lang.org/dist/2022-05-16/index.html&lt;/a&gt;. You
+can leave feedback on the &lt;a href&#x3D;&quot;https://internals.rust-lang.org/t/rust-1-61-0-prerelease-testing/&quot;&gt;internals thread&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The release team is also thinking about changes to our pre-release process:
+we&#x27;d love your feedback &lt;a href&#x3D;&quot;https://github.com/rust-lang/release-team/issues/16&quot;&gt;on this GitHub issue&lt;/a&gt;.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mark Rousskov</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>CTCFT 2022-05-16 Agenda</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/05/10/CTCFT-may.html" type="text/html" title="CTCFT 2022-05-16 Agenda" />
+        <published>2022-05-10T00:00:00+00:00</published>
+        <updated>2022-05-10T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/05/10/CTCFT-may.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/05/10/CTCFT-may.html">&lt;p&gt;The next &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/&quot;&gt;&amp;quot;Cross Team Collaboration Fun Times&amp;quot; (CTCFT)&lt;/a&gt; meeting will take
+place on Monday, 2022-05-16 at &lt;strong&gt;11am US Eastern Time&lt;/strong&gt; (&lt;a href&#x3D;&quot;https://everytimezone.com/s/6c2a0d08&quot;&gt;click to see in your
+time zone&lt;/a&gt;). You’ll find the full details (along with a calendar
+event, zoom details, etc) &lt;a href&#x3D;&quot;https://rust-lang.github.io/ctcft/meetings/2022-05-16.html&quot;&gt;on the CTCFT website&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#agenda&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;agenda&quot;&gt;&lt;/a&gt;Agenda&lt;/h2&gt;
+&lt;p&gt;The theme for this month&#x27;s CTCFT is &lt;strong&gt;Embedded Rust&lt;/strong&gt;. We&#x27;ll hear from some
+members of the Rust Embedded Working Group and community about the state of the ecosystem, as
+well as how async Rust is working for embedded systems. We also have some people
+coming in from the automotive industry to talk about how Rust use is starting to
+progress.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(5 min) Opening remarks 👋 (&lt;a href&#x3D;&quot;https://github.com/angelonfira&quot;&gt;angelonfira&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;(15 min) A whirlwind tour of Embedded Rust (&lt;a href&#x3D;&quot;https://github.com/jamesmunns&quot;&gt;jamesmunns&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;A brief history of the embedded-wg and use of Rust for embedded&lt;/li&gt;
+&lt;li&gt;A look at how developing embedded Rust looks like today&lt;/li&gt;
+&lt;li&gt;A sample of patterns that are special to embedded Rust, or differences from
+&amp;quot;desktop&amp;quot; Rust&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(15 min) Async Rust for Embedded Systems (&lt;a href&#x3D;&quot;https://github.com/Dirbaio&quot;&gt;Dirbaio&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;We&#x27;ll explore how concurrency is traditionally handled in embedded, and how
+Rust&#x27;s async makes it significantly easier while still requiring no runtime,
+no OS, and no allocation, and what Rust improvements could make it even more
+awesome.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(15 min) Rust in Automotive (&lt;a href&#x3D;&quot;https://github.com/cpetig&quot;&gt;cpetig&lt;/a&gt;, &lt;a href&#x3D;&quot;https://github.com/skade&quot;&gt;skade&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;We&#x27;ll look at Rust from a Functional Safety perspective, and continuing to
+the AUTOSAR architecture. We&#x27;ll also look a bit at what Ferrocene&#x27;s role is
+in all this, and look at the AUTOSAR Rust bindings. Finally, we&#x27;ll see
+what&#x27;s next for this space.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(5 min) Closing (&lt;a href&#x3D;&quot;https://github.com/angelonfira&quot;&gt;angelonfira&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href&#x3D;&quot;#afterwards-social-hour&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;afterwards-social-hour&quot;&gt;&lt;/a&gt;Afterwards: Social Hour&lt;/h2&gt;
+&lt;p&gt;Like always, we&#x27;ll be running a social hour after the CTCFT. The idea is really
+simple: for the hour after the meeting, we will create breakout rooms in Zoom
+with different themes. You can join any breakout room you like and hangout.&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Rust CTCFT Team</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Rust Library Team Aspirations</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/20/libs-aspirations.html" type="text/html" title="Rust Library Team Aspirations" />
+        <published>2022-04-20T00:00:00+00:00</published>
+        <updated>2022-04-20T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/04/20/libs-aspirations.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/20/libs-aspirations.html">&lt;p&gt;Over the past years, Rust has grown from a language used by a few dedicated users
+into a well-known language used by lots of highly visible projects and
+successful companies.
+As the Rust user base, the community, and the ecosystem continues to grow,
+we need to look forward and consider how we need to scale to adapt
+to the needs of the ever expanding Rust ecosystem.&lt;/p&gt;
+&lt;p&gt;Recently, the compiler team shared &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/02/22/compiler-team-ambitions-2022.html&quot;&gt;their blog post&lt;/a&gt;
+detailing their ambitions for 2022,
+and the language team published &lt;a href&#x3D;&quot;https://blog.rust-lang.org/inside-rust/2022/04/04/lang-roadmap-2024.html&quot;&gt;a roadmap&lt;/a&gt;
+with their vision for Rust in 2024.&lt;/p&gt;
+&lt;p&gt;In this blog post, we, the Rust library team, will share our perspective
+on the future of the Rust standard library and the library ecosystem.&lt;/p&gt;
+&lt;p&gt;It&#x27;s important to note that
+the role of the team is to coordinate changes and to guide, review and decide.
+The majority of the work itself is done by contributors, like yourself,
+both in and outside the Rust team.
+While we often also participate in design and implementation work,
+we do so as contributors, like everyone else.&lt;/p&gt;
+&lt;p&gt;What follows is an (incomplete) summary of topics we think
+are important and would like to coordinate and guide;
+things that we&#x27;d love to see happen,
+as an invitation and source of inspiration.&lt;/p&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#scalability&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;scalability&quot;&gt;&lt;/a&gt;Scalability&lt;/h3&gt;
+&lt;p&gt;As mentioned above, the Rust language, standard library, and ecosystem
+is growing and getting more mature.
+We need to invest in ways to keep evolving these smoothly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Evolvability of the standard library and fixing mistakes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The stability guarantee of Rust makes it hard to evolve the standard library.
+Unlike most crates, we cannot release a new major version, as that would effectively be releasing a &#x27;Rust 2.0&#x27;.
+So, once an API is stable, we have to keep it there forever, meaning that we have to be extremely careful
+when stabilizing anything new.&lt;/p&gt;
+&lt;p&gt;While we are very careful with adding new APIs, mistakes can still happen.
+There are a few things we would do differently if we could go back in time, based on current experience.
+There are not a lot of these cases, but over time these can still accumulate to the point that
+it&#x27;d be useful to have a mechanism to correct past mistakes.&lt;/p&gt;
+&lt;p&gt;The Rust language has the concept of &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/editions/index.html&quot;&gt;editions&lt;/a&gt;
+to be able to make breaking changes in the language itself, without disrupting Rust users.
+The library, however, can make very limited use of editions to correct mistakes.
+We have used them for the &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/panic-macro-consistency.html&quot;&gt;&lt;code&gt;panic!()&lt;/code&gt; macro&lt;/a&gt;
+and &lt;a href&#x3D;&quot;https://doc.rust-lang.org/edition-guide/rust-2021/prelude.html&quot;&gt;the prelude&lt;/a&gt;.
+However, in general, it&#x27;s extremely tricky to make use of the edition mechanism for backwards incompatible
+library changes, as crates of different editions can be mixed, while all using the same standard library.&lt;/p&gt;
+&lt;p&gt;There are also cases when adding a new API can subtly break existing Rust code,
+even when not changing any existing API.
+This can happen, for example, when a type gets a new method that was already available through
+a popular trait, such as &lt;code&gt;itertools::Itertools&lt;/code&gt; or &lt;code&gt;num::Integer&lt;/code&gt;.
+Adding a method to the standard library can result in an existing method call resolving differently,
+potentially breaking code.
+This is usually considered &#x27;acceptable&#x27; breakage, but as Rust usage grows,
+the impact of such breakage increases, often making such breakage unacceptable in practice.&lt;/p&gt;
+&lt;p&gt;So, in order to keep evolving the standard library, we&#x27;d like to collaborate on language features
+that alleviate these issues:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rfcs/pull/3240&quot;&gt;Edition based method disambiguation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A way to fix the &lt;code&gt;Range&lt;/code&gt; types, such that &lt;code&gt;1..2&lt;/code&gt; can be &lt;code&gt;Copy&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;A way to remove or improve lock poisoning without breaking existing code.&lt;/li&gt;
+&lt;li&gt;General mechanisms to provide for the library what editions provide for the language.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;People and collaboration&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The most important thing to keep Rust and the ecosystem scalable,
+are the people: Rust team members, maintainers of crates in the ecosystem,
+reviewers, contributors, and so on.
+It&#x27;s important we keep working on how we collaborate and make it
+as easy as possible for everyone to get involved in a way that works for them.&lt;/p&gt;
+&lt;p&gt;Concretely, we want to work on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Better and more complete guidelines for contributors and reviewers; and&lt;/li&gt;
+&lt;li&gt;More interaction with the rest of the ecosystem.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Making &lt;code&gt;std&lt;/code&gt; less special / Empowering other crates in the ecosystem&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The standard library uses a
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/94970&quot;&gt;huge amount of unstable language features&lt;/a&gt;
+that other crates in the ecosystem cannot (or should not) use.
+While this is unavoidable for &lt;code&gt;core&lt;/code&gt;, because it contains everything related
+to Rust&#x27;s built-in types, we should be able to make &lt;code&gt;alloc&lt;/code&gt; and &lt;code&gt;std&lt;/code&gt; less
+dependent on unstable features.
+Maybe some day these libraries could be no different than any other
+popular crate in the ecosystem.&lt;/p&gt;
+&lt;p&gt;A big part of the work here will be in collaboration with the language team,
+to help move the unstable language features we need towards a state where
+they can be stabilized.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Adapting to different platforms&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As Rust&#x27;s popularity increases, it is used on an increasingly wider variety of platforms.
+The Rust standard library does an okay job at abstracting away some of the
+differences between popular platforms like Linux and Windows,
+through things like &lt;code&gt;File&lt;/code&gt; and &lt;code&gt;TcpStream&lt;/code&gt;,
+but we don&#x27;t do a great job for targets that do not look like those,
+such as Wasm or kernel modules.&lt;/p&gt;
+&lt;p&gt;For example, &lt;code&gt;core&lt;/code&gt; includes &lt;code&gt;f32&lt;/code&gt; and &lt;code&gt;f64&lt;/code&gt;, even if the platform doesn&#x27;t support floating point operations,
+and &lt;code&gt;std&lt;/code&gt; includes &lt;code&gt;File::open&lt;/code&gt;, even if it isn&#x27;t implemented and always fails on the specific platform you&#x27;re targeting.&lt;/p&gt;
+&lt;p&gt;In order to better support the ever growing diversity of platforms Rust is used on,
+we would like to collaborate with the language and compiler teams to make it easier
+for the standard library to properly support targets with very different needs,
+without it becoming hugely inconvenient for maintainers, contributors, or users:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make it easier to port std to a new platform, possibly allowing the relevant code
+to live outside of the &lt;code&gt;rust-lang/rust&lt;/code&gt; repository for less popular platforms.&lt;/li&gt;
+&lt;li&gt;A better way to allow only parts of &lt;code&gt;std&lt;/code&gt; to be available, depending on the platform.
+For example, a &lt;code&gt;where Platform: Unix&lt;/code&gt; bound, or something like a &lt;a href&#x3D;&quot;https://rust-lang.github.io/rfcs/1868-portability-lint.html&quot;&gt;&lt;code&gt;#[cfg]&lt;/code&gt; portibility lint&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;A way to allow non-portable functionality to be available when on platforms
+that would support it, such as allowing infallible conversion between &lt;code&gt;u64&lt;/code&gt; and
+&lt;code&gt;usize&lt;/code&gt; in code that declares it only runs on 64-bit platforms.&lt;/li&gt;
+&lt;li&gt;Make the standard library more modular, allowing to disable e.g. floating point support
+or file system support on certain platforms.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improving-and-adding-new-apis&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-and-adding-new-apis&quot;&gt;&lt;/a&gt;Improving and adding new APIs&lt;/h3&gt;
+&lt;p&gt;A main focus of the library team is and will always be the public interface of the standard library.
+As of last year, we even have a separate team to make the final calls for API changes and additions:
+the &lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library#Library%20API%20team&quot;&gt;library API team&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Rust purposely has a minimal standard library. Lots of commonly used functionality is
+found in other crates in the ecosystem, rather than the standard library.&lt;/p&gt;
+&lt;p&gt;Where exactly we draw the line between things that should and shouldn&#x27;t go in the standard library
+can be tricky to define and is somewhat flexible, but there are a few categories we&#x27;re most interested in.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ergonomics&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A lot of additions to the standard library are very small ones that increase ergonomics.
+Quite often, these are things that were already possible in some way, just not in an ergonomic way.
+Some recent examples are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;abs_diff()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Path::is_symlink&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;iter::from_fn&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NonZero*::saturating_add&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;While we always have to consider the trade-off for niche features to the already large interface
+on some types and traits, additions like these continue to happen regularly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Standardizing some bigger features the ecosystem needs&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As Rust grows into new territories, there is more and more a need
+for certain features to be included in the standard library.
+This is especially true for things where a consistent, standard, interface is
+important.
+Some of the bigger examples are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Async traits and functions&lt;/li&gt;
+&lt;li&gt;Allocators and fallible allocation&lt;/li&gt;
+&lt;li&gt;Error and panic handling&lt;/li&gt;
+&lt;li&gt;Portable SIMD&lt;/li&gt;
+&lt;li&gt;Benchmarking and custom test/bench frameworks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Reducing and improving unsafe code&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;By providing the right low level APIs and abstractions, we can greatly minimize
+the amount of complex unsafe code that users need to write. Tools like
+&lt;code&gt;MaybeUninit&lt;/code&gt; guide users to correct unsafe code that&#x27;s easy to follow and
+prove correct. Even better, some APIs can entirely remove the need for unsafe
+code in many situations.
+This includes situations where users tend to reach for &lt;code&gt;unsafe&lt;/code&gt; for performance reasons.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;std::arch&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::simd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Scoped threads&lt;/li&gt;
+&lt;li&gt;More atomic primitives&lt;/li&gt;
+&lt;li&gt;&#x27;&lt;code&gt;Iterator&lt;/code&gt;&#x27; with static length for arrays&lt;/li&gt;
+&lt;li&gt;Improving &lt;code&gt;MaybeUninit&lt;/code&gt; and related methods&lt;/li&gt;
+&lt;li&gt;Extending &lt;code&gt;NonNull&lt;/code&gt; and pointer methods&lt;/li&gt;
+&lt;li&gt;A more complete interface to &lt;code&gt;OsString&lt;/code&gt;, &lt;code&gt;Path&lt;/code&gt;, and &lt;code&gt;CString&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Documentation for &lt;code&gt;Pin&lt;/code&gt; and other &#x27;unsafe&#x27; types&lt;/li&gt;
+&lt;li&gt;File descriptors (&lt;code&gt;OwnedFd&lt;/code&gt;, &lt;code&gt;AsFd&lt;/code&gt;, etc) and handles (&lt;code&gt;OwnedHandle&lt;/code&gt;, &lt;code&gt;AsHandle&lt;/code&gt;, etc)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#improving-implementations-of-things-within-the-standard-library&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;improving-implementations-of-things-within-the-standard-library&quot;&gt;&lt;/a&gt;Improving implementations of things within the standard library&lt;/h3&gt;
+&lt;p&gt;Historically, the implementation details of the standard library got less attention
+than its public API.
+Recently, however, we&#x27;re seeing more and more contributions towards improving the implementation
+of various parts of the standard library.&lt;/p&gt;
+&lt;p&gt;These are some parts that we&#x27;re especially interested in seeing improvements in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;core::fmt&lt;/code&gt; and the implementation of &lt;code&gt;format_args!()&lt;/code&gt; and &lt;code&gt;fmt::Arguments&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/93740&quot;&gt;Synchronization primitives like &lt;code&gt;Mutex&lt;/code&gt;, &lt;code&gt;RwLock&lt;/code&gt;, and &lt;code&gt;Condvar&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Cleanups in platform-specific code in &lt;code&gt;std::sys&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Avoiding allocations wherever possible, &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/93668&quot;&gt;such as when calling functions in &lt;code&gt;std::fs&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Making widely used types &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/87869&quot;&gt;such as &lt;code&gt;std::io::Error&lt;/code&gt;&lt;/a&gt; more light-weight&lt;/li&gt;
+&lt;li&gt;Cleaning up all unnecessary &lt;code&gt;SeqCst&lt;/code&gt; memory ordering&lt;/li&gt;
+&lt;li&gt;Optimizing thread local variables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;&lt;a href&#x3D;&quot;#conclusion&quot; aria-hidden&#x3D;&quot;true&quot; class&#x3D;&quot;anchor&quot; id&#x3D;&quot;conclusion&quot;&gt;&lt;/a&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;We hope this summary provides a healthy amount of inspiration and excitement,
+and gives you an idea of what direction the library team is headed.
+If you want to help out, whether you want to work on implementation work,
+design, documentation, organisation, or any other kind of helpful work,
+you&#x27;re warmly invited to &lt;a href&#x3D;&quot;https://rust-lang.zulipchat.com/#narrow/stream/219381-t-libs&quot;&gt;get involved&lt;/a&gt;!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mara Bos</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Imposter Syndrome</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/19/imposter-syndrome.html" type="text/html" title="Imposter Syndrome" />
+        <published>2022-04-19T00:00:00+00:00</published>
+        <updated>2022-04-19T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/04/19/imposter-syndrome.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/19/imposter-syndrome.html">&lt;p&gt;&lt;em&gt;Preface: This is in response to some feedback the project directors received
+from the Rust Foundation staff. Some of the contributors they&#x27;d talked to said
+they didn&#x27;t feel justified in applying for Foundation grants even though they&#x27;d
+love the opportunity, because they don&#x27;t feel qualified or deserving of them
+compared to the other amazing contributors they look up to within the Rust
+project. This was a little bit heart breaking to me, because I know exactly
+what that feeling is like&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn1&quot; id&#x3D;&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, and I also know just how wrong they are.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Imposter syndrome is an insidious problem within software communities. Many of
+us, especially members of marginalized communities, struggle to shake the
+feeling that we aren&#x27;t as qualified as our peers. This makes us feel
+unqualified and undeserving compared to those around us. It can make us
+hesitate to join communities in the first place and, for those already
+involved, it can create a sense of impending doom where you constantly feel
+like you&#x27;re going to get found out and expelled from the community. Overall
+it&#x27;s just not great for mental health, 0/10, would not recommend.&lt;/p&gt;
+&lt;p&gt;The thing is though, imposter syndrome is a logical fallacy&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn2&quot; id&#x3D;&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. Imposter
+syndrome occurs when we discount what we know and inflate what we think other
+people know, and this effect is often then reinforced by systemic bias for
+those of us who don&#x27;t get the assumption of competence.&lt;/p&gt;
+&lt;p&gt;&lt;img src&#x3D;&quot;../../../../images/2022-04-19-imposter-syndrome/imposter_syndrome.jpg&quot; alt&#x3D;&quot;picture of imposter syndrome, left side shows a large circle saying &amp;quot;What I think others know&amp;quot; and a small circle inside of it saying &amp;quot;What I know&amp;quot;, right side shows the same small circle saying &amp;quot;What I know&amp;quot; surrounded by many other equally sized small circles labeled &amp;quot;What others know&amp;quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;In reality, we&#x27;re all specialists within the Rust project. We all have areas
+where we have deep expertise and other large areas where we only have the
+vaguest idea of how things work. &lt;a href&#x3D;&quot;https://github.com/nikomatsakis&quot;&gt;Niko&lt;/a&gt;, one
+of the lang team co-leads, former compiler team lead and core team alumni,
+still comes to me to ask questions about error handling. I frequently need to
+tell my fellow contributors that I have no idea what the acronyms they&#x27;re using
+mean&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn3&quot; id&#x3D;&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;. But this doesn&#x27;t mean we don&#x27;t deserve our positions within the
+project. We don&#x27;t expect every contributor to know everything, to be perfect, or
+to make no mistakes. The only thing we expect from our contributors is the
+ability to collaborate effectively with others and a willingness to learn and
+grow over time.&lt;/p&gt;
+&lt;p&gt;The thing that makes the Rust project as good as it is isn&#x27;t a couple of
+prolific contributors lifting mountains by themselves, it&#x27;s everyone working
+together that brought us to where we are today. We all make mistakes. The
+project has layer&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn4&quot; id&#x3D;&quot;fnref4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; after layer&lt;sup class&#x3D;&quot;footnote-ref&quot;&gt;&lt;a href&#x3D;&quot;#fn5&quot; id&#x3D;&quot;fnref5&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; of safeguards to make sure we have a
+chance to catch and fix them before they affect our users. These incidents are
+unavoidable, expected, and honestly fine! This is the most fundamental
+philosophy of both the Rust language and the Rust project: we don&#x27;t think it&#x27;s
+sufficient to build robust systems by only including people who don&#x27;t make
+mistakes; we think it&#x27;s better to provide tooling and process to catch and
+prevent mistakes. It isn&#x27;t an accident that our motto is &amp;quot;A language empowering
+everyone to build reliable and efficient software.&amp;quot; We want people to feel
+empowered to make changes they&#x27;re not 100% confident in, to make mistakes, to
+learn, and to grow within the Rust project. This is how all of us got to where
+we are today!&lt;/p&gt;
+&lt;p&gt;So, if you look up to people within the Rust project, if the work we do here
+interests you, if you have always wanted to contribute, and &lt;em&gt;especially&lt;/em&gt; if you
+already have contributed, I want you to know that you&#x27;re one of the people we
+want to apply for &lt;a href&#x3D;&quot;https://foundation.rust-lang.org/grants/&quot;&gt;Rust Foundation grants and
+fellowships&lt;/a&gt;. You&#x27;re one of the
+people we want to eventually see join teams. If you&#x27;re already on a team, I
+want you to know that you&#x27;re there for a good reason, and we value your
+judgement. You&#x27;re not an imposter, and I want you to know that I really look
+forward to seeing you around the project.&lt;/p&gt;
+&lt;p&gt;Edit: After I posted this it was brought to my attention that the image I used
+and tweet I cited are not from an original source, and they can actually be
+traced back to a series of blog posts by Alicia Liu. These original sources do
+a much more subtle exploration of what is and isn&#x27;t imposter syndrome, and
+particularly focus on how imposter syndrome impacts members of marginalized
+communities, I highly recommend reading these posts.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://medium.com/counter-intuition/overcoming-impostor-syndrome-bdae04e46ec5&quot;&gt;Overcoming Imposter Syndrome&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://medium.com/counter-intuition/impostor-syndrome-is-not-just-a-confidence-problem-dea670e59f6e&quot;&gt;Impostor Syndrome Is Not Just a Confidence Problem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://medium.com/counter-intuition/you-don-t-have-impostor-syndrome-126e4c4bdcc&quot;&gt;You don&#x27;t have Imposter Syndrome&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;To help reinforce and normalize this, I&#x27;ve gathered a list of times when
+current or past project members have struggled with imposter syndrome, have
+made mistakes, have had to ask &amp;quot;basic&amp;quot; questions, and similar experiences that
+will hopefully help set more reasonable expectations for new and old
+contributors across the project.&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/yaahc/&quot;&gt;Jane Lusby&lt;/a&gt;: &amp;quot;I frequently struggle with imposter
+syndrome and feeling like I don&#x27;t get as much done as my peers. When I do all
+of my work based off of notifications I completely lose track of what I&#x27;ve
+done and end up starving the tasks I wanted to work on. I&#x27;m learning to set
+reasonable expectations for myself, getting better at managing distractions,
+and being intentional about when I respond to github/zulip notifications
+which helps me with keeping track of what I&#x27;ve done and making steady
+progress on my priorities.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/joshtriplett/&quot;&gt;Josh Triplett&lt;/a&gt;: &amp;quot;I didn&#x27;t fully understand
+&lt;code&gt;Pin&lt;/code&gt; until I read fasterthanlime&#x27;s &lt;a href&#x3D;&quot;https://fasterthanli.me/articles/pin-and-suffering&quot;&gt;&amp;quot;Pin and
+suffering&amp;quot;&lt;/a&gt; blog post and
+I gave a talk in 2016 where my &lt;a href&#x3D;&quot;https://www.youtube.com/watch?v&#x3D;U8Gl3RTXf88#t&#x3D;24m40s&quot;&gt;most important
+point&lt;/a&gt; was that people
+erroneously believe that you have to be an expert to write an RFC or change
+Rust, but that I wasn&#x27;t, and you don&#x27;t need to be one either.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/ralfjung&quot;&gt;Ralf Jung&lt;/a&gt;: &amp;quot;I am still surprised anyone is
+taking Miri and Stacked Borrows seriously.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/angelonfira/&quot;&gt;Forest Anderson&lt;/a&gt;: &amp;quot;As someone who just
+learned last week what &lt;code&gt;dyn&lt;/code&gt; does, it still amazes me that I have something to
+give as a team lead. I was immersed in Rust communities by writing weekly
+blogs about Veloren (I took this on because I didn&#x27;t know enough to contribute
+code), which lead to helping with the Rust Gamedev newsletter, which led me to
+helping to run the Cross Team Collaboration Fun Times meetup!&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https://github.com/pnkfelix&quot;&gt;Felix S Klock II&lt;/a&gt;: &amp;quot;Back in 2015, while I was
+presenting a tutorial on Rust, and explaining &lt;code&gt;&amp;amp;T&lt;/code&gt;, I had someone from the
+audience, a Rust expert, say &amp;quot;ah ah ah! but what about interior mutability&amp;quot;;
+and in my mind I thought &amp;quot;... oh no; what is that?&amp;quot;, followed by &amp;quot;... what am
+I doing, I&#x27;m not qualified to be up here...&amp;quot;. All of us &amp;quot;imposters&amp;quot; must
+strive to prevent such moments from becoming barriers to our own
+participation. I&#x27;ve learned a lot about Rust (and group dynamics, and
+organizational behavior) since then, but I&#x27;m still learning every day;
+re-learning, in some cases.&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;section class&#x3D;&quot;footnotes&quot;&gt;
+&lt;ol&gt;
+&lt;li id&#x3D;&quot;fn1&quot;&gt;
+&lt;p&gt;Quote from &lt;a href&#x3D;&quot;https://yaah.dev/getting-involved&quot;&gt;https://yaah.dev/getting-involved&lt;/a&gt;: &amp;quot;What happened at the
+Google meetup you ask? Manish, our wonderful meetup organizer, walked up to
+me, unprompted, and asked “Hey, you’re Jane right?”. I was shocked, how the
+heck did Manish know who I was? It didn’t feel as though I’d done anything
+worthy of notice, and yet here he was asking for me by name.&amp;quot; &lt;a href&#x3D;&quot;#fnref1&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn2&quot;&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://twitter.com/ithinkwellHugh/status/1175900121097220096&quot;&gt;https://twitter.com/ithinkwellHugh/status/1175900121097220096&lt;/a&gt; &lt;a href&#x3D;&quot;#fnref2&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn3&quot;&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/rust-lang/project-error-handling/issues/34#issuecomment-1092269566&quot;&gt;https://github.com/rust-lang/project-error-handling/issues/34#issuecomment-1092269566&lt;/a&gt; &lt;a href&#x3D;&quot;#fnref3&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn4&quot;&gt;
+&lt;p&gt;Any irreversible changes such as stabilizations require almost everyone
+on the relevant team to approve the change and zero people on the team to
+raise concerns. &lt;a href&#x3D;&quot;#fnref4&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id&#x3D;&quot;fn5&quot;&gt;
+&lt;p&gt;We double check all changes with
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/crater&quot;&gt;crater&lt;/a&gt; before they ever land on stable
+and are careful to &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/88967&quot;&gt;quickly&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/90904&quot;&gt;revert&lt;/a&gt;
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/issues/82913&quot;&gt;changes&lt;/a&gt; that cause problems
+on crater or nightly. &lt;a href&#x3D;&quot;#fnref5&quot; class&#x3D;&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+
+        <author>
+            <name>Jane Lusby, Project Director of Collaboration</name>
+        </author>
+    </entry>
+    
+    <entry>
+        <title>Please welcome Thom and Chris to Library Contributors</title>
+        <link rel="alternate" href="https://blog.rust-lang.org/inside-rust/2022/04/18/libs-contributors.html" type="text/html" title="Please welcome Thom and Chris to Library Contributors" />
+        <published>2022-04-18T00:00:00+00:00</published>
+        <updated>2022-04-18T00:00:00+00:00</updated>
+        <id>https://blog.rust-lang.org/inside-rust/2022/04/18/libs-contributors.html</id>
+        <content type="html" xml:base="https://blog.rust-lang.org/inside-rust/2022/04/18/libs-contributors.html">&lt;p&gt;Please welcome Thom Chiovoloni and Chris Denton to the
+&lt;a href&#x3D;&quot;https://www.rust-lang.org/governance/teams/library#libs-contributors&quot;&gt;Library Contributors&lt;/a&gt; group!&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/thomcc&quot;&gt;Thom&lt;/a&gt; has been working on various improvements to the implementation
+of the standard library, such as &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/87869&quot;&gt;optimizing &lt;code&gt;io::Error&lt;/code&gt;&lt;/a&gt;,
+&lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pull/90414&quot;&gt;optimizing &lt;code&gt;Chars::count&lt;/code&gt;&lt;/a&gt;, and has been helping out
+with reviewing various implementation changes.&lt;/p&gt;
+&lt;p&gt;&lt;a href&#x3D;&quot;https://github.com/ChrisDenton/&quot;&gt;Chris&lt;/a&gt; has been focusing on the Windows specific parts of the standard library.
+Chris implemented the Windows part of the patch for &lt;a href&#x3D;&quot;https://blog.rust-lang.org/2022/01/20/cve-2022-21658.html&quot;&gt;CVE-2022-21658&lt;/a&gt;,
+and has done &lt;a href&#x3D;&quot;https://github.com/rust-lang/rust/pulls?q&#x3D;is%3Apr+author%3Achrisdenton+is%3Aclosed&quot;&gt;a ton of work&lt;/a&gt;
+to improve the Windows side of &lt;code&gt;std::fs&lt;/code&gt;, &lt;code&gt;std::path&lt;/code&gt;, &lt;code&gt;std::process&lt;/code&gt; and other modules.&lt;/p&gt;
+&lt;p&gt;Congratulations Thom and Chris, and thanks for everything you do!&lt;/p&gt;
+</content>
+
+        <author>
+            <name>Mara Bos</name>
         </author>
     </entry>
     

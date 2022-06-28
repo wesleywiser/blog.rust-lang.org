@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,7 +63,7 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Announcing Rust 1.37.0</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
     <div class="publish-date-author">Aug. 15, 2019 &middot; The Rust Release Team
@@ -85,7 +76,7 @@
 <pre><code class="language-console">rustup update stable
 </code></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1370-2019-08-15">detailed release notes for 1.37.0</a> on GitHub.</p>
-<h2><a href="#whats-in-1.37.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.37.0-stable"></a>What's in 1.37.0 stable</h2>
+<h2><a href="#whats-in-1370-stable" aria-hidden="true" class="anchor" id="whats-in-1370-stable"></a>What's in 1.37.0 stable</h2>
 <p>The highlights of Rust 1.37.0 include referring to <code>enum</code> variants through <code>type</code> aliases, built-in <code>cargo vendor</code>, unnamed <code>const</code> items, profile-guided optimization, a <code>default-run</code> key in Cargo, and <code>#[repr(align(N))]</code> on <code>enum</code>s. Read on for a few highlights, or see the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1370-2019-08-15">detailed release notes</a> for additional information.</p>
 <h3><a href="#referring-to-enum-variants-through-type-aliases" aria-hidden="true" class="anchor" id="referring-to-enum-variants-through-type-aliases"></a>Referring to <code>enum</code> variants through <code>type</code> aliases</h3>
 <p>With Rust 1.37.0, you can now refer to <code>enum</code> variants through type aliases. For example:</p>
@@ -141,7 +132,7 @@ static_assert_size!(usize, 8); // 2.
 <h3><a href="#choosing-a-default-binary-in-cargo-projects" aria-hidden="true" class="anchor" id="choosing-a-default-binary-in-cargo-projects"></a>Choosing a default binary in Cargo projects</h3>
 <p><a href="https://doc.rust-lang.org/cargo/commands/cargo-run.html"><code>cargo run</code></a> is great for quickly testing CLI applications. When multiple binaries are present in the same package, you have to explicitly declare the name of the binary you want to run with the <code>--bin</code> flag. This makes <code>cargo run</code> not as ergonomic as we'd like, especially when a binary is called more often than the others.</p>
 <p>Rust 1.37.0 addresses the issue by adding <a href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-default-run-field"><code>default-run</code></a>, a new key in <code>Cargo.toml</code>. When the key is declared in the <code>[package]</code> section, <code>cargo run</code> will default to the chosen binary if the <code>--bin</code> flag is not passed.</p>
-<h3><a href="#[repr(align(n))]-on-enums" aria-hidden="true" class="anchor" id="[repr(align(n))]-on-enums"></a><code>#[repr(align(N))]</code> on <code>enum</code>s</h3>
+<h3><a href="#repralignn-on-enums" aria-hidden="true" class="anchor" id="repralignn-on-enums"></a><code>#[repr(align(N))]</code> on <code>enum</code>s</h3>
 <p><a href="https://doc.rust-lang.org/reference/type-layout.html#the-alignment-modifiers">The <code>#[repr(align(N))]</code> attribute</a> can be used to raise the <a href="https://doc.rust-lang.org/reference/type-layout.html#size-and-alignment">alignment</a> of a type definition. Previously, the attribute was only allowed on <code>struct</code>s and <code>union</code>s. With Rust 1.37.0, the attribute can now also be used <a href="https://github.com/rust-lang/rust/pull/61229">on <code>enum</code> definitions</a>. For example, the following type <code>Align16</code> would, as expected, report <code>16</code> as the alignment whereas the natural alignment without <code>#[repr(align(16))]</code> would be <code>4</code>:</p>
 <pre><code class="language-rust">#[repr(align(16))]
 enum Align16 {
@@ -166,7 +157,7 @@ struct AlignN&lt;T&gt;(T);
 </ul>
 <h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
 <p>There are other changes in the Rust 1.37 release: check out what changed in <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1370-2019-08-15">Rust</a>, <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-137-2019-08-15">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-137">Clippy</a>.</p>
-<h2><a href="#contributors-to-137.0" aria-hidden="true" class="anchor" id="contributors-to-137.0"></a>Contributors to 1.37.0</h2>
+<h2><a href="#contributors-to-1370" aria-hidden="true" class="anchor" id="contributors-to-1370"></a>Contributors to 1.37.0</h2>
 <p>Many people came together to create Rust 1.37.0. We couldn't have done it
 without all of you. <a href="https://thanks.rust-lang.org/rust/1.37.0/">Thanks!</a></p>
 <h2><a href="#new-sponsors-of-rust-infrastructure" aria-hidden="true" class="anchor" id="new-sponsors-of-rust-infrastructure"></a>New sponsors of Rust infrastructure</h2>
@@ -188,7 +179,6 @@ without all of you. <a href="https://thanks.rust-lang.org/rust/1.37.0/">Thanks!<
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -203,10 +193,17 @@ without all of you. <a href="https://thanks.rust-lang.org/rust/1.37.0/">Thanks!<
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -217,6 +214,8 @@ without all of you. <a href="https://thanks.rust-lang.org/rust/1.37.0/">Thanks!<
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

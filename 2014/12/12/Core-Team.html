@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,7 +63,7 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Yehuda Katz and Steve Klabnik are joining the Rust Core Team</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
     <div class="publish-date-author">Dec. 12, 2014 &middot; Niko Matsakis
@@ -86,19 +77,19 @@ members of the Rust community, but they also bring a variety of skills
 and experience with them.</p>
 <p>Yehuda Katz will be known to many in the Rust community for his work
 on the initial design and implementation of the Cargo project. He is
-also a co-founder of <a href="http://www.tilde.io/">Tilde</a>, which has been using Rust commercially
+also a co-founder of <a href="https://www.tilde.io/">Tilde</a>, which has been using Rust commercially
 in their <a href="https://www.skylight.io/">Skylight</a> product for quite some time. Finally, he has been
 heavily involved with the Ruby ecosystem (through such projects as
-<a href="http://rubyonrails.org/">Ruby on Rails</a> and <a href="http://bundler.io/">Bundler</a>) and with JavaScript as well (through
-the <a href="http://emberjs.com/team/">Ember.js</a> and <a href="http://jquery.com/">jQuery</a> frameworks and the
-<a href="http://www.ecma-international.org/memento/TC39.htm">TC39 language committee</a>).</p>
-<p>Steve Klabnik is of course the primary author of the <a href="http://doc.rust-lang.org/guide.html">Rust guide</a> as
+<a href="https://rubyonrails.org/">Ruby on Rails</a> and <a href="https://bundler.io/">Bundler</a>) and with JavaScript as well (through
+the <a href="https://emberjs.com/team/">Ember.js</a> and <a href="https://jquery.com/">jQuery</a> frameworks and the
+<a href="https://www.ecma-international.org/memento/TC39.htm">TC39 language committee</a>).</p>
+<p>Steve Klabnik is of course the primary author of the <a href="https://doc.rust-lang.org/guide.html">Rust guide</a> as
 well as much of Rust's documentation (not to mention independent works
-like <a href="http://www.rustforrubyists.com/">Rust for Rubyists</a>). He is passionate about improving the
+like <a href="https://www.rustforrubyists.com/">Rust for Rubyists</a>). He is passionate about improving the
 learnability of Rust and ensuring that the onboarding experience is
 smooth. Finally, Steve is an enthusiastic and tireless
 communicator. Wherever there is discussion about Rust to be found, be
-it IRC, the <a href="https://github.com/rust-lang/rfcs/">RFCs repo</a>, or <a href="http://www.reddit.com/r/rust">Reddit</a>/<a href="https://news.ycombinator.com/">HackerNews</a>, you can be sure to
+it IRC, the <a href="https://github.com/rust-lang/rfcs/">RFCs repo</a>, or <a href="https://www.reddit.com/r/rust">Reddit</a>/<a href="https://news.ycombinator.com/">HackerNews</a>, you can be sure to
 find a comment or two from Steve there, explaining and clarifying the
 situation.</p>
 <p>Thanks Yehuda and Steve for all your hard work, and welcome to the core team!</p>
@@ -115,7 +106,6 @@ situation.</p>
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -130,10 +120,17 @@ situation.</p>
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -144,6 +141,8 @@ situation.</p>
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

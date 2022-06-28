@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,7 +63,7 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Announcing Rust 1.38.0</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
     <div class="publish-date-author">Sept. 26, 2019 &middot; The Rust Release Team
@@ -85,12 +76,12 @@
 <pre><code class="language-console">rustup update stable
 </code></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website.</p>
-<h2><a href="#whats-in-1.38.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.38.0-stable"></a>What's in 1.38.0 stable</h2>
+<h2><a href="#whats-in-1380-stable" aria-hidden="true" class="anchor" id="whats-in-1380-stable"></a>What's in 1.38.0 stable</h2>
 <p>The highlight of this release is pipelined compilation.</p>
 <h3><a href="#pipelined-compilation" aria-hidden="true" class="anchor" id="pipelined-compilation"></a>Pipelined compilation</h3>
 <p>To compile a crate, the compiler doesn't need the dependencies to be fully built. Instead, it just needs their &quot;metadata&quot; (i.e. the list of types, dependencies, exports...). This metadata is produced early in the compilation process. Starting with Rust 1.38.0, Cargo will take advantage of this by automatically starting to build dependent crates as soon as metadata is ready.</p>
 <p>While the change doesn't have any effect on builds for a single crate, during testing <a href="https://internals.rust-lang.org/t/evaluating-pipelined-rustc-compilation/10199">we got reports</a> of 10-20% compilation speed increases for optimized, clean builds of some crate graphs. Other ones did not improve much, and the speedup depends on the hardware running the build, so your mileage might vary. No code changes are needed to benefit from this.</p>
-<h3><a href="#linting-some-incorrect-uses-of-mem:{uninitialized,-zeroed}" aria-hidden="true" class="anchor" id="linting-some-incorrect-uses-of-mem:{uninitialized,-zeroed}"></a>Linting some incorrect uses of <code>mem::{uninitialized, zeroed}</code></h3>
+<h3><a href="#linting-some-incorrect-uses-of-memuninitialized-zeroed" aria-hidden="true" class="anchor" id="linting-some-incorrect-uses-of-memuninitialized-zeroed"></a>Linting some incorrect uses of <code>mem::{uninitialized, zeroed}</code></h3>
 <p>As <a href="https://blog.rust-lang.org/2019/07/04/Rust-1.36.0.html#maybeuninitt%3E-instead-of-mem::uninitialized">previously announced</a>, <code>std::mem::uninitialized</code> is essentially impossible to use safely. Instead, <code>MaybeUninit&lt;T&gt;</code> should be used.</p>
 <p>We have not yet deprecated <code>mem::uninitialized</code>; this will be done in a future release. Starting in 1.38.0, however, <code>rustc</code> will provide a lint for a narrow class of incorrect initializations using <code>mem::uninitialized</code> or <code>mem::zeroed</code>.</p>
 <p>It is undefined behavior for some types, such as <code>&amp;T</code> and <code>Box&lt;T&gt;</code>, to ever contain an all-<code>0</code> bit pattern, because they represent pointer-like objects that cannot be <code>null</code>. It is therefore an error to use <code>mem::uninitialized</code> or <code>mem::zeroed</code> to initialize one of these types, so the new lint will attempt to warn whenever one of those functions is used to initialize one of them, either directly or as a member of a larger <code>struct</code>. The check is recursive, so the following code will emit a warning:</p>
@@ -108,9 +99,9 @@ let bad_value: CannotBeZero = unsafe { std::mem::uninitialized() };
 </code></pre>
 <p>Astute readers may note that Rust has more types that cannot be zero, notably <code>NonNull&lt;T&gt;</code> and <code>NonZero&lt;T&gt;</code>. For now, initialization of these structs with <code>mem::uninitialized</code> or <code>mem::zeroed</code> is <em>not</em> linted against.</p>
 <p>These checks do not cover all cases of unsound use of <code>mem::uninitialized</code> or <code>mem::zeroed</code>, they merely help identify code that is definitely wrong. All code should still be moved to use <code>MaybeUninit</code> instead.</p>
-<h3><a href="#[deprecated]-macros" aria-hidden="true" class="anchor" id="[deprecated]-macros"></a><code>#[deprecated]</code> macros</h3>
+<h3><a href="#deprecated-macros" aria-hidden="true" class="anchor" id="deprecated-macros"></a><code>#[deprecated]</code> macros</h3>
 <p>The <code>#[deprecated]</code> attribute, first introduced in Rust 1.9.0, allows crate authors to notify their users an item of their crate is deprecated and will be removed in a future release. Rust 1.38.0 extends the attribute, allowing it to be applied to macros as well.</p>
-<h3><a href="#std:any::type_name" aria-hidden="true" class="anchor" id="std:any::type_name"></a><code>std::any::type_name</code></h3>
+<h3><a href="#stdanytype_name" aria-hidden="true" class="anchor" id="stdanytype_name"></a><code>std::any::type_name</code></h3>
 <p>For debugging, it is sometimes useful to get the name of a type. For instance, in generic code, you may want to see, at run-time, what concrete types a function's type parameters has been instantiated with. This can now be done using <code>std::any::type_name</code>:</p>
 <pre><code class="language-rust">fn gen_value&lt;T: Default&gt;() -&gt; T {
     println!(&quot;Initializing an instance of {}&quot;, std::any::type_name::&lt;T&gt;());
@@ -150,7 +141,7 @@ Initializing an instance of alloc::string::String
 <h3><a href="#corrections" aria-hidden="true" class="anchor" id="corrections"></a>Corrections</h3>
 <p>A Previous version of this post mistakenly marked these functions as stable. They are not yet stable.
 <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_duration_f32"><code>Duration::div_duration_f32</code></a> and <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.div_duration_f64"><code>Duration::div_duration_f64</code></a>.</p>
-<h2><a href="#contributors-to-138.0" aria-hidden="true" class="anchor" id="contributors-to-138.0"></a>Contributors to 1.38.0</h2>
+<h2><a href="#contributors-to-1380" aria-hidden="true" class="anchor" id="contributors-to-1380"></a>Contributors to 1.38.0</h2>
 <p>Many people came together to create Rust 1.38.0. We couldn't have done it
 without all of you. <a href="https://thanks.rust-lang.org/rust/1.38.0/">Thanks!</a></p>
 
@@ -166,7 +157,6 @@ without all of you. <a href="https://thanks.rust-lang.org/rust/1.38.0/">Thanks!<
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -181,10 +171,17 @@ without all of you. <a href="https://thanks.rust-lang.org/rust/1.38.0/">Thanks!<
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -195,6 +192,8 @@ without all of you. <a href="https://thanks.rust-lang.org/rust/1.38.0/">Thanks!<
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

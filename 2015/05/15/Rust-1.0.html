@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,7 +63,7 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Announcing Rust 1.0</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
     <div class="publish-date-author">May 15, 2015 &middot; The Rust Core Team
@@ -86,11 +77,11 @@ make it easier to build reliable, efficient systems. <strong>Rust combines
 low-level control over performance with high-level convenience and
 safety guarantees</strong>. Better yet, it achieves these goals without
 requiring a garbage collector or runtime, making it possible to
-<a href="http://blog.rust-lang.org/2015/04/24/Rust-Once-Run-Everywhere.html">use Rust libraries as a &quot;drop-in replacement&quot; for C</a>. If you'd
+<a href="https://blog.rust-lang.org/2015/04/24/Rust-Once-Run-Everywhere.html">use Rust libraries as a &quot;drop-in replacement&quot; for C</a>. If you'd
 like to experiment with Rust, the
-<a href="http://doc.rust-lang.org/1.0.0/book/getting-started.html">&quot;Getting Started&quot; section of the Rust book</a> is your best bet
+<a href="https://doc.rust-lang.org/1.0.0/book/getting-started.html">&quot;Getting Started&quot; section of the Rust book</a> is your best bet
 (if you prefer to use an e-reader, Pascal Hertleif maintains
-<a href="http://killercup.github.io/trpl-ebook/">unofficial e-book versions</a> as well).</p>
+<a href="https://killercup.github.io/trpl-ebook/">unofficial e-book versions</a> as well).</p>
 <p>What makes Rust different from other languages is its type system,
 which represents a refinement and codification of &quot;best practices&quot;
 that have been hammered out by generations of C and C++
@@ -99,7 +90,7 @@ systems programmers and newcomers alike: experienced programmers will
 find they save time they would have spent debugging, whereas newcomers
 can write low-level code without worrying about minor mistakes leading
 to mysterious crashes.</p>
-<h3><a href="#what-does-it-mean-for-rust-to-be-10?" aria-hidden="true" class="anchor" id="what-does-it-mean-for-rust-to-be-10?"></a>What does it mean for Rust to be 1.0?</h3>
+<h3><a href="#what-does-it-mean-for-rust-to-be-10" aria-hidden="true" class="anchor" id="what-does-it-mean-for-rust-to-be-10"></a>What does it mean for Rust to be 1.0?</h3>
 <p>The current Rust language is the result of a lot of iteration and
 experimentation. The process has worked out well for us: Rust today is
 both simpler and more powerful than we originally thought would be
@@ -107,25 +98,25 @@ possible. But all that experimentation also made it difficult to
 maintain projects written in Rust, since the language and standard
 library were constantly changing.</p>
 <p><strong>The 1.0 release marks the end of that churn.</strong> This release is the
-official beginning of our <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">commitment to stability</a>, and as
+official beginning of our <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">commitment to stability</a>, and as
 such it offers a firm foundation for building applications and
 libraries. From this point forward, breaking changes are largely out
 of scope (some <a href="https://github.com/rust-lang/rfcs/pull/1105">minor</a> <a href="https://github.com/rust-lang/rfcs/pull/1122">caveats</a> apply, such as compiler bugs).</p>
 <p>That said, releasing 1.0 doesn't mean that the Rust language is
-&quot;done&quot;. We have many <a href="http://internals.rust-lang.org/t/priorities-after-1-0/1901">improvements in store</a>. In fact, the
+&quot;done&quot;. We have many <a href="https://internals.rust-lang.org/t/priorities-after-1-0/1901">improvements in store</a>. In fact, the
 Nightly builds of Rust already demonstrate <a href="https://github.com/rust-lang/rust/pull/24965">improvements to</a>
 <a href="https://github.com/rust-lang/rust/pull/24615">compile</a> <a href="https://github.com/rust-lang/rust/pull/25323">times</a> (with more to come) and includes work
 on new APIs and language features, like <a href="https://github.com/rust-lang/rfcs/pull/1044"><code>std::fs</code></a> and
 <a href="https://github.com/rust-lang/rust/pull/23606/">associated constants</a>.</p>
 <p>To help ensure that compiler and language improvements make their way
 out into the ecosystem at large as quickly as possible, we've adopted
-a <a href="http://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">train-based</a> release model. This means that we'll be issuing
+a <a href="https://blog.rust-lang.org/2014/12/12/1.0-Timeline.html">train-based</a> release model. This means that we'll be issuing
 regular releases every six weeks, just like the Firefox and Chrome web
 browsers. <strong>To kick off that process, we are also releasing Rust 1.1
 beta today, simultaneously with Rust 1.0.</strong></p>
 <h3><a href="#cargo-and-cratesio" aria-hidden="true" class="anchor" id="cargo-and-cratesio"></a>Cargo and crates.io</h3>
 <p>Building a real project is about more than just writing code -- it's
-also about managing dependencies. <a href="http://blog.rust-lang.org/2014/11/20/Cargo.html">Cargo</a>, the Rust package
+also about managing dependencies. <a href="https://blog.rust-lang.org/2014/11/20/Cargo.html">Cargo</a>, the Rust package
 manager and build system, is designed to make this easy.  Using Cargo,
 downloading and installing new libraries is as simple as adding one
 line to your manifest.</p>
@@ -133,7 +124,7 @@ line to your manifest.</p>
 where <a href="https://crates.io/">crates.io</a> comes in -- crates.io is a central package
 repository for Rust code. It makes it easy to search for other
 people's packages or to publish your own.</p>
-<p>Since we <a href="http://blog.rust-lang.org/2014/11/20/Cargo.html">announced cargo and crates.io</a> approximately six
+<p>Since we <a href="https://blog.rust-lang.org/2014/11/20/Cargo.html">announced cargo and crates.io</a> approximately six
 months ago, the number of packages has been growing
 steadily. Nonetheless, it's still early days, and there are still lots
 of great packages yet to be written. If you're interested in building
@@ -153,7 +144,7 @@ encourage you to get involved, either by uploading libraries to
 <a href="https://github.com/rust-lang/rust/blob/master/CONTRIBUTING.md">writing code for Rust itself</a>.</p>
 <p>We'd like to give a special thank you to the following people, each of
 whom contributed changes since our previous release (the
-<a href="https://github.com/rust-lang/rust/blob/master/AUTHORS.txt">complete list of contributors</a> is here):</p>
+<a href="https://github.com/rust-lang/rust/graphs/contributors">complete list of contributors</a> is here):</p>
 <ul>
 <li><code>Aaron Gallagher</code></li>
 <li><code>Aaron Turon</code></li>
@@ -384,7 +375,6 @@ whom contributed changes since our previous release (the
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -399,10 +389,17 @@ whom contributed changes since our previous release (the
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -413,6 +410,8 @@ whom contributed changes since our previous release (the
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

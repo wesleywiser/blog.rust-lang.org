@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,10 +63,10 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Announcing Rust 1.36.0</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
-    <div class="publish-date-author">July 04, 2019 &middot; The Rust Release Team
+    <div class="publish-date-author">July 4, 2019 &middot; The Rust Release Team
     
     </div>
 
@@ -87,7 +78,7 @@ Rust is a programming language that is empowering everyone to build reliable and
 </code></pre>
 <p>If you don't have it already, you can <a href="https://www.rust-lang.org/install.html">get <code>rustup</code></a> from the appropriate page on our website,
 and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1360-2019-07-04">detailed release notes for 1.36.0</a> on GitHub.</p>
-<h2><a href="#whats-in-1.36.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.36.0-stable"></a>What's in 1.36.0 stable</h2>
+<h2><a href="#whats-in-1360-stable" aria-hidden="true" class="anchor" id="whats-in-1360-stable"></a>What's in 1.36.0 stable</h2>
 <p>This release brings many changes, including the stabilization of the <a href="https://doc.rust-lang.org/std/future/trait.Future.html"><code>Future</code></a> trait,
 the <a href="https://doc.rust-lang.org/alloc/index.html"><code>alloc</code></a> crate, the <a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a> type, <a href="http://blog.pnkfx.org/blog/2019/06/26/breaking-news-non-lexical-lifetimes-arrives-for-everyone/">NLL for Rust 2015</a>,
 a new <code>HashMap&lt;K, V&gt;</code> implementation, and <a href="https://doc.rust-lang.org/cargo/commands/cargo-build.html#cargo_build_manifest_options"><code>--offline</code></a> support in Cargo.
@@ -118,7 +109,7 @@ extern crate alloc;
 
 use alloc::vec::Vec;
 </code></pre>
-<h3><a href="#maybeuninitt>-instead-of-mem::uninitialized" aria-hidden="true" class="anchor" id="maybeuninitt>-instead-of-mem::uninitialized"></a><a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a> instead of <a href="https://doc.rust-lang.org/std/mem/fn.uninitialized.html"><code>mem::uninitialized</code></a></h3>
+<h3><a href="#maybeuninitt-instead-of-memuninitialized" aria-hidden="true" class="anchor" id="maybeuninitt-instead-of-memuninitialized"></a><a href="https://doc.rust-lang.org/std/mem/union.MaybeUninit.html"><code>MaybeUninit&lt;T&gt;</code></a> instead of <a href="https://doc.rust-lang.org/std/mem/fn.uninitialized.html"><code>mem::uninitialized</code></a></h3>
 <p>In previous releases of Rust, the <a href="https://doc.rust-lang.org/std/mem/fn.uninitialized.html"><code>mem::uninitialized</code></a> function has allowed you to bypass Rust's
 initialization checks by pretending that you've initialized a value at type <code>T</code> without doing anything.
 One of the main uses of this function has been to lazily allocate arrays.</p>
@@ -156,7 +147,7 @@ of errors if the NLL borrow checker rejects code the old AST borrow checker woul
 Please see <a href="https://github.com/rust-lang/rust/issues/60680#issuecomment-495089654">this list</a> of public crates that are affected.</p>
 <p>To find out more about NLL, MIR, the story around fixing soundness holes,
 and what you can do about the warnings if you have them, read <a href="http://blog.pnkfx.org/blog/2019/06/26/breaking-news-non-lexical-lifetimes-arrives-for-everyone/">Felix Klock's blog post</a>.</p>
-<h3><a href="#a-new-hashmapk,-v>-implementation" aria-hidden="true" class="anchor" id="a-new-hashmapk,-v>-implementation"></a>A new <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"><code>HashMap&lt;K, V&gt;</code></a> implementation</h3>
+<h3><a href="#a-new-hashmapk-v-implementation" aria-hidden="true" class="anchor" id="a-new-hashmapk-v-implementation"></a>A new <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"><code>HashMap&lt;K, V&gt;</code></a> implementation</h3>
 <p>In Rust 1.36.0, the <code>HashMap&lt;K, V&gt;</code> implementation has been <a href="https://github.com/rust-lang/rust/pull/58623">replaced</a>
 with the one in the <a href="https://crates.io/crates/hashbrown"><code>hashbrown</code></a> crate which is based on the <a href="https://abseil.io/blog/20180927-swisstables">SwissTable</a> design.
 While the interface is the same, the <code>HashMap&lt;K, V&gt;</code> implementation is now
@@ -198,7 +189,7 @@ use the <a href="https://doc.rust-lang.org/cargo/commands/cargo-fetch.html"><cod
 <h3><a href="#other-changes" aria-hidden="true" class="anchor" id="other-changes"></a>Other changes</h3>
 <p>Detailed 1.36.0 release notes are available for <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1360-2019-07-04">Rust</a>,
 <a href="https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md#cargo-136-2019-07-04">Cargo</a>, and <a href="https://github.com/rust-lang/rust-clippy/blob/master/CHANGELOG.md#rust-136">Clippy</a>.</p>
-<h2><a href="#contributors-to-136.0" aria-hidden="true" class="anchor" id="contributors-to-136.0"></a>Contributors to 1.36.0</h2>
+<h2><a href="#contributors-to-1360" aria-hidden="true" class="anchor" id="contributors-to-1360"></a>Contributors to 1.36.0</h2>
 <p>Many people came together to create Rust 1.36.0. We couldn't have done it
 without all of you. <a href="https://thanks.rust-lang.org/rust/1.36.0/">Thanks!</a></p>
 
@@ -214,7 +205,6 @@ without all of you. <a href="https://thanks.rust-lang.org/rust/1.36.0/">Thanks!<
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -229,10 +219,17 @@ without all of you. <a href="https://thanks.rust-lang.org/rust/1.36.0/">Thanks!<
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -243,6 +240,8 @@ without all of you. <a href="https://thanks.rust-lang.org/rust/1.36.0/">Thanks!<
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

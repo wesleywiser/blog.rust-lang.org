@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,7 +63,7 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Taking Rust everywhere with rustup</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
     <div class="publish-date-author">May 13, 2016 &middot; Brian Anderson
@@ -96,15 +87,15 @@ you ship on.</p>
 <p>You want to build an ultraportable binary you can ship to any Linux platform.</p>
 </li>
 <li>
-<p>You want to target the browser with <a href="http://kripken.github.io/emscripten-site/">Emscripten</a> or <a href="https://webassembly.github.io/">WebAssembly</a>.</p>
+<p>You want to target the browser with <a href="https://kripken.github.io/emscripten-site/">Emscripten</a> or <a href="https://webassembly.github.io/">WebAssembly</a>.</p>
 </li>
 </ul>
 <p>In other words, <strong>you want to develop/build on one &quot;host&quot; platform, but get a
 final binary that runs on a different &quot;target&quot; platform</strong>.</p>
-<p>Thanks to the <a href="http://llvm.org">LLVM</a> backend, it's always been possible <em>in principle</em>
+<p>Thanks to the <a href="https://llvm.org">LLVM</a> backend, it's always been possible <em>in principle</em>
 to cross-compile Rust code: just tell the backend to use a different
 target! And indeed, intrepid hackers have put Rust on embedded systems
-<a href="http://mirrors.link/posts/cross-compiling-rust-on-os-x-for-raspberry-pi-3">like the Raspberry Pi 3</a>, <a href="https://blog.thiago.me/raspberry-pi-bare-metal-programming-with-rust/">bare metal ARM</a>, <a href="https://github.com/japaric/rust-on-openwrt">MIPS routers running
+<a href="https://mirrors.link/posts/cross-compiling-rust-on-os-x-for-raspberry-pi-3">like the Raspberry Pi 3</a>, <a href="https://blog.thiago.me/raspberry-pi-bare-metal-programming-with-rust/">bare metal ARM</a>, <a href="https://github.com/japaric/rust-on-openwrt">MIPS routers running
 OpenWRT</a>, and many others.</p>
 <p>But in practice, there are a lot of ducks you have to get in a row to
 make it work: the appropriate Rust standard library, a cross-compiling
@@ -122,7 +113,7 @@ them to you via a new tool called <strong><a href="https://www.rustup.rs">rustup
 <p>At its heart, <strong>rustup is a <em>toolchain manager</em> for Rust</strong>. It can
 download and switch between copies of the Rust compiler and standard
 library for all supported platforms, and track Rust's nightly, beta,
-and release <a href="http://blog.rust-lang.org/2014/10/30/Stability.html">channels</a>, as well as specific versions. In this way
+and release <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">channels</a>, as well as specific versions. In this way
 rustup is similar to the <a href="https://rvm.io/">rvm</a>, <a href="https://github.com/rbenv/rbenv">rbenv</a> and <a href="https://github.com/yyuu/pyenv">pyenv</a> tools for Ruby and
 Python. I'll walk through all of this functionality, and the
 situations where it's useful, in the rest of the post.</p>
@@ -139,12 +130,35 @@ it's something we hope to incorporate over the next few months.</p>
 <p>Let's start with something simple: installing multiple Rust toolchains. In this
 example I create a new library, 'hello', then test it using rustc 1.8, then use
 rustup to install and test that same crate on the 1.9 beta.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div style="height:420px;margin:20px;">
+<script type="text/javascript"
+	src="https://asciinema.org/a/37cr19qny7451wenmpb113s1r.js"
+	id="asciicast-37cr19qny7451wenmpb113s1r"
+	async
+	data-speed="2"
+></script>
+</div>
+<!--
+```
+$ cargo new hello && cd hello
+$ rustc --version
+$ cargo test
+$ rustup install beta
+$ rustup run beta rustc --version
+$ rustup run beta cargo test
+```
+-->
 <p>That's an easy way to verify your code works on the next Rust release. That's
 good Rust citizenship!</p>
 <p>We can use <code>rustup show</code> to show us the installed toolchains, and <code>rustup update</code> to keep them up to date with Rust's releases.</p>
-<!-- raw HTML omitted -->
+<div style="height:420px;margin:20px;">
+<script type="text/javascript"
+	src="https://asciinema.org/a/ek7vdmfltncmgnip8cnuc6ua4.js"
+	id="asciicast-ek7vdmfltncmgnip8cnuc6ua4"
+	async
+	data-speed="2"
+></script>
+</div>
 <p>Finally, rustup can also change the default toolchain with <code>rustup default</code>:</p>
 <pre><code>$ rustc --version
 rustc 1.8.0 (db2939409 2016-04-11)
@@ -196,7 +210,7 @@ libraries they have installed.</p>
 <p>Today's Rust depends on libc, and on most Linuxes that means
 glibc. It's technically challenging to fully statically link glibc,
 which presents difficulties when using it to produce a truly standalone
-binary. Fortunately, an alternative exists: <a href="http://www.musl-libc.org/">musl</a>, a small, modern
+binary. Fortunately, an alternative exists: <a href="https://www.musl-libc.org/">musl</a>, a small, modern
 implementation of libc that can be easily statically linked. Rust has been
 compatible with musl since version 1.1, but until recently developers
 have needed to build their own compiler to benefit from it.</p>
@@ -319,7 +333,7 @@ output of which is not included here):</p>
 <pre><code>rust:~/home$ cd
 rust:~$ curl -O https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
 rust:~$ tar xzf android-sdk_r24.4.1-linux.tgz
-rust:~$ curl -O http://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
+rust:~$ curl -O https://dl.google.com/android/repository/android-ndk-r10e-linux-x86_64.zip
 rust:~$ unzip android-ndk-r10e-linux-x86_64.zip
 </code></pre>
 <p>We further need to create what the NDK calls a <a href="https://developer.android.com/ndk/guides/standalone_toolchain.html">&quot;standalone
@@ -342,7 +356,7 @@ release (which at the time of this writing is 'r11c'). Rust's <code>std</code> i
 built against <code>r10e</code> and links to symbols that are no longer included
 in the NDK. So for now we have to use the older NDK.  Second, in
 building the standalone toolchain we passed <code>--platform=android-18</code> to
-<code>make-standalone-toolchain.sh</code>. The &quot;18&quot; here is the Android <a href="http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels">API
+<code>make-standalone-toolchain.sh</code>. The &quot;18&quot; here is the Android <a href="https://developer.android.com/guide/topics/manifest/uses-sdk-element.html#ApiLevels">API
 level</a>.
 Today, Rust's <code>arm-linux-androideabi</code> target is built against Android
 API level 18, and should theoretically be forwards-compatible with
@@ -351,7 +365,7 @@ greatest Android compatibility that Rust presently allows.</p>
 <p>The final thing for us to do is tell Cargo where to find the android
 linker, which is in the standalone NDK toolchain we just created. To
 do that we configure the <code>arm-linux-androideabi</code> target in
-<a href="http://doc.crates.io/config.html"><code>.cargo/config</code></a> with the 'linker' value. And while we're doing that
+<a href="https://doc.crates.io/config.html"><code>.cargo/config</code></a> with the 'linker' value. And while we're doing that
 we'll go ahead and set the default target for this project to Android
 so we don't have to keep calling cargo with the <code>--target</code> option.</p>
 <pre><code class="language-toml">[build]
@@ -392,7 +406,7 @@ cross-compilation tooling, including <a href="https://github.com/japaric/xargo">
 build the standard library for targets unsupported by rustup, and
 <a href="https://users.rust-lang.org/t/announcing-cargo-apk/5501">cargo-apk</a>, which builds Android packages from Cargo packages.</p>
 <p>Finally, the most exciting platform on the horizon for Rust is not a traditional
-target for systems languages: the web. With <a href="http://kripken.github.io/emscripten-site/">Emscripten</a> today it's quite easy
+target for systems languages: the web. With <a href="https://kripken.github.io/emscripten-site/">Emscripten</a> today it's quite easy
 to run <em>C++</em> code on the web by converting LLVM IR to JavaScript (or the asm.js
 subset of JavaScript). And the upcoming <a href="https://webassembly.github.io/">WebAssembly</a> (wasm) standard will
 cement the web platform as a first-class target for programming languages.</p>
@@ -447,7 +461,6 @@ Vladimir, Wayne Warren, Yasushi Abe, Y. T. Chung</p>
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -462,10 +475,17 @@ Vladimir, Wayne Warren, Yasushi Abe, Y. T. Chung</p>
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -476,6 +496,8 @@ Vladimir, Wayne Warren, Yasushi Abe, Y. T. Chung</p>
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,7 +63,7 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Fearless Concurrency with Rust</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
     <div class="publish-date-author">Apr. 10, 2015 &middot; Aaron Turon
@@ -101,20 +92,20 @@ functional), and Rust will help you avoid common pitfalls.</p>
 <p>Here's a taste of concurrency in Rust:</p>
 <ul>
 <li>
-<p>A <a href="http://static.rust-lang.org/doc/master/std/sync/mpsc/index.html">channel</a> transfers ownership of the messages sent along it,
+<p>A <a href="https://static.rust-lang.org/doc/master/std/sync/mpsc/index.html">channel</a> transfers ownership of the messages sent along it,
 so you can send a pointer from one thread to another without fear of
 the threads later racing for access through that pointer. <strong>Rust's
 channels enforce thread isolation.</strong></p>
 </li>
 <li>
-<p>A <a href="http://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html">lock</a> knows what data it protects, and Rust guarantees
+<p>A <a href="https://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html">lock</a> knows what data it protects, and Rust guarantees
 that the data can only be accessed when the lock is held. State is
 never accidentally shared. <strong>&quot;Lock data, not code&quot; is enforced in
 Rust.</strong></p>
 </li>
 <li>
-<p>Every data type knows whether it can safely be <a href="http://static.rust-lang.org/doc/master/std/marker/trait.Send.html">sent</a> between
-or <a href="http://static.rust-lang.org/doc/master/std/marker/trait.Sync.html">accessed</a> by multiple threads, and Rust enforces this safe
+<p>Every data type knows whether it can safely be <a href="https://static.rust-lang.org/doc/master/std/marker/trait.Send.html">sent</a> between
+or <a href="https://static.rust-lang.org/doc/master/std/marker/trait.Sync.html">accessed</a> by multiple threads, and Rust enforces this safe
 usage; there are no data races, even for lock-free data structures.
 <strong>Thread safety isn't just documentation; it's law.</strong></p>
 </li>
@@ -138,9 +129,9 @@ features.</p>
 systems. If you're already familiar with these, you can skip the two
 &quot;background&quot; sections and jump straight into concurrency. If you want
 a deeper introduction, I can't recommend
-<a href="http://blog.skylight.io/rust-means-never-having-to-close-a-socket/">Yehuda Katz's post</a>
+<a href="https://blog.skylight.io/rust-means-never-having-to-close-a-socket/">Yehuda Katz's post</a>
 highly enough. And
-<a href="http://doc.rust-lang.org/book/ownership.html">the Rust book</a> has all
+<a href="https://doc.rust-lang.org/book/ownership.html">the Rust book</a> has all
 the details.</p>
 </blockquote>
 <p>In Rust, every value has an &quot;owning scope,&quot; and passing or returning a
@@ -298,11 +289,11 @@ it ties together sharing and communication:</p>
 <blockquote>
 <p>Do not communicate by sharing memory; instead, share memory by
 communicating.</p>
-<p>--<a href="http://golang.org/doc/effective_go.html">Effective Go</a></p>
+<p>--<a href="https://golang.org/doc/effective_go.html">Effective Go</a></p>
 </blockquote>
 <p><strong>Rust's ownership makes it easy to turn that advice into a
 compiler-checked rule</strong>. Consider the following channel API
-(<a href="http://static.rust-lang.org/doc/master/std/sync/mpsc/index.html">channels in Rust's standard library</a> are a bit different):</p>
+(<a href="https://static.rust-lang.org/doc/master/std/sync/mpsc/index.html">channels in Rust's standard library</a> are a bit different):</p>
 <pre><code class="language-rust">fn send&lt;T: Send&gt;(chan: &amp;Channel&lt;T&gt;, t: T);
 fn recv&lt;T: Send&gt;(chan: &amp;Channel&lt;T&gt;) -&gt; T;
 </code></pre>
@@ -357,7 +348,7 @@ time</strong>.  To see how this plays out, let's look at locks.</p>
 borrows. Locks provide the same guarantee (&quot;mutual exclusion&quot;) through
 synchronization at runtime. That leads to a locking API that hooks
 directly into Rust's ownership system.</p>
-<p>Here is a simplified version (the <a href="http://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html">standard library's</a>
+<p>Here is a simplified version (the <a href="https://static.rust-lang.org/doc/master/std/sync/struct.Mutex.html">standard library's</a>
 is more ergonomic):</p>
 <pre><code class="language-rust">// create a new mutex
 fn mutex&lt;T: Send&gt;(t: T) -&gt; Mutex&lt;T&gt;;
@@ -429,7 +420,7 @@ access(&amp;mut guard)
             ^~~~~
 </code></pre>
 <p>Disaster averted.</p>
-<h3><a href="#thread-safety-and-send"" aria-hidden="true" class="anchor" id="thread-safety-and-send""></a>Thread safety and &quot;Send&quot;</h3>
+<h3><a href="#thread-safety-and-send" aria-hidden="true" class="anchor" id="thread-safety-and-send"></a>Thread safety and &quot;Send&quot;</h3>
 <p>It's typical to distinguish some data types as &quot;thread safe&quot; and
 others not. Thread safe data structures use enough internal
 synchronization to be safely used by multiple threads concurrently.</p>
@@ -454,7 +445,7 @@ race conditions that corrupt the count.</p>
 make no <em>semantic</em> distinction between thread-safe and thread-unsafe
 types.</p>
 <p>In Rust, the world is divided into two kinds of data types: those that
-are <a href="http://static.rust-lang.org/doc/master/std/marker/trait.Send.html"><code>Send</code></a>, meaning they can be safely moved from one thread to
+are <a href="https://static.rust-lang.org/doc/master/std/marker/trait.Send.html"><code>Send</code></a>, meaning they can be safely moved from one thread to
 another, and those that are <code>!Send</code>, meaning that it may not be safe
 to do so. If all of a type's components are <code>Send</code>, so is that type --
 which covers most types. Certain base types are not inherently
@@ -472,12 +463,12 @@ compiler will say:</p>
 <pre><code>`Rc&lt;Vec&lt;i32&gt;&gt;` cannot be sent between threads safely
 </code></pre>
 <p>Disaster averted.</p>
-<h3><a href="#sharing-the-stack-"scoped"" aria-hidden="true" class="anchor" id="sharing-the-stack-"scoped""></a>Sharing the stack: &quot;scoped&quot;</h3>
+<h3><a href="#sharing-the-stack-scoped" aria-hidden="true" class="anchor" id="sharing-the-stack-scoped"></a>Sharing the stack: &quot;scoped&quot;</h3>
 <p><em>Note: The API mentioned here is an old one which has been moved out of
 the standard library. You can find equivalent functionality in
-<a href="https://crates.io/crates/crossbeam"><code>crossbeam</code></a> (<a href="http://aturon.github.io/crossbeam-doc/crossbeam/fn.scope.html">documentation for <code>scope()</code></a>)
+<a href="https://crates.io/crates/crossbeam"><code>crossbeam</code></a> (<a href="https://docs.rs/crossbeam/0.8.0/crossbeam/fn.scope.html">documentation for <code>scope()</code></a>)
 and <a href="https://crates.io/crates/scoped_threadpool"><code>scoped_threadpool</code></a>
-(<a href="http://kimundi.github.io/scoped-threadpool-rs/scoped_threadpool/index.html#examples:">documentation for <code>scoped()</code></a>)</em></p>
+(<a href="https://kimundi.github.io/scoped-threadpool-rs/scoped_threadpool/index.html#examples:">documentation for <code>scoped()</code></a>)</em></p>
 <p>So far, all the patterns we've seen involve creating data structures
 on the heap that get shared between threads. But what if we wanted to
 start some threads that make use of data living in our stack frame?
@@ -596,7 +587,6 @@ months. Stay tuned!</p>
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -611,10 +601,17 @@ months. Stay tuned!</p>
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -625,6 +622,8 @@ months. Stay tuned!</p>
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

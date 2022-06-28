@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,10 +63,10 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Cargo: predictable dependency management</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
-    <div class="publish-date-author">May 05, 2016 &middot; Yehuda Katz
+    <div class="publish-date-author">May 5, 2016 &middot; Yehuda Katz
     
     </div>
 
@@ -300,7 +291,7 @@ machine. Then, we run <code>cargo build</code> again.</p>
 versions of all dependencies as before</strong>. And if we wanted to start collaborating
 with other developers on GitHub (or with other members of our team at work), we
 would continue to get the same level of predictability.</p>
-<h3><a href="#common-conventions-examples,-tests,-and-docs" aria-hidden="true" class="anchor" id="common-conventions-examples,-tests,-and-docs"></a>Common conventions: examples, tests, and docs</h3>
+<h3><a href="#common-conventions-examples-tests-and-docs" aria-hidden="true" class="anchor" id="common-conventions-examples-tests-and-docs"></a>Common conventions: examples, tests, and docs</h3>
 <p>Now that we've written our snazzy new <code>datetime</code> crate, we'd love to write an
 example to show other developers how it should be used. We create a new file
 called <code>examples/date.rs</code> that looks like this:</p>
@@ -368,7 +359,7 @@ small change to dependencies to rebuild the entire graph, wreaking havoc in its
 wake.</p>
 <p><strong>As a rule, Cargo attempts to minimize the effects of intentional changes to
 direct dependencies.</strong></p>
-<h2><a href="#indirect-dependencies-just-work"" aria-hidden="true" class="anchor" id="indirect-dependencies-just-work""></a>Indirect Dependencies &quot;Just Work&quot;</h2>
+<h2><a href="#indirect-dependencies-just-work" aria-hidden="true" class="anchor" id="indirect-dependencies-just-work"></a>Indirect Dependencies &quot;Just Work&quot;</h2>
 <p>One of the most basic goals of an application package manager is separating
 direct dependencies, which are required by the application, and indirect
 dependencies, which those dependencies need in order to work.</p>
@@ -379,7 +370,7 @@ for future predictability.</p>
 <p>Since Cargo manages your dependencies for you, it can also make sure that it
 compiles all of your dependencies (whether you knew about them directly or not)
 appropriately for the task at hand.</p>
-<h3><a href="#testing-benchmarking,-releasing,-oh-my" aria-hidden="true" class="anchor" id="testing-benchmarking,-releasing,-oh-my"></a>Testing, Benchmarking, Releasing, Oh My</h3>
+<h3><a href="#testing-benchmarking-releasing-oh-my" aria-hidden="true" class="anchor" id="testing-benchmarking-releasing-oh-my"></a>Testing, Benchmarking, Releasing, Oh My</h3>
 <p>Historically, people have shied away from the kinds of granular dependencies
 we've seen here because of the configuration needed for each new dependency.</p>
 <p>For example, when running tests or type-checking your code, you would like to
@@ -414,7 +405,7 @@ test bench_date ... bench:         486 ns/iter (+/- 56)
 <p>Notice that we're re-compiling all of our dependencies. This is because <code>cargo bench</code> defaults to release mode, which uses maximum optimizations. <code>cargo build --release</code> similarly builds in optimized mode by default.</p>
 <blockquote>
 <p>As an aside, the default behavior of each command is configurable through
-<a href="http://doc.crates.io/manifest.html#the-profile-sections">profiles</a> in the
+<a href="https://doc.crates.io/manifest.html#the-profile-sections">profiles</a> in the
 <code>Cargo.toml</code>. This allows you to configure things like the optimization level,
 whether to include debug symbols and more. Rather than forcing you to use a
 custom workflow if something doesn't precisely meet your needs, the profiles
@@ -463,7 +454,7 @@ library for Unix-specific functionality.</p>
 wouldn't want it to!)</p>
 <p>Today, Cargo will automatically share dependencies between crates if they depend
 on the same <em>major</em> version (or minor version before 1.0), since Rust uses
-<a href="http://semver.org/">semantic versioning</a>. This means that if <code>nix</code> and <code>datetime</code>
+<a href="https://semver.org/">semantic versioning</a>. This means that if <code>nix</code> and <code>datetime</code>
 both depend on some version of <code>libc 0.2.x</code>, they will get the same version. In
 this case, they do, and the program compiles.</p>
 <p>While this policy works well (and in fact is the same policy that system package
@@ -514,7 +505,6 @@ indirect dependencies, we can all build higher together.</p>
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -529,10 +519,17 @@ indirect dependencies, we can all build higher together.</p>
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -543,6 +540,8 @@ indirect dependencies, we can all build higher together.</p>
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

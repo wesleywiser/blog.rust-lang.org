@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,7 +63,7 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Announcing Rust 1.14</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
     <div class="publish-date-author">Dec. 22, 2016 &middot; The Rust Core Team
@@ -85,7 +76,7 @@ systems programming language focused on safety, speed, and concurrency.</p>
 <p>As always, you can <a href="https://www.rust-lang.org/install.html">install Rust 1.14.0</a> from the appropriate page on our
 website, and check out the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1140-2016-12-22">detailed release notes for 1.14.0</a> on GitHub.
 1230 patches were landed in this release.</p>
-<h3><a href="#whats-in-1.14.0-stable" aria-hidden="true" class="anchor" id="whats-in-1.14.0-stable"></a>What's in 1.14.0 stable</h3>
+<h3><a href="#whats-in-1140-stable" aria-hidden="true" class="anchor" id="whats-in-1140-stable"></a>What's in 1.14.0 stable</h3>
 <p>One of the biggest features in Rust 1.14 isn't actually in the language or
 compiler: the <a href="https://internals.rust-lang.org/t/beta-testing-rustup-rs/3316/203">rustup tool has reached a 1.0 release</a>, and is now the
 recommended way to install Rust from the project directly. Rustup does a bit
@@ -103,7 +94,7 @@ GitHub</a>.</p>
 <p>Another exciting feature is <a href="https://users.rust-lang.org/t/compiling-to-the-web-with-rust-and-emscripten/7627">experimental support for WebAssembly</a> as a
 target, <code>wasm32-unknown-emscripten</code>. It is still early days, and there's a lot
 of bugs to shake out, so please give it a try and report them! To give you a
-small taste of how it works, once you have <a href="http://kripken.github.io/emscripten-site/docs/getting_started/downloads.html">emscripten</a> installed, compiling
+small taste of how it works, once you have <a href="https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html">emscripten</a> installed, compiling
 some Rust code to WebAssembly is as easy as:</p>
 <pre><code class="language-bash">rustup target add wasm32-unknown-emscripten
 $ echo 'fn main() { println!(&quot;Hello, Emscripten!&quot;); }' &gt; hello.rs
@@ -111,8 +102,8 @@ $ rustc --target=wasm32-unknown-emscripten hello.rs
 $ node hello.js
 </code></pre>
 <p>The community has been doing interesting, experimental work in this area: see
-<a href="http://www.hellorust.com/emscripten/">Jan-Erik's slides</a> for the workshop he ran at <a href="http://www.rust-belt-rust.com/sessions/">Rust Belt Rust</a> for some
-examples, or check out <a href="http://timryan.org/rust-todomvc/">Tim's example of the classic TodoMVC project</a>.
+<a href="https://www.hellorust.com/emscripten/">Jan-Erik's slides</a> for the workshop he ran at <a href="https://www.rust-belt-rust.com/sessions/">Rust Belt Rust</a> for some
+examples, or check out <a href="https://github.com/rust-webplatform/rust-todomvc">Tim's example of the classic TodoMVC project</a>.
 This implementation builds off of his <a href="https://crates.io/crates/webplatform">webplatform
 crate</a>, which exposes the DOM to Rust.</p>
 <p>Speaking of platforms, a large number of platforms have gained additional
@@ -217,7 +208,7 @@ the msvcrt on the MSVC platform.</p>
 panics counting as failing tests, and so with <code>panic=abort</code>, a failing test
 would abort the entire test suite.</p>
 <p>See the <a href="https://github.com/rust-lang/rust/blob/master/RELEASES.md#version-1140-2016-12-22">detailed release notes</a> for more.</p>
-<h3><a href="#contributors-to-114.0" aria-hidden="true" class="anchor" id="contributors-to-114.0"></a>Contributors to 1.14.0</h3>
+<h3><a href="#contributors-to-1140" aria-hidden="true" class="anchor" id="contributors-to-1140"></a>Contributors to 1.14.0</h3>
 <p>We had 144 individuals contribute to 1.14.0. Thank you so much!</p>
 <ul>
 <li>Abhishek Chanda</li>
@@ -378,7 +369,6 @@ would abort the entire test suite.</p>
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -393,10 +383,17 @@ would abort the entire test suite.</p>
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -407,6 +404,8 @@ would abort the entire test suite.</p>
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>

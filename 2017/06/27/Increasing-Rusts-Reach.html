@@ -20,28 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
 
-<!-- fonts -->
-<link rel="preload" as="font" crossorigin href="/fonts/AlfaSlabOne-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-ExtraBoldItalic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Italic.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-Regular.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBold.ttf">
-<link rel="preload" as="font" crossorigin href="/fonts/FiraSans-SemiBoldItalic.ttf">
-
 <!-- styles -->
-<link rel="stylesheet" href="/styles/vendor.css"/>
-<link rel="stylesheet" href="/styles/fonts.css"/>
-<link rel="stylesheet" href="/styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/vendor.css"/>
+<link rel="stylesheet" href="../../../styles/fonts.css"/>
+<link rel="stylesheet" href="../../../styles/app.css"/>
+<link rel="stylesheet" href="../../../styles/highlight.css"/>
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="manifest" href="/images/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="manifest" href="../../../images/site.webmanifest">
+<link rel="mask-icon" href="../../../images/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#ffffff">
 
@@ -52,8 +43,8 @@
   <body>
     <nav class="flex flex-row justify-center justify-end-l items-center flex-wrap ph2 pl3-ns pr4-ns">
   <div class="brand flex-auto w-100 w-auto-l self-start tc tl-l">
-    <a href="/">
-      <img class="v-mid ml0-l" alt="Rust Logo" src="/images/rust-logo-blk.svg">
+    <a href="../../../">
+      <img class="v-mid ml0-l" alt="Rust Logo" src="../../../images/rust-logo-blk.svg">
       <span class="dib ml1 ml0-l">Rust Blog</span>
     </a>
   </div>
@@ -72,7 +63,7 @@
   <div class="w-100 mw-none ph3 mw8-m mw8-l center f3">
     <header>
       <h2>Increasing Rust’s Reach</h2>
-      <div class="highlight"></div>
+      <div class="highlight mt2 mb3"></div>
     </header>
 
     <div class="publish-date-author">June 27, 2017 &middot; Carol Nichols
@@ -80,7 +71,7 @@
     </div>
 
     <div class="post">
-      <p><strong>EDIT: We've heard that Google Forms is not easily accessible in all countries; if that applies to you, please find the <a href="/images/2017-06-Increasing-Rusts-Reach/application.txt">application's questions in this text file</a> and send the answers via email to carol.nichols@gmail.com.</strong></p>
+      <p><strong>EDIT: We've heard that Google Forms is not easily accessible in all countries; if that applies to you, please find the <a href="../../../images/2017-06-Increasing-Rusts-Reach/application.txt">application's questions in this text file</a> and send the answers via email to carol.nichols@gmail.com.</strong></p>
 <p>One of <a href="https://blog.rust-lang.org/2017/02/06/roadmap.html">Rust's 2017 goals</a> is to make it easier
 to become productive in Rust by reducing its learning curve. We believe Rust has potential as an
 enabling technology, empowering a people who would not traditionally do system programming to take
@@ -126,7 +117,7 @@ who have different learning styles.</p>
 <a href="https://twitter.com/Carols10cents">@carols10cents</a> with any questions.</p>
 <hr />
 <h2><a href="#projects" aria-hidden="true" class="anchor" id="projects"></a>Projects</h2>
-<h3><a href="#1-user-experience-of-rust-documentation-&-code-browsing-tools" aria-hidden="true" class="anchor" id="1-user-experience-of-rust-documentation-&-code-browsing-tools"></a>1. User Experience of Rust Documentation &amp; Code Browsing Tools</h3>
+<h3><a href="#1-user-experience-of-rust-documentation--code-browsing-tools" aria-hidden="true" class="anchor" id="1-user-experience-of-rust-documentation--code-browsing-tools"></a>1. User Experience of Rust Documentation &amp; Code Browsing Tools</h3>
 <p>Rust partners: Nick Cameron and Steve Klabnik</p>
 <p>We’re looking for someone with background in graphic design, web frontend engineering, or user
 experience to work on the frontend/UI/UX/design for
@@ -144,13 +135,13 @@ code.</p>
 <li>Interest in improving usability of developer-facing documentation and tools</li>
 <li>Interest in learning in detail about Rust syntax and semantics</li>
 </ul>
-<p><img src="/images/2017-06-Increasing-Rusts-Reach/nrc.jpg" alt="Nick Cameron" /></p>
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/nrc.jpg" alt="Nick Cameron" class="right-thumbnail">
 <p><em>About Nick Cameron: I'm a Rust core team member and lead the dev-tools team. I work on a bunch of
 tools including Rustdoc, Rustfmt, the Rust Language Server, and the Rust compiler. I want to make
 Rust developer tools awesome, and user experience is a key part of that. I want Rust to change the
 world (or at least the programming world), and we can't do that without making the Rust language
 and community more accessible to more people.</em></p>
-<p><img src="/images/2017-06-Increasing-Rusts-Reach/steveklabnik.jpeg" alt="Steve Klabnik" /></p>
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/steveklabnik.jpeg" alt="Steve Klabnik" class="right-thumbnail">
 <p><em>About Steve Klabnik: I used to work on Ruby on Rails before Rust, and one of the reasons why I love
 Rust is that as a project, we're committed to helping people learn Rust as their first low-level
 language. So in some sense, I see this as a continuation of that.</em></p>
@@ -179,13 +170,13 @@ JavaScript, pylint in Python, Coverity, etc)</li>
 <li>Interest in improving the new Rust developer experience</li>
 <li>Interest in learning how to improve and create lints</li>
 </ul>
-<p><img src="/images/2017-06-Increasing-Rusts-Reach/manish.png" alt="Manish Goregaokar" /></p>
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/manish.png" alt="Manish Goregaokar" class="right-thumbnail">
 <p><em>About Manish Goregaokar: I'm a research engineer at Mozilla working on Servo. I care a lot about
 improving workflows and tooling, especially around the newcomer experience.</em></p>
 <p><em>I consider open source to be one of the best ways to gain proficiency in programming, and to that
 end I care about making it more accessible and easy to contribute to, both by systemic improvements
 and individual mentorship.</em></p>
-<h3><a href="#3-improve-the-approachability-of-the-design-of-rust-lang.org-and/or-crates.io" aria-hidden="true" class="anchor" id="3-improve-the-approachability-of-the-design-of-rust-lang.org-and/or-crates.io"></a>3. Improve the Approachability of the Design of rust-lang.org and/or crates.io</h3>
+<h3><a href="#3-improve-the-approachability-of-the-design-of-rust-langorg-andor-cratesio" aria-hidden="true" class="anchor" id="3-improve-the-approachability-of-the-design-of-rust-langorg-andor-cratesio"></a>3. Improve the Approachability of the Design of rust-lang.org and/or crates.io</h3>
 <p>Rust Partner: Aaron Turon</p>
 <p>I'd love to pair up with one or more people on the design of <a href="https://www.rust-lang.org/en-US/">our main
 website</a> and/or <a href="https://crates.io/">crates.io</a>. Both of them
@@ -199,7 +190,7 @@ new design subteam from the project, if successful.</p>
 <li>Interest in improving approachability of Rust</li>
 <li>Interest in investigating the motivations behind visitors to the main website and/or crates.io</li>
 </ul>
-<p><img src="/images/2017-06-Increasing-Rusts-Reach/aturon.jpg" alt="Aaron Turon" /></p>
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/aturon.jpg" alt="Aaron Turon" class="right-thumbnail">
 <p><em>About Aaron Turon: I'm a Rust core team member, manage the Mozilla Rust team, and currently lead
 the library, infrastructure, and Cargo teams. On the technical side, I'm most driven by language
 design and end-to-end user experience. On the people side, I love fostering consensus, building
@@ -207,7 +198,7 @@ teams, and empowering people. I live in Portland, Oregon with my partner and two
 <p><em>Working in an open source community has shown me, over and over, how vital a diversity of
 perspectives and backgrounds can be. My hope is that, by investing in initiatives like this one, we
 can welcome a broader range of people and empower them within the Rust community.</em></p>
-<h3><a href="#4-improving-the-video-tutorials-at-intorust.com" aria-hidden="true" class="anchor" id="4-improving-the-video-tutorials-at-intorust.com"></a>4. Improving the Video Tutorials at intorust.com</h3>
+<h3><a href="#4-improving-the-video-tutorials-at-intorustcom" aria-hidden="true" class="anchor" id="4-improving-the-video-tutorials-at-intorustcom"></a>4. Improving the Video Tutorials at intorust.com</h3>
 <p>Rust partner: Niko Matsakis</p>
 <p><a href="http://intorust.com/">intorust.com</a> is a website with a collection of screencasts that aim to
 teach key Rust concepts in an easy and accessible way. I would love to work with someone both on
@@ -220,13 +211,13 @@ cover background topics like the role of the stack and the heap.</p>
 <li>Background or interest in creating visual teaching tools like diagrams or drawings a plus</li>
 <li>Interest in learning Rust concepts and teaching what you learn to others</li>
 </ul>
-<p><img src="/images/2017-06-Increasing-Rusts-Reach/nmatsakis.jpeg" alt="Niko Matsakis" /></p>
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/nmatsakis.jpeg" alt="Niko Matsakis" class="right-thumbnail">
 <p><em>About Niko Matsakis: I'm a member of the Rust core team as well as the Rust language and compiler
 teams. I focus mainly on the design and implementation of the language itself. I want to do what I
 can to make learning Rust as smooth as possible for as many people as possible. I think that the
 best way to achieve this goal is to work with people with different backgrounds and experiences,
 since that will affect how they learn the material.</em></p>
-<h3><a href="#5-write-tutorials-for-rocket-and-diesel,-parts-of-rust’s-web-framework-story" aria-hidden="true" class="anchor" id="5-write-tutorials-for-rocket-and-diesel,-parts-of-rust’s-web-framework-story"></a>5. Write tutorials for Rocket and Diesel, Parts of Rust’s Web Framework Story</h3>
+<h3><a href="#5-write-tutorials-for-rocket-and-diesel-parts-of-rusts-web-framework-story" aria-hidden="true" class="anchor" id="5-write-tutorials-for-rocket-and-diesel-parts-of-rusts-web-framework-story"></a>5. Write tutorials for Rocket and Diesel, Parts of Rust’s Web Framework Story</h3>
 <p>Rust Partner: Sean Griffin</p>
 <p>I’m looking for someone with experience in web development in some other web framework to help
 improve the documentation around Rust's frameworks in the web development space. I’d love to
@@ -239,7 +230,7 @@ screencasts, making example applications, or improving the API documentation.</p
 <li>Experience using a web framework written in some other language</li>
 <li>Interest in learning how to write web applications in Rust and teaching what you learn to others</li>
 </ul>
-<p><img src="/images/2017-06-Increasing-Rusts-Reach/sgrif.jpeg" alt="Sean Griffin" /></p>
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/sgrif.jpeg" alt="Sean Griffin" class="right-thumbnail">
 <p><em>About Sean Griffin: In addition to my Rust work, I am one of the maintainers of Ruby on Rails. One
 of the great things about Rails (and web development) is that it has really helped to lower the
 barrier to entry. I think Rust can have a similar impact (both for low level programming, and
@@ -264,7 +255,7 @@ tango can do. You can see some ideas for extensions from the
 <li>Background in writing, teaching, or documentation</li>
 <li>Interest in, and opinions about, improving tools for creating and displaying code documentation</li>
 </ul>
-<p><img src="/images/2017-06-Increasing-Rusts-Reach/pnkfelix.jpeg" alt="Felix Klock" /></p>
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/pnkfelix.jpeg" alt="Felix Klock" class="right-thumbnail">
 <p><em>About Felix Klock: I'm the main developer of tango (as well as a member of the Rust compiler and
 language teams). I actively use tango for authoring my presentation slides about Rust. I
 hypothesize that literate Rust code can act as advertisement for Rust itself, and would like to
@@ -290,7 +281,7 @@ usable in more scenarios.</p>
 <li>Interest in learning how to translate an application to Rust</li>
 <li>Interest in researching and documenting features that libraries have or don’t have</li>
 </ul>
-<p><img src="/images/2017-06-Increasing-Rusts-Reach/burntsushi.jpeg" alt="Andrew Gallant" /></p>
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/burntsushi.jpeg" alt="Andrew Gallant" class="right-thumbnail">
 <p><em>About Andrew Gallant: I'm a member of the Rust library team that works with Rust in my free time. I
 am very interested in information retrieval, fast text search and generally improving Rust's
 ecosystem. I'm driven both by own personal interest in technical topics and the desire to teach.
@@ -299,7 +290,7 @@ because it provides an outlet to teach others about the things I've learned. I'm
 interested in improving the learning outcomes for as many people as possible, and would relish the
 opportunity to extend that to folks that I might not have been able to reach otherwise. I live in
 central Massachusetts with my wife.</em></p>
-<h3><a href="#8-finding-missing-pieces-in-the-experience-of-building-a-command-line-interface-(cli)-program" aria-hidden="true" class="anchor" id="8-finding-missing-pieces-in-the-experience-of-building-a-command-line-interface-(cli)-program"></a>8. Finding Missing Pieces in the Experience of building a Command Line Interface (CLI) Program</h3>
+<h3><a href="#8-finding-missing-pieces-in-the-experience-of-building-a-command-line-interface-cli-program" aria-hidden="true" class="anchor" id="8-finding-missing-pieces-in-the-experience-of-building-a-command-line-interface-cli-program"></a>8. Finding Missing Pieces in the Experience of building a Command Line Interface (CLI) Program</h3>
 <p>Rust partner: Kamal Marhubi</p>
 <p>I find Rust to be a great language for writing small command line tools, but I think it could be
 even better. I'd love to work with someone who wants to write a CLI program, or has one they want
@@ -311,7 +302,7 @@ to find them and improve the tooling for everyone.</p>
 <li>Interest in learning how to write or translate a CLI program to Rust</li>
 <li>Interest in researching and documenting features that libraries have or don’t have</li>
 </ul>
-<p><img src="/images/2017-06-Increasing-Rusts-Reach/kamalmarhubi.jpeg" alt="Kamal Marhubi" /></p>
+<img src="../../../images/2017-06-Increasing-Rusts-Reach/kamalmarhubi.jpeg" alt="Kamal Marhubi" class="right-thumbnail">
 <p><em>About Kamal Marhubi: I've been writing Rust for about a year and a half. I help maintain nix, a
 library that gives a Rusty interface to unix systems APIs. I've also contributed to rustfmt, rustup,
 and the standard library.</em></p>
@@ -330,7 +321,6 @@ and the standard library.</em></p>
         <ul>
           <li><a href="https://doc.rust-lang.org" target="_blank" rel="noopener">Documentation</a></li>
           <li><a href="mailto:core-team@rust-lang.org">Contact the Rust Team</a></li>
-          <li><a href="http://ping.rust-lang.org">Check Website Status</a></li>
         </ul>
       </div>
       <div class="four columns mt3 mt0-l">
@@ -345,10 +335,17 @@ and the standard library.</em></p>
       </div>
       <div class="four columns mt3 mt0-l">
         <h4>Social</h4>
-        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="/images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
-        <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="/images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
-        <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="/images/discord.svg" alt="discord logo" title="Discord"/></a>
-        <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="/images/github.svg" alt="github logo" title="GitHub"/></a>
+        <div class="flex flex-row flex-wrap">
+          <a href="https://twitter.com/rustlang" target="_blank" rel="noopener" alt="twitter link"><img src="../../../images/twitter.svg" alt="twitter logo" title="Twitter"/></a>
+          <a href="https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA" target="_blank" rel="noopener" alt="youtube link"><img style="padding-top: 6px; padding-bottom:6px" src="../../../images/youtube.svg" alt="youtube logo" title="YouTube"/></a>
+          <a href="https://discord.gg/rust-lang" target="_blank" rel="noopener" alt="discord link"><img src="../../../images/discord.svg" alt="discord logo" title="Discord"/></a>
+          <a href="https://github.com/rust-lang" target="_blank" rel="noopener" alt="github link"><img src="../../../images/github.svg" alt="github logo" title="GitHub"/></a>
+        </div>
+        <h4 class="mt4 mb3">RSS</h4>
+        <ul>
+          <li><a href="../../../feed.xml">Main Blog</a></li>
+          <li><a href="../../../inside-rust/feed.xml">"Inside Rust" Blog</a></li>
+        </ul>
       </div>
 
     </div>
@@ -359,6 +356,8 @@ and the standard library.</em></p>
   </div>
 </footer>
 
+<!-- scripts -->
+<script src="../../../scripts/highlight.js"></script>
 
   </body>
 </html>
